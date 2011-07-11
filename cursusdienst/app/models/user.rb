@@ -10,5 +10,8 @@ class User < ActiveRecord::Base
   validates :user_name, :presence => true
   validates_uniqueness_of :user_name, :rolno
   
+  belongs_to :permission
+  #test
+  
 end
 

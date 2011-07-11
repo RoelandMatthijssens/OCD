@@ -4,6 +4,6 @@ class Permission < ActiveRecord::Base
   validates :name, :level, :presence => true
   validates_uniqueness_of :level
   
-  has_many :user
+  has_many :users
   
 end
