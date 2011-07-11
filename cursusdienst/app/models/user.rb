@@ -8,10 +8,12 @@ class User < ActiveRecord::Base
   attr_accessible :full_name, :user_name, :rolno, :subject, :email
   
   validates :user_name, :presence => true
+  validates :rolno, :presence => true
   validates_uniqueness_of :user_name, :rolno
   
-  belongs_to :permission
+  has_many :permissions
+#  belongs_to :permission   # does not seem to be correct, should be the other way around
+  belongs_to :institute
   #test
   
 end
-

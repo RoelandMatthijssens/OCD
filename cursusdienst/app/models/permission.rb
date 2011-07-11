@@ -4,6 +4,7 @@ class Permission < ActiveRecord::Base
   validates :name, :level, :presence => true
   validates_uniqueness_of :level
   
-  has_many :users
+  belongs_to :user
+#  has_many :users   # does not seem to be correct, should be the other way around
   
 end
