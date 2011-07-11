@@ -1,4 +1,4 @@
-class Permissions < ActiveRecord::Base
+class Permission < ActiveRecord::Base
   attr_accessible :name, :level
   
   validates :name, :level, :presence => true
