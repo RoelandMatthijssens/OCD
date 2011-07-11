@@ -15,10 +15,9 @@ ActiveRecord::Schema.define(:version => 20110705115309) do
   create_table "users", :force => true do |t|
     t.string   "full_name"
     t.string   "user_name"
-    t.integer  "rolno",      :limit => 2
-    t.string   "faculty"
-    t.string   "subject"
+    t.integer  "rolno",       :limit => 2
     t.string   "email"
+    t.string   "institution"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -4,9 +4,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :full_name
       t.string :user_name
       t.column :rolno, :smallint
-      t.string :faculty
-      t.string :subject
       t.string :email
+      t.string :institution
 
       t.timestamps
     end
