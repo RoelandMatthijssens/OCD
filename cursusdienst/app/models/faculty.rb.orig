@@ -1,10 +1,15 @@
 #      t.string :name
 
 class Faculty < ActiveRecord::Base
-  attr_accessible :name, :initials, :institute_id
+<<<<<<< HEAD
   validates :name, :presence => true, :uniqueness => {:scope => :institute_id}
   validates :initials, :presence => true, :uniqueness => {:scope => :institute_id}
+=======
+  attr_accessible :name, :initials, :institute_id
+  validates :name, :presence => true
+  validates :initials, :presence => true
   validates :institute_id, :presence => true
+>>>>>>> bb8f6a678f4b1e03e2609f7d37ce096180d6fdee
   belongs_to :institute
   default_scope :order => "faculties.name ASC"
   has_many :disciplines

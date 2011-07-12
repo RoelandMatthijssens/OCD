@@ -68,7 +68,7 @@ describe Institute do
       @institute.faculties.should == [@f2, @f1]
     end
     it "should only contain the right faculties" do
-      @not_institute = Institute.create(@attr.merge(:name => "not Wetenschappen"))
+      @not_institute = Institute.create(@attr.merge(:name => "not Wetenschappen", :initials => "NWE"))
       @f3 = Factory(:faculty, :institute => @not_institute)
       @institute.faculties.should_not include(@f3)
     end
