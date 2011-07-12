@@ -14,5 +14,6 @@ end
 
 Factory.define :faculty do |faculty|
   faculty.name  "Wetenschappen"
+  faculty.initials  "WE"
   faculty.association :institute
 end

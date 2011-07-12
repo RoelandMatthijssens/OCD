@@ -4,7 +4,8 @@ describe Faculty do
   before :each do
     @institute = Factory(:institute)
     @attr = {
-      :name => "Wetenschappen"
+      :name => "Wetenschappen",
+      :initials => "WE"
       }
   end
   
@@ -14,6 +15,10 @@ describe Faculty do
   it "should require a name" do
     no_name_faculty = Faculty.new(@attr.merge(:name => ""))
     no_name_faculty.should_not be_valid
+  end
+  it "should require initials" do
+    no_initials_faculty = Faculty.new(@attr.merge(:initials => ""))
+    no_initials_faculty.should_not be_valid
   end
   
   describe "institute associations" do
