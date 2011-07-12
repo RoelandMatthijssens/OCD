@@ -58,8 +58,8 @@ describe Institute do
   describe "faculty associations" do
     before(:each) do
       @institute = Institute.create(@attr)
-      @f1 = Factory(:faculty, :institute => @institute, :name => "Wetenschappen")
-      @f2 = Factory(:faculty, :institute => @institute, :name => "Letteren en Wijsbegeerte")
+      @f1 = Factory(:faculty, :institute => @institute, :name => "Wetenschappen", :initials => "WE")
+      @f2 = Factory(:faculty, :institute => @institute, :name => "Letteren en Wijsbegeerte", :initials => "LEW")
     end
     it "should have a faculties attribute" do
       @institute.should respond_to(:faculties)
