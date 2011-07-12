@@ -33,4 +33,23 @@ describe Faculty do
       @faculty.institute.should == @institute
     end
   end
+  
+  describe "uniquness constraints" do
+    before(:each) do
+      @notattr = {
+        :name => "NotWetenschappen",
+        :initials => "NWE"
+      }
+    end
+    it "should not allow two faculties with the same name in a single institute" do
+      @faculty1 = @institute.faculties.create(@attr)
+      @faculty2 = @institute.faculties.create(@notattr.merge(:name => "Wetenschappen"))
+      @faculty2.should_not be_valid
+    end
+    it "should not allow two faculties with the same initials in a single institute" do
+      @faculty1 = @institute.faculties.create(@attr)
+      @faculty2 = @institute.faculties.create(@notattr.merge(:initials => "WE"))
+      @faculty2.should_not be_valid
+    end
+  end
 end
