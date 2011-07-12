@@ -7,6 +7,8 @@ Cursusdienst::Application.routes.draw do
   resources :institutes
 
   resources :faculties
+  
+  resources :disciplines
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
