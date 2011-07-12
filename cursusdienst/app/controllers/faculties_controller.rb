@@ -1,20 +1,20 @@
 class FacultiesController < ApplicationController
 
   def index
-    @faculties = faculty.all
+    @faculties = Faculty.all
   end
 
   def show
-    @faculty = faculty.find(params[:id])
+    @faculty = Faculty.find(params[:id])
   end
 
   def new
-    @faculty = faculty.new
+    @faculty = Faculty.new
     @submit = "Create new Institution"
   end
 
   def create
-    @faculty = faculty.new(params[:faculty])
+    @faculty = Faculty.new(params[:faculty])
     if @faculty.save
       flash[:succes] = "Institution create succesfully"
       redirect_to @faculty
@@ -24,12 +24,12 @@ class FacultiesController < ApplicationController
   end
 
   def edit
-    @faculty = faculty.find(params[:id])
+    @faculty = Faculty.find(params[:id])
     @submit = "Update Institution"
   end
 
   def update
-    @faculty = faculty.find(params[:id])
+    @faculty = Faculty.find(params[:id])
     if @faculty.update_attributes(params[:faculty])
       flash[:succes] = "faculty updated succesfully"
       redirect_to @faculty
