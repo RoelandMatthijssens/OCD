@@ -12,5 +12,5 @@ class Institute < ActiveRecord::Base
   validates_uniqueness_of :name, :initials
   
   has_many :users
-  has_many :faculties
+  has_many :faculties, :dependent => :destroy
 end

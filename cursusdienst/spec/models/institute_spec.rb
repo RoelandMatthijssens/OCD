@@ -72,5 +72,11 @@ describe Institute do
       @f3 = Factory(:faculty, :institute => @not_institute)
       @institute.faculties.should_not include(@f3)
     end
+    it "should destroy associated faculties" do
+      @institute.destroy
+      [@f1, @f2].each do |faculty|
+        Faculty.find_by_id(faculty.id).should be_nil
+      end
+    end
   end
 end
