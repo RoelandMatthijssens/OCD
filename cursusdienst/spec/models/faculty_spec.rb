@@ -4,7 +4,7 @@ describe Faculty do
   before :each do
     @institute = Factory(:institute)
     @attr = {
-      :name => "Computer Wetenschappen"
+      :name => "Wetenschappen"
       }
   end
   
