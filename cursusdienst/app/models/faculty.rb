@@ -1,4 +1,7 @@
+#      t.string :name
+
 class Faculty < ActiveRecord::Base
-#  belongs_to :institute
-#  has_many :disciplines
+  validates :name, :presence => true
+  belongs_to :institute
+  default_scope :order => "faculties.name ASC"
 end

@@ -12,7 +12,7 @@ describe Institute do
       :location => "Elsene Pleinlaan 2"
       }
   end
-  
+
   it "should create a new instance given valid arguments" do
     Institute.create!(@attr)
   end
@@ -21,17 +21,15 @@ describe Institute do
     no_name_institute = Institute.new(@attr.merge(:name => ""))
     no_name_institute.should_not be_valid
   end
-  
   it "should not allow empty initials" do
     no_initials_institute = Institute.new(@attr.merge(:initials => ""))
     no_initials_institute.should_not be_valid
   end
-  
   it "should not allow an empty location" do
     no_location_institute = Institute.new(@attr.merge(:location => ""))
     no_location_institute.should_not be_valid
   end
-  
+
   describe "uniqueness" do
     before :each do
       @other_attr = {
@@ -54,6 +52,25 @@ describe Institute do
       Institute.create!(@attr)
       second_institute = Institute.new(@other_attr.merge(:initials => "VUB"))
       second_institute.should_not be_valid
+    end
+  end
+  
+  describe "faculty associations" do
+    before(:each) do
+      @institute = Institute.create(@attr)
+      @f1 = Factory(:faculty, :institute => @institute, :name => "Wetenschappen")
+      @f2 = Factory(:faculty, :institute => @institute, :name => "Letteren en Wijsbegeerte")
+    end
+    it "should have a faculties attribute" do
+      @institute.should respond_to(:faculties)
+    end
+    it "should have the right faculties in alfabetical order" do
+      @institute.faculties.should == [@f2, @f1]
+    end
+    it "should only contain the right faculties" do
+      @not_institute = Institute.create(@attr.merge(:name => "not Wetenschappen"))
+      @f3 = Factory(:faculty, :institute => @not_institute)
+      @institute.faculties.should_not include(@f3)
     end
   end
 end
