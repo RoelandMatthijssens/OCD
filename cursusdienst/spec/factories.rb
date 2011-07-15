@@ -9,7 +9,7 @@ end
 Factory.define :institute do |institute|
   institute.name      'Vrije Universiteit Brussel'
   institute.initials  'VUB'
-  institute.location  'Elsene Pleinlaan 2'
+  institute.location  'Brussel'
 end
 
 Factory.define :faculty do |faculty|

@@ -1,14 +1,27 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Cursusdienst</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>Cursusdienst</title>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
 
-<%= yield %>
+    <h3>Flash messages</h3>
+    <% flash.each do |key, value| %>
+      <div class="flash <%= key %>"><%= value %></div>
+    <% end %>
 
-</body>
+
+    <h3>Main Body</h3>
+    <%= yield %>
+
+
+    <div id="debug">
+      <h3>Debugging output</h3>
+      <%= debug(params) if Rails.env.development? %>
+    </div>
+
+  </body>
 </html>
