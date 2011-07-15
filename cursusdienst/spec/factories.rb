@@ -21,9 +21,10 @@ end
 Factory.define :discipline do |discipline|
   discipline.name         "Computer Wetenschappen"
   discipline.association  :faculty
+  discipline.subjects { |subjects| [subjects.association(:discipline)] }
 end
 
 Factory.define :subject do |subject|
   subject.name        "Algoritmen En Datastructuren"
-  subject.association :disciplines_subjects
+  subject.disciplines { |disciplines| [disciplines.association(:subject)] }
 end

@@ -41,17 +41,17 @@ describe Discipline do
     end
   end
   
-  describe "Subject associations" do
-    before (:each) do
-      @discipline = @faculty.disciplines.new(@attr)
-      @s1 = Factory(:subject, :discipline => @discipline, :name => "Statestiek")
+#  describe "Subject associations" do
+#    before (:each) do
+#      @discipline = @faculty.disciplines.new(@attr)
+#      @s1 = Factory(:subject, :discipline => @discipline, :name => "Statestiek")
 #      @s2 = Factory(:subject, :discipline => @discipline, :name => "Algo En Data")
-    end
-    it "should have a subject attribute" do
-      @discipline.should respond_to(:subjects)
-    end
+#    end
+#    it "should have a subject attribute" do
+#      @discipline.should respond_to(:subjects)
+#    end
 #    it "should have the correct subjects in alfabetical order" do
 #      @discipline.subjects.should == [@s2, @s1]
 #    end
-  end
+#  end
 end
