@@ -10,6 +10,14 @@
     <%= f.label :initials %> <br>
     <%= f.text_field :initials %> <br>
   </div>
+  <div class='field'>
+    <%= f.label :institute %> <br>
+    <%= f.collection_select(:institute_id,
+      Institute.all,
+      :id,
+      :name,
+      { :prompt => true })%> <br>
+  </div>
   <div class="actions">
     <%= f.submit @submit %>
   </div>
