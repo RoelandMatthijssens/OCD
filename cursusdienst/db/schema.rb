@@ -10,13 +10,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110712135601) do
+ActiveRecord::Schema.define(:version => 20110714122226) do
 
   create_table "disciplines", :force => true do |t|
     t.string   "name"
     t.integer  "faculty_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "disciplines_subjects", :id => false, :force => true do |t|
+    t.integer "discipline_id"
+    t.integer "subject_id"
   end
 
   create_table "faculties", :force => true do |t|
@@ -40,6 +45,12 @@ ActiveRecord::Schema.define(:version => 20110712135601) do
   create_table "permissions", :force => true do |t|
     t.string   "name"
     t.integer  "level",      :limit => 2
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "subjects", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

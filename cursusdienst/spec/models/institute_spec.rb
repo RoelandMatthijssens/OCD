@@ -64,6 +64,9 @@ describe Institute do
     it "should have a faculties attribute" do
       @institute.should respond_to(:faculties)
     end
+    it "should have a disciplines attribute" do
+      @institute.should respond_to(:disciplines)
+    end
     it "should have the right faculties in alfabetical order" do
       @institute.faculties.should == [@f2, @f1]
     end

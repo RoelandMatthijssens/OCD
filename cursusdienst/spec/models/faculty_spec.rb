@@ -32,24 +32,46 @@ describe Faculty do
       @faculty.institute_id.should == @institute.id
       @faculty.institute.should == @institute
     end
+    describe "uniquness constraints" do
+      before(:each) do
+        @notattr = {
+          :name => "NotWetenschappen",
+          :initials => "NWE"
+        }
+      end
+      it "should not allow two faculties with the same name in a single institute" do
+        @another_faculty = @institute.faculties.create(@notattr.merge(:name => "Wetenschappen"))
+        @another_faculty.should_not be_valid
+      end
+      it "should not allow two faculties with the same initials in a single institute" do
+        @another_faculty = @institute.faculties.create(@notattr.merge(:initials => "WE"))
+        @another_faculty.should_not be_valid
+      end
+    end
   end
   
-  describe "uniquness constraints" do
-    before(:each) do
-      @notattr = {
-        :name => "NotWetenschappen",
-        :initials => "NWE"
-      }
+  describe "discipline associations" do
+    before (:each) do
+      @faculty = @institute.faculties.create(@attr)
+      @d1 = Factory(:discipline, :faculty => @faculty, :name => "Computer Wetenschappen")
+      @d2 = Factory(:discipline, :faculty => @faculty, :name => "Bio-ingenieurswetenschappen")
     end
-    it "should not allow two faculties with the same name in a single institute" do
-      @faculty1 = @institute.faculties.create(@attr)
-      @faculty2 = @institute.faculties.create(@notattr.merge(:name => "Wetenschappen"))
-      @faculty2.should_not be_valid
+    it "should have a constraints attribute" do
+      @faculty.should respond_to(:disciplines)
     end
-    it "should not allow two faculties with the same initials in a single institute" do
-      @faculty1 = @institute.faculties.create(@attr)
-      @faculty2 = @institute.faculties.create(@notattr.merge(:initials => "WE"))
-      @faculty2.should_not be_valid
+    it "should have the right disciplines in alfabetical order" do
+      @faculty.disciplines.should == [@d2, @d1]
+    end
+    it "should only contain the right disciplines" do
+      @not_faculty = Faculty.create(@attr.merge(:name => "not Computer Wetenschappen"))
+      @d3 = Factory(:discipline, :faculty => @not_faculty)
+      @faculty.disciplines.should_not include(@d3)
+    end
+    it "should destroy associated disciplines" do
+      @faculty.destroy
+      [@d1, @d2].each do |discipline|
+        Discipline.find_by_id(discipline.id).should be_nil
+      end
     end
   end
 end

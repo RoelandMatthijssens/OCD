@@ -13,7 +13,17 @@ Factory.define :institute do |institute|
 end
 
 Factory.define :faculty do |faculty|
-  faculty.name  "Wetenschappen"
-  faculty.initials  "WE"
+  faculty.name        "Wetenschappen"
+  faculty.initials    "WE"
   faculty.association :institute
+end
+
+Factory.define :discipline do |discipline|
+  discipline.name         "Computer Wetenschappen"
+  discipline.association  :faculty
+end
+
+Factory.define :subject do |subject|
+  subject.name        "Algoritmen En Datastructuren"
+  subject.association :disciplines_subjects
 end
