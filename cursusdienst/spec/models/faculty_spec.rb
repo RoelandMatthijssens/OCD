@@ -56,25 +56,22 @@ describe Faculty do
       @d1 = Factory(:discipline, :faculty => @faculty, :name => "Computer Wetenschappen")
       @d2 = Factory(:discipline, :faculty => @faculty, :name => "Bio-ingenieurswetenschappen")
     end
-    it "should never fail" do
-      a=1
+    it "should have a disciplines attribute" do
+      @faculty.should respond_to(:disciplines)
     end
-#    it "should have a disciplines attribute" do
-#      @faculty.should respond_to(:disciplines)
-#    end
-#    it "should have the right disciplines in alfabetical order" do
-#      @faculty.disciplines.should == [@d2, @d1]
-#    end
-#    it "should only contain the right disciplines" do
-#      @not_faculty = Faculty.create(@attr.merge(:name => "not Computer Wetenschappen"))
-#      @d3 = Factory(:discipline, :faculty => @not_faculty)
-#      @faculty.disciplines.should_not include(@d3)
-#    end
-#    it "should destroy associated disciplines" do
-#      @faculty.destroy
-#      [@d1, @d2].each do |discipline|
-#        Discipline.find_by_id(discipline.id).should be_nil
-#      end
-#    end
+    it "should have the right disciplines in alfabetical order" do
+      @faculty.disciplines.should == [@d2, @d1]
+    end
+    it "should only contain the right disciplines" do
+      @not_faculty = Faculty.create(@attr.merge(:name => "not Computer Wetenschappen"))
+      @d3 = Factory(:discipline, :faculty => @not_faculty)
+      @faculty.disciplines.should_not include(@d3)
+    end
+    it "should destroy associated disciplines" do
+      @faculty.destroy
+      [@d1, @d2].each do |discipline|
+        Discipline.find_by_id(discipline.id).should be_nil
+      end
+    end
   end
 end

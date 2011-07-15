@@ -1,8 +1,8 @@
 class CreateDisciplineSubject < ActiveRecord::Migration
   def up
     create_table :disciplines_subjects, :id => false do |t|
-      t.integer :discipline_id
-      t.integer :subject_id
+      t.references :discipline
+      t.references :subject
     end
   end
 
