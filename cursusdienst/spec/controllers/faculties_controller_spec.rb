@@ -60,11 +60,10 @@ describe FacultiesController do
       response.should have_selector("input[name='faculty[initials]'][type='text']")
     end
 
-    it "should have a institute field"
-#    do
-#      get :new
-#      response.should have_selector("input[name='faculty[institute]'][type='text']")
-#    end
+    it "should have a institute field" do
+      get :new
+      response.should have_selector("select[name='faculty[institute_id]']")
+    end
 
   end
 
