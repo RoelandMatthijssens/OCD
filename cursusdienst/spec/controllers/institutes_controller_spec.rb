@@ -6,8 +6,8 @@ describe InstitutesController do
   describe "GET 'index'" do
     before(:each) do
       @inst = Factory(:institute)
-      second = Factory(:institute, :name => "Kat uni leuven", :initials => "KUL", :location => "Leuven")
-      third = Factory(:institute, :name => "Uni Gent", :initials => "UG", :location => "Gent")
+      second = Factory(:institute)#, :name => "Kat uni leuven", :initials => "KUL", :location => "Leuven")
+      third = Factory(:institute)#, :name => "Uni Gent", :initials => "UG", :location => "Gent")
       @insts = [@inst, second, third]
     end
 

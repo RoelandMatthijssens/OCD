@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Subject do
   before(:each) do
     @attr = {
-      :name => "Wiskunde"
+      :name => "Statestiek"
       }
   end
   
@@ -14,4 +14,5 @@ describe Subject do
     subject = Subject.new(@attr.merge(:name => ""))
     subject.should_not be_valid
   end
+  it "should have a unique name given a institute"
 end

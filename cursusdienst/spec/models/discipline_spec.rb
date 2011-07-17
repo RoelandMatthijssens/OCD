@@ -30,28 +30,36 @@ describe Discipline do
       @discipline.faculty_id.should == @faculty.id
       @discipline.faculty.should == @faculty
     end
+    it "should have the right associated institute" #do
+#      @discipline.institute.should == @faculty.institute
+#    end
     describe "uniqueness constraints" do
       before(:each) do
         @not_attr = {:name => "not Computer Wetenschappen"}
       end
-      it "should not allow two disciplines with the same name in a single faculty" do
-        @d1 = @faculty.disciplines.create(@not_attr)
-        @d1 = @faculty.disciplines.create(@not_attr)
-      end
+      it "should not allow two disciplines with the same name in a single faculty" #do
+#        @d1 = @faculty.disciplines.create(@not_attr)
+#        @d2 = @faculty.disciplines.create(@not_attr)
+#        @d2.should_not be_valid
+#      end
+      it "should not allow two disciplines with the same name in a single school"
+#        inst = Factory(:institute)
+#        fac1 = inst.faculties.create(:name => 'Wetenschappen')
+#        fac2 = inst.faculties.create(:name => 'Geneeskunde')
     end
   end
   
-#  describe "Subject associations" do
-#    before (:each) do
-#      @discipline = @faculty.disciplines.new(@attr)
-#      @s1 = Factory(:subject, :discipline => @discipline, :name => "Statestiek")
-#      @s2 = Factory(:subject, :discipline => @discipline, :name => "Algo En Data")
-#    end
-#    it "should have a subject attribute" do
+  describe "Subject associations" do
+    before (:each) do
+      @discipline = @faculty.disciplines.create(@attr)
+      @s1 = Factory(:subject, :disciplines => [@discipline])
+      @s2 = Factory(:subject, :disciplines => [@discipline])
+    end
+    it "should have a subject attribute" #pdo
 #      @discipline.should respond_to(:subjects)
 #    end
-#    it "should have the correct subjects in alfabetical order" do
+    it "should have the correct subjects in alfabetical order"# do
 #      @discipline.subjects.should == [@s2, @s1]
 #    end
-#  end
+  end
 end

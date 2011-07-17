@@ -58,8 +58,8 @@ describe Institute do
   describe "faculty associations" do
     before(:each) do
       @institute = Institute.create(@attr)
-      @f1 = Factory(:faculty, :institute => @institute, :name => "Wetenschappen", :initials => "WE")
-      @f2 = Factory(:faculty, :institute => @institute, :name => "Letteren en Wijsbegeerte", :initials => "LEW")
+      @f1 = Factory(:faculty, :institute => @institute)#, :name => "Wetenschappen", :initials => "WE")
+      @f2 = Factory(:faculty, :institute => @institute)#, :name => "Letteren en Wijsbegeerte", :initials => "LEW")
     end
     it "should have a faculties attribute" do
       @institute.should respond_to(:faculties)
@@ -68,7 +68,7 @@ describe Institute do
       @institute.should respond_to(:disciplines)
     end
     it "should have the right faculties in alfabetical order" do
-      @institute.faculties.should == [@f2, @f1]
+      @institute.faculties.should == [@f1, @f2]
     end
     it "should only contain the right faculties" do
       @not_institute = Institute.create(@attr.merge(:name => "not Wetenschappen", :initials => "NWE"))

@@ -53,14 +53,14 @@ describe Faculty do
   describe "discipline associations" do
     before (:each) do
       @faculty = @institute.faculties.create(@attr)
-      @d1 = Factory(:discipline, :faculty => @faculty, :name => "Computer Wetenschappen")
-      @d2 = Factory(:discipline, :faculty => @faculty, :name => "Bio-ingenieurswetenschappen")
+      @d1 = Factory(:discipline, :faculty => @faculty)
+      @d2 = Factory(:discipline, :faculty => @faculty)
     end
     it "should have a disciplines attribute" do
       @faculty.should respond_to(:disciplines)
     end
     it "should have the right disciplines in alfabetical order" do
-      @faculty.disciplines.should == [@d2, @d1]
+      @faculty.disciplines.should == [@d1, @d2]
     end
     it "should only contain the right disciplines" do
       @not_faculty = Faculty.create(@attr.merge(:name => "not Computer Wetenschappen"))
