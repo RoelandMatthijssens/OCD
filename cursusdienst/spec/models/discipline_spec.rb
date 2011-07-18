@@ -37,11 +37,11 @@ describe Discipline do
       before(:each) do
         @not_attr = {:name => "not Computer Wetenschappen"}
       end
-      it "should not allow two disciplines with the same name in a single faculty" #do
-#        @d1 = @faculty.disciplines.create(@not_attr)
-#        @d2 = @faculty.disciplines.create(@not_attr)
-#        @d2.should_not be_valid
-#      end
+      it "should not allow two disciplines with the same name in a single faculty" do
+        @d1 = @faculty.disciplines.create(@not_attr)
+        @d2 = @faculty.disciplines.create(@not_attr)
+        @d2.should_not be_valid
+      end
       it "should not allow two disciplines with the same name in a single school"
 #        inst = Factory(:institute)
 #        fac1 = inst.faculties.create(:name => 'Wetenschappen')
