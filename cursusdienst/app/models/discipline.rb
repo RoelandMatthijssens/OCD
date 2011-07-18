@@ -1,5 +1,5 @@
 class Discipline < ActiveRecord::Base
-  attr_accessible :name, :faculty, :subjects
+  attr_accessible :name, :faculty_id, :subjects
   validates :name, :presence => true, :uniqueness => {:scope => :faculty_id}
   validates :faculty, :presence => true
   belongs_to :faculty

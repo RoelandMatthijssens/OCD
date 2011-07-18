@@ -79,7 +79,7 @@ describe DisciplinesController do
 
     describe "success" do
       before(:each) do
-        @attr = { :name => "Psychologie", :faculty_id => Factory(:faculty) }
+        @attr = { :name => "Psychologie", :faculty_id => Factory(:faculty).id }
       end
 
       it "should create a discipline" do
@@ -129,7 +129,10 @@ describe DisciplinesController do
 
     describe "success" do
       before(:each) do
-        @attr = { :name => "Psychologie", :faculty_id => Factory(:faculty, :name => "Something", :initials => "s") }
+        fac = Factory(:faculty)
+        fac.name = "Something"
+        fac.initials = "s"
+        @attr = { :name => "Psychologie", :faculty_id => fac.id }
       end
       it "Should never fail" do
         1.should == 1

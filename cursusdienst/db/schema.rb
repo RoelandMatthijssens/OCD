@@ -52,6 +52,13 @@ ActiveRecord::Schema.define(:version => 20110718124825) do
     t.datetime "updated_at"
   end
 
+  create_table "permissions", :force => true do |t|
+    t.string   "name"
+    t.integer  "level",      :limit => 2
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "subjects", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -61,6 +68,16 @@ ActiveRecord::Schema.define(:version => 20110718124825) do
   create_table "teachings", :force => true do |t|
     t.integer  "discipline_id"
     t.integer  "subject_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "full_name"
+    t.string   "user_name"
+    t.integer  "rolno",          :limit => 2
+    t.string   "email"
+    t.integer  "institution_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
