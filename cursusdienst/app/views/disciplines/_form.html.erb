@@ -5,6 +5,14 @@
     <%= f.label :name %> <br>
     <%= f.text_field :name %> <br>
   </div>
+    <div class='field'>
+    <%= f.label :faculty %> <br>
+    <%= f.collection_select(:faculty_id,
+      Faculty.all,
+      :id,
+      :full_name,
+      { :prompt => true })%> <br>
+  </div>
   <div class="actions">
     <%= f.submit @submit %>
   </div>

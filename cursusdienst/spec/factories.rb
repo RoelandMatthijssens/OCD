@@ -17,3 +17,8 @@ Factory.define :faculty do |faculty|
   faculty.initials  "WE"
   faculty.association :institute
 end
+
+Factory.define :discipline do |discipline|
+  discipline.name  "Computer Science"
+  discipline.association :faculty
+end

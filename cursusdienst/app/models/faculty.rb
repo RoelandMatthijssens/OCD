@@ -8,4 +8,9 @@ class Faculty < ActiveRecord::Base
   belongs_to :institute
   default_scope :order => "faculties.name ASC"
   has_many :disciplines
+  
+  def full_name
+    "#{institute.initials}: #{name}"
+  end
+  
 end
