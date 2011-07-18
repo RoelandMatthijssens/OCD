@@ -45,3 +45,12 @@ Factory.define :subject do |subject|
     [su.association(:discipline)]
   end
 end
+
+Factory.sequence(:material_id) { |n| n }
+Factory.define :material do |material|
+  material.after_build do |m|
+    id = Factory.next :material_id
+    m.name = "material_name #{id}"
+  end
+  material.association :subject
+end

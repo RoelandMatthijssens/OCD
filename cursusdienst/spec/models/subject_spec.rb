@@ -27,4 +27,20 @@ describe Subject do
     d2.subjects << s
     s.disciplines.should == [d1, d2]
   end
+  it "should have a materials attribute" do
+    subject = Subject.new(@attr)
+    subject.should respond_to(:materials)
+  end
+  
+  describe "materials associations" do
+    before(:each) do
+      @subject = Factory(:subject)
+      @m1 = Factory(:material, :subject => @subject)
+      @m2 = Factory(:material, :subject => @subject)
+    end
+    it "should have the correct materials in alphabetical order" do
+      @subject.materials.should == [@m1, @m2]
+    end
+    it "should sort the materials based on the name"
+  end
 end
