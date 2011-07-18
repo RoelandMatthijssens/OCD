@@ -30,9 +30,9 @@ describe Discipline do
       @discipline.faculty_id.should == @faculty.id
       @discipline.faculty.should == @faculty
     end
-    it "should have the right associated institute" #do
-#      @discipline.institute.should == @faculty.institute
-#    end
+    it "should have the right associated institute" do
+      @discipline.institute.should == @faculty.institute
+    end
     describe "uniqueness constraints" do
       before(:each) do
         @not_attr = {:name => "not Computer Wetenschappen"}

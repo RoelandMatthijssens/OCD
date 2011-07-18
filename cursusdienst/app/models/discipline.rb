@@ -1,4 +1,5 @@
 class Discipline < ActiveRecord::Base
+  attr_accessible :name, :faculty, :subjects
   validates :name, :presence => true
   belongs_to :faculty
   has_many :teachings
@@ -6,6 +7,6 @@ class Discipline < ActiveRecord::Base
   default_scope :order => "disciplines.name ASC"
   
   def institute
-    return discipline.faculty.intitute
+    return self.faculty.institute
   end
 end
