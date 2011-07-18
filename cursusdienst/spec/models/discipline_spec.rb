@@ -12,7 +12,11 @@ describe Discipline do
     @faculty.disciplines.create!(@attr)
   end
   it "should require a name" do
-    no_name_discipline = Discipline.new(@attr.merge(:name => ""))
+    no_name_discipline = @faculty.disciplines.new(@attr.merge(:name => ""))
+    no_name_discipline.should_not be_valid
+  end
+  it "should require a faculty" do
+    no_name_discipline = Discipline.new(@attr.merge(@attr))
     no_name_discipline.should_not be_valid
   end
   

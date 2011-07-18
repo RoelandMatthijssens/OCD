@@ -2,17 +2,22 @@ require 'spec_helper'
 
 describe MaterialOption do
   before(:each) do
+    @material = Factory(:material)
     @attr = {:key => "version", :value => "1.1"}
   end
   it "should create a new instance given correct attributes" do
-    MaterialOption.create!(@attr)
+    @material.materialOptions.create!(@attr)
   end
   it "should have a key" do
-    material_option = MaterialOption.new(@attr.merge(:key => ""))
+    material_option = @material.materialOptions.new(@attr.merge(:key => ""))
     material_option.should_not be_valid
   end
   it "should have a value" do
-    material_option = MaterialOption.new(@attr.merge(:value => ""))
+    material_option = @material.materialOptions.new(@attr.merge(:value => ""))
+    material_option.should_not be_valid
+  end
+  it "should have a material" do
+    material_option = MaterialOption.new(@attr)
     material_option.should_not be_valid
   end
   it "should have a unique key given a material_id" do

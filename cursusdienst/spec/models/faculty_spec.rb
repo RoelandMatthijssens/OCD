@@ -13,11 +13,15 @@ describe Faculty do
     @institute.faculties.create!(@attr)
   end
   it "should require a name" do
-    no_name_faculty = Faculty.new(@attr.merge(:name => ""))
+    no_name_faculty = @institute.faculties.new(@attr.merge(:name => ""))
     no_name_faculty.should_not be_valid
   end
   it "should require initials" do
-    no_initials_faculty = Faculty.new(@attr.merge(:initials => ""))
+    no_initials_faculty = @institute.faculties.new(@attr.merge(:initials => ""))
+    no_initials_faculty.should_not be_valid
+  end
+  it "should require an institute" do
+    no_initials_faculty = Faculty.new(@attr)
     no_initials_faculty.should_not be_valid
   end
   
