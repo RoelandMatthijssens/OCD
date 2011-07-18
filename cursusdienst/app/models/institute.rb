@@ -11,8 +11,8 @@ class Institute < ActiveRecord::Base
   
   validates_uniqueness_of :name, :initials
   
-#  has_many :users, :through => :faculty,
   has_many :faculties, :dependent => :destroy
+  has_many :disciplines, :through => :faculty
   
 #  def users
 #    self.faculties.collect{|f| f.users }.flatten

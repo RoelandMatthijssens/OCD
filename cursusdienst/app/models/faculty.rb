@@ -7,10 +7,9 @@ class Faculty < ActiveRecord::Base
   validates :institute_id, :presence => true
   belongs_to :institute
   default_scope :order => "faculties.name ASC"
-  has_many :disciplines
-  
+  has_many :disciplines, :dependent => :destroy
+
   def full_name
     "#{institute.initials}: #{name}"
   end
-  
 end

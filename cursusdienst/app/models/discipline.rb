@@ -1,4 +1,14 @@
 class Discipline < ActiveRecord::Base
-  validates :name, :presence => true
+  attr_accessible :name, :faculty, :subjects
+  validates :name, :presence => true, :uniqueness => {:scope => :faculty_id}
+#  validates :name, :presence => true, :uniqueness => {:scope => self.faculty.institute_id}
   belongs_to :faculty
+  has_many :teachings
+  has_many :subjects, :through => :teachings
+  default_scope :order => "disciplines.name ASC"
+  
+  def institute
+    return self.faculty.institute
+  end
 end
+
