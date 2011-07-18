@@ -5,10 +5,10 @@ describe DisciplinesController do
 
   describe "GET 'index'" do
     before(:each) do
-      @dis = factory(:discipline)
+      @dis = Factory(:discipline)
       @fac = @dis.faculty
-      second = factory(:discipline, :name => "Psychologie", :faculty => @fac)
-      third = factory(:discipline, :name => "Rechten", :faculty => @fac)
+      second = Factory(:discipline, :name => "Psychologie", :faculty => @fac)
+      third = Factory(:discipline, :name => "Rechten", :faculty => @fac)
       @diss = [@dis, second, third]
     end
 
@@ -28,7 +28,7 @@ describe DisciplinesController do
 
   describe "GET 'show" do
     before (:each) do
-      @dis = factory(:discipline)
+      @dis = Factory(:discipline)
     end
 
     it "should be successful" do
@@ -60,13 +60,13 @@ describe DisciplinesController do
   describe "POST 'create'" do
     describe "failure" do
       before(:each) do
-        @attr = { :name => "", :faculty => "" }
+        @attr = { :name => "" }
       end
 
       it "should not create a faculty" do
         lambda do
           post :create, :discipline => @attr
-        end.should_not change(faculty, :count)
+        end.should_not change(Faculty, :count)
       end
 
       it "should render the 'new' page" do
@@ -79,7 +79,7 @@ describe DisciplinesController do
 
     describe "success" do
       before(:each) do
-        @attr = { :name => "Psychologie", :faculty_id => factory(:faculty) }
+        @attr = { :name => "Psychologie", :faculty_id => Factory(:faculty) }
       end
 
       it "should create a discipline" do
@@ -103,7 +103,7 @@ describe DisciplinesController do
 
   describe "GET 'edit'" do
     before(:each) do
-      @dis = factory(:discipline)
+      @dis = Factory(:discipline)
     end
 
     it "should be successful" do
@@ -115,11 +115,11 @@ describe DisciplinesController do
 
   describe "PUT 'update'" do
     before(:each) do
-      @dis = factory(:discipline)
+      @dis = Factory(:discipline)
     end
     describe "failure" do
       before(:each) do
-        @attr = { :name => "", :faculty => "" }
+        @attr = { :name => "" }
       end
       it "should render the 'edit' page" do
         put :update, :id => @dis, :discipline => @attr
@@ -129,7 +129,7 @@ describe DisciplinesController do
 
     describe "success" do
       before(:each) do
-        @attr = { :name => "Psychologie", :faculty_id => factory(:faculty, :name => "Something", :initials => "s") }
+        @attr = { :name => "Psychologie", :faculty_id => Factory(:faculty, :name => "Something", :initials => "s") }
       end
       it "Should never fail" do
         1.should == 1

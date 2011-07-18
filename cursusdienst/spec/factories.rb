@@ -45,8 +45,3 @@ Factory.define :subject do |subject|
     [su.association(:discipline)]
   end
 end
-
-Factory.define :discipline do |discipline|
-  discipline.name  "Computer Science"
-  discipline.association :faculty
-end
