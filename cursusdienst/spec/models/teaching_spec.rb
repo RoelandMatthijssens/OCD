@@ -14,7 +14,7 @@ describe Teaching do
     end.should change(Teaching, :count).by(1)
   end
   
-  it "should not allow dubles" do
+  it "should not allow dubbels" do
     @d1.subjects << @s1
     lambda do
       @d1.subjects << @s1

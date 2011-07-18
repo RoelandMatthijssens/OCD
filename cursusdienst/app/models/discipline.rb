@@ -1,6 +1,7 @@
 class Discipline < ActiveRecord::Base
   attr_accessible :name, :faculty, :subjects
-  validates :name, :presence => true
+  validates :name, :presence => true, :uniqueness => {:scope => :faculty_id}
+#  validates :name, :presence => true, :uniqueness => {:scope => self.faculty.institute_id}
   belongs_to :faculty
   has_many :teachings
   has_many :subjects, :through => :teachings
@@ -10,3 +11,4 @@ class Discipline < ActiveRecord::Base
     return self.faculty.institute
   end
 end
+

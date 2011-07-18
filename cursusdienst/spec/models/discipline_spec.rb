@@ -38,8 +38,8 @@ describe Discipline do
         @not_attr = {:name => "not Computer Wetenschappen"}
       end
       it "should not allow two disciplines with the same name in a single faculty" do
-        @d1 = @faculty.disciplines.create(@not_attr)
-        @d2 = @faculty.disciplines.create(@not_attr)
+        @d1 = @faculty.disciplines.create(@attr.merge(:name => "something"))
+        @d2 = @faculty.disciplines.create(@attr.merge(:name => "something"))
         @d2.should_not be_valid
       end
       it "should not allow two disciplines with the same name in a single school"
@@ -55,11 +55,11 @@ describe Discipline do
       @s1 = Factory(:subject, :disciplines => [@discipline])
       @s2 = Factory(:subject, :disciplines => [@discipline])
     end
-    it "should have a subject attribute" #pdo
-#      @discipline.should respond_to(:subjects)
-#    end
-    it "should have the correct subjects in alfabetical order"# do
-#      @discipline.subjects.should == [@s2, @s1]
-#    end
+    it "should have a subject attribute" do
+      @discipline.should respond_to(:subjects)
+    end
+    it "should have the correct subjects in alfabetical order" do
+      @discipline.subjects.should == [@s1, @s2]
+    end
   end
 end

@@ -38,6 +38,10 @@ end
 Factory.sequence(:subject_id) { |n| n }
 Factory.define :subject do |subject|
   subject.after_build do |s|
+    id = Factory.next :subject_id
+    s.name = "subject_name #{id}"
   end
-  subject.association :discipline
+  subject.disciplines do |su|
+    [su.association(:discipline)]
+  end
 end
