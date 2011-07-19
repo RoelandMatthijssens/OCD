@@ -50,6 +50,4 @@ describe User do
       user2.should_not be_valid
     end
   end
-  
-#  it "should have a rolno" #does not make sense for multiple schools
 end

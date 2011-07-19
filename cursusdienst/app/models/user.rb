@@ -8,4 +8,5 @@ class User < ActiveRecord::Base
   validates :email, :presence => true
   belongs_to :discipline
   belongs_to :permission_group
+#  default_scope :order => "users.name ASC"
 end

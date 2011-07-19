@@ -57,7 +57,7 @@ Factory.define :user do |user|
     u.email = "user_email #{id}"
   end
   user.association :permission_group
-  user.association :subject
+  user.association :discipline
 end
 
 Factory.sequence(:permission_group_id) { |n| n }
