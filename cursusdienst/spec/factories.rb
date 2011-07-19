@@ -1,11 +1,4 @@
 # By using the symbol ':user', we get Factory Girl to simulate the User model.
-Factory.define :user do |user|
-  user.full_name  'rik vanmechelen'
-  user.rolno      90133
-  user.user_name  'rivmeche'
-  user.email      'name@mydomain.com'
-end
-
 Factory.sequence(:institute_id) { |n| n }
 Factory.define :institute do |institute|
   institute.after_build do |i|
@@ -53,4 +46,25 @@ Factory.define :material do |material|
     m.name = "material_name #{id}"
   end
   material.association :subject
+end
+
+Factory.sequence(:user_id) { |n| n }
+Factory.define :user do |user|
+  user.after_build do |u|
+    id = Factory.next :user_id
+    u.full_name = "user_full_name #{id}"
+    u.user_name = "user_user_name #{id}"
+    u.email = "user_email #{id}"
+  end
+  user.association :permission_group
+  user.association :subject
+end
+
+Factory.sequence(:permission_group_id) { |n| n }
+Factory.define :permission_group do |permission_group|
+  permission_group.after_build do |p|
+    id = Factory.next :permission_group_id
+    p.name = "permission_group_name #{id}"
+    p.level = id
+  end
 end
