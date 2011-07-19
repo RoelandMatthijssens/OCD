@@ -57,6 +57,7 @@ Factory.define :user do |user|
     u.email = "user_email #{id}"
   end
   user.association :permission_group
+  user.association :association
   user.association :discipline
 end
 
@@ -67,4 +68,14 @@ Factory.define :permission_group do |permission_group|
     p.name = "permission_group_name #{id}"
     p.level = id
   end
+end
+
+Factory.sequence(:association_id) { |n| n }
+Factory.define :association do |ass|
+  ass.after_build do |p|
+    id = Factory.next :association_id
+    p.name = "association_name #{id}"
+    p.initials = "association_initials #{id}"
+  end
+#  user.association :association
 end

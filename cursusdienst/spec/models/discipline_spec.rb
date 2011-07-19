@@ -47,9 +47,6 @@ describe Discipline do
         @d2.should_not be_valid
       end
       it "should not allow two disciplines with the same name in a single school"
-#        inst = Factory(:institute)
-#        fac1 = inst.faculties.create(:name => 'Wetenschappen')
-#        fac2 = inst.faculties.create(:name => 'Geneeskunde')
     end
   end
   
@@ -64,6 +61,19 @@ describe Discipline do
     end
     it "should have the correct subjects in alfabetical order" do
       @discipline.subjects.should == [@s1, @s2]
+    end
+  end
+  describe "association associations" do
+    before (:each) do
+      @discipline = @faculty.disciplines.create(@attr)
+      @a1 = @discipline.associations.create(:name => 'b', :initials => 'bb')
+      @a2 = @discipline.associations.create(:name => 'a', :initials => 'aa')
+    end
+    it "should have an associations attribute" do
+      @discipline.should respond_to(:associations)
+    end
+    it "should have the correct associations in alfabetical order" do
+      @discipline.associations.should == [@a2, @a1]
     end
   end
 end
