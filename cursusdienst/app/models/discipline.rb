@@ -4,6 +4,7 @@ class Discipline < ActiveRecord::Base
   validates :faculty, :presence => true
   belongs_to :faculty
   has_many :teachings
+  has_many :users
   has_many :subjects, :through => :teachings
   default_scope :order => "disciplines.name ASC"
   

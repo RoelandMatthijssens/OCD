@@ -23,6 +23,10 @@ describe User do
     user = User.new(@attr.merge(:user_name => ""))
     user.should_not be_valid
   end
+  it "should have a discipline attribute" do
+    user = User.new(@attr)
+    user.should respond_to(:discipline)
+  end
   describe "uniqueness" do
     before(:each) do
       @NOT_attr = {
@@ -37,5 +41,6 @@ describe User do
       user2.should_not be_valid
     end
   end
+  
 #  it "should have a rolno" #does not make sense for multiple schools
 end
