@@ -1,57 +1,46 @@
 require 'spec_helper'
 
 describe Association do
-  before(:each) do
-    @discipline = Factory(:discipline)
-    @attr = {:name => "Infogroep", :initials => "IG"}
+  subject { Factory(:association) }
+  
+  it { should validate_presence_of(:name) }
+  it { should validate_presence_of(:initials) }
+  it { should validate_presence_of(:disciplines) }
+  
+  it { should validate_uniqueness_of(:name) }
+  it { should validate_uniqueness_of(:initials) }
+  
+  it { should have_and_belong_to_many(:users)}
+  it { should have_and_belong_to_many(:disciplines) }
+  
+  it "should list the users in ALPHABETICAL order" do
+    user1 = Factory(:user)
+    user2 = Factory(:user)
+    association = Factory(:association)
+    
+    association.users << user2
+    association.users << user1
+    
+    association.users.should == [user1, user2]
   end
+  
   it "should create a new instance given valid attributes" do
-    @discipline.associations.create!(@attr)
-  end
-  it "should have a name" do
-    no_name_association = @discipline.associations.new(@attr.merge(:name => ""))
-    no_name_association.should_not be_valid
-  end
-  it "should have initials" do
-    no_initials_association = @discipline.associations.new(@attr.merge(:initials => ""))
-    no_initials_association.should_not be_valid
+    discipline = Factory(:discipline)
+    @attr = { :name => 'Infogroep', :initials => 'IG' }
+    association = Association.new(@attr)
+    association.disciplines << discipline
+    association.should be_valid
   end
   
-  describe "uniqueness" do
-    before(:each) do
-      @not_attr = {:name => "NOT_Infogroep", :initials => "NOT_IG"} 
-      @association = @discipline.associations.create!(@attr)
-    end
-    it "should have a unique name" do
-      association2 = @discipline.associations.new(@not_attr.merge(:name => "Infogroep"))
-      association2.should_not be_valid
-    end
-    it "should have a unique initials" do
-      association2 = @discipline.associations.new(@not_attr.merge(:initials => "IG"))
-      association2.should_not be_valid
-    end
- end 
-  it "should have a discipline" do
-    no_discipline_association = Association.new(@attr)
-    no_discipline_association.should_not be_valid
-  end
-  
-  describe "relations" do
-    before(:each) do
-      @association = @discipline.associations.create(@attr)
-    end
-    it "should have a users attribute" do
-      @association.should respond_to(:users)
-    end
-    it "should have a discipline attribute" do
-      @association.should respond_to(:discipline)
-    end
-    it "should have the correct users in alphabetical order" do
-      user1 = Factory(:user)
-      user2 = Factory(:user)
-      user1.association = @association
-      user2.association = @association
-      @association.users.should == [user1, user2]
-    end
+  it "should have the correct users in alphabetical order" do
+    association = Factory(:association)
+    u1 = Factory(:user)
+    u2 = Factory(:user)
+    u3 = Factory(:user)
+    u1.full_name = "bbb"; u2.full_name = "ccc"; u3.full_name = "aaa"
+    users = [u1, u2, u3]
+    users.each{|x| x.save; association.users << x}
+    
+    association.users.should == [u3, u1, u2]
   end
 end

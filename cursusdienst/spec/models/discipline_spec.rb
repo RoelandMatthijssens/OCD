@@ -1,79 +1,45 @@
 require 'spec_helper'
 
 describe Discipline do
-  before :each do
-    @faculty = Factory(:faculty)
-    @attr = {
-      :name => "Computer Wetenschappen"
-      }
-  end
+  subject = Factory(:discipline)
   
+  it { should validate_presence_of(:name) }
+  
+  it { should have_and_belong_to_many(:associations)}
+  
+  it { should belong_to(:faculty) }
+  
+  it { should have_many(:teachings) }
+  it { should have_many(:subjects).through(:teachings) }
+  
+  it { should validate_presence_of(:faculty) }
+  
+  it "should not allow two disciplines with the same name in a single faculty" do
+    faculty = Factory(:faculty)
+    @attr = { :name => "name" }
+    @not_attr = { :name => "NOT name" }
+    discipline1 = faculty.disciplines.create(@attr)
+    discipline2 = faculty.disciplines.new(@not_attr.merge(:name => "name"))
+    discipline2.should_not be_valid
+  end
+
   it "should create a new instance given valid attributes" do
-    @faculty.disciplines.create!(@attr)
+    faculty = Factory(:faculty)
+    @attr = { :name => "Computer Wetenschappen" }
+    discipline = Discipline.new(@attr)
+    discipline.faculty = faculty
+    discipline.should be_valid
   end
-  it "should require a name" do
-    no_name_discipline = @faculty.disciplines.new(@attr.merge(:name => ""))
-    no_name_discipline.should_not be_valid
-  end
-  it "should require a faculty" do
-    no_name_discipline = Discipline.new(@attr.merge(@attr))
-    no_name_discipline.should_not be_valid
-  end
-  
-  describe "faculty associations" do
-    before (:each) do
-      @discipline = @faculty.disciplines.create(@attr)
-    end
-    it "should have a faculty attribute" do
-      @discipline.should respond_to(:faculty)
-    end
-    it "should have a institute attribute" do
-      @discipline.should respond_to(:institute)
-    end
-    it "should have the right associated faculty" do
-      @discipline.faculty_id.should == @faculty.id
-      @discipline.faculty.should == @faculty
-    end
-    it "should have the right associated institute" do
-      @discipline.institute.should == @faculty.institute
-    end
-    describe "uniqueness constraints" do
-      before(:each) do
-        @not_attr = {:name => "not Computer Wetenschappen"}
-      end
-      it "should not allow two disciplines with the same name in a single faculty" do
-        @d1 = @faculty.disciplines.create(@attr.merge(:name => "something"))
-        @d2 = @faculty.disciplines.create(@attr.merge(:name => "something"))
-        @d2.should_not be_valid
-      end
-      it "should not allow two disciplines with the same name in a single school"
-    end
-  end
-  
-  describe "Subject associations" do
-    before (:each) do
-      @discipline = @faculty.disciplines.create(@attr)
-      @s1 = Factory(:subject, :disciplines => [@discipline])
-      @s2 = Factory(:subject, :disciplines => [@discipline])
-    end
-    it "should have a subject attribute" do
-      @discipline.should respond_to(:subjects)
-    end
-    it "should have the correct subjects in alfabetical order" do
-      @discipline.subjects.should == [@s1, @s2]
-    end
-  end
-  describe "association associations" do
-    before (:each) do
-      @discipline = @faculty.disciplines.create(@attr)
-      @a1 = @discipline.associations.create(:name => 'b', :initials => 'bb')
-      @a2 = @discipline.associations.create(:name => 'a', :initials => 'aa')
-    end
-    it "should have an associations attribute" do
-      @discipline.should respond_to(:associations)
-    end
-    it "should have the correct associations in alfabetical order" do
-      @discipline.associations.should == [@a2, @a1]
-    end
+
+  it "should have the correct associations in alfabetical order" do
+    discipline = Factory(:discipline)
+    ass1 = Factory(:association)
+    ass2 = Factory(:association)
+    ass3 = Factory(:association)
+    ass1.name = "bbb"; ass2.name = "ccc"; ass3.name = "aaa"
+    associations = [ass1, ass2, ass3]
+    associations.each{|x| x.save; discipline.associations << x}
+    
+    discipline.associations.should == [ass3, ass1, ass2]
   end
 end

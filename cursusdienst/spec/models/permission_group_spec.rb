@@ -1,50 +1,27 @@
 require 'spec_helper'
 
 describe PermissionGroup do
-  before(:each) do
-    @attr = {
-      :name => "permission_group_name",
-      :level => 1
-    }
-  end
+  subject { Factory(:permission_group) }
+  it { should validate_presence_of(:name) }
+  it { should validate_presence_of(:level) }
+  it { should validate_uniqueness_of(:name) }
+  it { should validate_uniqueness_of(:level) }
   
+  it { should have_many(:users) }
+
   it "should create a new instance given valid attributes" do
-    PermissionGroup.create!(@attr)
+    @attr = { :name => "permission_group_name", :level => 1 }
+    permission_group = PermissionGroup.new(@attr)
+    permission_group.should be_valid
   end
-  it "should have a name" do
-    permission_group = PermissionGroup.new(@attr.merge(:name => ""))
-    permission_group.should_not be_valid
-  end
-  it "should have a level" do
-    permission_group = PermissionGroup.new(@attr.merge(:level => ""))
-    permission_group.should_not be_valid
-  end
-  it "should have a users attribute" do
-    permission_group = PermissionGroup.new(@attr.merge(:level => ""))
-    permission_group.should respond_to(:users)
-  end
-  it "should have the correct users in alphabetical order" do
-    permission_group = PermissionGroup.create!(@attr)
-    u1 = Factory(:user, :permission_group => permission_group)
-    u2 = Factory(:user, :permission_group => permission_group)
-    permission_group.users.should == [u1, u2]
-  end
-  describe "uniqueness" do
-    before(:each) do
-     @NOT_attr = {
-      :name => "NOT_permission_group_name",
-      :level => 0
-      }
-    end
-    it "should have a unique name" do
-      permission_group1 = PermissionGroup.create(@attr)
-      permission_group2 = PermissionGroup.create(@NOT_attr.merge(:name => "permission_group_name"))
-      permission_group2.should_not be_valid
-    end
-    it "should have a unique level" do
-      permission_group1 = PermissionGroup.create(@attr)
-      permission_group2 = PermissionGroup.create(@NOT_attr.merge(:level => 1))
-      permission_group2.should_not be_valid
-    end
+  it "should have the correct users in ALPHABETICAL order" do
+    permission_group = Factory(:permission_group)
+    u1 = Factory(:user)
+    u2 = Factory(:user)
+    u3 = Factory(:user)
+    u1.full_name = "bbb"; u2.full_name = "ccc"; u3.full_name = "aaa"
+    users = [u1, u2, u3]
+    users.each{|x| permission_group.users << x}
+    permission_group.users.should == [u3, u1, u2]
   end
 end
