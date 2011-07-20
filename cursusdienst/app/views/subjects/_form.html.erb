@@ -1,0 +1,19 @@
+<%= form_for(@subject) do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+
+  <div class='field'>
+    <%= f.label :name %> <br>
+    <%= f.text_field :name %> <br>
+  </div>
+  <div class='field'>
+    <%= @subject.disciplines %> <br>
+    <%= f.label :discipline %> <br>
+    <%= f.fields_for :disciplines do |builder| %>
+      <%= builder.collection_select :id,
+        Discipline.find(:all), :id, :name %>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= f.submit @submit %>
+  </div>
+<% end %>

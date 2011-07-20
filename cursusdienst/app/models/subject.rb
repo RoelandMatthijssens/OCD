@@ -5,4 +5,6 @@ class Subject < ActiveRecord::Base
   has_many :materials
   validates :name, :presence => true
   default_scope :order => "subjects.name ASC"
+
+  accepts_nested_attributes_for :disciplines
 end

@@ -1,0 +1,8 @@
+<h1>All Subjects</h1>
+<%= link_to "Add a new subject", new_subject_path %>
+<ul class="subjects">
+  <% @subjects.each do |subject| %>
+    <%= render subject %>
+  <% end %>
+</ul>
+

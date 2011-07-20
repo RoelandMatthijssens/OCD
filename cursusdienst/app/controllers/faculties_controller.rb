@@ -1,6 +1,7 @@
 class FacultiesController < ApplicationController
 
   def index
+    @title = "Faculties"
     @faculties = Faculty.all
   end
 
@@ -10,7 +11,7 @@ class FacultiesController < ApplicationController
 
   def new
     @faculty = Faculty.new
-    @submit = "Create new Institution"
+    @submit = "Create new Faculty"
   end
 
   def create
@@ -25,7 +26,7 @@ class FacultiesController < ApplicationController
 
   def edit
     @faculty = Faculty.find(params[:id])
-    @submit = "Update Institution"
+    @submit = "Update Faculty"
   end
 
   def update

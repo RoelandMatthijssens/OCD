@@ -1,6 +1,7 @@
 class DisciplinesController < ApplicationController
 
    def index
+     @title = "Disciplines"
     @disciplines = Discipline.all
   end
 

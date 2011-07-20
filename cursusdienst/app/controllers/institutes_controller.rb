@@ -1,6 +1,7 @@
 class InstitutesController < ApplicationController
   
   def index
+    @title = "Institutes"
     @institutes = Institute.all
   end
 

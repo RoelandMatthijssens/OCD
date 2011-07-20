@@ -1,0 +1,7 @@
+<!-- hidden field to make sure the id doesnt get overloaded -->
+<div class="fields">
+  <% if :id %>
+    <%= f.collection_select :id,
+      Discipline.find(:all), :id, :name %>
+  <% end %>
+</div>
