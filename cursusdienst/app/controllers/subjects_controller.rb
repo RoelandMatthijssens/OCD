@@ -35,6 +35,7 @@ class SubjectsController < ApplicationController
 
   def update
     @subject = Subject.find(params[:id])
+    @subject.disciplines= get_disciplines_from_subject(params[:subject])
     if @subject.update_attributes(params[:subject])
       flash[:notice] = "Successfully updated subject."
       redirect_to @subject

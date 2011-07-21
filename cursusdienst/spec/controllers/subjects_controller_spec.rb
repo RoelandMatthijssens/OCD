@@ -2,5 +2,7 @@ require 'spec_helper'
 
 describe SubjectsController do
 
-  it "should have tests =^_^'="
+  render_views
+
+  it "should have tests!!!!!"
 end

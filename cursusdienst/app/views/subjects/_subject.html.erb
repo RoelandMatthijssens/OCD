@@ -2,9 +2,11 @@
   <h1><%= link_to subject.name, subject %></h1>
   <strong>Disciplines:</strong><br>
   <% subject.disciplines.each { |discipline| %>
-    <strong>Name:</strong><%= discipline.name %> <br/>
-    <strong>Faculty:</strong><%= discipline.faculty.name %> <br/>
-    <strong>Institute:</strong><%= discipline.faculty.institute.name %> <br/>
+    <strong><%= discipline.name %></strong><br/>
+    <ul>
+      <li><strong>Faculty:</strong><%= discipline.faculty.name %> <br/></li>
+      <li><strong>Institute:</strong><%= discipline.faculty.institute.name %> <br/></li>
+    </ul>
   <% } %>
 
   <%= link_to "Edit this subject", edit_subject_path(subject) %>
