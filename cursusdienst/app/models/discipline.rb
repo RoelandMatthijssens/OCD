@@ -10,5 +10,9 @@ class Discipline < ActiveRecord::Base
   def institute
     return self.faculty.institute
   end
+
+  def full_name
+    return "#{institute.initials}-#{faculty.initials}-#{name}-#{id}"
+  end
 end
 

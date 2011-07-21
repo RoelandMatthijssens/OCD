@@ -1,7 +1,6 @@
 <!-- hidden field to make sure the id doesnt get overloaded -->
 <div class="fields">
-  <% if :id %>
-    <%= f.collection_select :id,
-      Discipline.find(:all), :id, :name %>
-  <% end %>
+  <%= f.collection_select :id,
+    Discipline.find(:all), :id, :full_name %>
+  <%= link_to_remove_fields "remove", f %> 
 </div>

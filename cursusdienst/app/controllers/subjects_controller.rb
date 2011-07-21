@@ -11,7 +11,7 @@ class SubjectsController < ApplicationController
 
   def new
     @subject = Subject.new
-    @subject.disciplines= Discipline.all
+    @subject.disciplines << Discipline.find(:first)
     @submit = "Create new Subject"
   end
 
@@ -23,6 +23,7 @@ class SubjectsController < ApplicationController
       redirect_to @subject
     else
       flash[:notice] = "NOT created subject. #{params[:subject]}"
+#      flash[:notice] = "NOT created subject. #{get_disciplines_from_subject(params[:subject])}"
       render :action => 'new'
     end
   end
@@ -51,7 +52,7 @@ class SubjectsController < ApplicationController
     ds = []
     par[:disciplines_attributes].each_value { |v|
       d = Discipline.find(v["id"])
-      ds << d unless d.instance_of? Discipline
+      ds << d if d.instance_of? Discipline and v["_destroy"] != "1"
     }
     return ds
   end
