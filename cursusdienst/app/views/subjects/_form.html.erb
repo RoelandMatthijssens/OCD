@@ -1,0 +1,20 @@
+<%= form_for(@subject) do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+
+  <div class='field'>
+    <%= f.label :name %> <br>
+    <%= f.text_field :name %> <br>
+  </div>
+  <div class='field'>
+    <div class='field'>
+      <%= f.fields_for :disciplines do |builder| %>
+        <%=  render 'discipline_fields' , :f => builder %>
+      <% end %>
+      <%= link_to_add_discipline "add one", f, :disciplines %>
+    </div>
+
+  </div>
+  <div class="actions">
+    <%= f.submit @submit %>
+  </div>
+<% end %>

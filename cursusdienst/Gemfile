@@ -24,6 +24,8 @@ group :test do
 	gem 'spork', '0.8.5'
 	gem 'factory_girl_rails', '1.0'
 	gem 'shoulda', '2.11.3'
+	gem "capybara"
+	gem "guard-rspec"
 end
 
 

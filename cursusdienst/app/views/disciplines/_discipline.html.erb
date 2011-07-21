@@ -2,4 +2,5 @@
 <h1><%= link_to discipline.name, discipline %></h1>
 <strong>Faculty:</strong> <%= discipline.faculty.name %> <br/>
 <strong>Institute:</strong> <%= discipline.faculty.institute.name %> <br/>
+<%= link_to "Edit this discipline", edit_discipline_path(discipline) %>
 </div>
