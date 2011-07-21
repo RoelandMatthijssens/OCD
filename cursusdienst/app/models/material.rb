@@ -1,7 +1,8 @@
 class Material < ActiveRecord::Base
-  attr_accessible :name
+#  attr_accessible :name
   validates :name, :presence => true
-  validates :subject, :presence => true
+  validates :nr, :presence => true
   belongs_to :subject
-  has_many :materialOptions
+  validates :subject, :presence => true
+  has_many :material_options
 end

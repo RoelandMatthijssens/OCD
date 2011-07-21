@@ -5,9 +5,10 @@ class Discipline < ActiveRecord::Base
   
   belongs_to :faculty
   has_and_belongs_to_many :associations
+  has_and_belongs_to_many :users
   has_many :teachings
   has_many :subjects, :through => :teachings
   
-#  default_scope :order => "disciplines.name ASC"
+  default_scope :order => "disciplines.name ASC"
 end
 

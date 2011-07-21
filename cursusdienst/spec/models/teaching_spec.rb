@@ -1,24 +1,23 @@
 describe Teaching do
-  before (:each) do
-    faculty = Factory(:faculty)
-    @d1 = faculty.disciplines.create(:name => 'ComputerWetenschappen')
-    @d2 = faculty.disciplines.create(:name => 'Ingeniuers wetenschappen')
-    @s1 = Subject.create(:name => 'Statestiek')
-    @s2 = Subject.create(:name => 'Algo En Data')
-    @s3 = Subject.create(:name => 'Bouwkunde')
-  end
+  subject { Factory(:teaching) }
   
-  it "should create a relation" do
+  it { should belong_to(:discipline) }
+  it { should belong_to(:subject) }
+  
+#  it { should validate_uniqueness_of(:subject_id).scoped_to(:discipline_id) }
+  
+  it "should create a relation starting from discipline" do
+    discipline = Factory(:discipline)
+    subject = Factory(:subject)
     lambda do
-      @d1.subjects << @s1
+      discipline.subjects << subject
     end.should change(Teaching, :count).by(1)
   end
-  
-  it "should not allow dubbels" do
-    @d1.subjects << @s1
+  it "should create a relation starting from subject" do
+    discipline = Factory(:discipline)
+    subject = Factory(:subject)
     lambda do
-      @d1.subjects << @s1
-    end.should_not change(Teaching, :count)
+      subject.disciplines << discipline
+    end.should change(Teaching, :count).by(1)
   end
-  
 end

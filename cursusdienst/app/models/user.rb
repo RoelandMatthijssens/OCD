@@ -11,7 +11,8 @@ class User < ActiveRecord::Base
   belongs_to :discipline
   belongs_to :permission_group
   
-  has_and_belongs_to_many(:associations)
+  has_and_belongs_to_many :associations
+  has_and_belongs_to_many :disciplines
   
   default_scope :order => "users.full_name ASC"
 end
