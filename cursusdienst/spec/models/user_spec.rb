@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe User do
   before(:each) do
+    @permission_group = Factory(:permission_group)
     @attr = {
       :full_name => "User full_name",
       :email => "User email",
@@ -9,7 +10,7 @@ describe User do
       }
   end
   it "should create a new instance given valid attributes" do
-    User.create!(@attr)
+    @permission_group.users.create!(@attr)
   end
   it "should have a full_name" do
     user = User.new(@attr.merge(:full_name => ""))
@@ -21,6 +22,18 @@ describe User do
   end
   it "should have a user_name" do
     user = User.new(@attr.merge(:user_name => ""))
+    user.should_not be_valid
+  end
+  it "should have a discipline attribute" do
+    user = User.new(@attr)
+    user.should respond_to(:discipline)
+  end
+  it "should have a permission_group attribute" do
+    user = User.new(@attr)
+    user.should respond_to(:permission_group)
+  end
+  it "should have a permission_group" do
+    user = User.new(@attr.merge(:permission_group => ""))
     user.should_not be_valid
   end
   describe "uniqueness" do
@@ -37,5 +50,4 @@ describe User do
       user2.should_not be_valid
     end
   end
-#  it "should have a rolno" #does not make sense for multiple schools
 end
