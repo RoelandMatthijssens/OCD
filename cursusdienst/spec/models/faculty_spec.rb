@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Faculty do
+  before do
+    @old_silence_config = ::ActiveSupport::Deprecation.silenced
+    ::ActiveSupport::Deprecation.silenced = true
+  end
   subject { Factory(:faculty) }
   
   it { should validate_presence_of(:name) }
@@ -60,6 +64,9 @@ describe Faculty do
       faculty2 = @institute.faculties.create(@not_attr.merge(:initials => "initials"))
       faculty2.should_not be_valid
     end
+  end
+  after do
+    ::ActiveSupport::Deprecation.silenced = @old_silence_config
   end
 end
 

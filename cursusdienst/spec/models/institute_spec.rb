@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Institute do
+  before do
+    @old_silence_config = ::ActiveSupport::Deprecation.silenced
+    ::ActiveSupport::Deprecation.silenced = true
+  end
   subject { Factory(:institute) }
   
   it { should validate_presence_of(:name) }
@@ -38,6 +42,9 @@ describe Institute do
     [f1, f2].each do |faculty|
       Faculty.find_by_id(faculty.id).should be_nil
     end
+  end
+  after do
+    ::ActiveSupport::Deprecation.silenced = @old_silence_config
   end
 end
 

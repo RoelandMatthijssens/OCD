@@ -2,8 +2,10 @@ Factory.sequence(:user_id) { |n| n }
 Factory.define :user do |user|
   user.after_build do |u|
     id = Factory.next :user_id
-    u.full_name = "user_full_name #{id}"
+    u.name = "user_name #{id}"
+    u.last_name = "user_last_name #{id}"
     u.user_name = "user_user_name #{id}"
+    u.password = "user_password #{id}"
     u.email = "user_email#{id}@mail.com"
   end
   user.association :permission_group

@@ -1,8 +1,10 @@
 class User < ActiveRecord::Base
-  attr_accessible :full_name, :user_name, :email, :permission_group
+  attr_accessible :last_name, :name, :user_name, :email, :permission_group, :password
   
-  validates :full_name, :presence => true
   validates :user_name, :presence => true
+  validates :last_name, :presence => true
+  validates :password, :presence => true
+  validates :name, :presence => true
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, :presence => true, 
@@ -19,7 +21,11 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :associations
   has_and_belongs_to_many :disciplines
   
-  default_scope :order => "users.full_name ASC"
+  default_scope :order => "users.last_name, users.name ASC"
+  
+  def full_name
+    "#{last_name} #{name}"
+  end
 end
 
 # == Schema Information

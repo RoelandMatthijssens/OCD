@@ -1,4 +1,8 @@
 describe Teaching do
+  before do
+    @old_silence_config = ::ActiveSupport::Deprecation.silenced
+    ::ActiveSupport::Deprecation.silenced = true
+  end
   subject { Factory(:teaching) }
   
   it { should belong_to(:discipline) }
@@ -19,6 +23,9 @@ describe Teaching do
     lambda do
       subject.disciplines << discipline
     end.should change(Teaching, :count).by(1)
+  end
+  after do
+    ::ActiveSupport::Deprecation.silenced = @old_silence_config
   end
 end
 

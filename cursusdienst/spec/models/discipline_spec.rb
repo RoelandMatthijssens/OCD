@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Discipline do
+  before do
+    @old_silence_config = ::ActiveSupport::Deprecation.silenced
+    ::ActiveSupport::Deprecation.silenced = true
+  end
   subject { Factory(:discipline) }
   
   it { should validate_presence_of(:name) }
@@ -49,11 +53,13 @@ describe Discipline do
     user1 = Factory(:user)
     user2 = Factory(:user)
     user3 = Factory(:user)
-    user1.full_name = "bbb"; user2.full_name = "ccc"; user3.full_name = "aaa"
-    users = [user1, user2, user3]
+    user4 = Factory(:user)
+    user1.last_name = "bbb"; user2.last_name = "ccc"; user3.last_name = "aaa"; user4.last_name = "aaa"
+    user3.name = "bbb"; user4.name = "aaa"
+    users = [user1, user2, user3, user4]
     users.each{|x| x.save; discipline.users << x}
     
-    discipline.users.should == [user3, user1, user2]
+    discipline.users.should == [user4, user3, user1, user2]
   end
   
   it "should have the correct subjects in ALPHABETICAL order" do
@@ -66,6 +72,9 @@ describe Discipline do
     subjects.each{|x| x.save; discipline.subjects << x}
     
     discipline.subjects.should == [subject3, subject1, subject2]
+  end
+  after do
+    ::ActiveSupport::Deprecation.silenced = @old_silence_config
   end
 end
 

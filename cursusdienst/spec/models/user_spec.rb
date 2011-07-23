@@ -1,11 +1,18 @@
 require 'spec_helper'
 
 describe User do
+  before do
+    @old_silence_config = ::ActiveSupport::Deprecation.silenced
+    ::ActiveSupport::Deprecation.silenced = true
+  end
+  
   subject { Factory(:user) }
   
-  it { should validate_presence_of(:full_name) }
+  it { should validate_presence_of(:name) }
+  it { should validate_presence_of(:last_name) }
   it { should validate_presence_of(:user_name) }
   it { should validate_presence_of(:email) }
+  it { should validate_presence_of(:password) }
   it { should validate_presence_of(:permission_group) }
   it { should validate_uniqueness_of(:user_name) }
   
@@ -16,8 +23,10 @@ describe User do
   it "should create a new instance given valid attributes" do
     @permission_group = Factory(:permission_group)
     @attr = {
-      :full_name => 'user full_name',
+      :last_name => 'user last_name',
+      :name => 'user name',
       :user_name  => 'user user_name',
+      :password => 'user password',
       :email => 'useremail@mail.com'
       }
     user = User.new(@attr)
@@ -50,8 +59,10 @@ describe User do
   describe "email validation" do
     before(:each) do
       @attr = {
-        :full_name => 'user full_name',
+        :name => 'user name',
+        :last_name => 'user last_name',
         :user_name  => 'user user_name',
+        :password  => 'user password',
         :email => 'useremail@mail.com'
       }
       @valid_addresses = %w[user@foo.com THE_USER@foo.bar.org first.last@foo.jp]
@@ -81,7 +92,10 @@ describe User do
       user_with_duplicate_email.permission_group = @permission_group
       user_with_duplicate_email.should_not be_valid
     end
-
+  end
+  
+  after do
+    ::ActiveSupport::Deprecation.silenced = @old_silence_config
   end
 end
 

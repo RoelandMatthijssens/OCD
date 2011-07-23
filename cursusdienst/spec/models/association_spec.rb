@@ -37,11 +37,13 @@ describe Association do
     u1 = Factory(:user)
     u2 = Factory(:user)
     u3 = Factory(:user)
-    u1.full_name = "bbb"; u2.full_name = "ccc"; u3.full_name = "aaa"
-    users = [u1, u2, u3]
+    u4 = Factory(:user)
+    u1.last_name = "bbb"; u2.last_name = "ccc"; u3.last_name = "aaa"; u4.last_name = "aaa"
+    u3.name = "bbb"; u4.name = "aaa"
+    users = [u1, u2, u3, u4]
     users.each{|x| x.save; association.users << x}
     
-    association.users.should == [u3, u1, u2]
+    association.users.should == [u4, u3, u1, u2]
   end
 end
 

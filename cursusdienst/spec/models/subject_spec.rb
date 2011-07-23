@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Subject do
+  before do
+    @old_silence_config = ::ActiveSupport::Deprecation.silenced
+    ::ActiveSupport::Deprecation.silenced = true
+  end
   subject { Factory(:subject) }
   
   it { should validate_presence_of(:name) }
@@ -41,6 +45,9 @@ describe Subject do
 #    end
 #    it "should sort the materials based on the name"
 #  end
+  after do
+    ::ActiveSupport::Deprecation.silenced = @old_silence_config
+  end
 end
 
 # == Schema Information
