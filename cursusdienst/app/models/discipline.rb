@@ -12,3 +12,15 @@ class Discipline < ActiveRecord::Base
   default_scope :order => "disciplines.name ASC"
 end
 
+
+# == Schema Information
+#
+# Table name: disciplines
+#
+#  id         :integer(4)      not null, primary key
+#  name       :string(255)
+#  faculty_id :integer(4)
+#  created_at :datetime
+#  updated_at :datetime
+#
+

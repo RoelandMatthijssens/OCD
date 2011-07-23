@@ -4,7 +4,7 @@ Factory.define :user do |user|
     id = Factory.next :user_id
     u.full_name = "user_full_name #{id}"
     u.user_name = "user_user_name #{id}"
-    u.email = "user_email #{id}"
+    u.email = "user_email#{id}@mail.com"
   end
   user.association :permission_group
 #  user.association :association

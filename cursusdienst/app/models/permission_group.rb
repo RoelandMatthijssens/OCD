@@ -6,3 +6,15 @@ class PermissionGroup < ActiveRecord::Base
   validates_uniqueness_of :level
   has_many :users
 end
+
+# == Schema Information
+#
+# Table name: permission_groups
+#
+#  id         :integer(4)      not null, primary key
+#  name       :string(255)
+#  level      :integer(4)
+#  created_at :datetime
+#  updated_at :datetime
+#
+

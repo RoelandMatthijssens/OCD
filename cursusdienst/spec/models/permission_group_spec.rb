@@ -25,3 +25,15 @@ describe PermissionGroup do
     permission_group.users.should == [u3, u1, u2]
   end
 end
+
+# == Schema Information
+#
+# Table name: permission_groups
+#
+#  id         :integer(4)      not null, primary key
+#  name       :string(255)
+#  level      :integer(4)
+#  created_at :datetime
+#  updated_at :datetime
+#
+

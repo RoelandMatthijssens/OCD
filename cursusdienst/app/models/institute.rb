@@ -13,3 +13,16 @@ class Institute < ActiveRecord::Base
 #    self.faculties.collect{|f| f.users }.flatten
 #  end
 end
+
+# == Schema Information
+#
+# Table name: institutes
+#
+#  id         :integer(4)      not null, primary key
+#  name       :string(255)
+#  initials   :string(255)
+#  location   :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+

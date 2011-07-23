@@ -13,3 +13,16 @@ class Faculty < ActiveRecord::Base
     "#{institute.initials}: #{name}"
   end
 end
+
+# == Schema Information
+#
+# Table name: faculties
+#
+#  id           :integer(4)      not null, primary key
+#  name         :string(255)
+#  institute_id :integer(4)
+#  created_at   :datetime
+#  updated_at   :datetime
+#  initials     :string(255)
+#
+

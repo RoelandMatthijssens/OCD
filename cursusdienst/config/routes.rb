@@ -1,18 +1,22 @@
 Cursusdienst::Application.routes.draw do
 
   get "pages/home"
-
+  
   get "pages/about"
-
+  
+  resources :users
+  
   resources :institutes
-
+  
   resources :faculties
   
   resources :disciplines
-
+  
   resources :subjects
-
+  
   root :to => 'pages#home'
+  
+  match '/signup', :to => 'users#new'
 
 
 

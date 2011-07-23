@@ -42,3 +42,14 @@ describe Subject do
 #    it "should sort the materials based on the name"
 #  end
 end
+
+# == Schema Information
+#
+# Table name: subjects
+#
+#  id         :integer(4)      not null, primary key
+#  name       :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+

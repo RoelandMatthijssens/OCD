@@ -17,6 +17,8 @@ gem 'jquery-rails'
 group :development do
 	gem 'rspec-rails', '2.6.1'
 #	gem 'composite_primary_keys', '=3.1.0'
+  gem 'annotate', :git => 'git://github.com/jeremyolliver/annotate_models.git', :branch => 'rake_compatibility'
+
 end
 group :test do
 	gem 'rspec', '2.6.0'
@@ -26,6 +28,7 @@ group :test do
 	gem 'shoulda', '2.11.3'
 	gem "capybara"
 	gem "guard-rspec"
+  gem 'annotate', :git => 'git://github.com/jeremyolliver/annotate_models.git', :branch => 'rake_compatibility'
 end
 
 

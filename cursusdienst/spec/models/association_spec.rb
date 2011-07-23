@@ -44,3 +44,16 @@ describe Association do
     association.users.should == [u3, u1, u2]
   end
 end
+
+# == Schema Information
+#
+# Table name: associations
+#
+#  id            :integer(4)      not null, primary key
+#  name          :string(255)
+#  initials      :string(255)
+#  discipline_id :integer(4)
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+
