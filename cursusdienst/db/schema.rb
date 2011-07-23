@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110723144736) do
+ActiveRecord::Schema.define(:version => 20110723215315) do
 
   create_table "associations", :force => true do |t|
     t.string   "name"
@@ -106,6 +106,8 @@ ActiveRecord::Schema.define(:version => 20110723144736) do
     t.string   "name"
     t.string   "last_name"
     t.string   "password"
+    t.string   "encrypted_password"
+    t.string   "salt"
   end
 
 end

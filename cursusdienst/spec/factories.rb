@@ -6,6 +6,7 @@ Factory.define :user do |user|
     u.last_name = "user_last_name #{id}"
     u.user_name = "user_user_name #{id}"
     u.password = "user_password #{id}"
+    u.password_confirmation = "user_password #{id}"
     u.email = "user_email#{id}@mail.com"
   end
   user.association :permission_group
