@@ -96,14 +96,31 @@ describe User do
         user_with_duplicate_email.permission_group = @permission_group
         user_with_duplicate_email.should_not be_valid
       end
+    end
+    describe "password encryption" do
+      before(:each) do
+        @user.save
+      end
       describe "has_password? method" do
         it "should be true if the passwords match" do
-          @user.save
           @user.has_password?(@attr[:password]).should be_true
         end
         it "should be false if the passwords don't match" do
-          @user.save
           @user.has_password?("invalid").should be_false
+        end
+      end
+      describe "authentication method" do
+        it "should return nil on password/user_name mismatch" do
+          wrong_pass_user = User.autenticate(@attr[:user_name], "wrong password")
+          wrong_pass_user.should be_nil
+        end
+        it "should return nil when user_name not found" do
+          wrong_name_user = User.autenticate("wrong_user_name", @attr[:password])
+          wrong_name_user.should be_nil
+        end
+        it "should return a user when succesfull" do
+          success_user = User.autenticate(@attr[:user_name], @attr[:password])
+          success_user.should == @user
         end
       end
     end
