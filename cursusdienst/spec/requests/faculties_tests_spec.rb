@@ -43,11 +43,11 @@ describe "FacultiesTests" do
         visit new_faculty_path
         fill_in "faculty_name", :with => 'Compu We'
         fill_in "faculty_initials", :with => 'CW'
-        select @inst.name, :from => 'faculty_institute_id'
+        select @fac.institute.name, :from => 'faculty_institute_id'
         click_button "Create"
         page.should have_content("Faculty created succesfully")
         page.should have_content("Compu We")
-        page.should have_content(@inst.name)
+        page.should have_content(@fac.institute.name)
         page.should have_content('CW')
       end
 

@@ -1,7 +1,7 @@
 #      t.string :name
 
 class Faculty < ActiveRecord::Base
-  attr_accessible :name, :initials, :full_name, :institute
+  attr_accessible :name, :initials, :full_name, :institute_id
   validates :name, :presence => true, :uniqueness => {:scope => :institute_id}
   validates :initials, :presence => true, :uniqueness => {:scope => :institute_id}
   validates :institute, :presence => true
