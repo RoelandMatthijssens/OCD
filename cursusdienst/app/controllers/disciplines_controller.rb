@@ -17,7 +17,7 @@ class DisciplinesController < ApplicationController
   def create
     @discipline = Discipline.new(params[:discipline])
     if @discipline.save
-      flash[:succes] = "Disciplines create succesfully"
+      flash[:succes] = "Discipline created succesfully"
       redirect_to @discipline
     else
       render 'new'
