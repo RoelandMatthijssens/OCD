@@ -23,8 +23,9 @@ group :test do
 	gem 'webrat', '0.7.3'
 	gem 'spork', '0.8.5'
 	gem 'factory_girl_rails', '1.0'
-  gem "capybara"
-  gem "guard-rspec"
+	gem 'shoulda', '2.11.3'
+	gem "capybara"
+	gem "guard-rspec"
 end
 
 

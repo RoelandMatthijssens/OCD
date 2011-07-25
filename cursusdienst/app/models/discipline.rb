@@ -1,19 +1,14 @@
 class Discipline < ActiveRecord::Base
-  attr_accessible :name, :faculty_id, :subjects
+  attr_accessible :name, :faculty_id, :associations, :subjects
   validates :name, :presence => true, :uniqueness => {:scope => :faculty_id}
   validates :faculty, :presence => true
-  belongs_to :faculty
-  has_many :teachings
-  has_many :users
-  has_many :subjects, :through => :teachings
-  default_scope :order => "disciplines.name ASC"
   
-  def institute
-    return self.faculty.institute
-  end
-
-  def full_name
-    return "#{institute.initials}-#{faculty.initials}-#{name}-#{id}"
-  end
+  belongs_to :faculty
+  has_and_belongs_to_many :associations
+  has_and_belongs_to_many :users
+  has_many :teachings
+  has_many :subjects, :through => :teachings
+  
+  default_scope :order => "disciplines.name ASC"
 end
 
