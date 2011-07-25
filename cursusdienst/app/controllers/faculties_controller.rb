@@ -17,7 +17,7 @@ class FacultiesController < ApplicationController
   def create
     @faculty = Faculty.new(params[:faculty])
     if @faculty.save
-      flash[:succes] = "Institution create succesfully"
+      flash[:succes] = "Faculty created succesfully"
       redirect_to @faculty
     else
       render 'new'
@@ -32,7 +32,7 @@ class FacultiesController < ApplicationController
   def update
     @faculty = Faculty.find(params[:id])
     if @faculty.update_attributes(params[:faculty])
-      flash[:succes] = "faculty updated succesfully"
+      flash[:succes] = "Faculty updated succesfully"
       redirect_to @faculty
     else
       render 'edit'
