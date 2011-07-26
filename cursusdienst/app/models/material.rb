@@ -1,10 +1,13 @@
 class Material < ActiveRecord::Base
-#  attr_accessible :name
+  attr_accessible :name, :subject_id, :associations, :material_options
   validates :name, :presence => true
   validates :nr, :presence => true
   belongs_to :subject
-  validates :subject, :presence => true
+  has_many :sales
+  has_many :guilds, :through => :sales
+#  validates :subject, :presence => true
   has_many :material_options
+  default_scope :order => "materials.name ASC"
 end
 
 # == Schema Information

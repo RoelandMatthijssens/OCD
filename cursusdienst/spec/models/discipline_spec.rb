@@ -9,7 +9,7 @@ describe Discipline do
   
   it { should validate_presence_of(:name) }
   
-  it { should have_and_belong_to_many(:associations)}
+  it { should have_and_belong_to_many(:guilds)}
   it { should have_and_belong_to_many(:users)}
   
   it { should belong_to(:faculty) }
@@ -36,16 +36,16 @@ describe Discipline do
     discipline.should be_valid
   end
 
-  it "should have the correct associations in ALPHABETICAL order" do
+  it "should have the correct guilds in ALPHABETICAL order" do
     discipline = Factory(:discipline)
-    ass1 = Factory(:association)
-    ass2 = Factory(:association)
-    ass3 = Factory(:association)
-    ass1.name = "bbb"; ass2.name = "ccc"; ass3.name = "aaa"
-    associations = [ass1, ass2, ass3]
-    associations.each{|x| x.save; discipline.associations << x}
+    guild1 = Factory(:guild)
+    guild2 = Factory(:guild)
+    guild3 = Factory(:guild)
+    guild1.name = "bbb"; guild2.name = "ccc"; guild3.name = "aaa"
+    guilds = [guild1, guild2, guild3]
+    guilds.each{|x| x.save; discipline.guilds << x}
     
-    discipline.associations.should == [ass3, ass1, ass2]
+    discipline.guilds.should == [guild3, guild1, guild2]
   end
   
   it "should have the correct users in ALPHABETICAL order" do

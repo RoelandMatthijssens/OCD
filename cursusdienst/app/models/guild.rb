@@ -1,5 +1,5 @@
-class Association < ActiveRecord::Base
-  attr_accessible :name, :initials, :users, :disciplines
+class Guild < ActiveRecord::Base
+  attr_accessible :name, :initials, :users, :disciplines, :materials
   validates :name, :presence => true
   validates :initials, :presence => true
   validate :has_at_least_one_discipline
@@ -9,7 +9,9 @@ class Association < ActiveRecord::Base
   
   has_and_belongs_to_many :disciplines
   has_and_belongs_to_many :users
-  default_scope :order => "associations.name ASC"
+  has_many :sales, :dependent => :destroy
+  has_many :materials, :through => :sales
+  default_scope :order => "guilds.name ASC"
   def has_at_least_one_discipline
     errors.add(:disciplines, "can't be blank") if
       disciplines.empty?

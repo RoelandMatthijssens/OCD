@@ -10,31 +10,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110723215315) do
-
-  create_table "associations", :force => true do |t|
-    t.string   "name"
-    t.string   "initials"
-    t.integer  "discipline_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "associations_disciplines", :id => false, :force => true do |t|
-    t.integer "association_id"
-    t.integer "discipline_id"
-  end
-
-  create_table "associations_users", :id => false, :force => true do |t|
-    t.integer "association_id"
-    t.integer "user_id"
-  end
+ActiveRecord::Schema.define(:version => 20110726124828) do
 
   create_table "disciplines", :force => true do |t|
     t.string   "name"
     t.integer  "faculty_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "disciplines_guilds", :id => false, :force => true do |t|
+    t.integer "guild_id"
+    t.integer "discipline_id"
   end
 
   create_table "disciplines_users", :id => false, :force => true do |t|
@@ -51,6 +38,17 @@ ActiveRecord::Schema.define(:version => 20110723215315) do
   end
 
   add_index "faculties", ["institute_id"], :name => "index_faculties_on_institute_id"
+
+  create_table "guilds", :force => true do |t|
+    t.string  "name"
+    t.string  "initials"
+    t.integer "discipline_id"
+  end
+
+  create_table "guilds_users", :id => false, :force => true do |t|
+    t.integer "guild_id"
+    t.integer "user_id"
+  end
 
   create_table "institutes", :force => true do |t|
     t.string   "name"
@@ -81,6 +79,13 @@ ActiveRecord::Schema.define(:version => 20110723215315) do
     t.integer  "level"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "sales", :force => true do |t|
+    t.integer  "material_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "guild_id"
   end
 
   create_table "subjects", :force => true do |t|

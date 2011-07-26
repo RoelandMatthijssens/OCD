@@ -20,7 +20,7 @@ describe User do
   it { should ensure_length_of(:user_name).is_at_least(3).is_at_most(20) }
   
   it { should belong_to(:permission_group) }
-  it { should have_and_belong_to_many(:associations)}
+  it { should have_and_belong_to_many(:guilds)}
   it { should have_and_belong_to_many(:disciplines)}
   it { should respond_to(:encrypted_password) }
   
@@ -48,15 +48,15 @@ describe User do
       @user.save
       @user.encrypted_password.should_not be_blank
     end
-    it "should have the correct associations in ALPHABETICAL order" do
+    it "should have the correct guilds in ALPHABETICAL order" do
       user = Factory(:user)
-      ass1 = Factory(:association)
-      ass2 = Factory(:association)
-      ass3 = Factory(:association)
-      ass1.name = "bbb"; ass2.name = "ccc"; ass3.name = "aaa"
-      associations = [ass1, ass2, ass3]
-      associations.each{|x| x.save; user.associations << x}
-      user.associations.should == [ass3, ass1, ass2]
+      guild1 = Factory(:guild)
+      guild2 = Factory(:guild)
+      guild3 = Factory(:guild)
+      guild1.name = "bbb"; guild2.name = "ccc"; guild3.name = "aaa"
+      guilds = [guild1, guild2, guild3]
+      guilds.each{|x| x.save; user.guilds << x}
+      user.guilds.should == [guild3, guild1, guild2]
     end
     
     it "should have the correct disciplines in ALPHABETICAL order" do

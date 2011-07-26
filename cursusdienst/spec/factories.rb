@@ -22,12 +22,12 @@ Factory.define :permission_group do |permission_group|
   end
 end
 
-Factory.sequence(:association_id) { |n| n }
-Factory.define :association do |ass|
+Factory.sequence(:guild_id) { |n| n }
+Factory.define :guild do |ass|
   ass.after_build do |p|
-    id = Factory.next :association_id
-    p.name = "association_name #{id}"
-    p.initials = "association_initials #{id}"
+    id = Factory.next :guild_id
+    p.name = "guild_name #{id}"
+    p.initials = "guild_initials #{id}"
   end
   ass.disciplines do |a|
     [a.association(:discipline)]
@@ -72,6 +72,9 @@ Factory.define :subject do |subject|
 end
 
 Factory.define :teaching do |teaching|
+
+end
+Factory.define :sale do |sale|
 
 end
 
