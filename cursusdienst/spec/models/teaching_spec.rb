@@ -3,7 +3,7 @@ describe Teaching do
     @old_silence_config = ::ActiveSupport::Deprecation.silenced
     ::ActiveSupport::Deprecation.silenced = true
   end
-  subject { Factory(:teaching) }
+#  subject { Factory(:teaching) }
   
   it { should belong_to(:discipline) }
   it { should belong_to(:subject) }
@@ -24,6 +24,34 @@ describe Teaching do
       subject.disciplines << discipline
     end.should change(Teaching, :count).by(1)
   end
+  
+  describe "uniqueness per institute" do
+    before(:each) do
+      @institute1 = Factory(:institute)
+      @faculty1 = Factory(:faculty, :institute => @institute1)
+      @discipline1 = Factory(:discipline, :faculty => @faculty1)
+      @institute2 = Factory(:institute)
+      @faculty2 = Factory(:faculty, :institute => @institute2)
+      @discipline2 = Factory(:discipline, :faculty => @faculty2)
+      @subject1 = Subject.create(:name => 'same_name')
+      @subject2 = Subject.create(:name => 'same_name')
+    end
+    it "should allow the same name in different schools" do
+      lambda do
+        @discipline1.subjects << @subject1
+        @discipline2.subjects << @subject2
+      end.should_not raise_error
+    end
+    it "should not allow the same name in same school" do
+      @faculty2.institute = @institute1
+      @faculty2.save
+      lambda do
+        @discipline1.subjects << @subject1
+        @discipline2.subjects << @subject2
+      end.should raise_error
+    end
+  end
+  
   after do
     ::ActiveSupport::Deprecation.silenced = @old_silence_config
   end

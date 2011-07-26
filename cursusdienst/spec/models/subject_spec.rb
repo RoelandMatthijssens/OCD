@@ -29,22 +29,17 @@ describe Subject do
     subject.disciplines.should == [discipline3, discipline1, discipline2]
   end
   
-#  it "should have a materials attribute" do
-#    subject = Subject.new(@attr)
-#    subject.should respond_to(:materials)
-#  end
-#  
-#  describe "materials associations" do
-#    before(:each) do
-#      @subject = Factory(:subject)
-#      @m1 = Factory(:material, :subject => @subject)
-#      @m2 = Factory(:material, :subject => @subject)
-#    end
-#    it "should have the correct materials in alphabetical order" do
-#      @subject.materials.should == [@m1, @m2]
-#    end
-#    it "should sort the materials based on the name"
-#  end
+  it "should have the correct materials in ALPHABETICAL order" do
+    subject = Factory(:subject)
+    material1 = Factory(:material)
+    material2 = Factory(:material)
+    material3 = Factory(:material)
+    material1.name = "bbb"; material2.name = "ccc"; material3.name = "aaa"
+    materials = [material1, material2, material3]
+    materials.each{|x| x.save; subject.materials << x}
+    
+    subject.materials.should == [material3, material1, material2]
+  end
   after do
     ::ActiveSupport::Deprecation.silenced = @old_silence_config
   end
