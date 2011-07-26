@@ -1,0 +1,8 @@
+<h1>All Institutes</h1>
+<%= link_to "Add a new material", new_material_path %>
+<ul class="materials">
+  <% @materials.each do |material| %>
+    <%= render material %>
+  <% end %>
+</ul>
+
