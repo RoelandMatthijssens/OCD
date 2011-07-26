@@ -85,7 +85,6 @@ Factory.define :material do |material|
     m.name = "material_name #{id}"
     m.nr = id
   end
-  material.association :subject
 end
 
 Factory.sequence(:material_option_id) { |n| n }
