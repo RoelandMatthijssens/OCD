@@ -10,6 +10,7 @@ describe "SubjectsTests" do
       @sub = Factory(:subject)
       @sub.disciplines << @dis
       @second = Factory(:subject)
+      @second.disciplines << @dis
       third = Factory(:subject)
       @subs = [@sub, @second, third]
     end
@@ -81,7 +82,7 @@ describe "SubjectsTests" do
           page.should have_select("subject_disciplines_attributes_0_id", :selected => @dis.full_name)
         end
 
-        it "should NOT update an subject with a name that already exists" do
+        it "should NOT update an subject with a name that already exists within institute" do
           visit subjects_path
           click_link_or_button(@sub.name)
           click_link_or_button("Edit")
