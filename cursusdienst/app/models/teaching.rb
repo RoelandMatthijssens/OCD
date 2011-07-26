@@ -8,7 +8,7 @@ class Teaching < ActiveRecord::Base
     i.faculties.each { |x| x.disciplines.each{ |x| x.subjects.each { |x| result << x }}}
     return result
   end
-
+  
   def unique_name_per_institute
     name = subject.name
     institute = discipline.faculty.institute
@@ -18,7 +18,6 @@ class Teaching < ActiveRecord::Base
         sub.name == name
     end
   end
-  
 end
 
 # == Schema Information
@@ -31,6 +30,3 @@ end
 #  created_at    :datetime
 #  updated_at    :datetime
 #
-
-
-

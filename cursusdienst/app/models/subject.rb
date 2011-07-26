@@ -5,6 +5,7 @@ class Subject < ActiveRecord::Base
   has_many :disciplines, :through => :teachings
   has_many :materials
   default_scope :order => "subjects.name ASC"
+  validates_associated :teachings
 
   accepts_nested_attributes_for :disciplines
 end
