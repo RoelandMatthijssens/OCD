@@ -10,6 +10,10 @@ class Discipline < ActiveRecord::Base
   has_many :subjects, :through => :teachings
   
   default_scope :order => "disciplines.name ASC"
+
+  def full_name
+    return "#{faculty.initials}-#{name}"
+  end
 end
 
 
