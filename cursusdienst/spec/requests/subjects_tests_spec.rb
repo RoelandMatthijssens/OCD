@@ -89,9 +89,9 @@ describe "SubjectsTests" do
           fill_in "subject_name", :with => @second.name
           select @dis.full_name, :from => 'subject_disciplines_attributes_0_id'
           click_button "Update"
-          page.should have_content("Name has already been taken")
+          page.should have_content("Subject needs unique name per institute")
           page.should have_field("subject_name", :with => @second.name)
-          page.should have_select("subject_disciplines_attributes_0_id", @dis.full_name)
+          page.should have_select("subject_disciplines_attributes_0_id", :selected => @dis.full_name)
         end
       end
     end

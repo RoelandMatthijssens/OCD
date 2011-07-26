@@ -2,6 +2,7 @@ class Teaching < ActiveRecord::Base
   belongs_to :discipline
   belongs_to :subject
   validate :unique_name_per_institute
+#  validates_associated :subjects
   
   def subjects(i)
     result = []
