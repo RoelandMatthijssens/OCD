@@ -13,6 +13,8 @@ Cursusdienst::Application.routes.draw do
   resources :disciplines
   
   resources :subjects
+
+  resources :materials
   
   root :to => 'pages#home'
   
