@@ -18,3 +18,11 @@ function add_fields(link, association, content) {
   var regexp = new RegExp("new_" + association, "g")
   $(link).parent().before(content.replace(regexp, new_id));
 }
+
+function show_fields(id) {
+  $('#'+id).show('slow');
+}
+
+function hide_fields(id) {
+  $('#'+id).hide('slow');
+}

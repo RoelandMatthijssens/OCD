@@ -20,5 +20,18 @@ module ApplicationHelper
     link_to_function(name, "add_fields(this, '#{association}', '#{escape_javascript(fields)}')")
   end
 
+  def link_to_show_item(name, id)
+    link_to_function(name, "show_fields('#{escape_javascript(id)}')")
+  end
+
+  def link_to_hide_item(name, id)
+    link_to_function(name, "hide_fields('#{escape_javascript(id)}')")
+  end
+
+  def link_to_show_hide_item(name, show_id, hide_id)
+    link_to_function(name, "show_fields('#{escape_javascript(show_id)}')")
+    link_to_function(name, "hide_fields('#{escape_javascript(hide_id)}')")
+  end
+
 
 end
