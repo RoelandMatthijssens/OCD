@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
     :format => {:with => email_regex}, 
     :uniqueness => {:case_sensitive => false}
   
-  validates :permission_group, :presence => true
+#  validates :permission_group, :presence => true
   
   validates_uniqueness_of :user_name
   
