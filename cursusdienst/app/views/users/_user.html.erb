@@ -1,0 +1,14 @@
+<div>
+  <h1><%= link_to user.name, user %></h1>
+  <strong>Last Name:</strong> <%= user.last_name %> <br/>
+  <strong>User Name:</strong> <%= user.user_name %> <br/>
+  <strong>Email:</strong> <%= user.email %> <br/>
+  <% user.disciplines.each { |discipline| %>
+    <strong><%= discipline.name %></strong><br/>
+    <ul>
+      <li><strong>Faculty:</strong><%= discipline.faculty.name %> <br/></li>
+      <li><strong>Institute:</strong><%= discipline.faculty.institute.name %> <br/></li>
+    </ul>
+  <% } %>
+  <%= link_to "Edit this User", edit_user_path(user) %><br/>
+</div>
