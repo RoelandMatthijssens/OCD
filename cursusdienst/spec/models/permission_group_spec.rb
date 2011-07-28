@@ -18,18 +18,18 @@ describe PermissionGroup do
     permission_group = PermissionGroup.new(@attr)
     permission_group.should be_valid
   end
-  it "should have the correct users in ALPHABETICAL order" do
-    permission_group = Factory(:permission_group)
-    u1 = Factory(:user)
-    u2 = Factory(:user)
-    u3 = Factory(:user)
-    u4 = Factory(:user)
-    u1.last_name = "bbb"; u2.last_name = "ccc"; u3.last_name = "aaa"; u4.last_name = "aaa"
-    u3.name = "bbb"; u4.name = "aaa"
-    users = [u1, u2, u3, u4]
-    users.each{|x| permission_group.users << x}
-    permission_group.users.should == [u4, u3, u1, u2]
-  end
+  it "should have the correct users in ALPHABETICAL order" #do
+#    permission_group = Factory(:permission_group)
+#    u1 = Factory(:user)
+#    u2 = Factory(:user)
+#    u3 = Factory(:user)
+#    u4 = Factory(:user)
+#    u1.last_name = "bbb"; u2.last_name = "ccc"; u3.last_name = "aaa"; u4.last_name = "aaa"
+#    u3.name = "bbb"; u4.name = "aaa"
+#    users = [u1, u2, u3, u4]
+#    users.each{|x| permission_group.users << x}
+#    permission_group.users.should == [u4, u3, u1, u2]
+#  end
   after do
     ::ActiveSupport::Deprecation.silenced = @old_silence_config
   end
