@@ -1,0 +1,11 @@
+<% if errors.any? %>
+  <div id="error_explanation">
+    <h2><%= errors %></h2>
+    <p>There were problems with the following fields:</p>
+    <ul>
+      <% errors.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
