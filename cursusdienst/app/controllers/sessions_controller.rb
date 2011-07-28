@@ -1,18 +1,19 @@
 class SessionsController < ApplicationController
+  
   def new
     @errors = []
-#    @session = Session.new
     @submit = "Sign in"
   end
   
   def create
     user = User.autenticate(params[:session][:user_name], params[:session][:password])
     if user.nil?
-      @errors = ["hello"]
-      flash.now[:error] = "Institute updated succesfully"
+      @errors = ["User name - Password combination did not match"]
       render 'new'
     else
-      #sign in user
+      flash[:succes] =  "Successfully signed in"
+      sign_in user
+      redirect_to user
     end
   end
 
