@@ -6,15 +6,18 @@
     <%= f.text_field :name %> <br>
   </div>
   <div class='field' >
-    <div class="field" id="subject_field" style="display: none;">
+    <div class="field" id="subject_field" <%= "style='display: none;'" unless @material.subject  %> >
       <%= f.label :subject %> <br>
       <%= f.collection_select(:subject_id,
         Subject.all,
         :id,
         :name,
         { :prompt => "Select if applicable"})%>
+      <%= link_to_remove_fields "remove", f %>
     </div>
-    <%= link_to_show_item "add to subject", "subject_field" %>
+    <div class="field" id="add_subject_link" <%= "style='display: none;'" if @material.subject  %> >
+      <%= link_to_show_hide_items "add to subject", ["subject_field"], ["add_subject_link"] %>
+    </div>
   </div>
 
 

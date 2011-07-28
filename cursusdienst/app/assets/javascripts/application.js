@@ -9,20 +9,24 @@
 //= require_tree .
 
 function remove_fields(link) {
-  $(link).prev("input[type=hidden]").val("1");
-  $(link).closest(".fields").hide();
+    $(link).prev("input[type=hidden]").val("1");
+    $(link).closest(".fields").hide('slow');
 }
 
 function add_fields(link, association, content) {
-  var new_id = new Date().getTime();
-  var regexp = new RegExp("new_" + association, "g")
-  $(link).parent().before(content.replace(regexp, new_id));
+    var new_id = new Date().getTime();
+    var regexp = new RegExp("new_" + association, "g")
+    $(link).parent().before(content.replace(regexp, new_id));
 }
 
-function show_fields(id) {
-  $('#'+id).show('slow');
+function show_fields(ids) {
+    for ( var i=0, len=ids.length; i<len; ++i ){
+        $('#'+ids[i]).show('slow');
+    }
 }
 
-function hide_fields(id) {
-  $('#'+id).hide('slow');
+function hide_fields(ids) {
+    for ( var i=0, len=ids.length; i<len; ++i ){
+        $('#'+ids[i]).hide('slow');
+    }
 }

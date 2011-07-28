@@ -1,9 +1,0 @@
-<!-- hidden field to make sure the id doesnt get overloaded -->
-<div class="fields">
-  <% if :id %>
-    <%= f.hidden_field :id, :value => 0 %>
-    <%= f.collection_select :id,
-      Subject.find(:all), :id, :name, { :prompt => "Select if applicable" } %>
-    <%= link_to_remove_fields "remove", f %>
-  <% end %>
-</div>

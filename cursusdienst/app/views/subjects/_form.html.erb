@@ -7,7 +7,7 @@
   </div>
   <div class='field'>
     <%= f.label :disciplines %> <br>
-    <div class='field'>
+    <div class='fields'>
       <%= f.fields_for :disciplines do |builder| %>
         <%=  render 'discipline_fields' , :f => builder %>
       <% end %>

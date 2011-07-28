@@ -28,9 +28,10 @@ module ApplicationHelper
     link_to_function(name, "hide_fields('#{escape_javascript(id)}')")
   end
 
-  def link_to_show_hide_item(name, show_id, hide_id)
-    link_to_function(name, "show_fields('#{escape_javascript(show_id)}')")
-    link_to_function(name, "hide_fields('#{escape_javascript(hide_id)}')")
+  def link_to_show_hide_items(name, show_ids, hide_ids)
+    show_js = "show_fields(#{show_ids});"
+    hide_js = "hide_fields(#{hide_ids});"
+    link_to_function(name,show_js+hide_js)
   end
 
 
