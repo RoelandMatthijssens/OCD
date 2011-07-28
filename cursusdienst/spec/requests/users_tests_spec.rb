@@ -41,19 +41,22 @@ describe "UsersTests" do
         page.should have_button("Register")
       end
 
+      describe "on create" do
+        
+      end
       it "should create a new user" do
-        count = User.count
-        visit new_user_path
-        fill_in "user_user_name", :with => 'Fulgens'
-        fill_in "user_last_name", :with => 'Matthijssens'
-        fill_in "user_name", :with => 'Roeland'
-        fill_in "user_email", :with => 'fulgens.ailurus@gmail.com'
-        fill_in "user_password", :with => 'roeland1'
-        fill_in "user_password_confirmation", :with => 'roeland1'
-        click_button "Register"
-        page.should have_content("Registration succesfull")
-        page.should have_content("Fulgens")
-        User.count.should == count + 1
+        lambda do
+          visit new_user_path
+          fill_in "user_user_name", :with => 'Fulgens'
+          fill_in "user_last_name", :with => 'Matthijssens'
+          fill_in "user_name", :with => 'Roeland'
+          fill_in "user_email", :with => 'fulgens.ailurus@gmail.com'
+          fill_in "user_password", :with => 'roeland1'
+          fill_in "user_password_confirmation", :with => 'roeland1'
+          click_button "Register"
+          page.should have_content("Registration succesfull")
+          page.should have_content("Fulgens")
+        end.should change(User, :count).by(1)
       end
 
 #      describe "update" do
@@ -103,32 +106,42 @@ describe "UsersTests" do
         manditory_fields = ["user_name", "name", "last_name", "email"]
         manditory_fields.each do |field|
           it "should NOT create a new user given blank manditory attributes" do
+            lambda do
               fill_in "user_"+field, :with => ''
               click_button "Register"
               page.should have_content(field.sub("_", " ").capitalize + " can't be blank")
+            end.should_not change(User, :count)
           end
         end
         it "should NOT create a new user given a blank password" do
-          fill_in "user_password", :with => ""
-          click_button "Register"
-          page.should have_content("Password can't be blank")
+          lambda do
+            fill_in "user_password", :with => ""
+            click_button "Register"
+            page.should have_content("Password can't be blank")
+          end.should_not change(User, :count)
         end
         it "should NOT create a new user given a short password" do
-          fill_in "user_password", :with => "12345"
-          click_button "Register"
-          page.should have_content("Password is too short")
+          lambda do
+            fill_in "user_password", :with => "12345"
+            click_button "Register"
+            page.should have_content("Password is too short")
+          end.should_not change(User, :count)
         end
         it "should NOT create a new user given non-matching password-confirmation" do
-          fill_in "user_password_confirmation", :with => ""
-          click_button "Register"
-          page.should have_content("Password doesn't match confirmation")
+          lambda do
+            fill_in "user_password_confirmation", :with => ""
+            click_button "Register"
+            page.should have_content("Password doesn't match confirmation")
+          end.should_not change(User, :count)
         end
 
         it "should NOT create a new user with a user_name that already exists" do
-          fill_in "user_user_name", :with => @user1.user_name
-          click_button "Register"
-          page.should have_content("User name has already been taken")
-          page.should have_field("user_user_name", :with => @user1.user_name)
+          lambda do
+            fill_in "user_user_name", :with => @user1.user_name
+            click_button "Register"
+            page.should have_content("User name has already been taken")
+            page.should have_field("user_user_name", :with => @user1.user_name)
+          end.should_not change(User, :count)
         end
       end
 
