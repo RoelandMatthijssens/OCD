@@ -1,5 +1,5 @@
 Cursusdienst::Application.routes.draw do
-  get "auth_test/index"
+  get "test/index"
 
   get "pages/home"
   
@@ -27,8 +27,7 @@ Cursusdienst::Application.routes.draw do
   match '/register', :to => 'users#new'
   match '/signin', :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
-  
-#  match /users/auth_test/index, :to => 
+  match '/logintest', :to => 'test#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

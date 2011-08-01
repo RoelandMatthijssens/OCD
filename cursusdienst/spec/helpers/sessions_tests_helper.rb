@@ -7,4 +7,8 @@ module SessionsTestsHelper
     fill_in "session_password", :with => user.password
     click_link_or_button("Sign in")
   end
+  
+  def logout(user)
+    visit destroy_session_path
+  end
 end

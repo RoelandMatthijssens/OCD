@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe AuthTestController do
+describe TestController do
 
   describe "GET 'index'" do
     it "should be successful" do

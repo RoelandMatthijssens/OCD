@@ -47,11 +47,11 @@ describe "SessionsTests" do
     before(:each) do
       @user = Factory(:user)
       login(@user)
-#      visit auth_test_path
-#      page.should have_content("Signed in as "+@user.name)
     end
-    it "should log the user out" do
-      
-    end
+    it "should log the user out"# do
+#      logout(@user)
+#      page.should have_content("Successfully signed out")
+#      page.should have_content("PAGES#HOME")
+#    end
   end
 end
