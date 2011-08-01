@@ -19,6 +19,11 @@ module ApplicationHelper
     end
     link_to_function(name, "add_fields(this, '#{association}', '#{escape_javascript(fields)}')")
   end
+  
+  def link_to_add_field(name, f, association)
+    field = render(association.to_s + "_field", :f => f)
+    link_to_function(name, "add_field(this, '#{association}_id', '#{escape_javascript(field)}')")
+  end
 
   def link_to_show_item(name, id)
     link_to_function(name, "show_fields('#{escape_javascript(id)}')")
@@ -31,6 +36,25 @@ module ApplicationHelper
   def link_to_show_hide_items(name, show_ids, hide_ids)
     show_js = "show_fields(#{show_ids});"
     hide_js = "hide_fields(#{hide_ids});"
+    link_to_function(name,show_js+hide_js)
+  end
+  
+  def link_to_create_hide_items(name, association, hide_ids, f)
+    field = render(association.to_s + "_field", :f => f)
+    show_js = "add_field(this, '#{association}_id', '#{escape_javascript(field)}');"
+    hide_js = "hide_fields(#{hide_ids})"
+    link_to_function(name,show_js+hide_js)
+  end
+  
+  def destroy_nearest_class_and_show_items(name, distroy_val, show_ids, f)
+    show_js = "show_fields(#{show_ids});"
+    hide_js = "remove_fields(this)"
+    f.hidden_field(:_destroy) + link_to_function(name,show_js+hide_js)
+  end
+  
+  def remove_nearest_class_and_show_items(name, distroy_val, show_ids, f)
+    show_js = "show_fields(#{show_ids});"
+    hide_js = "delete_fields(this)"
     link_to_function(name,show_js+hide_js)
   end
 

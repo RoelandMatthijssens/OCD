@@ -15,8 +15,15 @@ function remove_fields(link) {
 
 function add_fields(link, association, content) {
     var new_id = new Date().getTime();
-    var regexp = new RegExp("new_" + association, "g")
-    $(link).parent().before(content.replace(regexp, new_id));
+    var regexp = new RegExp("new_" + association, "g");
+    add_field(link, association, content.replace(regexp, new_id));
+}
+
+function add_field(link, association, content) {
+    var c = $(content);
+    $(link).parent().before(c);
+    c.hide();
+    c.show('slow');
 }
 
 function show_fields(ids) {
@@ -29,4 +36,10 @@ function hide_fields(ids) {
     for ( var i=0, len=ids.length; i<len; ++i ){
         $('#'+ids[i]).hide('slow');
     }
+}
+
+function delete_fields(link) {
+    $(link).prev("input[type=hidden]").val("1");
+    var field = $(link).closest(".fields");
+    field.hide('slow', function () {field.remove()});
 }

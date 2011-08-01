@@ -30,6 +30,7 @@ class MaterialsController < ApplicationController
 
   def update
     @material = Material.find(params[:id])
+    @material.subject = nil unless subject_given?(params[:material])
     if @material.update_attributes(params[:material])
       flash[:succes] = "Material updated succesfully"
       redirect_to @material
@@ -40,4 +41,11 @@ class MaterialsController < ApplicationController
 
   def destroy
   end
+  
+  private
+  
+  def subject_given? par
+    return par[:subject_id]
+  end
+  
 end

@@ -8,6 +8,8 @@ class Material < ActiveRecord::Base
 #  validates :subject, :presence => true
   has_many :material_options
   default_scope :order => "materials.name ASC"
+  
+#  accepts_nested_attributes_for :subject
 end
 
 # == Schema Information

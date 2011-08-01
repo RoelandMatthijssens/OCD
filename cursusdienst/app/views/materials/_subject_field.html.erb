@@ -1,0 +1,11 @@
+<div class="fields" id="subject_field">
+
+  <%= f.label :subject %> <br>
+  <%= f.collection_select(:subject_id,
+    Subject.all,
+    :id,
+    :name,
+    { :prompt => "Select if applicable"})%>
+  <%= remove_nearest_class_and_show_items "remove", "_destroy_subject", ["add_subject_link"], f %>
+
+</div>

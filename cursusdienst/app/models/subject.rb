@@ -9,6 +9,7 @@ class Subject < ActiveRecord::Base
   validate :unique_name_per_institute
 
   accepts_nested_attributes_for :disciplines
+  
   def subjects(i)
     result = []
     i.faculties.each { |x| x.disciplines.each{ |x| x.subjects.each { |x| result << x }}}
