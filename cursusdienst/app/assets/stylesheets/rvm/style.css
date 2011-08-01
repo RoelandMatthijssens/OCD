@@ -164,6 +164,7 @@ ol li
   color: #EA8916;
   letter-spacing: .2em;
   display: inline-block;
+  cursor: pointer;
 }
 
 #logo #logo_small
@@ -174,6 +175,7 @@ ol li
   color: #EA8916;
   letter-spacing: .2em;
   display: inline-block;
+  cursor: pointer;
 }
 
 /* navigation menu */

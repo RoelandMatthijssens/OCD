@@ -1,4 +1,5 @@
 Cursusdienst::Application.routes.draw do
+  get "test/index"
 
   get "pages/home"
   
@@ -6,6 +7,8 @@ Cursusdienst::Application.routes.draw do
   
   resources :users
   
+  resources :sessions, :only => [:new, :create, :destroy]
+
   resources :institutes
   
   resources :faculties
@@ -18,9 +21,13 @@ Cursusdienst::Application.routes.draw do
   
   root :to => 'pages#home'
   
+  match '/home', :to => 'pages#home'
+  match '/about', :to => 'pages#about'
   match '/signup', :to => 'users#new'
-
-
+  match '/register', :to => 'users#new'
+  match '/signin', :to => 'sessions#new'
+  match '/signout', :to => 'sessions#destroy'
+  match '/logintest', :to => 'test#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
