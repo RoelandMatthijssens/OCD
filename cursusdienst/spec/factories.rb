@@ -87,12 +87,12 @@ Factory.define :material do |material|
   end
 end
 
-Factory.sequence(:material_option_id) { |n| n }
-Factory.define :material_option do |material_option|
-  material_option.after_build do |m|
-    id = Factory.next :material_option_id
-    m.key = "material_key #{id}"
-    m.value = "material_value #{id}"
+Factory.sequence(:option_id) { |n| n }
+Factory.define :option do |option|
+  option.after_build do |o|
+    id = Factory.next :option_id
+    o.name = "option_name #{id}"
+    #m.value = "material_value #{id}"
   end
-  material_option.association :material
+  #material_option.association :material
 end

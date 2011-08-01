@@ -1,17 +1,14 @@
 require 'spec_helper'
 
-describe MaterialOption do
+describe Option do
   before do
     @old_silence_config = ::ActiveSupport::Deprecation.silenced
     ::ActiveSupport::Deprecation.silenced = true
   end
-  subject { Factory(:material_option) }
+  subject { Factory(:option) }
   
-  it { should validate_presence_of(:key) }
-  it { should validate_presence_of(:value) }
-  it { should validate_presence_of(:material) }
-  
-  it { should belong_to(:material) }
+  it { should validate_presence_of(:name) }
+  it { should have_and_belong_to_many(:materials) }
   
   after do
     ::ActiveSupport::Deprecation.silenced = @old_silence_config

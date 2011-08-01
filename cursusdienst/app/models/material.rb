@@ -6,7 +6,7 @@ class Material < ActiveRecord::Base
   has_many :sales
   has_many :guilds, :through => :sales
 #  validates :subject, :presence => true
-  has_many :material_options
+  has_and_belongs_to_many :options
   default_scope :order => "materials.name ASC"
   
 #  accepts_nested_attributes_for :subject
