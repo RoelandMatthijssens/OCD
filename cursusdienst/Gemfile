@@ -18,6 +18,7 @@ group :development do
 	gem 'rspec-rails', '2.6.1'
 #	gem 'composite_primary_keys', '=3.1.0'
   gem 'annotate', :git => 'git://github.com/jeremyolliver/annotate_models.git', :branch => 'rake_compatibility'
+  gem 'faker'
 
 end
 group :test do
