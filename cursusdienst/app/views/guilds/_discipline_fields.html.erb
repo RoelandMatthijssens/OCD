@@ -1,0 +1,9 @@
+<!-- hidden field to make sure the id doesnt get overloaded -->
+<div class="fields">
+  <% if :id %>
+    <%= f.hidden_field :id, :value => 0 %>
+    <%= f.collection_select :id,
+      Discipline.find(:all), :id, :full_name, { :prompt => true } %>
+    <%= link_to_remove_fields "remove", f %>
+  <% end %>
+</div>

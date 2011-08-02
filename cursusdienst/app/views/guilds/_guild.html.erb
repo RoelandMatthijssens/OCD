@@ -1,0 +1,13 @@
+<div>
+  <h1><%= link_to guild.name, guild %></h1>
+  <strong>Disciplines:</strong><br>
+  <% guild.disciplines.each { |discipline| %>
+    <strong><%= discipline.name %></strong><br/>
+    <ul>
+      <li><strong>Faculty:</strong><%= discipline.faculty.name %> <br/></li>
+      <li><strong>Institute:</strong><%= discipline.faculty.institute.name %> <br/></li>
+    </ul>
+  <% } %>
+
+  <%= link_to "Edit this guild", edit_guild_path(guild) %>
+</div>
