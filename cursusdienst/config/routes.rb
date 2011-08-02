@@ -18,6 +18,8 @@ Cursusdienst::Application.routes.draw do
   resources :subjects
   
   resources :guilds
+  
+  resources :options
 
   resources :materials
   

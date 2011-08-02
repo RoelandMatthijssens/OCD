@@ -9,7 +9,8 @@ class Material < ActiveRecord::Base
   has_and_belongs_to_many :options
   default_scope :order => "materials.name ASC"
   
-#  accepts_nested_attributes_for :subject
+  accepts_nested_attributes_for :options
+  
 end
 
 # == Schema Information
