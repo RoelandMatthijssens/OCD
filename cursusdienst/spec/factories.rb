@@ -9,7 +9,7 @@ Factory.define :user do |user|
     u.password_confirmation = "user_password #{id}"
     u.email = "user_email#{id}@mail.com"
   end
-  user.association :permission_group
+  #user.association :permission_group
 #  user.association :association
 end
 

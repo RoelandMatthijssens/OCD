@@ -4,7 +4,7 @@ class PermissionGroup < ActiveRecord::Base
   validates :level, :presence => true
   validates_uniqueness_of :name
   validates_uniqueness_of :level
-  has_many :users
+  has_and_belongs_to_many :users
 end
 
 # == Schema Information

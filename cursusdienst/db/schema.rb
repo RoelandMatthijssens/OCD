@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110801144952) do
+ActiveRecord::Schema.define(:version => 20110802142527) do
 
   create_table "disciplines", :force => true do |t|
     t.string   "name"
@@ -82,6 +82,13 @@ ActiveRecord::Schema.define(:version => 20110801144952) do
   create_table "permission_groups", :force => true do |t|
     t.string   "name"
     t.integer  "level"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "permission_groups_users", :id => false, :force => true do |t|
+    t.integer  "permission_group_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
