@@ -5,6 +5,13 @@ GIT
   specs:
     annotate (2.4.0)
 
+GIT
+  remote: https://github.com/p7r/will_paginate.git
+  revision: 53d1da6da003dc172ee054e4cc416d0723f00b88
+  branch: rails3
+  specs:
+    will_paginate (3.0.pre3)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -171,3 +178,4 @@ DEPENDENCIES
   shoulda (= 2.11.3)
   spork (= 0.8.5)
   uglifier
+  will_paginate!

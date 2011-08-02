@@ -27,6 +27,16 @@ describe "UsersTests" do
         page.should have_content(@user1.name)
         page.should have_link("Edit")
       end
+      
+      it "should paginate the users" do
+				30.times do
+					@users << Factory(:user)
+				end
+				visit users_path
+				page.should have_content("Previous")
+				page.should have_content("Next")
+				page.should have_link("2")
+      end
     end
   end
   
