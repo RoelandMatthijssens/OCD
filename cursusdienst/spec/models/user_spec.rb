@@ -12,11 +12,11 @@ describe User do
   it { should validate_presence_of(:last_name) }
   it { should validate_presence_of(:user_name) }
   it { should validate_presence_of(:email) }
-  it { should validate_presence_of(:password) }
+  #it { should validate_presence_of(:password) }
 #  it { should validate_presence_of(:permission_group) }
   it { should validate_uniqueness_of(:user_name) }
   
-  it { should ensure_length_of(:password).is_at_least(6).is_at_most(40) }
+  #it { should ensure_length_of(:password).is_at_least(6).is_at_most(40) }
   it { should ensure_length_of(:user_name).is_at_least(3).is_at_most(20) }
   
   it { should belong_to(:permission_group) }

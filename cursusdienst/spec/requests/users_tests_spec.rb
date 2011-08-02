@@ -118,6 +118,10 @@ describe "UsersTests" do
   describe "PUT 'update'" do
     describe 'succeeding tests' do
       before(:each) do
+				visit new_session_path
+				fill_in "session_user_name", :with => @user1.user_name
+				fill_in "session_password", :with => @user1.password
+				click_link_or_button("Sign in")
         visit users_path
         click_link_or_button(@user1.name)
         click_link_or_button("Edit")
@@ -125,9 +129,38 @@ describe "UsersTests" do
         fill_in "user_name", :with => 'Roeland'
         fill_in "user_email", :with => 'fulgens.ailurus@gmail.com'
       end
+      it "should have the correct fields, filled in" do
+				visit users_path
+        click_link_or_button(@user1.name)
+        click_link_or_button("Edit")
+        page.should have_field("user_name", :with => @user1.name)
+        page.should have_field("user_last_name", :with => @user1.last_name)
+        page.should have_field("user_email", :with => @user1.email)
+      end
+      update_fields = ["name", "last_name"]
+      update_fields.each do |field|
+				it "should update #{field}" do
+					fill_in "user_"+field, :with => "other_"+field
+					click_link_or_button("Update")
+					@user1.reload
+					@user1.send(field).should == "other_"+field
+					page.should have_content("User updated succesfully")
+				end
+			end
+			it "should update the email field" do
+				fill_in "user_email", :with => "other_email@email.email"
+				click_link_or_button("Update")
+				@user1.reload
+				@user1.email.should == "other_email@email.email"
+				page.should have_content("User updated succesfully")
+			end
     end
     describe 'failing tests' do
       before(:each) do
+				visit new_session_path
+				fill_in "session_user_name", :with => @user1.user_name
+				fill_in "session_password", :with => @user1.password
+				click_link_or_button("Sign in")
         visit users_path
         click_link_or_button(@user1.name)
         click_link_or_button("Edit")
@@ -137,58 +170,11 @@ describe "UsersTests" do
       end
       manditory_fields = ["name", "last_name", "email"]
       manditory_fields.each do |field|
-        it "should NOT create a new user given blank manditory attributes" do
+        it "should NOT edit a user given blank manditory attributes" do
             fill_in "user_"+field, :with => ''
-            click_button "Register"
+            click_button "Update User"
             page.should have_content(field.sub("_", " ").capitalize + " can't be blank")
         end
-      end
-      it "should NOT update an material given blank name" do
-        fill_in "material_name", :with => ''
-        click_button "Update"
-        page.should have_content("Name can't be blank")
-      end
-
-      it "should NOT update an material with a name that already exists" do
-        visit materials_path
-        click_link_or_button(@mat.name)
-        click_link_or_button("Edit")
-        fill_in "material_name", :with => @second.name
-        click_button "Update"
-        page.should have_content("Name has already been taken")
-        page.should have_field("material_name", :with => @second.name)
-      end
-    end
-    describe "update" do
-      before(:each) do
-        visit users_path
-        click_link_or_button(@user1.name)
-        click_link_or_button("Edit")
-      end
-      it "should have the correct fields" do
-        page.should have_field("user_name", :with => @user1.name)
-        page.should have_field("user_last_name", :with => @user1.last_name)
-        page.should have_field("user_email", :with => @user1.email)
-        page.should have_field("user_password", :type => "password")
-        page.should have_field("user_password_confirmation", :type => "password")
-      end
-      it "should update the name" do
-        fill_in "user_name", :with => 'Rik'
-        click_button "Update"
-        page.should have_content("User updated succesfully")
-        page.should have_content("Rik")
-      end
-      it "should update the last_name" do
-        fill_in "user_last_name", :with => 'Van Mechele'
-        click_button "Update"
-        page.should have_content("User updated succesfully")
-        page.should have_content("Van Mechele")
-      end
-      it "should update the last_name" do
-        fill_in "user_email", :with => 'Rik_Van_Mechele@gmail.com'
-        click_button "Update"
-        page.should have_content("User updated succesfully")
-        page.should have_content("Rik_Van_Mechele@gmail.com")
       end
     end
   end

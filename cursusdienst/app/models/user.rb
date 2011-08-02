@@ -1,7 +1,7 @@
 require 'digest'
 
 class User < ActiveRecord::Base
-  attr_accessible :last_name, :name, :user_name, :email, :permission_group, :password, :password_confirmation, :salt
+  attr_accessible :last_name, :name, :user_name, :email, :password, :password_confirmation, :permission_group, :salt
   attr_accessor :password
   
   validates :user_name, :presence => true,
@@ -9,7 +9,8 @@ class User < ActiveRecord::Base
   validates :last_name, :presence => true
   validates :password, :presence => true,
     :confirmation => true,
-    :length => { :within => 6..40 }
+    :length => { :within => 6..40 },
+    :on => :create
 #  validates :password_confirmation, :presence => true
   validates :name, :presence => true
   
@@ -30,7 +31,8 @@ class User < ActiveRecord::Base
   
   default_scope :order => "users.last_name, users.name ASC"
   
-  before_save :encrypt_password
+  #before_save :encrypt_password
+  before_create :encrypt_password
   
   def full_name
     "#{last_name} #{name}"
