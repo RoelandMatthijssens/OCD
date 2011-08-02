@@ -12,6 +12,9 @@ class Guild < ActiveRecord::Base
   has_many :sales, :dependent => :destroy
   has_many :materials, :through => :sales
   default_scope :order => "guilds.name ASC"
+  
+  accepts_nested_attributes_for :disciplines
+  
   def has_at_least_one_discipline
     errors.add(:disciplines, "can't be blank") if
       disciplines.empty?
