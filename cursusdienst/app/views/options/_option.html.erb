@@ -1,0 +1,9 @@
+<div>
+  <h1><%= link_to option.name, option %></h1>
+  <strong>Materials:</strong><br>
+  <% option.materials.each { |material| %>
+    <strong><%= link_to material.name , edit_material_path(material) %></strong><br/>
+  <% } %>
+
+  <%= link_to "Edit this option", edit_option_path(option) %>
+</div>

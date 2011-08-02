@@ -15,6 +15,7 @@ class MaterialsController < ApplicationController
 
   def create
     @material = Material.new(params[:material])
+    @material.options= get_options_from_material(params[:material])
     if @material.save
       flash[:succes] = "Material succesfully created"
       redirect_to @material
@@ -31,6 +32,7 @@ class MaterialsController < ApplicationController
   def update
     @material = Material.find(params[:id])
     @material.subject = nil unless subject_given?(params[:material])
+    @material.options= get_options_from_material(params[:material])
     if @material.update_attributes(params[:material])
       flash[:succes] = "Material updated succesfully"
       redirect_to @material
@@ -46,6 +48,15 @@ class MaterialsController < ApplicationController
   
   def subject_given? par
     return par[:subject_id]
+  end
+  
+  def get_options_from_material par
+    os = []
+    par[:options_attributes].each_value { |v|
+      o = Option.find(v["id"])
+      os << o if o.instance_of? Option and v["_destroy"] != "1"
+    } unless par[:options_attributes].nil?
+    return os
   end
   
 end

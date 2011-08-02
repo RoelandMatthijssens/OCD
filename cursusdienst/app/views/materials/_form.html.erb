@@ -6,6 +6,15 @@
     <%= f.text_field :name %> <br>
   </div>
   <div class='field'>
+    <%= f.label :options %> <br>
+    <div class='fields'>
+      <%= f.fields_for :options do |builder| %>
+        <%=  render 'option_fields' , :f => builder %>
+      <% end %>
+      <%= link_to_add_fields "add one", f, :options %>
+    </div>
+  </div>
+  <div class='field'>
      <%= render "subject_field", :f => f if @material.subject%>
 
     <div class="field" id="add_subject_link" <%= "style='display: none;'" if @material.subject  %> >
