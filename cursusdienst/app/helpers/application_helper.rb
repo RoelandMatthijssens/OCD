@@ -61,6 +61,17 @@ module ApplicationHelper
   def filter_select_on_change parent_id, child_id, data_key
     return "filter_select_on_change('#{parent_id}', '#{child_id}', '#{data_key}')"
   end
+  
+  def link_to_perform_javascript name, functions, params
+    js = ""
+    functions.size.times{ |i| 
+      js += functions[i] + "("
+      par = params[i]
+      par.size-1.times{|j| js += "'#{par[j]}', "}
+      js += "'#{par.last}');"
+    }
+    link_to_function(name, js)
+  end
 
 
 end

@@ -1,9 +1,20 @@
 <!-- hidden field to make sure the id doesnt get overloaded -->
 <div class="fields">
   <% if :id %>
+    <% tag = Time.now.to_i %>
     <%= f.hidden_field :id, :value => 0 %>
+
+
+    <%= collection_select "filter_#{tag}", :institute_id,
+      Institute.find(:all), :id, :name, { :prompt => true }, 
+      {:onchange=>filter_select_on_change("filter_#{tag}_institute_id","filter_#{tag}_faculty_id", "institute")} %>
+    <%= collection_select "filter_#{tag}", :faculty_id,
+      {}, :id, :name, { :prompt => true }, 
+      {:onchange=>filter_select_on_change("filter_#{tag}_faculty_id","subject_disciplines_attributes_#{tag}_id", "faculty")} %>
+  
     <%= f.collection_select :id,
-      Discipline.find(:all), :id, :full_name, { :prompt => true } %>
+      {}, :id, :name, { :prompt => true }%>
+    
     <%= link_to_remove_fields "remove", f %>
   <% end %>
 </div>

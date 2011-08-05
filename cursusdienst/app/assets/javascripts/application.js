@@ -88,7 +88,6 @@ function filter_select_on_change(parent_id, child_id, data_key) {
     var id_value_string = $("select#"+parent_id).val();
     if (id_value_string == "") { 
         // if the id is empty remove all the sub_selection options from being selectable and do not do any ajax
-        // $("select#"+parent_id).remove();
         var row = "<option value=\"" + "" + "\">" + "" + "</option>";
         $(row).appendTo("select#"+child_id);
     }
