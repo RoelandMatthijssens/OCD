@@ -1,11 +1,17 @@
 Cursusdienst::Application.routes.draw do
+
   get "test/index"
 
   get "pages/home"
   
   get "pages/about"
+
+  get "pages/idiot"
   
-  resources :users
+  resources :users do
+		get :edit_permissions, :on => :member
+		put :update_permissions, :on => :member
+  end
   
   resources :sessions, :only => [:new, :create, :destroy]
 
@@ -22,11 +28,14 @@ Cursusdienst::Application.routes.draw do
   resources :options
 
   resources :materials
+
+  resources :permission_groups
   
   root :to => 'pages#home'
   
   match '/home', :to => 'pages#home'
   match '/about', :to => 'pages#about'
+  match '/idiot', :to => 'pages#idiot'
   match '/signup', :to => 'users#new'
   match '/register', :to => 'users#new'
   match '/signin', :to => 'sessions#new'

@@ -1,0 +1,18 @@
+<h1>Permissions of <%= @user.name + ' ' + @user.last_name%></h1>
+
+<%= form_tag update_permissions_user_path, :method => :put do %>
+	<% PermissionGroup.all.each do |permission| %>
+		<div class='field'>
+			<% if @user.permission_groups.include? permission %>
+				<%= check_box_tag "permission_ids[]", permission.id, true %>
+			<% else %>
+				<%= check_box_tag "permission_ids[]", permission.id %>
+			<% end %>
+			<%= permission.name %><br/>
+		</div>
+	<% end %>
+
+  <div class='field'>
+    <%= submit_tag @submit %>
+  </div>
+<% end %>

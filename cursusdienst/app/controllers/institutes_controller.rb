@@ -2,7 +2,7 @@ class InstitutesController < ApplicationController
   
   def index
     @title = "Institutes"
-    @institutes = Institute.all
+    @institutes = Institute.paginate(:page => params[:page], :per_page => 10)
   end
 
   def show

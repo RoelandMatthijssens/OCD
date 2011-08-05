@@ -1,0 +1,11 @@
+<%= form_for(@permission) do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+
+  <div class='field'>
+    <%= f.label :name %> <br>
+    <%= f.text_field :name %> <br>
+  </div>
+  <div class="actions">
+    <%= f.submit @submit %>
+  </div>
+<% end %>

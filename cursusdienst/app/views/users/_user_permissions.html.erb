@@ -1,0 +1,11 @@
+<div class='permissions'>
+	<h2>Permissions</h2>
+		<ul>
+		<% user.permission_groups.each do | permission | %>
+			<li><%= permission.name.gsub("_", " ") %></li>
+		<% end %>
+		</ul>
+</div>
+<% if current_user.can?("edit_permissions") %>
+	<%= link_to "Edit Permissions ", "/users/" + user.id.to_s + "/edit_permissions" %> <!--TODO fix this with paths somehow-->
+<% end %>

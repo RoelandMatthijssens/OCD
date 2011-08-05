@@ -1,7 +1,7 @@
 class GuildsController < ApplicationController
   def index
     @title = "Guilds"
-    @guilds = Guild.all
+    @guilds = Guild.paginate(:page => params[:page], :per_page => 10)
   end
 
   def show

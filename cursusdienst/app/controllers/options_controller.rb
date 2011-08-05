@@ -1,7 +1,7 @@
 class OptionsController < ApplicationController
   def index
     @title = "Options"
-    @options = Option.all
+    @options = Option.paginate(:page => params[:page], :per_page => 10)
   end
 
   def show

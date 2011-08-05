@@ -50,7 +50,10 @@ class User < ActiveRecord::Base
     user = User.find_by_id(id)
     (user && user.salt == cookie_salt) ? user : nil
   end
-
+	
+	def can?(permission)
+		permission_groups.map{|x| x.name}.include?(permission)
+	end
 private
   def encrypt_password
     self.salt = make_salt if new_record?

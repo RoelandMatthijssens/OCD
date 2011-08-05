@@ -2,7 +2,7 @@ class FacultiesController < ApplicationController
 
   def index
     @title = "Faculties"
-    @faculties = Faculty.all
+    @faculties = Faculty.paginate(:page => params[:page], :per_page => 10)
   end
 
   def show

@@ -3,12 +3,18 @@
   <strong>Last Name:</strong> <%= user.last_name %> <br/>
   <strong>User Name:</strong> <%= user.user_name %> <br/>
   <strong>Email:</strong> <%= user.email %> <br/>
-  <% user.disciplines.each { |discipline| %>
+  <% user.disciplines.each do |discipline| %>
     <strong><%= discipline.name %></strong><br/>
     <ul>
-      <li><strong>Faculty:</strong><%= discipline.faculty.name %> <br/></li>
-      <li><strong>Institute:</strong><%= discipline.faculty.institute.name %> <br/></li>
+      <li><strong>Faculty:</strong><%= discipline.faculty.name %></li>
+      <li><strong>Institute:</strong><%= discipline.faculty.institute.name %></li>
     </ul>
-  <% } %>
-  <%= link_to "Edit this User", edit_user_path(user) %><br/>
+  <% end %>
+	<br/>
+	<% if current_user && ( current_user == user || current_user.can?("edit_users" ) ) %>
+		<% if current_user.can?("edit_permissions")|| user == current_user%>
+			<%= render :partial => 'user_permissions', :locals => {:user => user} %>
+		<% end %>
+		<%= link_to "Edit User", edit_user_path(user) %>
+	<% end %> 
 </div>

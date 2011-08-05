@@ -6,4 +6,8 @@ class PagesController < ApplicationController
   def about
   end
 
+  def idiot
+		@title = "Don't be an idiot"
+  end
+
 end

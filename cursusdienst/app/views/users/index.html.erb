@@ -1,11 +1,10 @@
 <h1>All users</h1>
 <%= will_paginate %>
-<%= link_to "Add a new user", new_user_path %>
+<%= link_to "Add a new user", new_user_path %><br/>
+<%= link_to "Me", current_user %>
 <ul class="users">
   <% @users.each do |user| %>
     <%= render user %>
   <% end %>
 </ul>
 <%= will_paginate %>
-
-

@@ -1,0 +1,9 @@
+<div>
+  <h1><%= link_to permission_group.name, permission_group %></h1>
+  <strong>Users:</strong><br>
+  <% permission_group.users.each { |user| %>
+    <strong><%= link_to user.name , edit_user_path(user) %></strong><br/>
+  <% } %>
+
+  <%= link_to "Edit this permission", edit_permission_group_path(permission_group) %>
+</div>

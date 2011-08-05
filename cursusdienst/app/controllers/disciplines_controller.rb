@@ -1,8 +1,8 @@
 class DisciplinesController < ApplicationController
 
    def index
-     @title = "Disciplines"
-    @disciplines = Discipline.all
+    @title = "Disciplines"
+    @disciplines = Discipline.paginate(:page => params[:page], :per_page => 10)
   end
 
   def show

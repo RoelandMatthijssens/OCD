@@ -2,7 +2,7 @@ class SubjectsController < ApplicationController
 
   def index
     @title = "Subjects"
-    @subjects = Subject.all
+    @subjects = Subject.paginate(:page => params[:page], :per_page => 10)
   end
 
   def show
@@ -23,7 +23,7 @@ class SubjectsController < ApplicationController
       redirect_to @subject
     else
       flash[:notice] = "NOT created subject. #{params[:subject]}"
-      #      flash[:notice] = "NOT created subject. #{get_disciplines_from_subject(params[:subject])}"
+      #flash[:notice] = "NOT created subject. #{get_disciplines_from_subject(params[:subject])}"
       render :action => 'new'
     end
   end

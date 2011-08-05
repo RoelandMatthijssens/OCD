@@ -1,7 +1,7 @@
 class PermissionGroup < ActiveRecord::Base
   attr_accessible :name, :level
   validates :name, :presence => true
-  validates :level, :presence => true
+  #validates :level, :presence => true
   validates_uniqueness_of :name
   validates_uniqueness_of :level
   has_and_belongs_to_many :users

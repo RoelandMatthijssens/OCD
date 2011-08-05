@@ -7,7 +7,6 @@ describe PermissionGroup do
   end
   subject { Factory(:permission_group) }
   it { should validate_presence_of(:name) }
-  it { should validate_presence_of(:level) }
   it { should validate_uniqueness_of(:name) }
   it { should validate_uniqueness_of(:level) }
   

@@ -22,3 +22,7 @@
     <%= u.submit @submit %>
   </div>
 <% end %>
+
+<div>
+  <%= link_to "Edit permissions", "/users/" + @user.id.to_s + "/edit_permissions" %>  <!--TODO fix this with paths somehow-->
+</div>
