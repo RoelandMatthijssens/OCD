@@ -26,10 +26,19 @@ module SessionsHelper
 	end
 	
 	def deny_access
+		store_location
 		redirect_to signin_path, :notice => "Please sign in to acces this page"
 	end
   
 private
+	def store_location
+		session[:return_to] = request.fullpath
+	end
+
+	def clear_location
+		session[:return_to] = nil
+	end
+	
   def user_from_remember_token
     User.autenticate_with_salt(*remember_token)
   end

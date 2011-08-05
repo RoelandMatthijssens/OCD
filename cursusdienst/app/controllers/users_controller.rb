@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def index
+		deny_access unless signed_in?
     @title = "Users"
     @users = User.paginate(:page => params[:page], :per_page => 10)
   end

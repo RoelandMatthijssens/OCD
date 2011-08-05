@@ -4,16 +4,9 @@
     <li><%= link_to "home", root_path, :id => navigation_selected("Home") %> </li>
     
     <% if signed_in? %>
-      <li><%= link_to "institutes", institutes_path, :id => navigation_selected("Institutes") %> </li>
-      <li><%= link_to "faculties", faculties_path, :id => navigation_selected("Faculties") %> </li>
-      <li><%= link_to "disciplines", disciplines_path, :id => navigation_selected("Disciplines") %> </li>
-      <li><%= link_to "subjects", subjects_path, :id => navigation_selected("Subjects") %> </li>
-      <li><%= link_to "materials", materials_path, :id => navigation_selected("Materials") %> </li>
-      <li><%= link_to "users", users_path, :id => navigation_selected("Users") %> </li>
       <li><%= link_to "sign out", signout_path, :id => navigation_selected("Sign Out") %> </li>
-			<li><%= link_to "guilds", guilds_path, :id => navigation_selected("Guilds") %></li>
 			<% if current_user && current_user.can?("use_control_panel") %>
-				<li><%= link_to "control panel", root_path, :id => navigation_selected("Control Panel") %> </li>
+				<li><%= link_to "control panel", control_panel_path, :id => navigation_selected("Control Panel") %> </li>
 			<% end %>
     
     <% else %>

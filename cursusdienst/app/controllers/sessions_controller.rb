@@ -13,7 +13,13 @@ class SessionsController < ApplicationController
     else
       flash[:succes] =  "Successfully signed in"
       sign_in user
-      redirect_to user
+      if session[:return_to]
+				x = session[:return_to]
+				clear_location
+				redirect_to x
+			else
+				redirect_to user
+			end
     end
   end
   

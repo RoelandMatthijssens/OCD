@@ -7,6 +7,8 @@ Cursusdienst::Application.routes.draw do
   get "pages/about"
 
   get "pages/idiot"
+
+  get "pages/control_panel"
   
   resources :users do
 		get :edit_permissions, :on => :member
@@ -41,6 +43,7 @@ Cursusdienst::Application.routes.draw do
   match '/home', :to => 'pages#home'
   match '/about', :to => 'pages#about'
   match '/idiot', :to => 'pages#idiot'
+  match '/control_panel', :to => 'pages#control_panel'
   match '/signup', :to => 'users#new'
   match '/register', :to => 'users#new'
   match '/signin', :to => 'sessions#new'

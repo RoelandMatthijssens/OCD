@@ -11,7 +11,6 @@ class SubjectsController < ApplicationController
 
   def new
     @subject = Subject.new
-    #@subject.disciplines << Discipline.find(:first) # if Discipline.count > 0
     @submit = "Create new Subject"
   end
 
@@ -23,8 +22,7 @@ class SubjectsController < ApplicationController
       redirect_to @subject
     else
       flash[:notice] = "NOT created subject. #{params[:subject]}"
-      #flash[:notice] = "NOT created subject. #{get_disciplines_from_subject(params[:subject])}"
-      render :action => 'new'
+      render 'new'
     end
   end
 
@@ -35,7 +33,7 @@ class SubjectsController < ApplicationController
 
   def update
     @subject = Subject.find(params[:id])
-    @subject.disciplines= get_disciplines_from_subject(params[:subject])
+    @subject.disciplines = get_disciplines_from_subject(params[:subject])
     if @subject.update_attributes(params[:subject])
       flash[:notice] = "Subject succesfully updated"
       redirect_to @subject

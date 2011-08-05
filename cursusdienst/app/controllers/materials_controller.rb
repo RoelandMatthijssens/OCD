@@ -1,4 +1,5 @@
 class MaterialsController < ApplicationController
+
   def index
     @title = "Materials"
     @materials = Material.paginate(:page => params[:page], :per_page => 10)
@@ -20,6 +21,7 @@ class MaterialsController < ApplicationController
       flash[:succes] = "Material succesfully created"
       redirect_to @material
     else
+			flash[:notice] = "NOT created subject. #{params[:subject]}"
       render 'new'
     end
   end
@@ -32,7 +34,7 @@ class MaterialsController < ApplicationController
   def update
     @material = Material.find(params[:id])
     @material.subject = nil unless subject_given?(params[:material])
-    @material.options= get_options_from_material(params[:material])
+    @material.options = get_options_from_material(params[:material])
     if @material.update_attributes(params[:material])
       flash[:succes] = "Material updated succesfully"
       redirect_to @material
