@@ -12,14 +12,11 @@ describe User do
   it { should validate_presence_of(:last_name) }
   it { should validate_presence_of(:user_name) }
   it { should validate_presence_of(:email) }
-  #it { should validate_presence_of(:password) }
-#  it { should validate_presence_of(:permission_group) }
   it { should validate_uniqueness_of(:user_name) }
   
-  #it { should ensure_length_of(:password).is_at_least(6).is_at_most(40) }
   it { should ensure_length_of(:user_name).is_at_least(3).is_at_most(20) }
   
-  it { should belong_to(:permission_group) }
+  it { should have_and_belong_to_many(:permission_groups) }
   it { should have_and_belong_to_many(:guilds)}
   it { should have_and_belong_to_many(:disciplines)}
   it { should respond_to(:encrypted_password) }
@@ -37,11 +34,11 @@ describe User do
         :email => 'useremail@mail.com'
         }
       @user = User.new(@attr)
-      @user.permission_group = @permission_group
+      @user.permission_groups << @permission_group
     end
     it "should create a new instance given valid attributes" do
       user = User.new(@attr)
-      user.permission_group = @permission_group
+      user.permission_groups << @permission_group
       user.should be_valid
     end
     it "should set a encrypted password" do
@@ -90,10 +87,10 @@ describe User do
       it "should reject email addresses identical up to case" do
         upcased_email = @attr[:email].upcase
         user = User.new(@attr.merge(:email => upcased_email))
-        user.permission_group = @permission_group
+        user.permission_groups << @permission_group
         user.save!
         user_with_duplicate_email = User.new(@attr.merge(:user_name => 'blub'))
-        user_with_duplicate_email.permission_group = @permission_group
+        user_with_duplicate_email.permission_groups << @permission_group
         user_with_duplicate_email.should_not be_valid
       end
     end
