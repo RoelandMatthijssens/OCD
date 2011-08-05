@@ -7,6 +7,19 @@
   </div>
   <div class='field'>
     <%= f.label :disciplines %> <br>
+    <div class="fields">
+      <%= collection_select "filter", :institute_id,
+        Institute.find(:all), :id, :name, { :prompt => true }, 
+        {:onchange=>filter_select_on_change("filter_institute_id","filter_faculty_id", "institute")} %>
+      <%= collection_select "filter", :faculty_id,
+        {}, :id, :name, { :prompt => true }, 
+        {:onchange=>filter_select_on_change("filter_faculty_id","filter_discipline_id", "faculty")} %>
+      <%= collection_select "filter", :discipline_id,
+        {}, :id, :name, { :prompt => true },
+        {:onchange=>filter_select_on_change("filter_discipline_id","filter_subject_id", "discipline")}%>
+      <%= collection_select "filter", :subject_id,
+        {}, :id, :name, { :prompt => true } %>
+    </div>
     <div class='fields'>
       <%= f.fields_for :disciplines do |builder| %>
         <%=  render 'discipline_fields' , :f => builder %>
