@@ -12,12 +12,12 @@ module ApplicationHelper
     f.hidden_field(:_destroy) + link_to_function(name, "remove_fields(this)")
   end
 
-  def link_to_add_fields(name, f, association)
+  def link_to_add_fields(name, f, association, new_id = Time.now.to_i)
     new_object = f.object.class.reflect_on_association(association).klass.first
     fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
       render(association.to_s.singularize + "_fields", :f => builder)
     end
-    link_to_function(name, "add_fields(this, '#{association}', '#{escape_javascript(fields)}')")
+    link_to_function(name, "add_fields(this, '#{association}', '#{new_id}','#{escape_javascript(fields)}')")
   end
   
   def link_to_add_field(name, f, association)
@@ -56,6 +56,10 @@ module ApplicationHelper
     show_js = "show_fields(#{show_ids});"
     hide_js = "delete_fields(this)"
     link_to_function(name,show_js+hide_js)
+  end
+  
+  def filter_select_on_change parent_id, child_id, data_key
+    return "filter_select_on_change('#{parent_id}', '#{child_id}', '#{data_key}')"
   end
 
 

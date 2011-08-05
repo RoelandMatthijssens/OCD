@@ -31,6 +31,11 @@ Cursusdienst::Application.routes.draw do
 
   resources :permission_groups
   
+  resources :filters do
+    get :faculties_from_institutes, :on => :collection
+    get :get_children_from_parent, :on => :collection
+  end
+  
   root :to => 'pages#home'
   
   match '/home', :to => 'pages#home'
