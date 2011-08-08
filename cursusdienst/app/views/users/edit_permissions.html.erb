@@ -8,7 +8,7 @@
 			<% else %>
 				<%= check_box_tag "permission_ids[]", permission.id %>
 			<% end %>
-			<%= permission.name %><br/>
+			<%= permission.name.gsub("_", " ") %><br/>
 		</div>
 	<% end %>
 

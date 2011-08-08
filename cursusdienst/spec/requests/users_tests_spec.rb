@@ -27,6 +27,12 @@ describe "UsersTests" do
 					page.should have_content "Please sign in to acces this page"
 				end
 			end
+			describe "'user/1/edit_permissions' self" do
+				it "should ask for login" do
+					visit edit_permissions_user_path :id => @user1.id
+					page.should have_content "Please sign in to acces this page"
+				end
+			end
 			describe "'user/new'" do
 				it "should have a registration page" do
 					visit new_user_path
@@ -116,6 +122,12 @@ describe "UsersTests" do
 					page.should have_content @user1.email
 				end
 			end
+			describe "'user/1/edit_permissions' self" do
+				it "should deny access" do
+					visit edit_permissions_user_path :id => @user1.id
+					page.should have_content("Access Denied")
+				end
+			end
 		end
 		describe "POST" do
 			describe "'user/1/update'" do
@@ -182,6 +194,12 @@ describe "UsersTests" do
 					page.should have_content("Access Denied")
 				end
 			end
+			describe "'user/1/edit_permissions' self" do
+				it "should deny access" do
+					visit edit_permissions_user_path :id => @user1.id
+					page.should have_content("Access Denied")
+				end
+			end
 		end
 		describe "POST" do
 		end
@@ -240,9 +258,58 @@ describe "UsersTests" do
 					page.should have_content @user1.email
 				end
 			end
+			describe "'user/1/edit_permissions' self" do
+				it "should deny access" do
+					visit edit_permissions_user_path :id => @user1.id
+					page.should have_content("Access Denied")
+				end
+			end
 		end
 		describe "POST" do
 			describe "'users/create'"
+		end
+		describe "PUT" do
+			describe "'users/1/update'"
+		end
+	end
+	describe "while logged in with edit permissions permissions" do
+		before(:each) do
+			p1 = PermissionGroup.create!(:name => 'edit_permissions')
+			@user1.permission_groups << p1
+			p2 = Factory(:permission_group)
+			p3 = Factory(:permission_group)
+			p4 = Factory(:permission_group)
+			login(@user1)
+		end
+		describe "GET" do
+			describe "'users'" do
+				it "should ask for login" do
+					visit users_path
+					page.should have_content "Access Denied"
+				end
+			end
+			describe "'user/2/edit'" do
+				it "should ask for login" do
+					visit edit_user_path :id => @user2.id
+					page.should have_content "Access Denied"
+				end
+			end
+			describe "'user/2'" do
+				it "should ask for login" do
+					visit edit_user_path :id => @user2.id
+					page.should have_content "Access Denied"
+				end
+			end
+			describe "'user/1/edit_permissions' self" do
+				it "should have all permissions listed" do
+					visit edit_permissions_user_path :id => @user1.id
+					PermissionGroup.all.each do |permission|
+						page.should have_content(permission.name.gsub("_", " ") )
+					end
+				end
+			end
+		end
+		describe "POST" do
 		end
 		describe "PUT" do
 			describe "'users/1/update'"

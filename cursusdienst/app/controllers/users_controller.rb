@@ -63,7 +63,13 @@ class UsersController < ApplicationController
 
   def edit_permissions
 		@user = User.find(params[:id])
+		@user = User.find(params[:id])
+		if signed_in?
+			deny_privileged_access unless current_user.can?("edit_permissions")
 		@submit = "Save permissions"
+		else
+			deny_access
+		end
   end
   
   def update_permissions
