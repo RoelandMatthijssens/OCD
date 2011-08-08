@@ -29,6 +29,10 @@ module SessionsHelper
 		store_location
 		redirect_to signin_path, :notice => "Please sign in to acces this page"
 	end
+
+	def deny_privileged_access
+		redirect_to access_denied_path, :notice => "You are not allowed to view this page"
+	end
   
 private
 	def store_location

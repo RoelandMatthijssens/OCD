@@ -6,7 +6,7 @@ Cursusdienst::Application.routes.draw do
   
   get "pages/about"
 
-  get "pages/idiot"
+  get "pages/access_denied"
 
   get "pages/control_panel"
   
@@ -42,7 +42,7 @@ Cursusdienst::Application.routes.draw do
   
   match '/home', :to => 'pages#home'
   match '/about', :to => 'pages#about'
-  match '/idiot', :to => 'pages#idiot'
+  match '/access_denied', :to => 'pages#access_denied'
   match '/control_panel', :to => 'pages#control_panel'
   match '/signup', :to => 'users#new'
   match '/register', :to => 'users#new'

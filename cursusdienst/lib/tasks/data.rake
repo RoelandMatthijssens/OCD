@@ -65,7 +65,10 @@ namespace :db do
 			 end
 		 end
 		
-		permissionNames = ["edit_users", "delete_users", "view_users", "use_control_panel", "edit_permissions"]
+		permissionNames = ["use_control_panel",
+			"edit_users",				"delete_users",				"view_users",
+			"edit_permissions",	"delete_permissions",	"view_permissions",
+			"edit_disciplines",	"delete_disciplines",	"view_disciplines", ]
 		permissionNames.each do |name|
 			PermissionGroup.create!(
 				:name => name

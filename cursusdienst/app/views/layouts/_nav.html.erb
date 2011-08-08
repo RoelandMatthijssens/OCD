@@ -5,6 +5,7 @@
     
     <% if signed_in? %>
       <li><%= link_to "sign out", signout_path, :id => navigation_selected("Sign Out") %> </li>
+			<li><%= link_to "profile", current_user, :id => navigation_selected("Profile") %></li>
 			<% if current_user && current_user.can?("use_control_panel") %>
 				<li><%= link_to "control panel", control_panel_path, :id => navigation_selected("Control Panel") %> </li>
 			<% end %>

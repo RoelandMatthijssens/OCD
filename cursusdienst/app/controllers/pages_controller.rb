@@ -7,9 +7,8 @@ class PagesController < ApplicationController
 		@title = "About"
   end
 
-  def idiot
-		redirect_to root_path unless signed_in?
-		@title = "Don't be an idiot"
+  def access_denied
+		@title = "Access Denied"
   end
 
   def control_panel
