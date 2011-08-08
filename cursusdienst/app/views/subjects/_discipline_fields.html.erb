@@ -1,9 +1,7 @@
 <!-- hidden field to make sure the id doesnt get overloaded -->
 <div class="fields">
   <% if :id %>
-    <% tag = Time.now.to_i %>
-    <%= f.hidden_field :id, :value => 0 %>
-
+    <% tag = "new_disciplines" %>
 
     <%= collection_select "filter_#{tag}", :institute_id,
       Institute.find(:all), :id, :name, { :prompt => true }, 

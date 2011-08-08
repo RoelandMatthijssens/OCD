@@ -16,7 +16,7 @@ function remove_fields(link) {
 function add_fields(link, association, new_id, content) {
 //    var new_id = new Date().getTime();
     var regexp = new RegExp("new_" + association, "g");
-    add_field(link, association, content.replace(regexp, new_id));
+    add_field(link, association, content.replace(regexp, new Date().getTime()));
 }
 
 function add_field(link, association, content) {
