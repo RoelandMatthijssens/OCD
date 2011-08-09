@@ -1,8 +1,10 @@
 <h1>All Subjects</h1>
 <%= link_to "Add a new subject", new_subject_path %>
+<%= will_paginate %>
 <ul class="subjects">
   <% @subjects.each do |subject| %>
     <%= render subject %>
   <% end %>
 </ul>
+<%= will_paginate %>
 

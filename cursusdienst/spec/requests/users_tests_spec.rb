@@ -23,7 +23,7 @@ describe "UsersTests" do
 			end
 			describe "'user/1'" do
 				it "should ask for login" do
-					visit edit_user_path :id => @user1.id
+					visit users_path :id => @user1.id
 					page.should have_content "Please sign in to acces this page"
 				end
 			end
@@ -134,13 +134,15 @@ describe "UsersTests" do
 				before(:each) do
 					visit edit_user_path :id => @user1.id
 				end
-				fields = ["user_name", "user_last_name", "user_email"]
+				fields = ["name", "last_name", "email"]
 				fields.each do |field|
 					it "should update the user" do
-						fill_in field, :with => 'something@something.something'
+						fill_in "user_"+field, :with => 'something@something.something'
 						click_button "Update User"
 						page.should have_content("User updated succesfully")
 						page.should have_content("something@something.something")
+						@user1.reload
+						@user1.send(field).should == "something@something.something"
 					end
 				end
 			end
@@ -272,7 +274,7 @@ describe "UsersTests" do
 			describe "'users/1/update'"
 		end
 	end
-	describe "while logged in with edit permissions permissions" do
+	describe "while logged in with edit_permissions permissions" do
 		before(:each) do
 			p1 = PermissionGroup.create!(:name => 'edit_permissions')
 			@user1.permission_groups << p1
@@ -308,11 +310,14 @@ describe "UsersTests" do
 					end
 				end
 			end
-		end
-		describe "POST" do
-		end
-		describe "PUT" do
-			describe "'users/1/update'"
+			describe "'user/2/edit_permissions' not self" do
+				it "should have all permissions listed" do
+					visit edit_permissions_user_path :id => @user2.id
+					PermissionGroup.all.each do |permission|
+						page.should have_content(permission.name.gsub("_", " ") )
+					end
+				end
+			end
 		end
 	end
 end

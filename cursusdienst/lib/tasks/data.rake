@@ -48,7 +48,7 @@ namespace :db do
 		Faculty.all.each do |faculty|
 			rand(5).times do 
 				d = Discipline.new(
-					:name => Faker::Lorem.words(2)
+					:name => Faker::Lorem.words(1)
 					)
 				d.faculty = faculty
 				d.save if d.valid?
@@ -58,7 +58,7 @@ namespace :db do
 		Discipline.all.each do |discipline|
 			rand(6).times do
 				s = Subject.new(
-					:name => Faker::Lorem.words(2)
+					:name => Faker::Lorem.words(1)
 					)
 				s.disciplines << discipline
 				s.save if s.valid?
@@ -66,9 +66,10 @@ namespace :db do
 		 end
 		
 		permissionNames = ["use_control_panel",
-			"edit_users",				"delete_users",				"view_users",
-			"edit_permissions",	"delete_permissions",	"view_permissions",
-			"edit_disciplines",	"delete_disciplines",	"view_disciplines", ]
+			"edit_users",				"delete_users",				"view_users"				,	
+			"edit_permissions",	"delete_permissions",	"view_permissions"	,	"create_permissions"	,
+			"edit_disciplines",	"delete_disciplines",	"view_disciplines"	,	"create_disciplines"	,
+			"edit_subjects"		,	"delete_subjects"		,	"view_subjects"			,	"create_subjects"			,]
 		permissionNames.each do |name|
 			PermissionGroup.create!(
 				:name => name

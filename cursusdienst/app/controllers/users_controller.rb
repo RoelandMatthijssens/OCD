@@ -1,12 +1,9 @@
 class UsersController < ApplicationController
   def index
-		if signed_in?
-			deny_privileged_access unless current_user.can?('view_users')
-			@title = "Users"
-			@users = User.paginate(:page => params[:page], :per_page => 10)
-		else
-			deny_access
-		end
+		deny_access and return unless signed_in?
+		deny_privileged_access and return unless current_user.can?('view_users')
+		@title = "Users"
+		@users = User.paginate(:page => params[:page], :per_page => 10)
   end
 
   def show

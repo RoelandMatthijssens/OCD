@@ -1,45 +1,75 @@
 class SubjectsController < ApplicationController
 
   def index
-    @title = "Subjects"
-    @subjects = Subject.paginate(:page => params[:page], :per_page => 10)
+		if signed_in?
+			deny_privileged_access unless current_user.can?('view_subjects')
+			@title = "Subjects"
+			@subjects = Subject.paginate(:page => params[:page], :per_page => 10)
+		else
+			deny_access
+		end
   end
 
   def show
-    @subject = Subject.find(params[:id])
+    if signed_in?
+			deny_privileged_access unless current_user.can?('view_subjects')
+			@subject = Subject.find(params[:id])
+		else
+			deny_access
+		end
   end
 
   def new
-    @subject = Subject.new
-    @submit = "Create new Subject"
+    if signed_in?
+			deny_privileged_access unless current_user.can?('create_subjects')
+			@subject = Subject.new
+			@submit = "Create new Subject"
+		else
+			deny_access
+		end
   end
 
   def create
-    @subject = Subject.new(params[:subject])
-    @subject.disciplines= get_disciplines_from_subject(params[:subject])
-    if @subject.save
-      flash[:notice] = "Subject succesfully created"
-      redirect_to @subject
-    else
-      flash[:notice] = "NOT created subject. #{params[:subject]}"
-      render 'new'
-    end
+    if signed_in?
+			deny_privileged_access unless current_user.can?('create_subjects')
+			@subject = Subject.new(params[:subject])
+			@subject.disciplines= get_disciplines_from_subject(params[:subject])
+			if @subject.save
+				flash[:notice] = "Subject succesfully created"
+				redirect_to @subject
+			else
+				flash[:notice] = "NOT created subject. #{params[:subject]}"
+				render 'new'
+			end
+		else
+			deny_access
+		end
   end
 
   def edit
-    @subject = Subject.find(params[:id])
-    @submit = "Update Subject"
+    if signed_in?
+			deny_privileged_access unless current_user.can?('edit_subjects')
+			@subject = Subject.find(params[:id])
+			@submit = "Update Subject"
+		else
+			deny_access
+		end
   end
 
   def update
-    @subject = Subject.find(params[:id])
-    @subject.disciplines = get_disciplines_from_subject(params[:subject])
-    if @subject.update_attributes(params[:subject])
-      flash[:notice] = "Subject succesfully updated"
-      redirect_to @subject
-    else
-      render :action => 'edit'
-    end
+    if signed_in?
+			deny_privileged_access unless current_user.can?('create_subjects')
+			@subject = Subject.find(params[:id])
+			@subject.disciplines = get_disciplines_from_subject(params[:subject])
+			if @subject.update_attributes(params[:subject])
+				flash[:notice] = "Subject succesfully updated"
+				redirect_to @subject
+			else
+				render :action => 'edit'
+			end
+		else
+			deny_access
+		end
   end
 
   def destroy
