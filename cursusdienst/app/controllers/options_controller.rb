@@ -20,7 +20,6 @@ class OptionsController < ApplicationController
       redirect_to @option
     else
       flash[:notice] = "NOT created option. #{params[:option]}"
-      #      flash[:notice] = "NOT created option. #{get_disciplines_from_option(params[:option])}"
       render :action => 'new'
     end
   end

@@ -1,11 +1,21 @@
 class UsersController < ApplicationController
   def index
-    @title = "Users"
-    @users = User.paginate(:page => params[:page], :per_page => 10)
+		if signed_in?
+			deny_privileged_access unless current_user.can?('view_users')
+			@title = "Users"
+			@users = User.paginate(:page => params[:page], :per_page => 10)
+		else
+			deny_access
+		end
   end
 
   def show
-    @user = User.find(params[:id])
+		@user = User.find(params[:id])
+		if signed_in?
+			deny_privileged_access unless current_user == @user || current_user.can?("view_users")
+		else
+			deny_access
+		end
   end
 
   def new
@@ -25,13 +35,18 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+		@user = User.find(params[:id])
+		if signed_in?
+			deny_privileged_access unless current_user == @user || current_user.can?('edit_users')
+		else
+			deny_access
+		end
   end
 
   def update
     @user = User.find(params[:id])
-    if current_user && (current_user == @user || current_user.can("edit_users"))
-			#user can edit the selected user
+    if signed_in?
+			deny_privileged_access unless current_user == @user || current_user.can?("edit_users")
 			if @user.update_attributes(params[:user])
 				flash[:succes] = "User updated succesfully"
 				redirect_to @user
@@ -39,9 +54,7 @@ class UsersController < ApplicationController
 				render 'edit'
 			end
 		else
-			#user can't edit the selected user
-			flash[:error] = "You are not allowed to edit this user"
-			redirect_to idiot_path
+			deny_access
     end
   end
 
