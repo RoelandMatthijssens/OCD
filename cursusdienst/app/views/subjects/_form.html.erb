@@ -20,7 +20,6 @@
       <%= f.fields_for :disciplines do |builder| %>
         <% if @dis_fac_inst.empty? %>
           <%=  render 'discipline_fields' , :f => builder %>
-       
         <% end %>
       <% end %>
       <%= link_to_perform_javascript "add one", [],[], [add_fields(f, :disciplines)] %>

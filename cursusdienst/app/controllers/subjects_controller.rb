@@ -23,7 +23,7 @@ class SubjectsController < ApplicationController
       flash[:notice] = "Subject succesfully created"
       redirect_to @subject
     else
-      @dis_fac_inst = get_dis_fac_inst_from_subject(params[:subject])
+      @dis_fac_inst = get_dis_fac_inst_from_par(params[:subject])
       flash[:notice] = "NOT created subject. #{params[:subject]}"
       #flash[:notice] = "NOT created subject. #{get_disciplines_from_subject(params[:subject])}"
       render :action => 'new'
@@ -32,6 +32,7 @@ class SubjectsController < ApplicationController
 
   def edit
     @subject = Subject.find(params[:id])
+    @dis_fac_inst = get_dis_fac_inst_from_subject(@subject)
     @submit = "Update Subject"
   end
 
@@ -39,6 +40,7 @@ class SubjectsController < ApplicationController
     @subject = Subject.find(params[:id])
     @subject.disciplines= get_disciplines_from_subject(params[:subject])
     if @subject.update_attributes(params[:subject])
+      @dis_fac_inst = get_dis_fac_inst_from_par(params[:subject])
       flash[:notice] = "Subject succesfully updated"
       redirect_to @subject
     else
@@ -60,7 +62,7 @@ class SubjectsController < ApplicationController
     return ds
   end
   
-  def get_dis_fac_inst_from_subject par
+  def get_dis_fac_inst_from_par par
     ds = []
     fac = []
     inst = []
@@ -69,6 +71,18 @@ class SubjectsController < ApplicationController
       fac << v["faculty_id"]
       inst << v["institute_id"]
     } unless par[:disciplines_attributes].nil?
+    return [inst, fac, ds]
+  end
+  
+  def get_dis_fac_inst_from_subject subject
+    ds = []
+    fac = []
+    inst = []
+    subject.disciplines.each{ |d|
+      ds << d.id
+      fac << d.faculty_id
+      inst << d.institute_id
+    }
     return [inst, fac, ds]
   end
 
