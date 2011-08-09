@@ -40,10 +40,10 @@ class SubjectsController < ApplicationController
     @subject = Subject.find(params[:id])
     @subject.disciplines= get_disciplines_from_subject(params[:subject])
     if @subject.update_attributes(params[:subject])
-      @dis_fac_inst = get_dis_fac_inst_from_par(params[:subject])
       flash[:notice] = "Subject succesfully updated"
       redirect_to @subject
     else
+      @dis_fac_inst = get_dis_fac_inst_from_par(params[:subject])
       render :action => 'edit'
     end
   end
@@ -67,9 +67,11 @@ class SubjectsController < ApplicationController
     fac = []
     inst = []
     par[:disciplines_attributes].each_value { |v|
-      ds << v["id"] 
-      fac << v["faculty_id"]
-      inst << v["institute_id"]
+      if v["id"]
+        ds << v["id"] 
+        fac << v["faculty_id"]
+        inst << v["institute_id"]
+      end
     } unless par[:disciplines_attributes].nil?
     return [inst, fac, ds]
   end
