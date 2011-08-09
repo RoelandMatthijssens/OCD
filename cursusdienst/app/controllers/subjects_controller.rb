@@ -11,6 +11,7 @@ class SubjectsController < ApplicationController
 
   def new
     @subject = Subject.new
+    @dis_fac_inst = []
     #@subject.disciplines << Discipline.find(:first) # if Discipline.count > 0
     @submit = "Create new Subject"
   end
@@ -22,6 +23,7 @@ class SubjectsController < ApplicationController
       flash[:notice] = "Subject succesfully created"
       redirect_to @subject
     else
+      @dis_fac_inst = get_dis_fac_inst_from_subject(params[:subject])
       flash[:notice] = "NOT created subject. #{params[:subject]}"
       #flash[:notice] = "NOT created subject. #{get_disciplines_from_subject(params[:subject])}"
       render :action => 'new'
@@ -56,6 +58,18 @@ class SubjectsController < ApplicationController
       ds << d if d.instance_of? Discipline and v["_destroy"] != "1"
     } unless par[:disciplines_attributes].nil?
     return ds
+  end
+  
+  def get_dis_fac_inst_from_subject par
+    ds = []
+    fac = []
+    inst = []
+    par[:disciplines_attributes].each_value { |v|
+      ds << v["id"] 
+      fac << v["faculty_id"]
+      inst << v["institute_id"]
+    } unless par[:disciplines_attributes].nil?
+    return [inst, fac, ds]
   end
 
 end

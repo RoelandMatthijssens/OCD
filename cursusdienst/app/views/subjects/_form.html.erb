@@ -7,12 +7,21 @@
     <%= f.label :name %> <br>
     <%= f.text_field :name %> <br>
   </div>
+  <%= hidden_field_tag "counter", "0" %>
   <div class='field'>
     <%= f.label :disciplines %> <br>
-    <%= hidden_field_tag "disciplines_counter", 1 %>
     <div class='fields'>
       <%= f.fields_for :disciplines do |builder| %>
-        <%=  render 'discipline_fields' , :f => builder %>
+        
+        <%=  render 'given_discipline_fields' , {:f => builder} unless @dis_fac_inst.empty?%>
+      <% end %>
+    </div>
+    <div class='fields'>
+      <%= f.fields_for :disciplines do |builder| %>
+        <% if @dis_fac_inst.empty? %>
+          <%=  render 'discipline_fields' , :f => builder %>
+       
+        <% end %>
       <% end %>
       <%= link_to_perform_javascript "add one", [],[], [add_fields(f, :disciplines)] %>
     </div>
