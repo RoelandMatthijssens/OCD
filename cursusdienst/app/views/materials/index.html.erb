@@ -1,8 +1,10 @@
 <h1>All Materials</h1>
 <%= link_to "Add a new material", new_material_path %>
+<%= will_paginate %>
 <ul class="materials">
   <% @materials.each do |material| %>
     <%= render material %>
   <% end %>
 </ul>
+<%= will_paginate %>
 

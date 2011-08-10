@@ -11,7 +11,7 @@ namespace :db do
 			)
 		suffix = [ "Elementary", "Middel school", "College", "University", "High school" ]
 		prefix = [ "Fort" ]
-		10.times do |n|
+		2.times do |n|
 			name = Faker::Name.name
 			name = 'Saint '+name if rand(5) < 1
 			if rand(10) < 9
@@ -28,12 +28,10 @@ namespace :db do
 			)
 		end
 		
-		facultyNames = ["Recht en Criminologie", "Economische, Sociale en Politieke Wetenschappen", "Psychologie en Educatiewetenschappen",
-			"Wetenschappen en Bio-ingenieurswetenschappen", "Geneeskunde en Farmacie", "Letteren en Wijsbegeerte", "Ingenieurswetenschappen",
-			"Lichamelijke Opvoeding en Kinesitherapie", "Interfacultair Departement Lerarenopleiding"]
+		facultyNames = ["Recht en Criminologie", "Psychologie en Educatiewetenschappen",
+			"Wetenschappen en Bio-ingenieurswetenschappen"]
 		Institute.all.each do |institute|
-			rand(facultyNames.length).times do
-				name = facultyNames[rand(facultyNames.length-1)]
+			facultyNames.each do |name|
 				initials = ''
 				name.split(' ').each{|w| initials += w[0].capitalize}
 				f = Faculty.new(
@@ -42,35 +40,39 @@ namespace :db do
 				)
 				f.institute = institute
 				f.save if f.valid?
-			 end
-		 end
+			end
+		end
 		
 		Faculty.all.each do |faculty|
-			rand(5).times do 
+			id = 0
+			3.times do 
 				d = Discipline.new(
-					:name => Faker::Lorem.words(1)
+					:name => id.to_s+" discipline"
 					)
+				id += 1
 				d.faculty = faculty
 				d.save if d.valid?
 			end
 		end
 		
 		Discipline.all.each do |discipline|
-			rand(6).times do
+			id = 0
+			3.times do
 				s = Subject.new(
-					:name => Faker::Lorem.words(1)
+					:name => id.to_s+" subject"
 					)
+				id += 1
 				s.disciplines << discipline
 				s.save if s.valid?
 			 end
 		 end
 		
 		permissionNames = ["use_control_panel",
-			"edit_users",				"delete_users",				"view_users"				,	
-			"edit_permissions",	"delete_permissions",	"view_permissions"	,	"create_permissions"	,
-			"edit_disciplines",	"delete_disciplines",	"view_disciplines"	,	"create_disciplines"	,
-			"edit_subjects"		,	"delete_subjects"		,	"view_subjects"			,	"create_subjects"			,
-			"edit_permission_groups"		,	"delete_permission_groups"		,	"view_permission_groups"			,	"create_permission_groups"			,]
+			"edit_users"							,	"delete_users"							,	"view_users"							,	
+			"edit_permissions"				,	"delete_permissions"				,	"view_permissions"				,	"create_permissions"				,
+			"edit_disciplines"				,	"delete_disciplines"				,	"view_disciplines"				,	"create_disciplines"				,
+			"edit_subjects"						,	"delete_subjects"						,	"view_subjects"						,	"create_subjects"						,
+			"edit_permission_groups"	,	"delete_permission_groups"	,	"view_permission_groups"	,	"create_permission_groups"	,]
 		permissionNames.each do |name|
 			PermissionGroup.create!(
 				:name => name
@@ -86,18 +88,19 @@ namespace :db do
 		
 		Subject.all.each do |subject|
 			materialNames = ["Boek", "Slides", "Samenvatting", "Cursusnotas"]
-			rand(3).times do
-				name = materialNames[rand(materialNames.length - 1)]
-				m = Material.new(
-					:name => name
-					)
-				m.subject = subject
-				rand(3).times do |n|
-					nn = rand(Option.all.size)+1
-					o = Option.find(nn) unless nn == 0
-					m.options << o
+			3.times do
+				materialNames.each do |name|
+					m = Material.new(
+						:name => name
+						)
+					m.subject = subject
+					rand(3).times do |n|
+						nn = rand(Option.all.size)+1
+						o = Option.find(nn) unless nn == 0
+						m.options << o
+					end
+					m.save if m.valid?
 				end
-				m.save if m.valid?
 			end
 		end
 		
@@ -118,7 +121,7 @@ namespace :db do
 				:user_name => "rik"
 			)
 		[enermis, rik].each { |u| u.permission_groups << PermissionGroup.all}
-		99.times do |n|
+		18.times do |n|
 			password = "foobar"
 			u = User.new(
 				:name => Faker::Name.first_name,

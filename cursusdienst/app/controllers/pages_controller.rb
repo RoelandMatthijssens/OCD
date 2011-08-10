@@ -12,13 +12,9 @@ class PagesController < ApplicationController
   end
 
   def control_panel
-		if !signed_in?
-			deny_access
-		elsif !current_user.can?("use_control_panel")
-			redirect_to idiot_path
-		else
-			@title = "Control Panel"
-		end
+		deny_access and return unless signed_in?
+		deny_privileged_access and return unless current_user.can?('use_control_panel')
+		@title = 'Control Panel'
 	end
 
 end
