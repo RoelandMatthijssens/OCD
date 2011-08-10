@@ -1,8 +1,10 @@
 <h1>All Guilds</h1>
 <%= link_to "Add a new guild", new_guild_path %>
+<%= will_paginate %>
 <ul class="guilds">
   <% @guilds.each do |guild| %>
     <%= render guild %>
   <% end %>
 </ul>
+<%= will_paginate %>
 
