@@ -1,122 +1,175 @@
 require 'spec_helper'
 
 describe "DisciplinesTests" do
-  describe "GET /disciplines_tests" do
-    before(:each) do
-      @fac = Factory(:faculty)
-      @dis = Factory(:discipline)
-      @second = Factory(:discipline)
-      third = Factory(:discipline)
-      @diss = [@dis, @second, third]
-    end
-
-		it "should be tested"
-    #describe "succeeding tests" do
-      #it "should visit the disciplines page" do
-        #visit disciplines_path
-      #end
-
-      #it "index should contain all discipline" do
-        #visit disciplines_path
-        #@diss.each { |i|
-          #page.should have_content(i.name)
-        #}
-      #end
-
-      #it "should go to an discipline when discipline name is clicked" do
-        #visit disciplines_path
-        #has_link? (@dis.name).should be_true
-        #click_link(@dis.name)
-        #page.should have_content(@dis.name)
-        #page.should have_link("Edit")
-      #end
-
-      #it "should have a new page" do
-        #visit new_discipline_path
-        #page.should have_content("new")
-        #page.should have_field("discipline_name")
-        #page.should have_select("discipline_faculty_id")
-      #end
-
-      #it "should create a new discipline" do
-        #visit new_discipline_path
-        #fill_in "discipline_name", :with => 'Compu We'
-        #select @dis.faculty.name, :from => 'discipline_faculty_id'
-        #click_button "Create"
-        #page.should have_content("Discipline created succesfully")
-        #page.should have_content("Compu We")
-        #page.should have_content(@dis.faculty.name)
-      #end
-
-      #it "should update an existing discipline" do
-        #visit disciplines_path
-        #click_link_or_button(@dis.name)
-        #click_link_or_button("Edit")
-        #page.should have_field("discipline_name", :with => @dis.name)
-        #fill_in "discipline_name", :with => 'Compu We'
-        #select @fac.full_name, :from => 'discipline_faculty_id'
-        #click_button "Update"
-        #page.should have_content("Discipline updated succesfully")
-        #page.should have_content("Compu We")
-        #page.should have_content(@fac.name)
-      #end
-    #end
-    #describe "failing tests" do
-      #describe "create new" do
-        #it "should NOT create a new discipline given blank name" do
-          #visit new_discipline_path
-          #fill_in "discipline_name", :with => ''
-          #select @fac.full_name, :from => 'discipline_faculty_id'
-          #click_button "Create"
-          #page.should have_content("Name can't be blank")
-          #page.should have_select("discipline_faculty_id", :selected => @fac.full_name)
-        #end
-
-
-        #it "should NOT create a new discipline given blank faculty" do
-          #visit new_discipline_path
-          #fill_in "discipline_name", :with => 'Compu We'
-          #click_button "Create"
-          #page.should have_content("Faculty can't be blank")
-          #page.should have_field("discipline_name", :with => "Compu We")
-        #end
-
-        #it "should NOT create a new discipline with a name that already exists within faculty" do
-          #visit new_discipline_path
-          #fill_in "discipline_name", :with => @dis.name
-          #select @dis.faculty.full_name, :from => 'discipline_faculty_id'
-          #click_button "Create"
-          #page.should have_content("Name has already been taken")
-          #page.should have_field("discipline_name", :with => @dis.name)
-          #page.should have_select("discipline_faculty_id", :selected => @dis.faculty.full_name)
-        #end
-
-      #end
-
-      #describe "update existing" do
-        #it "should NOT update an discipline given blank name" do
-          #visit disciplines_path
-          #click_link_or_button(@dis.name)
-          #click_link_or_button("Edit")
-          #fill_in "discipline_name", :with => ''
-          #select @fac.full_name, :from => 'discipline_faculty_id'
-          #click_button "Update"
-          #page.should have_content("Name can't be blank")
-          #page.should have_select("discipline_faculty_id", :selected => @fac.full_name)
-        #end
-
-        #it "should NOT update an discipline with a name that already exists" do
-          #visit disciplines_path
-          #click_link_or_button(@dis.name)
-          #click_link_or_button("Edit")
-          #fill_in "discipline_name", :with => @second.name
-          #select @second.faculty.full_name, :from => 'discipline_faculty_id'
-          #click_button "Update"
-          #page.should have_content("Name has already been taken")
-          #page.should have_field("discipline_name", :with => @second.name)
-          #page.should have_select("discipline_faculty_id", :selected => @second.faculty.full_name)
-        #end
-      #end
-    #end
-  end
+  before(:each) do
+		@discipline1 = Factory(:discipline)
+		@discipline2 = Factory(:discipline)
+		@discipline3 = Factory(:discipline)
+		@user1 = Factory(:user)
+		@disciplines = [@discipline1, @discipline2, @discipline3]
+	end
+	describe "while not logged in" do
+		describe "GET" do
+			describe "'disciplines'" do
+				it "should ask for login" do
+					visit disciplines_path
+					page.should have_content "Please sign in to acces this page"
+				end
+			end
+			describe "'discipline/1/edit'" do
+				it "should ask for login" do
+					visit edit_discipline_path :id => @discipline1.id
+					page.should have_content "Please sign in to acces this page"
+				end
+			end
+			describe "'discipline/1'" do
+				it "should ask for login" do
+					visit disciplines_path :id => @discipline1.id
+					page.should have_content "Please sign in to acces this page"
+				end
+			end
+			describe "'discipline/new'" do
+				it "should ask for login" do
+					visit new_discipline_path
+					page.should have_content "Please sign in to acces this page"
+				end
+			end
+		end
+	end
+	describe "while logged in with no special permissions" do
+		before(:each) do
+			login(@user1)
+		end
+		describe "GET" do
+			describe "'disciplines'" do
+				it "should deny access" do
+					visit disciplines_path
+					page.should have_content "Access Denied"
+				end
+			end
+			describe "'discipline/1/edit'" do
+				it "should deny access" do
+					visit edit_discipline_path :id => @discipline1.id
+					page.should have_content "Access Denied"
+				end
+			end
+			describe "'discipline/1'" do
+				it "should deny access" do
+					visit disciplines_path :id => @discipline1.id
+					page.should have_content "Access Denied"
+				end
+			end
+			describe "'discipline/new'" do
+				it "should deny access" do
+					visit new_discipline_path
+					page.should have_content "Access Denied"
+				end
+			end
+		end
+	end
+	describe "while logged in with view_disciplines permission" do
+		before(:each) do
+			p = PermissionGroup.create!(:name => "view_disciplines")
+			@user1.permission_groups << p
+			login(@user1)
+		end
+		describe "GET" do
+			describe "'disciplines'" do
+				it "should list all disciplines" do
+					visit disciplines_path
+					@disciplines.each do |discipline|
+						page.should have_content(discipline.name)
+					end
+				end
+				it "should paginate the disciplines" do
+					10.times do
+						@disciplines << Factory(:discipline)
+					end
+					visit disciplines_path
+					page.should have_content("Previous")
+					page.should have_content("Next")
+					page.should have_link("2")
+				end
+				it "should go to a discipline when discipline name is clicked" do
+					visit disciplines_path
+					page.should have_link(@discipline1.name)
+					click_link(@discipline1.name)
+					page.should have_content(@discipline1.name)
+					page.should have_link("Edit")
+				end
+			end
+			describe "'discipline/1/edit'" do
+				it "should deny access" do
+					visit edit_discipline_path :id => @discipline1.id
+					page.should have_content "Access Denied"
+				end
+			end
+			describe "'discipline/1'" do
+				it "should show the correct discipline" do
+					visit disciplines_path :id => @discipline1.id
+					page.should have_content @discipline1.name
+					page.should have_content @discipline1.faculty.name
+					page.should have_content @discipline1.faculty.institute.name
+					
+				end
+			end
+			describe "'discipline/new'" do
+				it "should deny access" do
+					visit new_discipline_path
+					page.should have_content "Access Denied"
+				end
+			end
+		end
+	end
+	describe "while logged in with edit_disciplines permission" do
+		before(:each) do
+			p = PermissionGroup.create!(:name => "edit_disciplines")
+			@user1.permission_groups << p
+			login(@user1)
+		end
+		describe "GET" do
+			describe "'disciplines'" do
+				it "should deny access" do
+					visit disciplines_path
+					page.should have_content "Access Denied"
+				end
+			end
+			describe "'discipline/1/edit'" do
+				it "show the edit page" do
+					visit edit_discipline_path :id => @discipline1.id
+					page.should have_field "discipline_name"
+				end
+			end
+			describe "'discipline/1'" do
+				it "should deny access" do
+					visit disciplines_path :id => @discipline1.id
+					page.should have_content "Access Denied"
+				end
+			end
+			describe "'discipline/new'" do
+				it "deny access" do
+					visit new_discipline_path
+					page.should have_content "Access Denied"
+				end
+			end
+		end
+		describe "POST" do
+			describe "'discipline/1/update'" do
+				before(:each) do
+					visit edit_discipline_path :id => @discipline1.id
+				end
+				fields = ["discipline_name"]
+				fields.each do |field|
+					it "should update the discipline" do
+						fill_in field, :with => 'something'
+						click_button "Update Discipline"
+						#can't check the page, since i have no read access
+						#check if the discipline has actually changed instead
+						@discipline1.reload
+						@discipline1.name.should == 'something'
+					end
+				end
+			end
+		end
+	end
 end

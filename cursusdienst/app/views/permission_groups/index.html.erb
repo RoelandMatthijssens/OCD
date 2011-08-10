@@ -1,8 +1,10 @@
 <h1>All Permission groups</h1>
-<%= link_to "Add a new permission", new_permission_group_path %>
-<ul class="permissions">
-  <% @permissions.each do |permission| %>
-    <%= render permission %>
+<%= link_to "Add a new permission", new_permission_group_path %><br/>
+
+<%= will_paginate %>
+<ul class="permission_groups">
+  <% @permission_groups.each do |permission_group| %>
+    <%= render permission_group %>
   <% end %>
 </ul>
-
+<%= will_paginate %>

@@ -69,7 +69,8 @@ namespace :db do
 			"edit_users",				"delete_users",				"view_users"				,	
 			"edit_permissions",	"delete_permissions",	"view_permissions"	,	"create_permissions"	,
 			"edit_disciplines",	"delete_disciplines",	"view_disciplines"	,	"create_disciplines"	,
-			"edit_subjects"		,	"delete_subjects"		,	"view_subjects"			,	"create_subjects"			,]
+			"edit_subjects"		,	"delete_subjects"		,	"view_subjects"			,	"create_subjects"			,
+			"edit_permission_groups"		,	"delete_permission_groups"		,	"view_permission_groups"			,	"create_permission_groups"			,]
 		permissionNames.each do |name|
 			PermissionGroup.create!(
 				:name => name
