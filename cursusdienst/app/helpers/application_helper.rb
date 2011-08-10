@@ -20,6 +20,15 @@ module ApplicationHelper
     link_to_function(name, "add_fields(this, '#{association}', '#{new_id}','#{escape_javascript(fields)}')")
   end
   
+  def add_fields(f, association, new_id = Time.now.to_i)
+    new_object = f.object.class.reflect_on_association(association).klass.first
+    fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
+      render(association.to_s.singularize + "_fields", :f => builder, :lol => "kaka")
+#      render(:partial => association.to_s.singularize + "_fields", :locals => {:f => f, :tag => new_id})
+    end
+    return "add_fields(this, '#{association}', '#{new_id}','#{escape_javascript(fields)}')"
+  end
+  
   def link_to_add_field(name, f, association)
     field = render(association.to_s + "_field", :f => f)
     link_to_function(name, "add_field(this, '#{association}_id', '#{escape_javascript(field)}')")
@@ -60,6 +69,19 @@ module ApplicationHelper
   
   def filter_select_on_change parent_id, child_id, data_key
     return "filter_select_on_change('#{parent_id}', '#{child_id}', '#{data_key}')"
+  end
+  
+  def link_to_perform_javascript name, functions, params, complete_functions = []
+    js = ""
+    functions.size.times{ |i| 
+      js += functions[i] + "("
+      par = params[i]
+      par.size-1.times{|j| js += "'#{par[j]}', "} if par.size > 1
+      
+      js += "'#{par.last}');"
+    }
+    complete_functions.each { |f| js += f}
+    link_to_function(name, js)
   end
 
 

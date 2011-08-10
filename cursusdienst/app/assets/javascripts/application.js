@@ -16,7 +16,7 @@ function remove_fields(link) {
 function add_fields(link, association, new_id, content) {
 //    var new_id = new Date().getTime();
     var regexp = new RegExp("new_" + association, "g");
-    add_field(link, association, content.replace(regexp, new_id));
+    add_field(link, association, content.replace(regexp, new Date().getTime()));
 }
 
 function add_field(link, association, content) {
@@ -46,49 +46,10 @@ function delete_fields(link) {
     });
 }
 
-
-//$(document).ready(function(){
-//    $("select#filter_institute_id").change(function(){
-//        var id_value_string = $(this).val();
-//        if (id_value_string == "") { 
-//            // if the id is empty remove all the sub_selection options from being selectable and do not do any ajax
-//            $("select#filter_faculty_id").remove();
-//            var row = "<option value=\"" + "" + "\">" + "" + "</option>";
-//            $(row).appendTo("select#filter_faculty_id");
-//        }
-//        else {
-//            // Send the request and update sub category dropdown 
-//            $.ajax({
-//                dataType: "json",
-//                cache: false,
-//                url: '/filters/faculties_from_institutes?',
-//                data: "institute=" + id_value_string,
-//                timeout: 2000,
-//                error: function(XMLHttpRequest, errorTextStatus, error){
-//                    alert("Failed to submit : "+ errorTextStatus+" ;"+error);
-//                },
-//                success: function(data){                    
-//                    // Clear all options from sub category select 
-//                    $("select#filter_faculty_id option").remove();
-//                    //put in a empty default line
-//                    var row = "<option value=\"" + "" + "\">" + "" + "</option>";
-//                    $(row).appendTo("select#filter_faculty_id");                        
-//                    // Fill sub category select 
-//                    $.each(data, function(i, j){
-//                        row = "<option value=\"" + j.id + "\">" + j.name + "</option>";   
-//                        $(row).appendTo("select#filter_faculty_id");                     
-//                    });             
-//                }
-//            });
-//        };
-//    });
-//});
-
 function filter_select_on_change(parent_id, child_id, data_key) {
     var id_value_string = $("select#"+parent_id).val();
     if (id_value_string == "") { 
         // if the id is empty remove all the sub_selection options from being selectable and do not do any ajax
-        // $("select#"+parent_id).remove();
         var row = "<option value=\"" + "" + "\">" + "" + "</option>";
         $(row).appendTo("select#"+child_id);
     }

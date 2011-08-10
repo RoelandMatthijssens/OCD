@@ -161,10 +161,10 @@ describe "SubjectsTests" do
 					it "should update the subject" do
 						fill_in field, :with => 'something'
 						click_button "Update Subject"
-						page.should have_content("User updated succesfully")
-						page.should have_content("something")
+						#can't check the page, since i have no read access
+						#check if the subject has actually changed instead
 						@subject1.reload
-						@subject.name.should == 'something'
+						@subject1.name.should == 'something'
 					end
 				end
 			end

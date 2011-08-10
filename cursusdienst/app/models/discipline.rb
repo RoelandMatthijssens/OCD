@@ -1,5 +1,5 @@
 class Discipline < ActiveRecord::Base
-  attr_accessible :name, :faculty_id, :associations, :subjects
+  attr_accessible :name, :faculty_id, :associations, :subjects, :institute_id
   validates :name, :presence => true, :uniqueness => {:scope => :faculty_id}
   validates :faculty, :presence => true
   
@@ -13,6 +13,10 @@ class Discipline < ActiveRecord::Base
 
   def full_name
     return "#{faculty.initials}-#{name}"
+  end
+  
+  def institute_id
+    return faculty.institute.id
   end
 end
 

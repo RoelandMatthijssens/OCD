@@ -1,30 +1,23 @@
 <%= form_for(@subject) do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
-
+  <script type="text/javascript">
+    tag = 1;
+  </script>
   <div class='field'>
     <%= f.label :name %> <br>
     <%= f.text_field :name %> <br>
   </div>
+  <%= hidden_field_tag "counter", "0" %>
   <div class='field'>
     <%= f.label :disciplines %> <br>
-    <div class="fields">
-      <%= collection_select "filter", :institute_id,
-        Institute.find(:all), :id, :name, { :prompt => true }, 
-        {:onchange=>filter_select_on_change("filter_institute_id","filter_faculty_id", "institute")} %>
-      <%= collection_select "filter", :faculty_id,
-        {}, :id, :name, { :prompt => true }, 
-        {:onchange=>filter_select_on_change("filter_faculty_id","filter_discipline_id", "faculty")} %>
-      <%= collection_select "filter", :discipline_id,
-        {}, :id, :name, { :prompt => true },
-        {:onchange=>filter_select_on_change("filter_discipline_id","filter_subject_id", "discipline")}%>
-      <%= collection_select "filter", :subject_id,
-        {}, :id, :name, { :prompt => true } %>
-    </div>
     <div class='fields'>
       <%= f.fields_for :disciplines do |builder| %>
-        <%=  render 'discipline_fields' , :f => builder %>
+        
+        <%=  render 'given_discipline_fields' , {:f => builder} unless @dis_fac_inst.empty?%>
       <% end %>
-      <%= link_to_add_fields "add one", f, :disciplines %>
+    </div>
+    <div class='fields'>
+      <%= link_to_perform_javascript "add one", [],[], [add_fields(f, :disciplines)] %>
     </div>
 
   </div>
