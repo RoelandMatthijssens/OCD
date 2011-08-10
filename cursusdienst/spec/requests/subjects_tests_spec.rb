@@ -1,6 +1,4 @@
 require 'spec_helper'
-require 'helpers/subjects_tests_helper'
-include SubjectsTestsHelper
 
 describe "SubjectsTests" do
 	before(:each) do
@@ -152,7 +150,7 @@ describe "SubjectsTests" do
 				end
 			end
 			describe "'subject/new'" do
-				it "should ask for login" do
+				it "should deny access" do
 					visit new_subject_path
 					page.should have_content "Access Denied"
 				end
