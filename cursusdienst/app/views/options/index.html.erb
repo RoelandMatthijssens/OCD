@@ -1,8 +1,10 @@
 <h1>All Subjects</h1>
 <%= link_to "Add a new option", new_option_path %>
+<%= will_paginate %>
 <ul class="options">
   <% @options.each do |option| %>
     <%= render option %>
   <% end %>
 </ul>
+<%= will_paginate %>
 
