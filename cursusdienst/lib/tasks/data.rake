@@ -59,7 +59,7 @@ namespace :db do
 			id = 0
 			3.times do
 				s = Subject.new(
-					:name => id.to_s+" subject"
+					:name => discipline.faculty.institute.initials + " - " + discipline.faculty.initials + " - " + discipline.name + " - " + id.to_s+" subject"
 					)
 				id += 1
 				s.disciplines << discipline
@@ -72,7 +72,8 @@ namespace :db do
 			"edit_permissions"				,	"delete_permissions"				,	"view_permissions"				,	"create_permissions"				,
 			"edit_disciplines"				,	"delete_disciplines"				,	"view_disciplines"				,	"create_disciplines"				,
 			"edit_subjects"						,	"delete_subjects"						,	"view_subjects"						,	"create_subjects"						,
-			"edit_permission_groups"	,	"delete_permission_groups"	,	"view_permission_groups"	,	"create_permission_groups"	,]
+			"edit_permission_groups"	,	"delete_permission_groups"	,	"view_permission_groups"	,	"create_permission_groups"	,
+			"edit_options"						,	"delete_options"						,	"view_options"						,	"create_options"						,]
 		permissionNames.each do |name|
 			PermissionGroup.create!(
 				:name => name
