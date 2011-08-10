@@ -50,7 +50,7 @@ class DisciplinesController < ApplicationController
       flash[:succes] = "Discipline updated succesfully"
       redirect_to @discipline
     else
-      @faculties = get_data_from_material @material, :faculty_id
+      @faculties = get_data_from_material @discipline, :faculty_id
       render 'edit'
     end
   end
