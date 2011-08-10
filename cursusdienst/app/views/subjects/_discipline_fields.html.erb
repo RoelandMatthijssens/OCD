@@ -4,21 +4,25 @@
     <% tag = "new_disciplines" %>
     <%= f.hidden_field :id, :value => 0 %>
 
-    <%= label :filter, :institute %>
-    <%= f.collection_select :institute_id,
-      Institute.find(:all), :id, :name, { :prompt => true }, 
-      {:onchange=>filter_select_on_change("subject_disciplines_attributes_#{tag}_institute_id",
-        "subject_disciplines_attributes_#{tag}_faculty_id", "institute")} %><br />
-    <%= label :filter, :faculty %>
-    <%= f.collection_select :faculty_id,
-      {}, :id, :name, { :prompt => true }, 
-      {:onchange=>filter_select_on_change("subject_disciplines_attributes_#{tag}_faculty_id",
-        "subject_disciplines_attributes_#{tag}_id", "faculty")} %><br />
-    <%= label :filter, :discipline %>
-    <%= f.collection_select :id,
-      {}, :id, :name, { :prompt => true }%>
+    <%= render :partial => "filters/institute", :locals => { :f => f, 
+      :id => :institute_id,
+      :dataset => Institute.all, 
+      :parent_id => "subject_disciplines_attributes_#{tag}_institute_id",
+      :child_id => "subject_disciplines_attributes_#{tag}_faculty_id"} %> <br />
+
+    <%= render :partial => "filters/faculty", :locals => { :f => f, 
+      :id => :faculty_id,
+      :dataset => {}, 
+      :parent_id => "subject_disciplines_attributes_#{tag}_faculty_id",
+      :child_id => "subject_disciplines_attributes_#{tag}_id"} %> <br />
+
+    <%= render :partial => "filters/discipline", :locals => { :f => f,
+      :id => :id,
+      :dataset => {}, 
+      :parent_id => "",
+      :child_id => ""} %> <br />
 
     <%= link_to_remove_fields "remove", f %>
-      <h1></h1> <!-- TODO: remove this, just gives us a line css abuse -->
+    <h1></h1> <!-- TODO: remove this, just gives us a line css abuse -->
   <% end %>
 </div>

@@ -1,0 +1,4 @@
+<%= label_tag "institute" %>
+<%= f.collection_select id,
+  dataset, :id, :name, { :prompt => true }, 
+  {:onchange=>filter_select_on_change(parent_id, child_id, "institute")} %>

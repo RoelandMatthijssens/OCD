@@ -11,6 +11,18 @@ class Material < ActiveRecord::Base
   
   accepts_nested_attributes_for :options
   
+  def discipline_id
+    subject && subject.disciplines && subject.disciplines.first.id
+  end
+  
+  def faculty_id
+    subject && subject.disciplines && subject.disciplines.first.faculty.id
+  end
+  
+  def institute_id
+    subject && subject.disciplines && subject.disciplines.first.faculty.institute.id
+  end
+  
 end
 
 # == Schema Information
