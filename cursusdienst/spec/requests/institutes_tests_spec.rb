@@ -1,201 +1,231 @@
 require 'spec_helper'
 
 describe "InstitutesTests" do
-  describe "GET /institutes_tests" do
-    before(:each) do
-      @inst = Factory(:institute)
-      @second = Factory(:institute)#, :name => "Kat uni leuven", :initials => "KUL", :location => "Leuven")
-      third = Factory(:institute)#, :name => "Uni Gent", :initials => "UG", :location => "Gent")
-      @insts = [@inst, @second, third]
-    end
-    
-    describe "succeeding tests" do
-      it "should visit the institutes page" do
-        visit institutes_path
-      end
-
-      it "index should contain all institute" do
-        visit institutes_path
-        @insts.each { |i|
-          has_content?(i.name).should be_true
-        }
-      end
-
-      it "should go to an institute when institute name is clicked" do
-        visit institutes_path
-        has_link? (@inst.name).should be_true
-        click_link(@inst.name)
-        page.should have_content(@inst.name)
-        page.should have_content(@inst.initials)
-        page.should have_content(@inst.location)
-        page.should have_link("Edit")
-      end
-
-      it "should have a new page" do
-        visit new_institute_path
-        page.should have_content("new")
-        page.should have_field("institute_name")
-        page.should have_field("institute_initials")
-        page.should have_field("institute_location")
-      end
-
-      it "should create a new institute" do
-        visit new_institute_path
-        fill_in "institute_name", :with => 'Uni Antwerpen'
-        fill_in "institute_initials", :with => 'UA'
-        fill_in "institute_location", :with => 'Antwerpen'
-        click_button "Create"
-        page.should have_content("Institution create succesfully")
-        page.should have_content("Uni Antwerpen")
-        page.should have_content('UA')
-        page.should have_content('Antwerpen')
-      end
-
-      it "should update a existing institute" do
-        visit institutes_path
-        click_link_or_button(@inst.name)
-        click_link_or_button("Edit")
-        page.should have_field("institute_location", :with => @inst.location)
-        page.should have_field("institute_initials", :with => @inst.initials)
-        page.should have_field("institute_name", :with => @inst.name)
-        fill_in "institute_name", :with => 'Uni Antwerpen'
-        fill_in "institute_initials", :with => 'UA'
-        fill_in "institute_location", :with => 'Antwerpen'
-        click_button "Update"
-        page.should have_content("Institute updated succesfully")
-        page.should have_content("Uni Antwerpen")
-        page.should have_content('UA')
-        page.should have_content('Antwerpen')
-      end
-    end
-    describe "failing tests" do
-      describe "create new" do
-        it "should NOT create a new institute given blank name" do
-          visit new_institute_path
-          fill_in "institute_name", :with => ''
-          fill_in "institute_initials", :with => 'UA'
-          fill_in "institute_location", :with => 'Antwerpen'
-          click_button "Create"
-          page.should have_content("Name can't be blank")
-          page.should have_field("institute_initials", :with => "UA")
-          page.should have_field("institute_location", :with => "Antwerpen")
-        end
-
-        it "should NOT create a new institute given blank initials" do
-          visit new_institute_path
-          fill_in "institute_name", :with => 'Uni Antwerpen'
-          fill_in "institute_initials", :with => ''
-          fill_in "institute_location", :with => 'Antwerpen'
-          click_button "Create"
-          page.should have_content("Initials can't be blank")
-          page.should have_field("institute_name", :with => "Uni Antwerpen")
-          page.should have_field("institute_location", :with => "Antwerpen")
-        end
-
-        it "should NOT create a new institute given blank location" do
-          visit new_institute_path
-          fill_in "institute_name", :with => 'Uni Antwerpen'
-          fill_in "institute_initials", :with => 'UA'
-          fill_in "institute_location", :with => ''
-          click_button "Create"
-          page.should have_content("Location can't be blank")
-          page.should have_field("institute_initials", :with => "UA")
-          page.should have_field("institute_name", :with => "Uni Antwerpen")
-        end
-
-        it "should NOT create a new institute with a name that already exists" do
-          visit new_institute_path
-          fill_in "institute_name", :with => @inst.name
-          fill_in "institute_initials", :with => "BLA"
-          fill_in "institute_location", :with => @inst.location
-          click_button "Create"
-          page.should have_content("Name has already been taken")
-          page.should have_field("institute_location", :with => @inst.location)
-          page.should have_field("institute_initials", :with => "BLA")
-          page.should have_field("institute_name", :with => @inst.name)
-        end
-        
-        it "should NOT create a new institute with initials that already exists" do
-          visit new_institute_path
-          fill_in "institute_name", :with => "BLA"
-          fill_in "institute_initials", :with => @inst.initials
-          fill_in "institute_location", :with => @inst.location
-          click_button "Create"
-          page.should have_content("Initials has already been taken")
-          page.should have_field("institute_location", :with => @inst.location)
-          page.should have_field("institute_initials", :with => @inst.initials)
-          page.should have_field("institute_name", :with => "BLA")
-        end
-      end
-
-      describe "update existing" do
-        it "should NOT update an institute given blank name" do
-          visit institutes_path
-          click_link_or_button(@inst.name)
-          click_link_or_button("Edit")
-          fill_in "institute_name", :with => ''
-          fill_in "institute_initials", :with => 'UA'
-          fill_in "institute_location", :with => 'Antwerpen'
-          click_button "Update"
-          page.should have_content("Name can't be blank")
-          page.should have_field("institute_initials", :with => "UA")
-          page.should have_field("institute_location", :with => "Antwerpen")
-        end
-
-        it "should NOT update an institute given blank initials" do
-          visit institutes_path
-          click_link_or_button(@inst.name)
-          click_link_or_button("Edit")
-          fill_in "institute_name", :with => 'Uni Antwerpen'
-          fill_in "institute_initials", :with => ''
-          fill_in "institute_location", :with => 'Antwerpen'
-          click_button "Update"
-          page.should have_content("Initials can't be blank")
-          page.should have_field("institute_name", :with => "Uni Antwerpen")
-          page.should have_field("institute_location", :with => "Antwerpen")
-        end
-
-        it "should NOT update an institute given blank location" do
-          visit institutes_path
-          click_link_or_button(@inst.name)
-          click_link_or_button("Edit")
-          fill_in "institute_name", :with => 'Uni Antwerpen'
-          fill_in "institute_initials", :with => 'UA'
-          fill_in "institute_location", :with => ''
-          click_button "Update"
-          page.should have_content("Location can't be blank")
-          page.should have_field("institute_initials", :with => "UA")
-          page.should have_field("institute_name", :with => "Uni Antwerpen")
-        end
-
-        it "should NOT update an institute with a name that already exists" do
-          visit institutes_path
-          click_link_or_button(@inst.name)
-          click_link_or_button("Edit")
-          fill_in "institute_name", :with => @second.name
-          fill_in "institute_initials", :with => "BLA"
-          fill_in "institute_location", :with => @second.location
-          click_button "Update"
-          page.should have_content("Name has already been taken")
-          page.should have_field("institute_location", :with => @second.location)
-          page.should have_field("institute_initials", :with => "BLA")
-          page.should have_field("institute_name", :with => @second.name)
-        end
-
-        it "should NOT update an institute with initials that already exists" do
-          visit institutes_path
-          click_link_or_button(@inst.name)
-          click_link_or_button("Edit")
-          fill_in "institute_name", :with => "BLA"
-          fill_in "institute_initials", :with => @second.initials
-          fill_in "institute_location", :with => @second.location
-          click_button "Update"
-          page.should have_content("Initials has already been taken")
-          page.should have_field("institute_location", :with => @second.location)
-          page.should have_field("institute_initials", :with => @second.initials)
-          page.should have_field("institute_name", :with => "BLA")
-        end
-      end
-    end
-  end
+	before(:each) do
+		@institute1 = Factory(:institute)
+		@institute2 = Factory(:institute)
+		@institute3 = Factory(:institute)
+		@user1 = Factory(:user)
+		@institutes = [@institute1, @institute2, @institute3]
+	end
+	describe "while not logged in" do
+		describe "GET" do
+			describe "'institutes'" do
+				it "should ask for login" do
+					visit institutes_path
+					page.should have_content "Please sign in to acces this page"
+				end
+			end
+			describe "'option/1/edit'" do
+				it "should ask for login" do
+					visit edit_institute_path :id => @institute1.id
+					page.should have_content "Please sign in to acces this page"
+				end
+			end
+			describe "'institute/1'" do
+				it "should ask for login" do
+					visit institutes_path :id => @institute1.id
+					page.should have_content "Please sign in to acces this page"
+				end
+			end
+			describe "'institute/new'" do
+				it "should ask for login" do
+					visit new_institute_path
+					page.should have_content "Please sign in to acces this page"
+				end
+			end
+		end
+	end
+	describe "while logged in with no special permissions" do
+		before(:each) do
+			login(@user1)
+		end
+		describe "GET" do
+			describe "'institutes'" do
+				it "should deny access" do
+					visit institutes_path
+					page.should have_content "Access Denied"
+				end
+			end
+			describe "'institute/1/edit'" do
+				it "should deny access" do
+					visit edit_institute_path :id => @institute1.id
+					page.should have_content "Access Denied"
+				end
+			end
+			describe "'institute/1'" do
+				it "should deny access" do
+					visit institutes_path :id => @institute1.id
+					page.should have_content "Access Denied"
+				end
+			end
+			describe "'institute/new'" do
+				it "should deny access" do
+					visit new_institute_path
+					page.should have_content "Access Denied"
+				end
+			end
+		end
+	end
+	describe "while logged in with view_institutes permission" do
+		before(:each) do
+			p = PermissionGroup.create!(:name => "view_institutes")
+			@user1.permission_groups << p
+			login(@user1)
+		end
+		describe "GET" do
+			describe "'institutes'" do
+				it "should list all institutes" do
+					visit institutes_path
+					@institutes.each do |institute|
+						page.should have_content(institute.name)
+					end
+				end
+				it "should paginate the institutes" do
+					10.times do
+						@institutes << Factory(:institute)
+					end
+					visit institutes_path
+					page.should have_content("Previous")
+					page.should have_content("Next")
+					page.should have_link("2")
+				end
+				it "should go to a institute when institute name is clicked" do
+					visit institutes_path
+					page.should have_link(@institute1.name)
+					click_link(@institute1.name)
+					page.should have_content(@institute1.name)
+					page.should have_link("Edit")
+				end
+			end
+			describe "'institute/1/edit'" do
+				it "should deny access" do
+					visit edit_institute_path :id => @institute1.id
+					page.should have_content "Access Denied"
+				end
+			end
+			describe "'institute/1'" do
+				it "should show the correct institute" do
+					visit institutes_path :id => @institute1.id
+					page.should have_content @institute1.name
+					@institute1.faculties.each do |faculty|
+						page.should have_content faculty.name
+					end
+				end
+			end
+			describe "'institute/new'" do
+				it "should deny access" do
+					visit new_institute_path
+					page.should have_content "Access Denied"
+				end
+			end
+		end
+	end
+	describe "while logged in with edit_institutes permission" do
+		before(:each) do
+			p = PermissionGroup.create!(:name => "edit_institutes")
+			@user1.permission_groups << p
+			login(@user1)
+		end
+		describe "GET" do
+			describe "'institutes'" do
+				it "should deny access" do
+					visit institutes_path
+					page.should have_content "Access Denied"
+				end
+			end
+			describe "'institute/1/edit'" do
+				it "show the correct edit page" do
+					visit edit_institute_path :id => @institute1.id
+					page.should have_field "institute_name"
+				end
+			end
+			describe "'institute/1'" do
+				it "should deny access" do
+					visit institutes_path :id => @institute1.id
+					page.should have_content "Access Denied"
+				end
+			end
+			describe "'institute/new'" do
+				it "should deny access" do
+					visit new_institute_path
+					page.should have_content "Access Denied"
+				end
+			end
+		end
+		describe "POST" do
+			describe "'institute/1/update'" do
+				before(:each) do
+					visit edit_institute_path :id => @institute1.id
+				end
+				fields = ["institute_name"]
+				fields.each do |field|
+					it "should update the institute" do
+						fill_in field, :with => 'something'
+						click_button "Update Institute"
+						#can't check the page, since i have no read access
+						#check if the institute has actually changed instead
+						@institute1.reload
+						@institute1.name.should == 'something'
+					end
+				end
+			end
+		end
+	end
+	describe "while logged in with create_institutes permission" do
+		before(:each) do
+			p = PermissionGroup.create!(:name => "create_institutes")
+			@user1.permission_groups << p
+			login(@user1)
+		end
+		describe "GET" do
+			describe "'institutes'" do
+				it "should deny access" do
+					visit institutes_path
+					page.should have_content "Access Denied"
+				end
+			end
+			describe "'institute/1/edit'" do
+				it "should deny access" do
+					visit edit_institute_path :id => @institute1.id
+					page.should have_content "Access Denied"
+				end
+			end
+			describe "'institute/1'" do
+				it "should deny access" do
+					visit institutes_path :id => @institute1.id
+					page.should have_content "Access Denied"
+				end
+			end
+			describe "'institute/new'" do
+				it "should show the correct form" do
+					visit new_institute_path
+					page.should have_field "institute_name"
+					page.should have_field "institute_initials"
+					page.should have_field "institute_location"
+				end
+			end
+		end
+		describe "POST" do
+			describe "'institute/1/update'" do
+				it "should deny access" do
+					visit edit_institute_path :id => @institute1.id
+					page.should have_content "Access Denied"
+				end
+			end
+			describe "'institute/new'" do
+				it "create a new institute" do
+					lambda do
+						visit new_institute_path
+						fill_in "institute_name", :with => "something"
+						fill_in "institute_initials", :with => "something"
+						fill_in "institute_location", :with => "something"
+						click_link_or_button "Create new Institute"
+						#can't check the page, since i have no read access
+						#check if the subject was actually created instead
+					end.should change(Institute, :count).by(1)
+				end
+			end
+		end
+	end
 end
