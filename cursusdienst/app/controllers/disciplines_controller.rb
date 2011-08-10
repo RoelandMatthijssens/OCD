@@ -17,6 +17,7 @@ class DisciplinesController < ApplicationController
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?("create_disciplines")
     @discipline = Discipline.new
+    @faculties = get_data_from_filter params[:discipline], :faculty_id, Faculty
     @submit = "Create new Discipline"
   end
 
@@ -28,6 +29,7 @@ class DisciplinesController < ApplicationController
       flash[:succes] = "Discipline created succesfully"
       redirect_to @discipline
     else
+      @faculties = get_data_from_filter params[:discipline], :faculty_id, Faculty
       render 'new'
     end
   end
@@ -36,6 +38,7 @@ class DisciplinesController < ApplicationController
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?("edit_disciplines")
     @discipline = Discipline.find(params[:id])
+    @faculties = get_data_from_material @discipline, :faculty_id
     @submit = "Update Discipline"
   end
 
@@ -47,6 +50,7 @@ class DisciplinesController < ApplicationController
       flash[:succes] = "Discipline updated succesfully"
       redirect_to @discipline
     else
+      @faculties = get_data_from_material @material, :faculty_id
       render 'edit'
     end
   end

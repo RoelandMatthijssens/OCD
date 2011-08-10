@@ -83,6 +83,8 @@ module ApplicationHelper
     complete_functions.each { |f| js += f}
     link_to_function(name, js)
   end
+  
+
 
 
 end
