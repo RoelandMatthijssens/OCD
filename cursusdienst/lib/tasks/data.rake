@@ -73,7 +73,12 @@ namespace :db do
 			"edit_disciplines"				,	"delete_disciplines"				,	"view_disciplines"				,	"create_disciplines"				,
 			"edit_subjects"						,	"delete_subjects"						,	"view_subjects"						,	"create_subjects"						,
 			"edit_permission_groups"	,	"delete_permission_groups"	,	"view_permission_groups"	,	"create_permission_groups"	,
-			"edit_options"						,	"delete_options"						,	"view_options"						,	"create_options"						,]
+			"edit_options"						,	"delete_options"						,	"view_options"						,	"create_options"						,
+			"edit_institute"					,	"delete_institute"					,	"view_institute"					,	"create_institute"					,
+			"edit_guilds"						,	"delete_guilds"						,	"view_guilds"						,	"create_guilds"						,
+			"edit_materials"						,	"delete_materials"						,	"view_materials"						,	"create_materials"						,
+			]
+			#"edit_"						,	"delete_"						,	"view_"						,	"create_"						,
 		permissionNames.each do |name|
 			PermissionGroup.create!(
 				:name => name

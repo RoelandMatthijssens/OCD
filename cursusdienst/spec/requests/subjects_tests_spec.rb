@@ -175,5 +175,57 @@ describe "SubjectsTests" do
 			end
 		end
 	end
+	describe "while logged in with create_subject permission" do
+		before(:each) do
+			p = PermissionGroup.create!(:name => "create_subjects")
+			@user1.permission_groups << p
+			login(@user1)
+		end
+		describe "GET" do
+			describe "'subjects'" do
+				it "should deny access" do
+					visit subjects_path
+					page.should have_content "Access Denied"
+				end
+			end
+			describe "'subject/1/edit'" do
+				it "should deny access" do
+					visit edit_subject_path :id => @subject1.id
+					page.should have_content "Access Denied"
+				end
+			end
+			describe "'subject/1'" do
+				it "should deny access" do
+					visit subjects_path :id => @subject1.id
+					page.should have_content "Access Denied"
+				end
+			end
+			describe "'subject/new'" do
+				it "should show the correct form" do
+					visit new_subject_path
+					page.should have_field "subject_name"
+				end
+			end
+		end
+		describe "POST" do
+			describe "'subject/1/update'" do
+				it "should deny access" do
+					visit edit_subject_path :id => @subject1.id
+					page.should have_content "Access Denied"
+				end
+			end
+			describe "'subject/new'" do
+				it "should create a new subject" do
+					lambda do
+						visit new_subject_path
+						fill_in "subject_name", :with => "something"
+						click_link_or_button "Create new Subject"
+						#can't check the page, since i have no read access
+						#check if the subject was actually created instead
+					end.should change(Subject, :count).by(1)
+				end
+			end
+		end
+	end
 end
       #it "TEST MANUAL: should create a new subject with one discipline"
