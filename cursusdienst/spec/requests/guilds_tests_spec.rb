@@ -213,6 +213,16 @@ describe "GuildsTests" do
 					page.should have_content "Access Denied"
 				end
 			end
+			describe "'guild/new'" do
+				it "should show the correct form" do
+					visit new_guild_path
+					fill_in "guild_name", :with => "something"
+					fill_in "guild_initials", :with => "something"
+					click_button "Create new Guild"
+					page.should have_content "Disciplines can't be blank"
+					#can't really test anything else, since the dropdowns are javascript generated
+				end
+			end
 		end
 	end
 end

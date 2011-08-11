@@ -1,8 +1,10 @@
 <h1>All faculties</h1>
 <%= link_to "Add a new faculty", new_faculty_path %>
+<%= will_paginate %>
 <ul class="faculties">
   <% @faculties.each do |faculty| %>
     <%= render faculty %>
   <% end %>
 </ul>
+<%= will_paginate %>
 

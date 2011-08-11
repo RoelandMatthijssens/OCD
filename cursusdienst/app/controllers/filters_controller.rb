@@ -1,19 +1,5 @@
 class FiltersController < ApplicationController
   
-  def faculties_from_institutes
-    if params[:institute]
-      @institute = Institute.find(params[:institute])
-      if @institute
-        faculties = Faculty.find_all_by_institute_id(params[:institute])
-        respond_to do |format|
-          format.html{ flash[:notice] = "ok #{faculties}" } 
-          format.json{ render :json => faculties }
-        end
-      end
-    end
-    
-  end
-  
   def get_children_from_parent
     if params[:institute] && Institute.exists?(params[:institute])
       @faculties = Faculty.find_all_by_institute_id(params[:institute])
@@ -35,7 +21,6 @@ class FiltersController < ApplicationController
         format.json{ render :json => @subjects }
       end  
     end
-    
   end
   
 end
