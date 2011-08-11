@@ -9,6 +9,6 @@ module SessionsTestsHelper
   end
   
   def logout(user)
-    visit destroy_session_path
+    visit signout_path
   end
 end

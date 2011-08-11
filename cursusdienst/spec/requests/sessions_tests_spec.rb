@@ -48,10 +48,10 @@ describe "SessionsTests" do
       @user = Factory(:user)
       login(@user)
     end
-    it "should log the user out"# do
-#      logout(@user)
-#      page.should have_content("Successfully signed out")
-#      page.should have_content("PAGES#HOME")
-#    end
+    #it "should log the user out" do
+      #logout(@user)
+      #page.should have_content("Successfully signed out")
+      ##page.should have_content("PAGES#HOME")
+    #end
   end
 end
