@@ -17,6 +17,8 @@
   <div class='field'>
      <%= render "subject_field", :f => f if @material.subject%>
 
+
+    
     <div class="field" id="add_subject_link" <%= "style='display: none;'" if @material.subject  %> >
       <%= link_to_create_hide_items "add to subject", :subject, ["add_subject_link"],f %>
     </div>

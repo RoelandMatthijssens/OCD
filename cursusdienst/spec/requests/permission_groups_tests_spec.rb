@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'helpers/permission_groups_helper_spec'
+#require 'helpers/permission_groups_helper_spec'
 include PermissionGroupsHelper
 
 describe "PermissionGroupsTests" do
