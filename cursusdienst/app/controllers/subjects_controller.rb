@@ -66,8 +66,10 @@ class SubjectsController < ApplicationController
   def get_disciplines_from_subject par
     ds = []
     par[:disciplines_attributes].each_value { |v|
-      d = Discipline.find(v["id"])
-      ds << d if d.instance_of? Discipline and v["_destroy"] != "1"
+      unless v["id"].empty?
+        d = Discipline.find(v["id"])
+        ds << d if d.instance_of? Discipline and v["_destroy"] != "1"
+      end
     } unless par[:disciplines_attributes].nil?
     return ds
   end

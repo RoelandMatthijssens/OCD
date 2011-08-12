@@ -17,6 +17,9 @@ class MaterialsController < ApplicationController
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('create_materials')
     @material = Material.new
+    @faculties = get_data_from_filter params[:material], :faculty_id, Faculty
+    @disciplines = get_data_from_filter params[:material], :discipline_id, Discipline
+    @subjects = get_data_from_filter params[:material], :subject_id, Subject
     @submit = "Create new Material"
   end
 
@@ -29,7 +32,11 @@ class MaterialsController < ApplicationController
       flash[:succes] = "Material succesfully created"
       redirect_to @material
     else
-			flash[:notice] = "NOT created subject. #{params[:subject]}"
+      filter = params[:material]
+      @faculties = get_data_from_filter filter, :faculty_id, Faculty
+      @disciplines = get_data_from_filter filter, :discipline_id, Discipline
+      @subjects = get_data_from_filter params[:material], :subject_id, Subject
+			flash[:notice] = "NOT created material. #{params[:subject]}"
       render 'new'
     end
   end
@@ -38,6 +45,9 @@ class MaterialsController < ApplicationController
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('edit_materials')
     @material = Material.find(params[:id])
+    @faculties = get_data_from_material @material, :faculty_id
+    @disciplines = get_data_from_material @material, :discipline_id
+    @subjects = get_data_from_material @material, :subject_id
     @submit = "Update Material"
   end
 
@@ -51,6 +61,9 @@ class MaterialsController < ApplicationController
       flash[:succes] = "Material updated succesfully"
       redirect_to @material
     else
+      @faculties = get_data_from_material @material, :faculty_id
+      @disciplines = get_data_from_material @material, :discipline_id
+      @subjects = get_data_from_material @material, :subject_id
       render 'edit'
     end
   end
@@ -72,5 +85,7 @@ class MaterialsController < ApplicationController
     } unless par[:options_attributes].nil?
     return os
   end
+  
+  
   
 end

@@ -4,19 +4,22 @@
     <% tag = f.object_name.gsub(/[^0-9]+/,'') %>
     <%= f.hidden_field :id, :value => 0 %>
 
-    <%= label :filter, :institute %>
-    <%= f.collection_select :institute_id,
-      Institute.find(:all), :id, :name, { :prompt => true }, 
-      {:onchange=>filter_select_on_change("subject_disciplines_attributes_#{tag}_institute_id",
-        "subject_disciplines_attributes_#{tag}_faculty_id", "institute")} %><br />
-    <%= label :filter, :faculty %>
-    <%= f.collection_select :faculty_id,
-      Faculty.find_all_by_institute_id(@dis_fac_inst[0][tag.to_i]), :id, :name, { :prompt => true }, 
-      {:onchange=>filter_select_on_change("subject_disciplines_attributes_#{tag}_faculty_id",
-        "subject_disciplines_attributes_#{tag}_id", "faculty")} %><br />
-    <%= label :filter, :discipline %>
-    <%= f.collection_select :id,
-      Discipline.find_all_by_faculty_id(@dis_fac_inst[1][tag.to_i]), :id, :name, { :prompt => true }%>
+    <%= render :partial => "filters/institute", :locals => { :f => f, 
+      :id => :institute_id,
+      :dataset => Institute.all, :parent_id => "subject_disciplines_attributes_#{tag}_institute_id",
+      :child_id => "subject_disciplines_attributes_#{tag}_faculty_id"} %> <br />
+
+    <%= render :partial => "filters/faculty", :locals => { :f => f, 
+      :id => :faculty_id,
+      :dataset => Faculty.find_all_by_institute_id(@dis_fac_inst[0][tag.to_i]), 
+      :parent_id => "subject_disciplines_attributes_#{tag}_faculty_id",
+      :child_id => "subject_disciplines_attributes_#{tag}_id"} %> <br />
+
+    <%= render :partial => "filters/discipline", :locals => { :f => f,
+      :id => :id,
+      :dataset => Discipline.find_all_by_faculty_id(@dis_fac_inst[1][tag.to_i]), 
+      :parent_id => "",
+      :child_id => ""} %> <br />
 
     <%= link_to_remove_fields "remove", f %>
     <h1></h1> <!-- TODO: remove this, just gives us a line css abuse -->

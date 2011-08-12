@@ -5,13 +5,18 @@
     <%= f.label :name %> <br>
     <%= f.text_field :name %> <br>
   </div>
-    <div class='field'>
+  <div class='field'>
     <%= f.label :faculty %> <br>
-    <%= f.collection_select(:faculty_id,
-      Faculty.all,
-      :id,
-      :full_name,
-      { :prompt => true })%> <br>
+    <%= render :partial => "filters/institute", :locals => { :f => f, 
+      :id => :institute_id,
+      :dataset => Institute.all, :parent_id => "discipline_institute_id",
+      :child_id => "discipline_faculty_id"} %>
+
+    <%= render :partial => "filters/faculty", :locals => { :f => f, 
+      :id => :faculty_id,
+      :dataset => @faculties, :parent_id => "",
+      :child_id => ""} %>
+     <br>
   </div>
   <div class="actions">
     <%= f.submit @submit %>
