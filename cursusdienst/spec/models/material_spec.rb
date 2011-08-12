@@ -10,6 +10,7 @@ describe Material do
   it { should validate_presence_of(:name) }
   
   it { should belong_to(:subject) }
+  it { should belong_to(:parent) }
   it { should have_and_belong_to_many(:options) }
   it { should have_many(:sales) }
   it { should have_many(:guilds).through(:sales) }
