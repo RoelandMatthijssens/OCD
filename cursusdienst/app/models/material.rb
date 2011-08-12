@@ -4,8 +4,8 @@ class Material < ActiveRecord::Base
   #validates :nr, :presence => true
   belongs_to :subject
   belongs_to :parent, :class_name => 'Material', :foreign_key => 'parent_id'
-  has_many :sales
-  has_many :guilds, :through => :sales
+  has_many :supplies
+  has_many :guilds, :through => :supplies
 #  validates :subject, :presence => true
   has_and_belongs_to_many :options
   default_scope :order => "materials.name ASC"

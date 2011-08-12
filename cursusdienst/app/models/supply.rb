@@ -1,4 +1,4 @@
-class Sale < ActiveRecord::Base
+class Supply < ActiveRecord::Base
   
   belongs_to :guild
   belongs_to :material

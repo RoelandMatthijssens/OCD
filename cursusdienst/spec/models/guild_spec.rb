@@ -17,8 +17,8 @@ describe Guild do
   it { should have_and_belong_to_many(:users)}
   it { should have_and_belong_to_many(:disciplines) }
   
-  it { should have_many(:sales) }
-  it { should have_many(:materials).through(:sales) }
+  it { should have_many(:supplies) }
+  it { should have_many(:materials).through(:supplies) }
   
   it "should create a new instance given valid attributes" do
     discipline = Factory(:discipline)

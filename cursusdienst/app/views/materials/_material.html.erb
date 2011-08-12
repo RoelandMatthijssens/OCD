@@ -1,6 +1,6 @@
 <div class="material">
   <h1><%= link_to material.name, material %></h1>
-	<strong>Subject:</strong> <%= material.parent ? link_to(material.parent.subject.name, material.parent.subject) : link_to(material.subject.name, material.subject) %> <br/>
+	<strong>Subject:</strong> <%= material.parent ? 'link_to(material.parent.subject.name, material.parent.subject)' : 'link_to(material.subject.name, material.subject)' %> <br/>
 	<% if material.parent %>
 		<strong>Parent:</strong> <%= link_to material.parent.name, material.parent %>
 	<% end %>
