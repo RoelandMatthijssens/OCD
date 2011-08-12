@@ -6,6 +6,8 @@ class Material < ActiveRecord::Base
   belongs_to :parent, :class_name => 'Material', :foreign_key => 'parent_id'
   has_many :supplies
   has_many :guilds, :through => :supplies
+  has_many :sales
+  has_many :users, :through => :sales
 #  validates :subject, :presence => true
   has_and_belongs_to_many :options
   default_scope :order => "materials.name ASC"
