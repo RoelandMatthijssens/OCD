@@ -57,7 +57,7 @@
             <!-- One detail.. There have to be at least 3 lins of text in the middle or
 		  the design fucks up.--> 
             <% flash.each do |key, value| %>
-              <div class="flash <%= key %>"><%= value %></div>
+              <div class="error_green" id="flash <%= key %>"> <%= value %></div>
             <% end %>
 
             <%= yield %>
