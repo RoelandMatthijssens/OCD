@@ -1,0 +1,305 @@
+/*****************************
+ * Design > HeaderBackground *
+ *****************************/
+
+#headerbg{
+	left: 		0px;
+	top: 		0px;
+	position:	absolute;
+	width: 		100%;
+	height: 	85px;
+	/* >>> for in case we make it scalable <<<
+	min-width: 750px;
+	min-height: 68px;
+	*/
+	background-image:	url(images/header_slice.gif); 
+	layer-background-image:url(images/header_slice.gif);
+	background-repeat:	repeat;
+}
+
+/******************************
+ * Design > Containers > Main *
+ ******************************/
+
+/* maincontainer will center everything else */
+#maincontainer{
+	top: 		0px;
+	position:	absolute;
+	width: 		970px;
+	min-height: 800px;
+	left: 		50%;
+	margin-left: -485px; 
+	position: 	absolute; 
+	floating: 	left;
+
+	
+	/*background-image:	url(images/full.png); 
+	background-repeat:	no-repeat;*/
+}
+
+/**************************************
+ * Design > Containers > Second Layer *
+ **************************************/
+#headercontainer{
+	width: 		100%;
+	height: 	85px;
+	position: 	relative;
+	margin: 	0px;
+}
+
+#menucontainer{
+	width: 		100%;
+	height: 	87px;	
+	position: 	relative;
+	margin: 	0px;
+}
+#bodycontainer{
+	width: 		100%;
+	min-height: 520px;
+	height: 	100%;
+	position: 	relative;
+	margin: 	0px;
+}
+#footercontainer1{
+	width: 		100%;
+	height: 	16px;
+	position: 	relative;
+	margin: 	0px;
+}
+#footercontainer2{
+	width: 		100%;
+	min-height: 28px;
+	position: 	relative;
+	margin: 	0px;
+}
+
+
+/***************************
+ * Design > Images > header*
+ ***************************/
+#headerlogo{
+	left: 		0px; 
+	width: 		292px;
+	height: 	85px;
+	position: 	absolute;
+	background-image:	url(images/cd_logo.gif); 
+	background-repeat:	no-repeat;
+}
+
+#headerstudentlogo{
+	left: 			0 px;
+	top: 			0 px;
+	margin-left: 	292px;
+	margin-right: 	209px;
+	width: 			486px;
+	height: 		85px;
+	position: 		absolute;
+
+	
+	background-image:	url(images/students_logo_temp.png); 
+	background-repeat:	no-repeat;
+}
+
+#headerloginarea{
+	right: 		0px;
+	width: 		209px;
+	height: 	85px;
+	position: 	absolute;
+
+	background-image:	url(images/login_area.gif); 
+	background-repeat:	no-repeat;
+}
+
+/***************************
+ * Design > Images > menu  *
+ ***************************/
+
+#menubuttonarea{
+	left: 			0px;
+	top: 			0px;
+	margin-left: 	22px;
+	margin-right: 	16px;
+	width: 			932px;
+	height: 		37px;
+	position: 		absolute;
+	background-image:	url(images/menu_center.gif); 
+	background-repeat:	repeat-x;
+}
+
+#menubottom{
+	left: 			0px;
+	top: 			0px;
+	margin-top: 	37px;
+	margin-left: 	22px;
+	margin-right: 	16px;
+	width: 			932px;
+	height: 		50px;
+	position: 		absolute;
+	background-image:	url(images/menu_bottom.gif); 
+	background-repeat:	no-repeat;
+}
+
+#menuleft{
+	left: 		0px; 
+	width: 		22px;
+	height: 	87px;
+	position: 	absolute;
+	background-image:	url(images/menu_left.gif); 
+	background-repeat:	no-repeat;
+}
+
+#menuright{
+	right: 		0px;
+	width: 		16px;
+	height: 	87px;
+	position: 	absolute;
+
+	background-image:	url(images/menu_right.gif); 
+	background-repeat:	no-repeat;
+}
+
+/***************************
+ * Design > Images > body  *
+ ***************************/
+/* 	Note that "bodyleft" and "bodyright" are again
+ *  containers in case there is a menu
+ ******************************************/
+ 
+#bodyleft{
+	left: 			0px; 
+	width: 			181px;
+	height: 		100%;
+	position: 		absolute;
+	background-image:	url(images/body_left.gif); 
+	background-repeat:	repeat-y;
+}
+
+#bodyright{
+	right: 			0px;
+	width: 			185px;
+	height: 		100%;
+	position: 		absolute;
+	background-image:	url(images/body_right.gif); 
+	background-repeat:	repeat-y;
+}
+
+#bodycenter{
+	left: 			0px;
+	top: 			0px;
+	margin-left:	181px;
+	margin-right: 	185px;
+	padding-left:	10px;
+	padding-right: 	10px;
+	width: 			594px;
+	height: 		100%;
+	position: 		absolute;
+}
+
+#sidemenu{
+	left: 		0px; 
+	margin-top: 50px;
+	width: 		22px;
+	height: 	auto;
+	position: 	absolute;
+}
+
+/*****************************
+ * Design > Images > footer1 *
+ *****************************/
+ #footerlefter1{
+	left: 		0px; 
+	width: 		25px;
+	height: 	16px;
+	position: 	absolute;
+	background-image:	url(images/footer_lefter1.gif); 
+	background-repeat:	no-repeat;
+}
+#footerleft1{
+	left: 		0px; 
+	width: 		149px;
+	margin-left:25px;
+	height: 	16px;
+	position: 	absolute;
+	background-image:	url(images/footer_left1.gif); 
+	background-repeat:	no-repeat;
+}
+
+#footercenter1{
+	left: 			0px;
+	top: 			0px;
+	margin-left:	174px;
+	margin-right: 	172px;
+	width: 			624px;
+	height: 		16px;
+	position: 		absolute;
+	background-image:	url(images/footer_center1.gif); 
+	background-repeat:	no-repeat;
+}
+#footerright1{
+	right: 			0px;
+	margin-right: 	19px;
+	width: 			153px;
+	height: 		16px;
+	position: 		absolute;
+	background-image:	url(images/footer_right1.gif); 
+	background-repeat:	no-repeat;
+}
+#footerrighter1{
+	right: 		0px;
+	width: 		19px;
+	height: 	16px;
+	position: 	absolute;
+	background-image:	url(images/footer_righter1.png); 
+	background-repeat:	no-repeat;
+}
+
+/*****************************
+ * Design > Images > footer2 *
+ *****************************/
+#footerlefter2{
+	left: 		0px; 
+	width: 		25px;
+	height: 	28px;
+	position: 	absolute;
+	position: 	absolute;
+	background-image:	url(images/footer_lefter2.gif); 
+	background-repeat:	no-repeat;
+}
+#footerleft2{
+	left: 		0px; 
+	width: 		149px;
+	margin-left:25px;
+	height: 	28px;
+	position: 	absolute;
+	background-image:	url(images/footer_left2.gif); 
+	background-repeat:	no-repeat;
+}
+
+#footercenter2{
+	left: 			0px;
+	top: 			0px;
+	margin-left:	174px;
+	margin-right: 	172px;
+	width: 			624px;
+	height: 		28px;
+	position: 		absolute;
+	background-image:	url(images/footer_center2.gif); 
+	background-repeat:	no-repeat;
+}
+#footerright2{
+	right: 			0px;
+	margin-right: 	19px;
+	width: 			153px;
+	height: 		28px;
+	position: 	absolute;
+	background-image:	url(images/footer_right2.gif); 
+	background-repeat:	no-repeat;
+}
+#footerrighter2{
+	right: 		0px;
+	width: 		19px;
+	height: 	28px;
+	position: 	absolute;
+	background-image:	url(images/footer_righter2.gif); 
+	background-repeat:	no-repeat;
+}

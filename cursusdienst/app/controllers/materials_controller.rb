@@ -20,6 +20,7 @@ class MaterialsController < ApplicationController
     @faculties = get_data_from_filter params[:material], :faculty_id, Faculty
     @disciplines = get_data_from_filter params[:material], :discipline_id, Discipline
     @subjects = get_data_from_filter params[:material], :subject_id, Subject
+    @materials = get_data_from_filter params[:material], :material_id, Subject
     @submit = "Create new Material"
   end
 
@@ -45,9 +46,10 @@ class MaterialsController < ApplicationController
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('edit_materials')
     @material = Material.find(params[:id])
-    @faculties = get_data_from_material @material, :faculty_id
-    @disciplines = get_data_from_material @material, :discipline_id
-    @subjects = get_data_from_material @material, :subject_id
+    @faculties = Institute.find(@material.institute_id).faculties #get_data_from_material @material, :faculty_id
+    @disciplines = Faculty.find(@material.faculty_id).disciplines #get_data_from_material @material, :discipline_id
+    @subjects = Discipline.find(@material.discipline_id).subjects#get_data_from_material @material, :subject_id
+    @parents = @material.subject.materials
     @submit = "Update Material"
   end
 

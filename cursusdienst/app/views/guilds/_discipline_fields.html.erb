@@ -1,9 +1,28 @@
 <!-- hidden field to make sure the id doesnt get overloaded -->
 <div class="fields">
   <% if :id %>
+    <% tag = "new_disciplines" %>
     <%= f.hidden_field :id, :value => 0 %>
-    <%= f.collection_select :id,
-      Discipline.find(:all), :id, :full_name, { :prompt => true } %>
+
+    <%= render :partial => "filters/institute", :locals => { :f => f, 
+      :id => :institute_id,
+      :dataset => Institute.all, 
+      :parent_id => "guild_disciplines_attributes_#{tag}_institute_id",
+      :child_id => "guild_disciplines_attributes_#{tag}_faculty_id"} %> <br />
+
+    <%= render :partial => "filters/faculty", :locals => { :f => f, 
+      :id => :faculty_id,
+      :dataset => {}, 
+      :parent_id => "guild_disciplines_attributes_#{tag}_faculty_id",
+      :child_id => "guild_disciplines_attributes_#{tag}_id"} %> <br />
+
+    <%= render :partial => "filters/discipline", :locals => { :f => f,
+      :id => :id,
+      :dataset => {}, 
+      :parent_id => "",
+      :child_id => ""} %> <br />
+
     <%= link_to_remove_fields "remove", f %>
+    <h1></h1> <!-- TODO: remove this, just gives us a line css abuse -->
   <% end %>
 </div>

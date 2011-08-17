@@ -1,0 +1,21 @@
+<div id="loginmenu">
+  <ul>
+    <% if signed_in? %>
+
+      <li><%= link_to 'Sign Out', signout_path, :class=>"loginmenu lockicon", :onclick=>"this.blur();" %> </li>
+      <li><%= link_to 'Profile', current_user, :class=>"loginmenu usericon", :onclick=>"this.blur();" %></li>
+      <li> <a class="loginmenu shopicon" href="#" onclick="this.blur();">Winkelwagen</a> </li>
+
+    <% else %>
+      <li><%= link_to "Sign in", signin_path, :class=>"loginmenu lockicon", :onclick=>"this.blur();" %> </li>
+      <li><%= link_to "Profile", signin_path, :class=>"loginmenu lockicon", :onclick=>"this.blur();" %> </li>
+      <li><%= link_to "Winkelwagen", signin_path, :class=>"loginmenu lockicon", :onclick=>"this.blur();" %> </li>
+    <% end %>
+
+    <!--  
+    <li> <a class="loginmenu usericon" href="#" onclick="this.blur();">Account</a> </li>
+      <li> <a class="loginmenu shopicon" href="#" onclick="this.blur();">Winkelwagen</a> </li>
+      <li> <a class="loginmenu lockicon" href="#" onclick="this.blur();">Login / Register </a> </li>
+    -->
+  </ul>
+</div>

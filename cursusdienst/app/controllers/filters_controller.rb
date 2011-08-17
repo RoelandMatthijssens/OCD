@@ -20,6 +20,13 @@ class FiltersController < ApplicationController
         format.html{ flash[:notice] = "ok #{@subjects}" } 
         format.json{ render :json => @subjects }
       end  
+    elsif params[:subject] && Discipline.exists?(params[:subject])
+      subject = Subject.find(params[:subject])
+      @materials = subject.materials
+      respond_to do |format|
+        format.html{ flash[:notice] = "ok #{@subjects}" } 
+        format.json{ render :json => @subjects }
+      end  
     end
   end
   

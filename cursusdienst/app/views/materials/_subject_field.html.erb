@@ -3,22 +3,22 @@
   <%= render :partial => "filters/institute", :locals => { :f => f, 
     :id => :institute_id,
     :dataset => Institute.all, :parent_id => "material_institute_id",
-    :child_id => "material_faculty_id"} %>
+    :child_id => "material_faculty_id"} %><br />
 
   <%= render :partial => "filters/faculty", :locals => { :f => f, 
     :id => :faculty_id,
     :dataset => @faculties, :parent_id => "material_faculty_id",
-    :child_id => "material_discipline_id"} %>
+    :child_id => "material_discipline_id"} %><br />
 
   <%= render :partial => "filters/discipline", :locals => { :f => f, 
     :id => :discipline_id,
     :dataset => @disciplines, :parent_id => "material_discipline_id",
-    :child_id => "material_subject_id"} %>
+    :child_id => "material_subject_id"} %><br />
 
   <%= render :partial => "filters/subject", :locals => { :f => f, 
     :id => :subject_id,
     :dataset => @subjects, :parent_id => "",
-    :child_id => ""} %>
+    :child_id => ""} %><br />
 
 
   <%= remove_nearest_class_and_show_items "remove", "_destroy_subject", ["add_subject_link"], f %>
