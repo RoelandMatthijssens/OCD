@@ -74,7 +74,7 @@ end
 Factory.define :teaching do |teaching|
 
 end
-Factory.define :sale do |sale|
+Factory.define :supply do |supply|
 
 end
 

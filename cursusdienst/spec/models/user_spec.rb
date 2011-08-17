@@ -20,6 +20,8 @@ describe User do
   it { should have_and_belong_to_many(:guilds)}
   it { should have_and_belong_to_many(:disciplines)}
   it { should respond_to(:encrypted_password) }
+  it { should have_many(:sales) }
+  it { should have_many(:materials).through(:sales) }
   
   
   describe "other tests" do

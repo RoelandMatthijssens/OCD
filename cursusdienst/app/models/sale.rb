@@ -1,6 +1,4 @@
 class Sale < ActiveRecord::Base
-  
-  belongs_to :guild
-  belongs_to :material
-  
+	belongs_to :user
+	belongs_to :material
 end
