@@ -70,6 +70,20 @@ class MaterialsController < ApplicationController
     end
   end
 
+	def sell
+		deny_access and return unless signed_in?
+		deny_privileged_access and return unless current_user.can?('sell_materials')
+		@material = Material.find(params[:id])
+		g = current_user.guilds
+		if g.empty?
+			redirect_to home_path
+		elsif g.size == 1
+			g[0].sells << material
+		else
+			redirect_to home_path
+		end
+	end
+	
   def destroy
   end
   

@@ -31,7 +31,9 @@ Cursusdienst::Application.routes.draw do
   
   resources :options
 
-  resources :materials
+  resources :materials do
+		put :sell, :on => :member
+  end
 
   resources :messages
 

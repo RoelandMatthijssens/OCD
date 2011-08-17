@@ -67,7 +67,7 @@ namespace :db do
 			 end
 		 end
 		
-		permissionNames = ["use_control_panel",
+		permissionNames = ["use_control_panel", "sell_materials",
 			"edit_users"							,	"delete_users"							,	"view_users"							,	
 			"edit_permissions"				,	"delete_permissions"				,	"view_permissions"				,	"create_permissions"				,
 			"edit_disciplines"				,	"delete_disciplines"				,	"view_disciplines"				,	"create_disciplines"				,

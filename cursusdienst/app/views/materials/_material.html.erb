@@ -4,5 +4,8 @@
 	<% if material.parent %>
 		<strong>Parent:</strong> <%= link_to material.parent.name, material.parent %>
 	<% end %>
-  <%= link_to "Edit this material", edit_material_path(material) %>
+	<%= link_to "Edit this material", edit_material_path(material) %><br/>
+	<% if current_user.can?("sell_materials") %>
+		<%= link_to "Add this material to the guilds supply", sell_material_path(material), :method => :put %>
+	<% end %>
 </div>
