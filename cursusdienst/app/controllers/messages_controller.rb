@@ -41,6 +41,8 @@ class MessagesController < ApplicationController
     end
   end
 
+  #def mark_
+
   def destroy
   end
 end
