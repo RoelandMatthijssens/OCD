@@ -1,5 +1,4 @@
 require 'spec_helper'
-#require 'helpers/permission_groups_helper_spec'
 include PermissionGroupsHelper
 
 describe "PermissionGroupsTests" do
@@ -40,7 +39,13 @@ describe "PermissionGroupsTests" do
 	end
 	describe "while logged in with no special permissions" do
 		before(:each) do
-			login(@user1)
+			#login(@user1)
+			visit new_session_path
+			fill_in "User name", :with => @user1.user_name
+			fill_in "Password", :with => @user1.password
+			click_button("Sign in")
+		end
+		it "la" do
 		end
 		describe "GET" do
 			describe "'permission_groups'" do
@@ -73,7 +78,11 @@ describe "PermissionGroupsTests" do
 		before(:each) do
 			p = PermissionGroup.create!(:name => "view_permission_groups")
 			@user1.permission_groups << p
-			login(@user1)
+			#login(@user1)
+			visit new_session_path
+			fill_in "User name", :with => @user1.user_name
+			fill_in "Password", :with => @user1.password
+			click_button("Sign in")
 		end
 		describe "GET" do
 			describe "'permission_groups'" do
@@ -125,7 +134,11 @@ describe "PermissionGroupsTests" do
 		before(:each) do
 			p = PermissionGroup.create!(:name => "edit_permission_groups")
 			@user1.permission_groups << p
-			login(@user1)
+			#login(@user1)
+			visit new_session_path
+			fill_in "User name", :with => @user1.user_name
+			fill_in "Password", :with => @user1.password
+			click_button("Sign in")
 		end
 		describe "GET" do
 			describe "'permission_groups'" do

@@ -17,10 +17,12 @@ describe "SessionsTests" do
   describe "POST 'create'" do
     describe "invalid signin" do
       before(:each) do
+				
+			#login(@user1)
         visit new_session_path
-        fill_in "session_user_name", :with => "Example"
-        fill_in "session_password", :with => "INVALID"
-        click_link_or_button("Sign in")
+        fill_in "User name", :with => "Example"
+        fill_in "Password", :with => "INVALID"
+        click_button("Sign in")
       end
       it "should re-render the new page" do
         page.should have_content("Sign in")
@@ -32,7 +34,11 @@ describe "SessionsTests" do
     describe "valid signin" do
       before(:each) do
         @user = Factory(:user)
-        login(@user)
+				#login(@user1)
+				visit new_session_path
+				fill_in "User name", :with => @user.user_name
+				fill_in "Password", :with => @user.password
+				click_button("Sign in")
       end
       it "should sign in the user" do
         page.should have_content("Successfully signed in")
@@ -46,7 +52,11 @@ describe "SessionsTests" do
   describe "DELETE 'destroy'" do
     before(:each) do
       @user = Factory(:user)
-      login(@user)
+			#login(@user1)
+			visit new_session_path
+			fill_in "User name", :with => @user.user_name
+			fill_in "Password", :with => @user.password
+			click_button("Sign in")
     end
     #it "should log the user out" do
       #logout(@user)

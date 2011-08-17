@@ -112,21 +112,29 @@ namespace :db do
 		end
 		
 		enermis = User.create!(
-				:name => "Roeland",
-				:last_name => "Matthijssens",
-				:email => "Fulgens.ailurus@gmail.com",
-				:password => "roeland1",
-				:password_confirmation => "roeland1",
-				:user_name => "Enermis"
+			:name => "Roeland",
+			:last_name => "Matthijssens",
+			:email => "Fulgens.ailurus@gmail.com",
+			:password => "roeland1",
+			:password_confirmation => "roeland1",
+			:user_name => "Enermis"
 			)
 		rik = User.create!(
-				:name => "Rik",
-				:last_name => "Vanmechelen",
-				:email => "rik.vanmechelen@gmail.com",
-				:password => "roeland1",
-				:password_confirmation => "roeland1",
-				:user_name => "rik"
+			:name => "Rik",
+			:last_name => "Vanmechelen",
+			:email => "rik.vanmechelen@gmail.com",
+			:password => "roeland1",
+			:password_confirmation => "roeland1",
+			:user_name => "rik"
 			)
+		test = User.create!(
+			:name => "Test",
+			:last_name => "Test",
+			:email => "Test@gmail.com",
+			:password => "roeland1",
+			:password_confirmation => "roeland1",
+			:user_name => "test"
+		)
 		[enermis, rik].each { |u| u.permission_groups << PermissionGroup.all}
 		18.times do |n|
 			password = "foobar"
