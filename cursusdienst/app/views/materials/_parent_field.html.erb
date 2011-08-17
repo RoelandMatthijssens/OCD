@@ -17,9 +17,15 @@
 
   <%= render :partial => "filters/subject", :locals => { :f => f, 
     :id => :subject_id,
-    :dataset => @subjects, :parent_id => "",
-    :child_id => ""} %><br />
+    :dataset => @subjects, :parent_id => "material_subject_id",
+    :child_id => "material_parent_id"} %><br />
 
+  <div class="fild" id="parent_field" display="none">
+    <%= render :partial => "filters/material", :locals => { :f => f, 
+    :id => :parent_id,
+    :dataset => @parents, :parent_id => "",
+    :child_id => ""} %><br />
+  </div>
 
   <%= remove_nearest_class_and_show_items "remove", "_destroy_subject", ["add_subject_link"], f %>
 
