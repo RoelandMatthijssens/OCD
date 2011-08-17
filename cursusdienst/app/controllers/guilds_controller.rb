@@ -58,6 +58,14 @@ class GuildsController < ApplicationController
   def destroy
   end
 
+  def join
+		deny_access and return unless signed_in?
+		@guild = Guild.find(params[:id])
+		current_user.guilds << @guild unless current_user.guilds.include? @guild
+		flash[:notice] = "Succesfully joined the guild"
+		redirect_to @guild
+  end
+
   private
 
   def get_disciplines_from_guild par

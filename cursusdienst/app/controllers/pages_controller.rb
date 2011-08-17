@@ -1,5 +1,8 @@
 class PagesController < ApplicationController
   def home
+		if signed_in? && current_user.guilds.any?
+			redirect_to current_user.guilds[0]
+		end
     @title = "Home"
   end
 

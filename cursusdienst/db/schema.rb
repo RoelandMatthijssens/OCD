@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110812140047) do
+ActiveRecord::Schema.define(:version => 20110817103602) do
 
   create_table "disciplines", :force => true do |t|
     t.string   "name"
@@ -71,6 +71,13 @@ ActiveRecord::Schema.define(:version => 20110812140047) do
   create_table "materials_options", :id => false, :force => true do |t|
     t.integer  "material_id"
     t.integer  "option_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "messages", :force => true do |t|
+    t.integer  "guild_id"
+    t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

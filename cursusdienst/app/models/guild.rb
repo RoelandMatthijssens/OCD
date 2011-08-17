@@ -11,6 +11,7 @@ class Guild < ActiveRecord::Base
   has_and_belongs_to_many :users
   has_many :supplies, :dependent => :destroy
   has_many :materials, :through => :supplies
+  has_many :messages
   default_scope :order => "guilds.name ASC"
   
   accepts_nested_attributes_for :disciplines
