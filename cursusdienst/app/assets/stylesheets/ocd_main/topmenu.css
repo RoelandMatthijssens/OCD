@@ -1,50 +1,108 @@
-#button1{
-	width:		auto;
-	position: 	relative;
-	height: 	37px;
-	float: 		left;
-}
-/* If necessary, defined your button width hardcoded */
-#button2{
-	width:		55px;
-	margin-left: 0px;
-	position: 	relative;
+a.style1 {
+	background: transparent url('images/topmenu/a.gif') no-repeat scroll top right;
 }
 
-#buttonleft{
-	margin-left: 7px;
-	float: 		left;
-	height: 	37px;
-	width:		6px;
-	position: 	relative;
-	background-image:	url(images/topmenu/left.gif); 
-	background-repeat:	no-repeat;
-	z-index: 2;
+a.style2 {
+	background: transparent url('images/topmenu/a_style2.gif') no-repeat scroll top right;
 }
 
-#buttoncenter{
-	padding-left: 	8px;
-	padding-right: 	8px;
-	padding-top:	8px;
-	float: 			left;
-	height: 		37px;
-	width: 			auto;
-	position: 		relative;
-	background-image:	url(images/topmenu/center.gif); 
-	background-repeat:	repeat-x;
-	z-index: 1;
-	font-family: Arial ;
+a.style3 {
+	background: transparent url('images/topmenu/a_style3.gif') no-repeat scroll top right;
+}
+
+a.style4 {
+	background: transparent url('images/topmenu/a_style4.gif') no-repeat scroll top right;
+}
+
+a.style1 span {
+	background: transparent url('images/topmenu/span.gif') no-repeat;
+}
+
+a.style2 span {
+	background: transparent url('images/topmenu/span_style2.gif') no-repeat;
+	line-height: 30px;
 	color:			#FFF;
-	font-size:	 	20px;
+	font-size:	14px;
+}
+a.style3 span {
+	background: transparent url('images/topmenu/span_style3.gif') no-repeat;
+	line-height: 30px;
+	color:			#555;
+	font-weight:	bold;
 }
 
-#buttonright{
-	margin-right: 7px;
-	float: 		left;
-	height: 	37px;
-	width:		9px;
-	position: 	relative;
-	background-image:	url(images/topmenu/right.gif); 
-	background-repeat:	no-repeat;
-	z-index: 2;
+a.style4 span {
+	background: transparent url('images/topmenu/span_style4.gif') no-repeat;
+	font-size:		16px;
 }
+
+a.button {
+   
+    color: #FFF;
+    display: block;
+    float: left;
+    font: normal 13px verdana, sans-serif;
+    height: 37px;
+    margin-right: 6px;
+    padding-right: 18px; 
+    text-decoration: none;
+}
+
+a.button span {
+	padding-left: 15px;
+    
+    padding-top: 3px;
+	float: left;
+    display: block;
+	height: 32px;
+	max-height:35px;
+} 
+
+a.button:hover {
+	height: 37px;
+    margin-right: 6px;
+    padding-right: 18px; 
+	color: #DDD;
+	background-position: center right;
+	 outline: none; /* hide dotted outline in Firefox */
+}
+a.button:hover span{
+	padding-left: 15px;
+	padding-top: 5px;
+    display: block;
+	height: 32px;
+	background-position: center left;
+}
+
+a.button:active {
+	height: 37px;
+    margin-right: 6px;
+    padding-right: 18px; 
+	color: #DDD;
+    background-position: bottom right;
+    outline: none; /* hide dotted outline in Firefox */
+}
+
+a.button:active span {
+	padding-left: 15px;
+	padding-top: 5px;
+    display: block;
+	height: 32px;
+    background-position: bottom left;
+
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

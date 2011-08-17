@@ -1,38 +1,89 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html
+  xmlns="http://www.w3.org/1999/xhtml">
   <head>
-
-    <link href='http://fonts.googleapis.com/css?family=Dancing+Script&v2' rel='stylesheet' type='text/css'>
-    <%= stylesheet_link_tag 'rvm/style' %>
-    
-
-    <%= javascript_include_tag :application %>
-
-
-
-    <%= csrf_meta_tag %>
+    <script type="text/javascript" src="firebug-lite/build/firebug-lite.js"></script>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title></title>
+    <%= stylesheet_link_tag 'ocd_main/main' %>
+    <%= stylesheet_link_tag 'ocd_main/sideshop' %>
+    <%= stylesheet_link_tag 'ocd_main/sidemenu' %>
+    <%= stylesheet_link_tag 'ocd_main/sidechat' %>
+    <%= stylesheet_link_tag 'ocd_main/topmenu' %>
+    <%= stylesheet_link_tag 'ocd_main/typography' %>
+    <%= stylesheet_link_tag 'ocd_main/fieldsets' %>
+    <%= stylesheet_link_tag 'ocd_main/loginmenu' %>
   </head>
-  <body>
-    <div id="main">
-      <div id="logo" padding-top=41px >
-        <div onclick="location.href='home'" id="logo_big">Cursusdienst</div><div onclick="location.href='home'" id="logo_small">.net</div></div>
-      <%= render 'layouts/nav' %>
-      <div id="content">
-        <div id="column2">
+  <body class="grey">
+    <table id="maintable">
+      <div id="headerbg"> </div>
+      <div id="maincontainer">
+        <div id="headercontainer">
+          <div id="headerlogo">
+            <%= image_tag "banners/cd_logo.gif", :alt=>"Header Logo" %>
+          </div>
+          <div id="headerbanner"> 
+            <%= image_tag "banners/headerbanner.png", :alt=>"Header Banner" %>
+          </div>
+          <div id="headerloginarea"> 
+            <!-- Loginmenu div voor het login menu rechts bovenaan--> 
+            <!-- icons kan je aanpassen in de CSS file -->
+            <%= render 'layouts/loginmenu' %>
+          </div>
+        </div>
+        <div id="menucontainer">
+          <div id="menuleft"> </div>
+          <%= render 'layouts/navigation' %>
+          <div id="menubottom"> </div>
+          <div id="menuright"> </div>
+        </div>
+        <div id="bodycontainer">
+          <div id="bodyleft">
+            <!-- Example of a menu, see the menuleft_template file for explanation -->
+            <!-- Hiermee kunde regelen hoe hoog het menu staat -->
+            <p class="whitespace"> </p>
+            
+            <%= render 'layouts/sidemenu' %>
+            
 
+            <!-- Example of a chat module -->
+            <p class="whitespace"> </p>
+            <%= render 'layouts/sideshop' %>
+            
+            <!-- End Example --> </div>
+
+          <div id="bodycenter">
+            <!-- Insert main page content here -->
+            <!-- One detail.. There have to be at least 3 lins of text in the middle or
+		  the design fucks up.--> 
             <% flash.each do |key, value| %>
               <div class="flash <%= key %>"><%= value %></div>
             <% end %>
 
-          <%= yield %>
+            <%= yield %>
+              
+          </div>
 
-
+          <!--End main page example -->
+          <div id="bodyright">
+            <!-- Example of a chat module -->
+            <p class="whitespace"> </p>
+            <%= render 'layouts/sidechat' %>
+            
+            <!-- End Example --> 
+          </div>
+          <!-- Footer is a bit overly complicated but the only way I was 100% sure it would work from the first time --> 
+          <div id="footer">
+            <div id="footer1"></div>	
+            <div id="footer2">
+              <div id="footerbannerdiv">
+                <%= image_tag "banners/footerbanner.gif", :alt=>"Footer Banner" %>
+              </div>	
+            </div>	
+            <div id="footer3"></div>
+          </div>			
         </div>
       </div>
-      <%= render 'layouts/footer' %>
-    </div>
-    <div id="debug">
-      <%= debug(params) if Rails.env.development? %>
-    </div>
+    </table>
   </body>
 </html>

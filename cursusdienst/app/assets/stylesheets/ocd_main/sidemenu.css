@@ -1,52 +1,81 @@
-#top{
-	width: 		167px;
-	height: 	3px;
-	position: 	relative;
-	margin-left: 	10px;
-	margin-top: 	40px;
-	background-image:	url(images/sidemenu/top.gif); 
-	background-repeat:	no-repeat;
+
+#sidemenu {
+	background: 			#FFF;
+	width:					176px;
+	padding: 				0;
+	margin:					0;
+	position:				relative;
 }
 
-#separator{
-	width: 		167px;
-	height: 	1px;
-	position: 	relative;
-	margin-left: 	10px;
-	background-image:	url(images/sidemenu/separator.gif); 
-	background-repeat:	no-repeat;
+#sidemenu ul {
+	list-style-type:		none;
+	padding: 				0px 0px 0px 0px;
+	margin: 				0px 0px 0px 0px;
+	width:					1px;
+	font: 					normal 10px verdana, sans-serif;
+	font-weight: 			bold;
+    text-decoration: 		none;
+	background:				#FFF;
 }
 
-#activelink{
-	padding-top: 	5px;
-	padding-bottom: 5px;
-	padding-left: 	10px;
-	width: 		167px;
-	height: 	auto;
-	position: 	relative;
-	margin-left: 	10px;
-	background-image:	url(images/sidemenu/active_link.gif); 
-	background-repeat:	repeat-y;
+.generallink{
+	background-color:		#FFFFFF; 
+}
+.generallink:hover{
+	background-color:		#C3DB6E; 
 }
 
-#link{
-	padding-top: 	5px;
-	padding-bottom: 5px;
-	padding-left: 	10px;
-	width: 		167px;
-	height: 	auto;
-	position: 	relative;
-	margin-left: 	10px;
-	background-image:	url(images/sidemenu/inactive_link.gif); 
-	background-repeat:	repeat-y;
+.link1{
+	background-color:		#C3DB6E; 
+	background: 			transparent url('images/sidemenu/test_icon.png') center left no-repeat;
+}
+.link1:hover{
+	background: 			transparent url('images/sidemenu/test_icon.png') center left no-repeat;
+	background-color:		#C3DB6E; 
+}
+#sidemenu li  a{
+	
+	margin-left: 			0px;
+	padding-top: 			10px;
+	padding-bottom: 		10px;
+	display:				block; 
+	width:					164px; 
+	max-width:				104px;
+	height:					auto; 
+	padding-left: 			50px;
+	padding-right: 			10px;
+	border-top:				1px solid #DDD; 
+	border-left:			1px solid #DDD; 
+	border-right:			1px solid #DDD; 	
+	text-align:				left; 
+	font: 					normal 10px verdana, sans-serif;
+	font-weight: 			bold;
+    text-decoration: 		none;
+	color:					#333;
 }
 
-#bottom{
-	width: 		167px;
-	height: 	3px;
-	position: 	relative;
-	margin-left: 	10px;
-	background-image:	url(images/sidemenu/bottom.gif); 
-	background-repeat:	no-repeat;
+#sidemenu ul a{
+	
 }
+
+#sidemenu li a:hover, #sidemenu li a:focus{
+	padding-top: 			10px;
+	padding-bottom: 		10px;
+	display:				block; 
+	width:					164px; 
+	max-width:				104px;
+	height:					auto; 
+	padding-left: 			50px;
+	padding-right: 			10px;
+	border-top:				1px solid #DDD; border-left:1px solid #DDD; border-right:1px solid #DDD; 	
+	font: 					normal 10px verdana, sans-serif;
+	font-weight: 			bold;
+	color:					#333;
+	
+	
+}
+
+
+
+
 

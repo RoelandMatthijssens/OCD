@@ -7,71 +7,65 @@
 	top: 		0px;
 	position:	absolute;
 	width: 		100%;
+	min-width:	1000px;
 	height: 	85px;
+
 	/* >>> for in case we make it scalable <<<
 	min-width: 750px;
 	min-height: 68px;
 	*/
 	background-image:	url(images/header_slice.gif); 
-	layer-background-image:url(images/header_slice.gif);
 	background-repeat:	repeat;
 }
 
 /******************************
  * Design > Containers > Main *
  ******************************/
-
 /* maincontainer will center everything else */
 #maincontainer{
-	top: 		0px;
-	position:	absolute;
+	margin: 	0 auto; 
 	width: 		970px;
-	min-height: 800px;
-	left: 		50%;
-	margin-left: -485px; 
-	position: 	absolute; 
-	floating: 	left;
-
-	
-	/*background-image:	url(images/full.png); 
-	background-repeat:	no-repeat;*/
 }
 
 /**************************************
  * Design > Containers > Second Layer *
  **************************************/
 #headercontainer{
-	width: 		100%;
+	width: 		970px;
 	height: 	85px;
-	position: 	relative;
+	top:		0px;
+	position: 	absolute;
 	margin: 	0px;
 }
 
 #menucontainer{
-	width: 		100%;
+	width: 		970px;
 	height: 	87px;	
-	position: 	relative;
+	position: 	absolute;
+	top:		85px;
 	margin: 	0px;
 }
 #bodycontainer{
-	width: 		100%;
-	min-height: 520px;
-	height: 	100%;
-	position: 	relative;
+	width: 		970px;
+	top:		172px;
+	position: 	absolute;
 	margin: 	0px;
+	background-image:	url(images/body_slice.gif); 
+	background-repeat:	repeat-y;
+	padding-bottom: 40px;
+	}
+	
+#footer{
+	bottom: 0px;
+	left:	0px;
+	width: 		970px;
+	height: 	22px;
+	position: 	absolute;
+	display: 	block;
+	background-image:	url(images/bottom_slice.gif); 
+	Z-index: 	10;
 }
-#footercontainer1{
-	width: 		100%;
-	height: 	16px;
-	position: 	relative;
-	margin: 	0px;
-}
-#footercontainer2{
-	width: 		100%;
-	min-height: 28px;
-	position: 	relative;
-	margin: 	0px;
-}
+
 
 
 /***************************
@@ -82,22 +76,16 @@
 	width: 		292px;
 	height: 	85px;
 	position: 	absolute;
-	background-image:	url(images/cd_logo.gif); 
-	background-repeat:	no-repeat;
 }
 
-#headerstudentlogo{
-	left: 			0 px;
-	top: 			0 px;
+#headerbanner{
+	left: 			0px;
+	top: 			0px;
 	margin-left: 	292px;
 	margin-right: 	209px;
 	width: 			486px;
 	height: 		85px;
 	position: 		absolute;
-
-	
-	background-image:	url(images/students_logo_temp.png); 
-	background-repeat:	no-repeat;
 }
 
 #headerloginarea{
@@ -106,20 +94,22 @@
 	height: 	85px;
 	position: 	absolute;
 
-	background-image:	url(images/login_area.gif); 
-	background-repeat:	no-repeat;
 }
 
+ 
 /***************************
  * Design > Images > menu  *
  ***************************/
 
 #menubuttonarea{
-	left: 			0px;
+	left: 			22px;
+	right:			16px;
 	top: 			0px;
-	margin-left: 	22px;
-	margin-right: 	16px;
-	width: 			932px;
+	margin-left: 	0px;
+	padding-left: 	20px;
+	margin-right: 	0px;
+	width: 			920px;
+	width: 			920px;
 	height: 		37px;
 	position: 		absolute;
 	background-image:	url(images/menu_center.gif); 
@@ -166,140 +156,113 @@
  ******************************************/
  
 #bodyleft{
-	left: 			0px; 
-	width: 			181px;
+	width: 			171px;
 	height: 		100%;
-	position: 		absolute;
+	float:			left;
+	padding-left:	10px;
 	background-image:	url(images/body_left.gif); 
 	background-repeat:	repeat-y;
 }
 
 #bodyright{
-	right: 			0px;
-	width: 			185px;
+	width: 			175px;
 	height: 		100%;
-	position: 		absolute;
+	float:			left;
+	padding-left:	10px;
 	background-image:	url(images/body_right.gif); 
 	background-repeat:	repeat-y;
 }
 
 #bodycenter{
-	left: 			0px;
-	top: 			0px;
-	margin-left:	181px;
-	margin-right: 	185px;
 	padding-left:	10px;
-	padding-right: 	10px;
-	width: 			594px;
-	height: 		100%;
-	position: 		absolute;
-}
-
-#sidemenu{
-	left: 		0px; 
-	margin-top: 50px;
-	width: 		22px;
-	height: 	auto;
-	position: 	absolute;
+	padding-right:	10px;	
+	height:			auto;
+	max-width: 		584px;
+	width: 			598px;
+	float:			left;
 }
 
 /*****************************
- * Design > Images > footer1 *
+ * Design > Images > footer  *
  *****************************/
- #footerlefter1{
-	left: 		0px; 
-	width: 		25px;
-	height: 	16px;
-	position: 	absolute;
-	background-image:	url(images/footer_lefter1.gif); 
+ /*Footer is a bit overly complicated but the only way I was 100% sure it would work from the first time*/
+#footer1{
+	width: 			100%;
+	height: 		6px;
+	positioning:	relative;
+	background-image:	url(images/footer_1.gif); 
 	background-repeat:	no-repeat;
 }
-#footerleft1{
-	left: 		0px; 
-	width: 		149px;
-	margin-left:25px;
-	height: 	16px;
-	position: 	absolute;
-	background-image:	url(images/footer_left1.gif); 
-	background-repeat:	no-repeat;
-}
-
-#footercenter1{
-	left: 			0px;
-	top: 			0px;
-	margin-left:	174px;
-	margin-right: 	172px;
-	width: 			624px;
-	height: 		16px;
-	position: 		absolute;
-	background-image:	url(images/footer_center1.gif); 
-	background-repeat:	no-repeat;
-}
-#footerright1{
-	right: 			0px;
-	margin-right: 	19px;
-	width: 			153px;
-	height: 		16px;
-	position: 		absolute;
-	background-image:	url(images/footer_right1.gif); 
-	background-repeat:	no-repeat;
-}
-#footerrighter1{
-	right: 		0px;
-	width: 		19px;
-	height: 	16px;
-	position: 	absolute;
-	background-image:	url(images/footer_righter1.png); 
-	background-repeat:	no-repeat;
+/* this is the scaleable one that contains the footerbannerdiv */
+#footer2{
+	width: 			100%;
+	height: 		auto;
+	positioning:	relative;
+	background-image:	url(images/footer_2.gif); 
+	background-repeat:	repeat-y;
 }
 
-/*****************************
- * Design > Images > footer2 *
- *****************************/
-#footerlefter2{
-	left: 		0px; 
-	width: 		25px;
-	height: 	28px;
-	position: 	absolute;
-	position: 	absolute;
-	background-image:	url(images/footer_lefter2.gif); 
+
+#footer3{
+	width: 			100%;
+	height: 		7px;
+	positioning:	relative;
+	background-image:	url(images/footer_3.gif); 
 	background-repeat:	no-repeat;
 }
-#footerleft2{
-	left: 		0px; 
-	width: 		149px;
-	margin-left:25px;
-	height: 	28px;
-	position: 	absolute;
-	background-image:	url(images/footer_left2.gif); 
-	background-repeat:	no-repeat;
+/* this div contains the banner and will scale automatically in height */
+/* to make sure it stays centered it needs an absolute width though... */
+/* which I think is not a problem since the request came with an absolute widht */
+#footerbannerdiv{
+	margin: 	0 auto; 
+	width: 		468px;
 }
 
-#footercenter2{
-	left: 			0px;
-	top: 			0px;
-	margin-left:	174px;
-	margin-right: 	172px;
-	width: 			624px;
-	height: 		28px;
-	position: 		absolute;
-	background-image:	url(images/footer_center2.gif); 
-	background-repeat:	no-repeat;
+/***************************
+ * Design > Images > errors*
+ ***************************/
+ 
+.error_red{
+z-index:2;
+	width: 			970px;
+	height: 		auto;
+	position:		relative;
+	background-image:	url(images/error/red_error.gif); 
+	background-repeat:	repeat-y;
 }
-#footerright2{
-	right: 			0px;
-	margin-right: 	19px;
-	width: 			153px;
-	height: 		28px;
-	position: 	absolute;
-	background-image:	url(images/footer_right2.gif); 
-	background-repeat:	no-repeat;
+.error_green{
+	height: 		auto;
+	position:		relative;
+	background-image:	url(images/error/green_error.gif); 
 }
-#footerrighter2{
-	right: 		0px;
-	width: 		19px;
-	height: 	28px;
-	position: 	absolute;
-	background-image:	url(images/footer_righter2.gif); 
-	background-repeat:	no-repeat;
+.error_text{
+	padding-left: 	180px;
+	padding-right:	180px;
+	text-decoration: none;
+	color:#000;
+	font-weight: bold;
+	font-size: 11px;
+	font-family:"Verdana";
+	}
+
+	
+	
+.whitespace {
+    height: 2px;
+	line-height: 0px;
 }
+
+
+
+.topline {
+	padding: 		0px 0px 0px 0px;
+	margin: 		0px 0px 0px 0px;
+	margin-left:	-3px;
+	height: 		3px;
+	width: 			172px;
+	background: 	transparent url('images/sidemenu/top.gif') no-repeat;
+	font-size: 		0px;
+	position:		relative;
+}
+
+.grey{background-color:#DDDDDD;}

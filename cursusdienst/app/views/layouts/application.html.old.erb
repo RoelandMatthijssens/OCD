@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <link href='http://fonts.googleapis.com/css?family=Dancing+Script&v2' rel='stylesheet' type='text/css'>
+    <%= stylesheet_link_tag 'rvm/style' %>
+    
+
+    <%= javascript_include_tag :application %>
+
+
+
+    <%= csrf_meta_tag %>
+  </head>
+  <body>
+    <div id="main">
+      <div id="logo" padding-top=41px >
+        <div onclick="location.href='home'" id="logo_big">Cursusdienst</div><div onclick="location.href='home'" id="logo_small">.net</div></div>
+      <%= render 'layouts/nav' %>
+      <div id="content">
+        <div id="column2">
+
+            <% flash.each do |key, value| %>
+              <div class="flash <%= key %>"><%= value %></div>
+            <% end %>
+
+          <%= yield %>
+
+
+        </div>
+      </div>
+      <%= render 'layouts/footer' %>
+    </div>
+    <div id="debug">
+      <%= debug(params) if Rails.env.development? %>
+    </div>
+  </body>
+</html>
