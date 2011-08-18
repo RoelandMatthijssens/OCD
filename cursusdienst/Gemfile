@@ -31,7 +31,7 @@ group :test do
 	gem 'spork', '0.8.5'
 	gem 'factory_girl_rails', '1.0'
 	gem 'shoulda', '2.11.3'
-	gem "capybara"
+	gem "capybara", :git => 'git://github.com/jnicklas/capybara.git'
 	gem "guard-rspec"
   gem 'annotate', :git => 'git://github.com/jeremyolliver/annotate_models.git', :branch => 'rake_compatibility'
 end

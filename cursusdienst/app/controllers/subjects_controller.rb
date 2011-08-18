@@ -8,8 +8,8 @@ class SubjectsController < ApplicationController
   end
 
   def show
-		deny_access and return unless signed_in?
-		deny_privileged_access and return unless current_user.can?('view_subjects')
+		#deny_access and return unless signed_in?
+		#deny_privileged_access and return unless current_user.can?('view_subjects')
     @subject = Subject.find(params[:id])
   end
 

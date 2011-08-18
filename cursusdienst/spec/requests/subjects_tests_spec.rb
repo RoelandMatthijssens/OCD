@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "SubjectsTests" do
+
 	before(:each) do
 		@subject1 = Factory(:subject)
 		@subject2 = Factory(:subject)
@@ -153,6 +154,22 @@ describe "SubjectsTests" do
 				it "show the correct edit page" do
 					visit edit_subject_path :id => @subject1.id
 					page.should have_field "subject_name"
+					page.should have_link "add one"
+				end
+			end
+			describe "javascript", :js => true do
+				it 'should show dropdowns when link is clicked' do
+						
+					visit new_session_path
+					fill_in "User name", :with => @user1.user_name
+					fill_in "Password", :with => @user1.password
+					click_button("Sign in")
+					
+					visit edit_subject_path :id => @subject1.id
+					click_link "add one"
+					page.should have_select "Institute"
+					page.should have_select "Faculty"
+					page.should have_select "Discipline"
 				end
 			end
 			describe "'subject/1'" do
@@ -244,4 +261,3 @@ describe "SubjectsTests" do
 		end
 	end
 end
-      #it "TEST MANUAL: should create a new subject with one discipline"
