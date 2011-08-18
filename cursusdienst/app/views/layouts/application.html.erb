@@ -2,7 +2,6 @@
 <html
   xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <script type="text/javascript" src="firebug-lite/build/firebug-lite.js"></script>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title></title>
     <%= stylesheet_link_tag 'ocd_main/main' %>
@@ -76,14 +75,17 @@
           </div>
           <!-- Footer is a bit overly complicated but the only way I was 100% sure it would work from the first time --> 
           <div id="footer">
-            <div id="footer1"></div>	
+            <div id="footer1"></div>
             <div id="footer2">
               <div id="footerbannerdiv">
                 <%= image_tag "banners/footerbanner.gif", :alt=>"Footer Banner" %>
-              </div>	
-            </div>	
+              </div>
+            </div>
             <div id="footer3"></div>
-          </div>			
+						<div id="debug">
+							<%= debug(params) if Rails.env.development? %>
+						</div>
+          </div>
         </div>
       </div>
     </table>
