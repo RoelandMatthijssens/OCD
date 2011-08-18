@@ -1,0 +1,10 @@
+<h1>All Materials</h1>
+<%= link_to "Add a new message", new_message_path %>
+<%= will_paginate %>
+<ul class="messages">
+  <% @messages.each do |message| %>
+    <%= render message %>
+  <% end %>
+</ul>
+<%= will_paginate %>
+

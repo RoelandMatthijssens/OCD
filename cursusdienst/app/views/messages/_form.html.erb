@@ -1,0 +1,13 @@
+<%= form_for(@message) do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+
+  <div class='field'>
+    <%= f.label :content %> <br>
+    <%= f.text_area :content, :cols => 61, :rows => 7%> <br>
+		<%= f.hidden_field 'guild_id', :value => @guild %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit @submit %>
+  </div>
+<% end %>

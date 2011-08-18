@@ -73,7 +73,11 @@ describe "UsersTests" do
   end
   describe "while logged in with no special permissions" do
 		before(:each) do
-			login(@user1)
+			#login(@user1)
+			visit new_session_path
+			fill_in "User name", :with => @user1.user_name
+			fill_in "Password", :with => @user1.password
+			click_button("Sign in")
 		end
 		describe "GET" do
 			describe "'users'" do
@@ -154,7 +158,11 @@ describe "UsersTests" do
 		before(:each) do
 			p = PermissionGroup.create!(:name => "view_users")
 			@user1.permission_groups << p
-			login(@user1)
+			#login(@user1)
+			visit new_session_path
+			fill_in "User name", :with => @user1.user_name
+			fill_in "Password", :with => @user1.password
+			click_button("Sign in")
 		end
 		describe "GET 'users'" do
 			before(:each) do
@@ -212,7 +220,11 @@ describe "UsersTests" do
 		before(:each) do
 			p = PermissionGroup.create!(:name => "edit_users")
 			@user1.permission_groups << p
-			login(@user1)
+			#login(@user1)
+			visit new_session_path
+			fill_in "User name", :with => @user1.user_name
+			fill_in "Password", :with => @user1.password
+			click_button("Sign in")
 		end
 		describe "GET" do
 			describe "'users'" do
@@ -281,7 +293,11 @@ describe "UsersTests" do
 			p2 = Factory(:permission_group)
 			p3 = Factory(:permission_group)
 			p4 = Factory(:permission_group)
-			login(@user1)
+			#login(@user1)
+			visit new_session_path
+			fill_in "User name", :with => @user1.user_name
+			fill_in "Password", :with => @user1.password
+			click_button("Sign in")
 		end
 		describe "GET" do
 			describe "'users'" do

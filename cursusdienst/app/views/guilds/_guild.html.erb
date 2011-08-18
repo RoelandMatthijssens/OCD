@@ -1,5 +1,12 @@
 <div>
   <h1><%= link_to guild.name, guild %></h1>
+  
+	<% if current_user && not(current_user.guilds.include?(guild) )%>
+		<%= link_to "Join this guild", join_guild_path(guild), :method => :put %>
+	<% else %>
+		<p>You are a member of this guild</p>
+	<% end %>
+	
   <strong>Disciplines:</strong><br>
   <% guild.disciplines.each { |discipline| %>
     <strong><%= discipline.name %></strong><br/>
@@ -8,6 +15,13 @@
       <li><strong>Institute:</strong><%= discipline.faculty.institute.name %> <br/></li>
     </ul>
   <% } %>
+
+	<ul class="messages">
+		<% guild.messages.each do |message| %>
+			<%= render message %>
+		<% end %>
+	</ul>
+	<%= link_to "New Message", new_message_path(:guild_id => guild.id)  %><br/>
 
   <%= link_to "Edit this guild", edit_guild_path(guild) %>
 </div>

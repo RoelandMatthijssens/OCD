@@ -75,13 +75,19 @@ class UsersController < ApplicationController
 		unselected_ids = []
 		@permissions = @user.permission_groups
 		@permissions.each { |x| unselected_ids << x unless selected_ids.include?(x.id.to_s)}
-		
-		selected_ids && selected_ids.each do |permission_id|
-			p = PermissionGroup.find(permission_id)
-			@user.permission_groups << p unless @permissions.include? p
-		end
-		unselected_ids.each do |permission|
-			@user.permission_groups.delete(permission)
+
+		if selected_ids.include?("-1")
+			@user.permission_groups = []
+		elsif selected_ids.include?(0.to_s)
+			@user.permission_groups << PermissionGroup.all
+		else
+			selected_ids && selected_ids.each do |permission_id|
+				p = PermissionGroup.find(permission_id)
+				@user.permission_groups << p unless @permissions.include? p
+			end
+			unselected_ids.each do |permission|
+				@user.permission_groups.delete(permission)
+			end
 		end
 		flash[:succes] = "Permissions updated"
 		redirect_to edit_permissions_user_path

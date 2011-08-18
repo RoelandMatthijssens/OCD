@@ -38,7 +38,11 @@ describe "SubjectsTests" do
 	end
 	describe "while logged in with no special permissions" do
 		before(:each) do
-			login(@user1)
+			#login(@user1)
+			visit new_session_path
+			fill_in "User name", :with => @user1.user_name
+			fill_in "Password", :with => @user1.password
+			click_button("Sign in")
 		end
 		describe "GET" do
 			describe "'options'" do
@@ -71,7 +75,11 @@ describe "SubjectsTests" do
 		before(:each) do
 			p = PermissionGroup.create!(:name => "view_options")
 			@user1.permission_groups << p
-			login(@user1)
+			#login(@user1)
+			visit new_session_path
+			fill_in "User name", :with => @user1.user_name
+			fill_in "Password", :with => @user1.password
+			click_button("Sign in")
 		end
 		describe "GET" do
 			describe "'options'" do
@@ -125,7 +133,11 @@ describe "SubjectsTests" do
 		before(:each) do
 			p = PermissionGroup.create!(:name => "edit_options")
 			@user1.permission_groups << p
-			login(@user1)
+			#login(@user1)
+			visit new_session_path
+			fill_in "User name", :with => @user1.user_name
+			fill_in "Password", :with => @user1.password
+			click_button("Sign in")
 		end
 		describe "GET" do
 			describe "'options'" do
@@ -176,7 +188,11 @@ describe "SubjectsTests" do
 		before(:each) do
 			p = PermissionGroup.create!(:name => "create_options")
 			@user1.permission_groups << p
-			login(@user1)
+			#login(@user1)
+			visit new_session_path
+			fill_in "User name", :with => @user1.user_name
+			fill_in "Password", :with => @user1.password
+			click_button("Sign in")
 		end
 		describe "GET" do
 			describe "'options'" do

@@ -87,6 +87,15 @@ Factory.define :material do |material|
   end
 end
 
+Factory.sequence(:message_id) { |n| n }
+Factory.define :message do |message|
+  message.after_build do |m|
+    id = Factory.next :message_id
+    m.content = "message_content #{id}"
+  end
+  message.association :guild
+end
+
 Factory.sequence(:option_id) { |n| n }
 Factory.define :option do |option|
   option.after_build do |o|

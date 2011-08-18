@@ -25,11 +25,15 @@ Cursusdienst::Application.routes.draw do
   
   resources :subjects
   
-  resources :guilds
+	resources :guilds do
+		put :join, :on => :member
+	end
   
   resources :options
 
   resources :materials
+
+  resources :messages
 
   resources :permission_groups
   
