@@ -66,18 +66,25 @@ namespace :db do
 				s.save if s.valid?
 			 end
 		 end
-		
-		permissionNames = ["use_control_panel", "sell_materials",
+		#xxx_all_yyy is used when general permissions are only applicable for specific instances of yyy
+		#e.g. sell_materials => users can only mark materials as sellable for their own guild
+		#			sell_all_materials => the user can mark materials as sellable for any guild.. even if he is not a member of it.
+		permissionNames = [
+			#admin permissions
+			"use_control_panel", "sell_materials", "sell_all_materials", 'create_all_messages',
+			
+			#normal permissions
 			"edit_users"							,	"delete_users"							,	"view_users"							,	
 			"edit_permissions"				,	"delete_permissions"				,	"view_permissions"				,	"create_permissions"				,
 			"edit_disciplines"				,	"delete_disciplines"				,	"view_disciplines"				,	"create_disciplines"				,
 			"edit_subjects"						,	"delete_subjects"						,	"view_subjects"						,	"create_subjects"						,
 			"edit_permission_groups"	,	"delete_permission_groups"	,	"view_permission_groups"	,	"create_permission_groups"	,
 			"edit_options"						,	"delete_options"						,	"view_options"						,	"create_options"						,
-			"edit_institute"					,	"delete_institute"					,	"view_institute"					,	"create_institute"					,
+			"edit_institutes"					,	"delete_institutes"					,	"view_institutes"					,	"create_institutes"					,
 			"edit_guilds"							,	"delete_guilds"							,	"view_guilds"							,	"create_guilds"							,
 			"edit_materials"					,	"delete_materials"					,	"view_materials"					,	"create_materials"					,
 			"edit_faculties"					,	"delete_faculties"					,	"view_faculties"					,	"create_faculties"					,
+			"edit_messages"						,	"delete_messages"																				,	"create_messages"					,
 			]
 			#"edit_"						,	"delete_"						,	"view_"						,	"create_"						,
 		permissionNames.each do |name|
@@ -95,7 +102,7 @@ namespace :db do
 		
 		Subject.all.each do |subject|
 			materialNames = ["Boek", "Slides", "Samenvatting", "Cursusnotas"]
-			3.times do
+			1.times do
 				materialNames.each do |name|
 					m = Material.new(
 						:name => name
@@ -148,5 +155,11 @@ namespace :db do
 				)
 			u.save if u.valid?
 		end
+
+		Guild.create!(
+			:name => "InfoGroep",
+			:initials => "IG",
+			:disciplines => [Institute.first.faculties.first.disciplines.first]
+		)
 	end
 end

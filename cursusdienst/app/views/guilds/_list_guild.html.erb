@@ -15,13 +15,5 @@
       <li><strong>Institute:</strong><%= link_to discipline.faculty.institute.name, discipline.faculty.institute %> <br/></li>
     </ul>
   <% } %>
-
-	<ul class="messages">
-		<% guild.messages.each do |message| %>
-			<%= render message %>
-		<% end %>
-	</ul>
-	<%= link_to "New Message", new_message_path(:guild_id => guild.id) if current_user.can?('create_all_messages') || (current_user.can?('create_messages') && current_user.guilds.include?(guild)) %><br/>
-
   <%= link_to "Edit this guild", edit_guild_path(guild) %>
 </div>

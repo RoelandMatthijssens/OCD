@@ -157,21 +157,6 @@ describe "SubjectsTests" do
 					page.should have_link "add one"
 				end
 			end
-			describe "javascript", :js => true do
-				it 'should show dropdowns when link is clicked' do
-						
-					visit new_session_path
-					fill_in "User name", :with => @user1.user_name
-					fill_in "Password", :with => @user1.password
-					click_button("Sign in")
-					
-					visit edit_subject_path :id => @subject1.id
-					click_link "add one"
-					page.should have_select "Institute"
-					page.should have_select "Faculty"
-					page.should have_select "Discipline"
-				end
-			end
 			describe "'subject/1'" do
 				it "should deny access" do
 					visit subjects_path :id => @subject1.id
@@ -258,6 +243,22 @@ describe "SubjectsTests" do
 					end.should change(Subject, :count).by(1)
 				end
 			end
+		end
+	end
+
+	describe "javascript", :js => true do
+		it 'should show dropdowns when link is clicked' do
+			visit new_session_path
+			fill_in "User name", :with => @user1.user_name
+			fill_in "Password", :with => @user1.password
+			click_button("Sign in")
+			
+			visit edit_subject_path :id => @subject1.id
+			save_and_open_page
+			click_link "add one"
+			page.should have_select "Institute"
+			page.should have_select "Faculty"
+			page.should have_select "Discipline"
 		end
 	end
 end

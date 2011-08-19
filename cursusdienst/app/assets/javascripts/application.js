@@ -48,10 +48,11 @@ function delete_fields(link) {
 
 function filter_select_on_change(parent_id, child_id, data_key) {
     var id_value_string = $("select#"+parent_id).val();
+		var emptyrow = "<option value=\"" + "" + "\">" + "" + "</option>";
     if (id_value_string == "") { 
         // if the id is empty remove all the sub_selection options from being selectable and do not do any ajax
-        var row = "<option value=\"" + "" + "\">" + "" + "</option>";
-        $(row).appendTo("select#"+child_id);
+        $("select#"+child_id + " option").remove();
+        $(emptyrow).appendTo("select#"+child_id);
     }
     else {
         // Send the request and update sub category dropdown 
@@ -68,8 +69,7 @@ function filter_select_on_change(parent_id, child_id, data_key) {
                 // Clear all options from sub category select 
                 $("select#"+child_id + " option").remove();
                 //put in a empty default line
-                var row = "<option value=\"" + "" + "\">" + "" + "</option>";
-                $(row).appendTo("select#"+child_id);                        
+                $(emptyrow).appendTo("select#"+child_id);                        
                 // Fill sub category select 
                 $.each(data, function(i, j){
                     row = "<option value=\"" + j.id + "\">" + j.name + "</option>";   

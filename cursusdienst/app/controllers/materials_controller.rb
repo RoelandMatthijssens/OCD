@@ -22,6 +22,7 @@ class MaterialsController < ApplicationController
     @subjects = get_data_from_filter params[:material], :subject_id, Subject
     @materials = get_data_from_filter params[:material], :material_id, Subject
     @submit = "Create new Material"
+    @title = "Create new Material"
   end
 
   def create
@@ -78,9 +79,17 @@ class MaterialsController < ApplicationController
 		if g.empty?
 			redirect_to home_path
 		elsif g.size == 1
-			g[0].sells << material
+			g = g.first
+			if g.materials.include?(@material)
+				flash[:succes] = "#{g.name} is already selling #{@material.name}"
+			else
+				g.materials << @material
+				flash[:succes] = "#{g.name} is now selling #{@material.name}"
+			end
+			redirect_to materials_path
 		else
-			redirect_to home_path
+			flash[:succes] = "you have more than one guild, we dont know what guild to add the material to"
+			redirect_to materials_path
 		end
 	end
 	
