@@ -51,6 +51,7 @@ function filter_select_on_change(parent_id, child_id, data_key) {
     if (id_value_string == "") { 
         // if the id is empty remove all the sub_selection options from being selectable and do not do any ajax
         var row = "<option value=\"" + "" + "\">" + "" + "</option>";
+        $("select#"+child_id + " option").remove();
         $(row).appendTo("select#"+child_id);
     }
     else {
@@ -74,7 +75,8 @@ function filter_select_on_change(parent_id, child_id, data_key) {
                 $.each(data, function(i, j){
                     row = "<option value=\"" + j.id + "\">" + j.name + "</option>";   
                     $(row).appendTo("select#"+child_id);                     
-                });             
+                });
+                $("select#"+child_id)[0].onchange();
             }
         });
     };

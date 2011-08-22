@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   
   validates_uniqueness_of :user_name
   
-  belongs_to :discipline
+#  belongs_to :discipline
   has_and_belongs_to_many :permission_groups
   
   has_and_belongs_to_many :guilds

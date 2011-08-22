@@ -74,7 +74,7 @@ namespace :db do
 			"edit_subjects"						,	"delete_subjects"						,	"view_subjects"						,	"create_subjects"						,
 			"edit_permission_groups"	,	"delete_permission_groups"	,	"view_permission_groups"	,	"create_permission_groups"	,
 			"edit_options"						,	"delete_options"						,	"view_options"						,	"create_options"						,
-			"edit_institute"					,	"delete_institute"					,	"view_institute"					,	"create_institute"					,
+			"edit_institutes"					,	"delete_institutes"					,	"view_institutes"					,	"create_institutes"					,
 			"edit_guilds"							,	"delete_guilds"							,	"view_guilds"							,	"create_guilds"							,
 			"edit_materials"					,	"delete_materials"					,	"view_materials"					,	"create_materials"					,
 			"edit_faculties"					,	"delete_faculties"					,	"view_faculties"					,	"create_faculties"					,

@@ -4,20 +4,30 @@
     <% tag = f.object_name.gsub(/[^0-9]+/,'') %>
     <%= f.hidden_field :id, :value => 0 %>
 
-    <%= render :partial => "filters/institute", :locals => { :f => f, 
-      :id => :institute_id,
-      :dataset => Institute.all, :parent_id => "subject_disciplines_attributes_#{tag}_institute_id",
+    <%= label_tag "institute" %>
+    <%= render :partial => "filters/select_box", :locals => {
+      :filter_key_ajax => "institute",
+      :id => "subject[disciplines_attributes][#{tag}][institute_id]",
+      :dataset => Institute.all, 
+      :selected_id => "#{@dis_fac_inst[0][tag.to_i]}",
+      :parent_id => "subject_disciplines_attributes_#{tag}_institute_id",
       :child_id => "subject_disciplines_attributes_#{tag}_faculty_id"} %> <br />
 
-    <%= render :partial => "filters/faculty", :locals => { :f => f, 
-      :id => :faculty_id,
+    <%= label_tag "faculty" %>    
+    <%= render :partial => "filters/select_box", :locals => {
+      :filter_key_ajax => "faculty",
+      :id => "subject[disciplines_attributes][#{tag}][faculty_id]",
       :dataset => Faculty.find_all_by_institute_id(@dis_fac_inst[0][tag.to_i]), 
+      :selected_id => "#{@dis_fac_inst[1][tag.to_i]}",
       :parent_id => "subject_disciplines_attributes_#{tag}_faculty_id",
       :child_id => "subject_disciplines_attributes_#{tag}_id"} %> <br />
 
-    <%= render :partial => "filters/discipline", :locals => { :f => f,
-      :id => :id,
+    <%= label_tag "discipline" %>    
+    <%= render :partial => "filters/select_box", :locals => {
+      :filter_key_ajax => "discipline",
+      :id => "subject[disciplines_attributes][#{tag}][id]",
       :dataset => Discipline.find_all_by_faculty_id(@dis_fac_inst[1][tag.to_i]), 
+      :selected_id => "#{@dis_fac_inst[2][tag.to_i]}",
       :parent_id => "",
       :child_id => ""} %> <br />
 

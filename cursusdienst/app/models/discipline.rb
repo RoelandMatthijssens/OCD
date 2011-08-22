@@ -15,6 +15,10 @@ class Discipline < ActiveRecord::Base
     return "#{faculty.initials}-#{name}"
   end
   
+  def institute
+    faculty && faculty.institute
+  end
+  
   def institute_id
     faculty && faculty.institute.id
   end
