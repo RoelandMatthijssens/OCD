@@ -28,6 +28,7 @@ class FacultiesController < ApplicationController
       flash[:succes] = "Faculty created succesfully"
       redirect_to @faculty
     else
+      @selected_institute = get_id params[:faculty], :institute_id 
       render 'new'
     end
   end
@@ -36,6 +37,7 @@ class FacultiesController < ApplicationController
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('edit_faculties')
     @faculty = Faculty.find(params[:id])
+    @selected_institute = @faculty.institute_id.to_s
     @submit = "Update Faculty"
   end
 
@@ -47,6 +49,7 @@ class FacultiesController < ApplicationController
       flash[:succes] = "Faculty updated succesfully"
       redirect_to @faculty
     else
+      @selected_institute = get_id params[:faculty], :institute_id
       render 'edit'
     end
   end

@@ -65,10 +65,5 @@ class DisciplinesController < ApplicationController
 
   def destroy
   end
-
-  private
   
-  def get_id params, key
-    params[key] ? params[key] : ""
-  end
 end

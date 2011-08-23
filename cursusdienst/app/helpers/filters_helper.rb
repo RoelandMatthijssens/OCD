@@ -58,4 +58,9 @@ module FiltersHelper
     item unless item && item.empty?
   end
   
+  
+  def get_id params, key
+    params[key] ? params[key] : ""
+  end
+  
 end
