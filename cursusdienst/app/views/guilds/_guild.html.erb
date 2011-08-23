@@ -16,12 +16,26 @@
     </ul>
   <% } %>
 
-	<ul class="messages">
-		<% guild.messages.each do |message| %>
-			<%= render message %>
-		<% end %>
-	</ul>
-	<%= link_to "New Message", new_message_path(:guild_id => guild.id) if current_user.can?('create_all_messages') || (current_user.can?('create_messages') && current_user.guilds.include?(guild)) %><br/>
-
+	<h2>Supplies</h2>
+	<%= link_to_function "Show", "$('#supplies').toggle()" %>
+	<div class="supplies", id="supplies", style="display:none;">
+		<ul class="supplies">
+			<%= "not selling any materials" if guild.materials.empty?%>
+			<% guild.materials.each do |supply| %>
+				<%= render supply %>
+			<% end %>
+		</ul>
+	</div>
+	
+	<h2>Messages</h2>
+	<%= link_to_function "Show", "$('#messages').toggle()" %>
+	<div class="messages", id="messages", style="display:none;">
+		<ul class="messages">
+			<% guild.messages.each do |message| %>
+				<%= render message %>
+			<% end %>
+		</ul>
+		<%= link_to "New Message", new_message_path(:guild_id => guild.id) if current_user.can?('create_all_messages') || (current_user.can?('create_messages') && current_user.guilds.include?(guild)) %><br/>
+	</div><br/>
   <%= link_to "Edit this guild", edit_guild_path(guild) %>
 </div>

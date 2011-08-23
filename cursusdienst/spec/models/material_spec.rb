@@ -17,6 +17,8 @@ describe Material do
   it { should have_many(:sales) }
   it { should have_many(:users).through(:sales) }
   
+  it { should have_and_belong_to_many(:orders)}
+  
   after do
     ::ActiveSupport::Deprecation.silenced = @old_silence_config
   end

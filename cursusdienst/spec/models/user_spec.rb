@@ -22,6 +22,7 @@ describe User do
   it { should respond_to(:encrypted_password) }
   it { should have_many(:sales) }
   it { should have_many(:materials).through(:sales) }
+  it { should have_many (:orders) }
   
   
   describe "other tests" do

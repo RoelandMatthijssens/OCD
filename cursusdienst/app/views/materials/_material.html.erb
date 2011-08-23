@@ -12,7 +12,13 @@
 	<% end %>
 	<%= link_to "Edit this material", edit_material_path(material) %><br/>
 	<% if current_user.can?("sell_materials") %>
-		<% unless current_user.guilds.size > 1 || current_user.guilds.first.materials.include?(material) %>
+		<% if current_user.guilds.size == 0 %>
+			<p>Join a guild to add materials for it.</p>
+		<% elsif current_user.guilds.size > 1 %>
+			<p>You are in more than one guild. We don't know which guild you want to sell the material.</p>
+		<% elsif current_user.guilds.first.materials.include?(material)%>
+			<p>material already added to <%= current_user.guilds.first.name %></p>
+		<% else %>
 			<%= link_to "Add this material to the guilds supply", sell_material_path(material), :method => :put %>
 		<% end %>
 	<% end %>

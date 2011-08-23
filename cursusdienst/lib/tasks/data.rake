@@ -156,10 +156,12 @@ namespace :db do
 			u.save if u.valid?
 		end
 
-		Guild.create!(
+		infogroep = Guild.create!(
 			:name => "InfoGroep",
 			:initials => "IG",
 			:disciplines => [Institute.first.faculties.first.disciplines.first]
 		)
+
+		User.all.each { |u| u.guilds <<  infogroep}
 	end
 end
