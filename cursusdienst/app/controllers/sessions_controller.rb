@@ -17,6 +17,8 @@ class SessionsController < ApplicationController
 				x = session[:return_to]
 				clear_location
 				redirect_to x
+			elsif user.guilds.any?
+				redirect_to user.guilds.first
 			else
 				redirect_to user
 			end

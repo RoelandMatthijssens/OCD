@@ -1,15 +1,15 @@
 class GuildsController < ApplicationController
   def index
-		deny_access and return unless signed_in?
-		deny_privileged_access and return unless current_user.can?('view_guilds')
+		#deny_access and return unless signed_in?
+		#deny_privileged_access and return unless current_user.can?('view_guilds')
     @title = "Guilds"
     @guilds = Guild.paginate(:page => params[:page], :per_page => 10)
   end
 
   def show
-		deny_access and return unless signed_in?
-		deny_privileged_access and return unless current_user.can?('view_guilds')
     @guild = Guild.find(params[:id])
+		deny_access and return unless signed_in?
+		deny_privileged_access and return unless current_user.can?('view_guilds') || current_user.guilds.include?(@guild)
   end
 
   def new

@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :disciplines
   has_many :sales
   has_many :materials, :through => :sales
+  has_many :orders
   
   default_scope :order => "users.last_name, users.name ASC"
   
