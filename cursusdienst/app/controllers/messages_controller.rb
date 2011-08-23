@@ -35,7 +35,7 @@ class MessagesController < ApplicationController
 		@message = Message.find(params[:id])
     if @message.update_attributes(params[:message])
       flash[:succes] = "Message updated succesfully"
-      redirect_to @message
+      redirect_to @message.guild
     else
       render 'edit'
     end

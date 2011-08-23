@@ -3,7 +3,7 @@
 <%= will_paginate %>
 <ul class="guilds">
   <% @guilds.each do |guild| %>
-    <%= render guild %>
+    <%= render :partial => 'list_guild', :locals => { :guild => guild } %>
   <% end %>
 </ul>
 <%= will_paginate %>
