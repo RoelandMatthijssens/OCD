@@ -3,25 +3,31 @@
   <% if :id %>
     <% tag = "new_disciplines" %>
     <%= f.hidden_field :id, :value => 0 %>
-		<% institutes = Institute.all %>
-		<% faculties = institutes.first.faculties %>
-		<% disciplines = faculties.first.disciplines %>
 
-    <%= render :partial => "filters/institute", :locals => { :f => f, 
-      :id => :institute_id,
-      :dataset => institutes, 
+    <%= label_tag "institute" %>
+    <%= render :partial => "filters/select_box", :locals => {
+      :filter_key_ajax => "institute",
+      :id => "subject[disciplines_attributes][#{tag}][institute_id]",
+      :dataset => get_institutes, 
+      :selected_id => "",
       :parent_id => "subject_disciplines_attributes_#{tag}_institute_id",
       :child_id => "subject_disciplines_attributes_#{tag}_faculty_id"} %> <br />
 
-    <%= render :partial => "filters/faculty", :locals => { :f => f, 
-      :id => :faculty_id,
-      :dataset => faculties, 
+    <%= label_tag "faculty" %>    
+    <%= render :partial => "filters/select_box", :locals => {
+      :filter_key_ajax => "faculty",
+      :id => "subject[disciplines_attributes][#{tag}][faculty_id]",
+      :dataset => get_faculties, 
+      :selected_id => "",
       :parent_id => "subject_disciplines_attributes_#{tag}_faculty_id",
       :child_id => "subject_disciplines_attributes_#{tag}_id"} %> <br />
 
-    <%= render :partial => "filters/discipline", :locals => { :f => f,
-      :id => :id,
-      :dataset => disciplines, 
+    <%= label_tag "discipline" %>    
+    <%= render :partial => "filters/select_box", :locals => {
+      :filter_key_ajax => "discipline",
+      :id => "subject[disciplines_attributes][#{tag}][id]",
+      :dataset => get_disciplines, 
+      :selected_id => "",
       :parent_id => "",
       :child_id => ""} %> <br />
 

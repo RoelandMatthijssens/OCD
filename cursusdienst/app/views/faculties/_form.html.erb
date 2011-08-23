@@ -11,12 +11,14 @@
     <%= f.text_field :initials %> <br>
   </div>
   <div class='field'>
-    <%= f.label :institute %> <br>
-    <%= f.collection_select(:institute_id,
-      Institute.all,
-      :id,
-      :name,
-      { :prompt => true })%> <br>
+    <%= label_tag "institute" %>
+    <%= render :partial => "filters/select_box", :locals => {
+      :filter_key_ajax => "institute",
+      :id => "faculty[institute_id]",
+      :dataset => get_institutes, 
+      :selected_id => @selected_institute,
+      :parent_id => "",
+      :child_id => ""} %> <br />
   </div>
   <div class="actions">
     <%= f.submit @submit %>

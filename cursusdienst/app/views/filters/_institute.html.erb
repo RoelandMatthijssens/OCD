@@ -1,4 +1,7 @@
-<%= label_tag "institute" %>
-<%= f.collection_select :institute_id,
-  dataset, :id, :name, { :prompt => true }, 
-  {:onchange=>filter_select_on_change(parent_id, child_id, "institute")} %>
+<%= select_tag id, 
+  options_from_collection_for_select(dataset, :id, :name, selected_item(selected_id)), 
+  if parent_id && child_id
+    {:onchange=>filter_select_on_change(parent_id, child_id, filter_key_ajax)}
+  else
+    {}
+  end %>

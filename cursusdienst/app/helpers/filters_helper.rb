@@ -34,4 +34,33 @@ module FiltersHelper
     end
   end
   
+  def get_institutes
+    Institute.all
+  end
+  
+  def get_faculties
+    if signed_in? && !current_user.disciplines.empty?
+      current_user.disciplines.first.institute.facultities
+    else
+      Institute.first.faculties
+    end
+  end
+  
+  def get_disciplines
+    if signed_in? && !current_user.disciplines.empty?
+      current_user.disciplines.first.faculty.disciplines
+    else
+      Institute.first.faculties.first.disciplines
+    end
+  end
+  
+  def selected_item item
+    item unless item && item.empty?
+  end
+  
+  
+  def get_id params, key
+    params[key] ? params[key] : ""
+  end
+  
 end
