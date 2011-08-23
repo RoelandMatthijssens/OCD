@@ -246,19 +246,19 @@ describe "SubjectsTests" do
 		end
 	end
 
-	describe "javascript", :js => true do
-		it 'should show dropdowns when link is clicked' do
-			visit new_session_path
-			fill_in "User name", :with => @user1.user_name
-			fill_in "Password", :with => @user1.password
-			click_button("Sign in")
+	#describe "javascript", :js => true do
+		#it 'should show dropdowns when link is clicked' do
+			#visit new_session_path
+			#fill_in "User name", :with => @user1.user_name
+			#fill_in "Password", :with => @user1.password
+			#click_button("Sign in")
 			
-			visit edit_subject_path :id => @subject1.id
-			save_and_open_page
-			click_link "add one"
-			page.should have_select "Institute"
-			page.should have_select "Faculty"
-			page.should have_select "Discipline"
-		end
-	end
+			#visit edit_subject_path :id => @subject1.id
+			#save_and_open_page
+			#click_link "add one"
+			#page.should have_select "Institute"
+			#page.should have_select "Faculty"
+			#page.should have_select "Discipline"
+		#end
+	#end
 end

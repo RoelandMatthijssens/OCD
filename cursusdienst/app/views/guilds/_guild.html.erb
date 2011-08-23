@@ -35,7 +35,7 @@
 				<%= render message %>
 			<% end %>
 		</ul>
-		<%= link_to "New Message", new_message_path(:guild_id => guild.id) if current_user.can?('create_all_messages') || (current_user.can?('create_messages') && current_user.guilds.include?(guild)) %><br/>
+		<%= link_to "New Message", new_message_path(:guild_id => guild.id) if (current_user && current_user.can?('create_all_messages')) || (current_user && current_user.can?('create_messages') && current_user.guilds.include?(guild)) %><br/>
 	</div><br/>
   <%= link_to "Edit this guild", edit_guild_path(guild) %>
 </div>
