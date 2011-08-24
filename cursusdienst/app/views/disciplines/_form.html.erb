@@ -20,7 +20,7 @@
     <%= render :partial => "filters/select_box", :locals => {
       :filter_key_ajax => "faculty",
       :id => "discipline[faculty_id]",
-      :dataset => get_faculties, 
+      :dataset => get_faculties(@selected_institute), 
       :selected_id => @selected_faculty,
       :parent_id => "",
       :child_id => ""} %> <br />
