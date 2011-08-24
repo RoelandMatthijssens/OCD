@@ -163,5 +163,12 @@ namespace :db do
 		)
 
 		User.all.each { |u| u.guilds <<  infogroep}
+		
+		x = Guild.first
+		x.disciplines.each do |discipline|
+			discipline.subjects.each do |subject|
+					x.materials << subject.materials
+			end
+		end
 	end
 end
