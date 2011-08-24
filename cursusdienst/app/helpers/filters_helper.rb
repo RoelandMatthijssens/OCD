@@ -38,19 +38,43 @@ module FiltersHelper
     Institute.all
   end
   
-  def get_faculties
-    if signed_in? && !current_user.disciplines.empty?
-      current_user.disciplines.first.institute.facultities
+  def get_faculties current_institute_id = nil 
+    if current_institute_id && !current_institute_id.empty?
+      Institute.find(current_institute_id).faculties
+    elsif signed_in? && !current_user.disciplines.empty?
+      current_user.disciplines.first.institute.faculties
     else
       Institute.first.faculties
     end
   end
   
-  def get_disciplines
-    if signed_in? && !current_user.disciplines.empty?
+  def get_disciplines current_faculty_id = nil
+    if current_faculty_id && !current_faculty_id.empty?
+      Faculty.find(current_faculty_id).disciplines
+    elsif signed_in? && !current_user.disciplines.empty?
       current_user.disciplines.first.faculty.disciplines
     else
       Institute.first.faculties.first.disciplines
+    end
+  end
+  
+  def get_subjects current_discipline_id = nil
+    if current_discipline_id && !current_discipline_id.empty?
+      Discipline.find(current_discipline_id).subjects
+    elsif signed_in? && !current_user.disciplines.empty?
+      current_user.disciplines.first.faculty.disciplines.first.subjects
+    else
+      Institute.first.faculties.first.disciplines.first.subjects
+    end
+  end
+  
+  def get_materials current_subject_id = nil
+    if current_subject_id && !current_subject_id.empty?
+      Subject.find(current_subject_id).materials
+    elsif signed_in? && !current_user.disciplines.empty?
+      current_user.disciplines.first.faculty.disciplines.first.subjects.first.materials
+    else
+      Institute.first.faculties.first.disciplines.first.subjects.first.materials
     end
   end
   

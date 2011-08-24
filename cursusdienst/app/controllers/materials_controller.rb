@@ -17,12 +17,17 @@ class MaterialsController < ApplicationController
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('create_materials')
     @material = Material.new
-    @faculties = get_data_from_filter params[:material], :faculty_id, Faculty
-    @disciplines = get_data_from_filter params[:material], :discipline_id, Discipline
-    @subjects = get_data_from_filter params[:material], :subject_id, Subject
-    @materials = get_data_from_filter params[:material], :material_id, Subject
     @submit = "Create new Material"
     @title = "Create new Material"
+    @subject_params_institute = [get_institutes, ""]
+    @subject_params_faculty = [get_faculties, ""]
+    @subject_params_discipline = [get_disciplines, ""]
+    @subject_params_subject = [get_subjects, ""]
+    @parent_params_institute = [get_institutes, ""]
+    @parent_params_faculty = [get_faculties, ""]
+    @parent_params_discipline = [get_disciplines, ""]
+    @parent_params_subject = [get_subjects, ""]
+    @parent_params_material = [get_materials, ""]
   end
 
   def create
@@ -35,10 +40,16 @@ class MaterialsController < ApplicationController
       redirect_to @material
     else
       filter = params[:material]
-      @faculties = get_data_from_filter filter, :faculty_id, Faculty
-      @disciplines = get_data_from_filter filter, :discipline_id, Discipline
-      @subjects = get_data_from_filter params[:material], :subject_id, Subject
-			flash[:notice] = "NOT created material. #{params[:subject]}"
+			flash[:notice] = "NOT created material. #{params[:material]}"
+      @subject_params_institute = [get_institutes, get_selected_item(params, :subject, :institute_id)]
+      @subject_params_faculty = [get_faculties(get_selected_item(params, :subject, :institute_id)), get_selected_item(params, :subject, :faculty_id)]
+      @subject_params_discipline = [get_disciplines(get_selected_item(params, :subject, :faculty_id)), get_selected_item(params, :subject, :discipline_id)]
+      @subject_params_subject = [get_subjects(get_selected_item(params, :subject, :discipline_id)), get_selected_item(params, :subject, :subject_id)]
+      @parent_params_institute = [get_institutes, get_selected_item(params, :parent, :institute_id)]
+      @parent_params_faculty = [get_faculties(get_selected_item(params, :parent, :institute_id)), get_selected_item(params, :parent, :faculty_id)]
+      @parent_params_discipline = [get_disciplines(get_selected_item(params, :parent, :faculty_id)), get_selected_item(params, :parent, :discipline_id)]
+      @parent_params_subject = [get_subjects(get_selected_item(params, :parent, :discipline_id)), get_selected_item(params, :parent, :subject_id)]
+      @parent_params_material = [get_materials(get_selected_item(params, :parent, :subject_id)), get_selected_item(params, :parent, :material_id)]
       render 'new'
     end
   end
@@ -47,10 +58,31 @@ class MaterialsController < ApplicationController
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('edit_materials')
     @material = Material.find(params[:id])
-    @faculties = Institute.find(@material.institute_id).faculties #get_data_from_material @material, :faculty_id
-    @disciplines = Faculty.find(@material.faculty_id).disciplines #get_data_from_material @material, :discipline_id
-    @subjects = Discipline.find(@material.discipline_id).subjects#get_data_from_material @material, :subject_id
     @parents = @material.subject.materials
+    if @material.subject
+      @subject_params_institute = [get_institutes, @material.institute_id.to_s]
+      @subject_params_faculty = [get_faculties(@material.institute_id.to_s), @material.faculty_id.to_s]
+      @subject_params_discipline = [get_disciplines(@material.faculty_id.to_s), @material.discipline_id.to_s]
+      @subject_params_subject = [get_subjects(@material.discipline_id.to_s), @material.subject_id.to_s]
+    else
+      @subject_params_institute = [get_institutes, ""]
+      @subject_params_faculty = [get_faculties, ""]
+      @subject_params_discipline = [get_disciplines, ""]
+      @subject_params_subject = [get_subjects, ""]
+    end
+    if @material.parent
+      @parent_params_institute = [get_institutes, @material.parent.institute_id.to_s]
+      @parent_params_faculty = [get_faculties(@material.parent.institute_id.to_s), @material.parent.faculty_id.to_s]
+      @parent_params_discipline = [get_disciplines(@material.parent.faculty_id.to_s), @material.parent.discipline_id.to_s]
+      @parent_params_subject = [get_subjects(@material.parent.discipline_id.to_s), @material.parent.subject_id.to_s]
+      @parent_params_material = [get_materials(@material.parent.subject_id.to_s), @material.parent_id.to_s]
+    else
+      @parent_params_institute = [get_institutes, ""]
+      @parent_params_faculty = [get_faculties, ""]
+      @parent_params_discipline = [get_disciplines, ""]
+      @parent_params_subject = [get_subjects, ""]
+      @parent_params_material = [get_materials, ""]
+    end
     @submit = "Update Material"
   end
 
@@ -64,9 +96,15 @@ class MaterialsController < ApplicationController
       flash[:succes] = "Material updated succesfully"
       redirect_to @material
     else
-      @faculties = get_data_from_material @material, :faculty_id
-      @disciplines = get_data_from_material @material, :discipline_id
-      @subjects = get_data_from_material @material, :subject_id
+      @subject_params_institute = [get_institutes, get_selected_item(params, :subject, :institute_id)]
+      @subject_params_faculty = [get_faculties(get_selected_item(params, :subject, :institute_id)), get_selected_item(params, :subject, :faculty_id)]
+      @subject_params_discipline = [get_disciplines(get_selected_item(params, :subject, :faculty_id)), get_selected_item(params, :subject, :discipline_id)]
+      @subject_params_subject = [get_subjects(get_selected_item(params, :subject, :discipline_id)), get_selected_item(params, :subject, :subject_id)]
+      @parent_params_institute = [get_institutes, get_selected_item(params, :parent, :institute_id)]
+      @parent_params_faculty = [get_faculties(get_selected_item(params, :parent, :institute_id)), get_selected_item(params, :parent, :faculty_id)]
+      @parent_params_discipline = [get_disciplines(get_selected_item(params, :parent, :faculty_id)), get_selected_item(params, :parent, :discipline_id)]
+      @parent_params_subject = [get_subjects(get_selected_item(params, :parent, :discipline_id)), get_selected_item(params, :parent, :subject_id)]
+      @parent_params_material = [get_materials(get_selected_item(params, :parent, :subject_id)), get_selected_item(params, :parent, :material_id)]
       render 'edit'
     end
   end
@@ -110,7 +148,13 @@ class MaterialsController < ApplicationController
     } unless par[:options_attributes].nil?
     return os
   end
-  
-  
+    
+  def get_selected_item params = nil, type = nil, key = nil
+    if type == :subject && key == :subject_id || type == :parent && key == :parent_id
+      params && params[:material] && params[:material][key] ? params[:material][key] : ""
+    else
+      params && params[type] &&  params[type][key] ? params[type][key] : ""
+    end
+  end
   
 end
