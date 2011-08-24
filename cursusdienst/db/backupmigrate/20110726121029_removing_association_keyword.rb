@@ -20,7 +20,7 @@ class RemovingAssociationKeyword < ActiveRecord::Migration
       t.integer :user_id
     end
     
-    remove_column :sales, :association_id
-    add_column :sales, :guild_id, :integer
+    #remove_column :sales, :association_id
+    #add_column :sales, :guild_id, :integer
   end
 end
