@@ -63,13 +63,6 @@ class MergeMigrations < ActiveRecord::Migration
 			t.datetime "updated_at"
 		end
 
-		create_table "materials_orders", :id => false, :force => true do |t|
-			t.integer  "material_id"
-			t.integer  "order_id"
-			t.datetime "created_at"
-			t.datetime "updated_at"
-		end
-
 		create_table "messages", :force => true do |t|
 			t.integer  "guild_id"
 			t.string   "content"

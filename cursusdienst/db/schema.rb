@@ -59,6 +59,24 @@ ActiveRecord::Schema.define(:version => 20110824110709) do
     t.datetime "updated_at"
   end
 
+<<<<<<< HEAD
+=======
+  create_table "material_options", :force => true do |t|
+    t.string   "key"
+    t.string   "value"
+    t.integer  "material_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "material_orders", :force => true do |t|
+    t.integer  "order_id"
+    t.integer  "material_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+>>>>>>> a2b6316532d243d6a0bdf45f8c8a9aaaf48e9166
   create_table "materials", :force => true do |t|
     t.string   "name"
     t.integer  "subject_id"
@@ -72,13 +90,6 @@ ActiveRecord::Schema.define(:version => 20110824110709) do
   create_table "materials_options", :id => false, :force => true do |t|
     t.integer  "material_id"
     t.integer  "option_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "materials_orders", :id => false, :force => true do |t|
-    t.integer  "material_id"
-    t.integer  "order_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

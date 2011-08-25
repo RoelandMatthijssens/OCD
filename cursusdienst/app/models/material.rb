@@ -10,7 +10,8 @@ class Material < ActiveRecord::Base
   has_many :users, :through => :sales
 #  validates :subject, :presence => true
   has_and_belongs_to_many :options
-  has_and_belongs_to_many :orders
+  has_many :material_orders
+  has_many :orders, :through => :material_orders
   default_scope :order => "materials.name ASC"
   
   accepts_nested_attributes_for :options
