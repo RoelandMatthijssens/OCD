@@ -1,26 +1,43 @@
-<div class="fields" id="subject_field">
+<div class="fields" id="material_field">
   <%= f.label :subject %> <br>
-  <%= render :partial => "filters/institute", :locals => { :f => f, 
-    :id => :institute_id,
-    :dataset => Institute.all, :parent_id => "material_institute_id",
-    :child_id => "material_faculty_id"} %><br />
+  <%= label_tag "institute" %>
+  <%= render :partial => "filters/select_box", :locals => {
+    :filter_key_ajax => "institute",
+    :id => "subject[institute_id]",
+    :dataset => @subject_params_institute[0], 
+    :selected_id => @subject_params_institute[1],
+    :parent_id => "subject_institute_id",
+    :child_id => "subject_faculty_id"} %> <br />
 
-  <%= render :partial => "filters/faculty", :locals => { :f => f, 
-    :id => :faculty_id,
-    :dataset => @faculties, :parent_id => "material_faculty_id",
-    :child_id => "material_discipline_id"} %><br />
+  <%= label_tag "faculty" %>    
+  <%= render :partial => "filters/select_box", :locals => {
+    :filter_key_ajax => "faculty",
+    :id => "subject[faculty_id]",
+    :dataset => @subject_params_faculty[0], 
+    :selected_id => @subject_params_faculty[1],
+    :parent_id => "subject_faculty_id",
+    :child_id => "subject_discipline_id"} %> <br />
 
-  <%= render :partial => "filters/discipline", :locals => { :f => f, 
-    :id => :discipline_id,
-    :dataset => @disciplines, :parent_id => "material_discipline_id",
-    :child_id => "material_subject_id"} %><br />
+  <%= label_tag "discipline" %>    
+  <%= render :partial => "filters/select_box", :locals => {
+    :filter_key_ajax => "discipline",
+    :id => "subject[discipline_id]",
+    :dataset => @subject_params_discipline[0], 
+    :selected_id => @subject_params_discipline[1],
+    :parent_id => "subject_discipline_id",
+    :child_id => "material_subject_id"} %> <br />
+    
+    <%= label_tag "subject" %>    
+  <%= render :partial => "filters/select_box", :locals => {
+    :filter_key_ajax => "subject",
+    :id => "material[subject_id]",
+    :dataset => @subject_params_subject[0], 
+    :selected_id => @subject_params_subject[1],
+    :parent_id => "",
+    :child_id => ""} %> <br />
 
-  <%= render :partial => "filters/subject", :locals => { :f => f, 
-    :id => :subject_id,
-    :dataset => @subjects, :parent_id => "",
-    :child_id => ""} %><br />
 
 
-  <%= remove_nearest_class_and_show_items "remove", "_destroy_subject", ["add_subject_link"], f %>
+  <%= remove_nearest_class_and_show_items "remove", "_destroy_material", ["add_subject_or_parent_link"], f %>
 
 </div>

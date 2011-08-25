@@ -8,6 +8,7 @@ class GuildsController < ApplicationController
 
   def show
     @guild = Guild.find(params[:id])
+    @materials = @guild.materials
 		#deny_access and return unless signed_in?
 		#deny_privileged_access and return unless current_user.can?('view_guilds') || current_user.guilds.include?(@guild)
   end

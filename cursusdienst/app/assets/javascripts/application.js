@@ -53,6 +53,7 @@ function filter_select_on_change(parent_id, child_id, data_key) {
         var row = "<option value=\"" + "" + "\">" + "" + "</option>";
         $("select#"+child_id + " option").remove();
         $(row).appendTo("select#"+child_id);
+        $("select#"+child_id)[0].onchange();
     }
     else {
         // Send the request and update sub category dropdown 

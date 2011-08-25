@@ -16,12 +16,16 @@
   </div>
   
   <div class='field' id="subject_field">
-    <%= render "subject_field", :f => f if @material.subject%>
-    <div class="field" id="add_subject_link" <%= "style='display: none;'" if @material.subject  %> >
-      <%= link_to_create_hide_items "add to subject", :subject, ["add_subject_link"],f %>
+    <%= render "subject_field", :f => f if @material.subject_id%>
+    <div class='field' id="parent_field">
+      <%= render "parent_field", :f => f if @material.parent_id %>
+    </div>
+    <div class="field" id="add_subject_or_parent_link" <%= "style='display: none;'" if @material.subject_id || @material.parent_id%> >
+      <%= link_to_create_hide_items "add to subject", :subject, ["add_subject_or_parent_link"],f %> or 
+      <%= link_to_create_hide_items "add to parent", :parent, ["add_subject_or_parent_link"],f %>
     </div>
   </div>
-  
+
 
 
   <div class="actions">
