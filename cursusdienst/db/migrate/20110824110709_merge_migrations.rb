@@ -109,6 +109,8 @@ class MergeMigrations < ActiveRecord::Migration
 
 		create_table "subjects", :force => true do |t|
 			t.string   "name"
+			t.integer  "year"
+			t.string   "year_type"
 			t.datetime "created_at"
 			t.datetime "updated_at"
 		end

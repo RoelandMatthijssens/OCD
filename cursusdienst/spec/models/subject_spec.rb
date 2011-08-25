@@ -8,6 +8,8 @@ describe Subject do
   subject { Factory(:subject) }
   
   it { should validate_presence_of(:name) }
+  it { should validate_presence_of(:year) }
+  it { should validate_presence_of(:year_type) }
   it { should have_many(:teachings) }
   it { should have_many(:disciplines).through(:teachings) }
   

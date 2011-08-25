@@ -59,7 +59,9 @@ namespace :db do
 			id = 0
 			3.times do
 				s = Subject.new(
-					:name => discipline.faculty.institute.initials + " - " + discipline.faculty.initials + " - " + discipline.name + " - " + id.to_s+" subject"
+					:name => discipline.faculty.institute.initials + " - " + discipline.faculty.initials + " - " + discipline.name + " - " + id.to_s+" subject",
+					:year => rand(3)+1,
+					:year_type => ['bachelor', 'master'][rand(2)],
 					)
 				id += 1
 				s.disciplines << discipline

@@ -1,5 +1,8 @@
 <div>
   <h1><%= link_to subject.name, subject %></h1>
+	<ul class="info">
+		<li><strong>Year: </strong><%= subject.year.to_s + ' ' + subject.year_type %></li>
+	</ul>
   <strong>Disciplines:</strong><br>
   <% subject.disciplines.each { |discipline| %>
     <strong><%= discipline.name %></strong><br/>

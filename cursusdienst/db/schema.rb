@@ -46,11 +46,6 @@ ActiveRecord::Schema.define(:version => 20110825152829) do
     t.integer "discipline_id"
   end
 
-  create_table "guilds_disciplines", :id => false, :force => true do |t|
-    t.integer "guild_id"
-    t.integer "user_id"
-  end
-
   create_table "guilds_users", :id => false, :force => true do |t|
     t.integer "guild_id"
     t.integer "user_id"
@@ -60,14 +55,6 @@ ActiveRecord::Schema.define(:version => 20110825152829) do
     t.string   "name"
     t.string   "initials"
     t.string   "location"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "material_options", :force => true do |t|
-    t.string   "key"
-    t.string   "value"
-    t.integer  "material_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -109,15 +96,6 @@ ActiveRecord::Schema.define(:version => 20110825152829) do
     t.string   "name"
   end
 
-  create_table "order", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "guild_id"
-    t.string   "order_key"
-    t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "orders", :force => true do |t|
     t.integer  "user_id"
     t.integer  "guild_id"
@@ -150,7 +128,7 @@ ActiveRecord::Schema.define(:version => 20110825152829) do
     t.datetime "updated_at"
   end
 
-  create_table "shopping_carts", :force => true do |t|
+  create_table "shopping_cart_items", :force => true do |t|
     t.integer  "user_id"
     t.integer  "material_id"
     t.integer  "amount"
@@ -160,6 +138,8 @@ ActiveRecord::Schema.define(:version => 20110825152829) do
 
   create_table "subjects", :force => true do |t|
     t.string   "name"
+    t.integer  "year"
+    t.string   "year_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
