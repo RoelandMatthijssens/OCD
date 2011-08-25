@@ -68,7 +68,7 @@ class UsersController < ApplicationController
 			deny_access
 		end
   end
-  
+
   def update_permissions
 		@user = User.find(params[:id])
 		selected_ids = params[:permission_ids]
@@ -94,7 +94,7 @@ class UsersController < ApplicationController
   end
 
  private
- 
+
 	def authenticate
 		deny_access unless signed_in?
 	end

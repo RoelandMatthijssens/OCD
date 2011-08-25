@@ -48,7 +48,7 @@ function delete_fields(link) {
 
 function filter_select_on_change(parent_id, child_id, data_key) {
     var id_value_string = $("select#"+parent_id).val();
-    if (id_value_string == "") { 
+    if (id_value_string == "") {
         // if the id is empty remove all the sub_selection options from being selectable and do not do any ajax
         var row = "<option value=\"" + "" + "\">" + "" + "</option>";
         $("select#"+child_id + " option").remove();
@@ -56,7 +56,7 @@ function filter_select_on_change(parent_id, child_id, data_key) {
         $("select#"+child_id)[0].onchange();
     }
     else {
-        // Send the request and update sub category dropdown 
+        // Send the request and update sub category dropdown
         $.ajax({
             dataType: "json",
             cache: false,
@@ -66,16 +66,16 @@ function filter_select_on_change(parent_id, child_id, data_key) {
             error: function(XMLHttpRequest, errorTextStatus, error){
 								$('#ajax_errors').append("Failed to submit : "+ errorTextStatus+" ;"+error)
             },
-            success: function(data){                    
-                // Clear all options from sub category select 
+            success: function(data){
+                // Clear all options from sub category select
                 $("select#"+child_id + " option").remove();
                 //put in a empty default line
                 var row = "<option value=\"" + "" + "\">" + "" + "</option>";
-                $(row).appendTo("select#"+child_id);                        
-                // Fill sub category select 
+                $(row).appendTo("select#"+child_id);
+                // Fill sub category select
                 $.each(data, function(i, j){
-                    row = "<option value=\"" + j.id + "\">" + j.name + "</option>";   
-                    $(row).appendTo("select#"+child_id);                     
+                    row = "<option value=\"" + j.id + "\">" + j.name + "</option>";
+                    $(row).appendTo("select#"+child_id);
                 });
                 $("select#"+child_id)[0].onchange();
             }
@@ -87,8 +87,7 @@ function add_to_cart(material_id) {
 	$.ajax({
 		dataType: "json",
 		cache: false,
-		url: '/materials/add_to_cart?',
-		data: "material_id=" + material_id,
+		url: '/materials/'+material_id+'/add_to_cart?',
 		timeout: 2000,
 		error: function(XMLHttpRequest, errorTextStatus, error){
 			// flash error message

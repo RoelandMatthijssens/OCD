@@ -137,20 +137,23 @@ class MaterialsController < ApplicationController
 		#deny_access and return unless signed_in?
 		#deny_privileged_access and return unless current_user.can?('buy_materials')
 		@material = Material.find(params[:id])
-		cart = session[:cart] || []
-		cart << {:material => material.id, :amount => 1}
-		session[:cart] ? session[:cart] << {:material => material.id, :amount => 1} : session[:cart] = [{:material => material.id, :amount => 1}]
+		session[:cart] ||= []
+		session[:cart] << {:material => @material.id, :amount => 1}
+		respond_to do |format|
+			format.html{  "#{@material}" }
+			format.json{ render :json => @material }
+		end
 	end
-	
+
   def destroy
   end
-  
+
   private
-  
+
   def subject_given? par
     return par[:subject_id]
   end
-  
+
   def get_options_from_material par
     os = []
     par[:options_attributes].each_value { |v|
@@ -159,7 +162,7 @@ class MaterialsController < ApplicationController
     } unless par[:options_attributes].nil?
     return os
   end
-    
+
   def get_selected_item params = nil, type = nil, key = nil
     if type == :subject && key == :subject_id || type == :parent && key == :parent_id
       params && params[:material] && params[:material][key] ? params[:material][key] : ""
@@ -167,5 +170,5 @@ class MaterialsController < ApplicationController
       params && params[type] &&  params[type][key] ? params[type][key] : ""
     end
   end
-  
+
 end

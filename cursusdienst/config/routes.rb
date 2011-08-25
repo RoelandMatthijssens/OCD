@@ -3,48 +3,49 @@ Cursusdienst::Application.routes.draw do
   get "test/index"
 
   get "pages/home"
-  
+
   get "pages/about"
 
   get "pages/access_denied"
 
   get "pages/control_panel"
-  
+
   resources :users do
 		get :edit_permissions, :on => :member
 		put :update_permissions, :on => :member
   end
-  
+
   resources :sessions, :only => [:new, :create, :destroy]
 
   resources :institutes
-  
+
   resources :faculties
-  
+
   resources :disciplines
-  
+
   resources :subjects
-  
+
 	resources :guilds do
 		put :join, :on => :member
 	end
-  
+
   resources :options
 
   resources :materials do
 		put :sell, :on => :member
+		get :add_to_cart, :on => :member
   end
 
   resources :messages
 
   resources :permission_groups
-  
+
   resources :filters do
     get :get_children_from_parent, :on => :collection
   end
-  
+
   root :to => 'pages#home'
-  
+
   match '/home', :to => 'pages#home'
   match '/about', :to => 'pages#about'
   match '/access_denied', :to => 'pages#access_denied'
