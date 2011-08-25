@@ -58,7 +58,7 @@ class MaterialsController < ApplicationController
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('edit_materials')
     @material = Material.find(params[:id])
-    @parents = @material.subject.materials
+    @parents = @material.subject ? @material.subject.materials : nil
     if @material.subject
       @subject_params_institute = [get_institutes, @material.institute_id.to_s]
       @subject_params_faculty = [get_faculties(@material.institute_id.to_s), @material.faculty_id.to_s]
@@ -92,6 +92,8 @@ class MaterialsController < ApplicationController
     @material = Material.find(params[:id])
     @material.subject = nil unless subject_given?(params[:material])
     @material.options = get_options_from_material(params[:material])
+#    @material.subject_id = nil if !params[:material][:subject_id]
+#    @material.parent_id = nil if !params[:material][:parent_id]
     if @material.update_attributes(params[:material])
       flash[:succes] = "Material updated succesfully"
       redirect_to @material

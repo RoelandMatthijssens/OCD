@@ -18,7 +18,8 @@
 
 	<h2>Supplies</h2>
 	<%= link_to_function "Show", "$('#supplies').toggle()" %>
-	<div class="supplies", id="supplies", style="display:none;">
+	<div class="supplies" id="supplies" style="display:none;">
+             
 		<ul class="supplies">
 			<%= "not selling any materials" if guild.materials.empty?%>
 			<% guild.materials.each do |supply| %>
