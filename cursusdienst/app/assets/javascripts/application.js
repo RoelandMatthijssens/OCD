@@ -63,7 +63,7 @@ function filter_select_on_change(parent_id, child_id, data_key) {
             data: data_key+"=" + id_value_string,
             timeout: 2000,
             error: function(XMLHttpRequest, errorTextStatus, error){
-                alert("Failed to submit : "+ errorTextStatus+" ;"+error);
+								$('#ajax_errors').append("Failed to submit : "+ errorTextStatus+" ;"+error)
             },
             success: function(data){                    
                 // Clear all options from sub category select 
@@ -80,4 +80,22 @@ function filter_select_on_change(parent_id, child_id, data_key) {
             }
         });
     };
+}
+
+function add_to_cart(material_id) {
+	$.ajax({
+		dataType: "json",
+		cache: false,
+		url: '/materials/add_to_cart?',
+		data: "material_id=" + material_id,
+		timeout: 2000,
+		error: function(XMLHttpRequest, errorTextStatus, error){
+			// flash error message
+			$('#ajax_errors').append("Failed to submit : "+ errorTextStatus+" ;"+error)
+		},
+		success: function(data){
+			// flash success message
+			$('#ajax_messages').append("Material added to cart")
+		}
+	});
 }

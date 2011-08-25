@@ -58,7 +58,9 @@
           <div id="bodycenter">
             <!-- Insert main page content here -->
             <!-- One detail.. There have to be at least 3 lins of text in the middle or
-		  the design fucks up.--> 
+		  the design fucks up.-->
+						<div class="error_red" id="ajax_errors"></div>
+						<div class="error_green" id="ajax_messages"></div>
             <% flash.each do |key, value| %>
               <div class="error_green" id="flash <%= key %>"> <%= value %></div>
             <% end %>

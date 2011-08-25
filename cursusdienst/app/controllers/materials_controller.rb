@@ -94,7 +94,12 @@ class MaterialsController < ApplicationController
 	end
 
 	def add_to_cart
-		
+		#deny_access and return unless signed_in?
+		#deny_privileged_access and return unless current_user.can?('buy_materials')
+		@material = Material.find(params[:id])
+		cart = session[:cart] || []
+		cart << {:material => material.id, :amount => 1}
+		session[:cart] ? session[:cart] << {:material => material.id, :amount => 1} : session[:cart] = [{:material => material.id, :amount => 1}]
 	end
 	
   def destroy
