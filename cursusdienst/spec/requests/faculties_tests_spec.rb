@@ -231,11 +231,13 @@ describe "FacultiesTests" do
 			end
 			describe "'faculty/new'" do
 				it "should show the correct form" do
-					visit new_faculty_path
-					fill_in "faculty_name", :with => "something"
-					click_button "Create new Faculty"
-					page.should have_content "Institute can't be blank"
-					#can't really test anything else, since the dropdowns are javascript generated
+					lambda do
+						visit new_faculty_path
+						fill_in "faculty_name", :with => "something"
+						fill_in "faculty_initials", :with => "something"
+						click_button "Create new Faculty"
+						#can't really test anything else, since the dropdowns are javascript generated
+					end.should change(Faculty, :count).by(1)
 				end
 			end
 		end

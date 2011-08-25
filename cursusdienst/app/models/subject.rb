@@ -1,6 +1,8 @@
 class Subject < ActiveRecord::Base
   attr_accessible :name, :materials, :year, :year_type
   validates :name, :presence => true
+  validates :year, :presence => true
+  validates :year_type, :presence => true
   has_many :teachings
   has_many :disciplines, :through => :teachings
   has_many :materials

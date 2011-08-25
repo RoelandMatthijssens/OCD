@@ -1,14 +1,15 @@
 <div class="material">
   <h1><%= link_to material.name, material %></h1>
+	<% subject = material.subject %>
 	<strong>Subject:</strong>
-		<% if material.parent %>
-				<%= link_to(material.parent.subject.name, material.parent.subject) %>
+		<% if subject %>
+				<%= link_to(subject.name, subject) %>
 		<% else %>
-				<%= link_to(material.subject.name, material.subject) %>
+			This material is not attached to a subject yet.
 		<% end %>
 		<br/>
 	<% if material.parent %>
-		<strong>Previous edition:</strong> <%= link_to material.parent.name, material.parent %>
+		<strong>Parent:</strong> <%= link_to material.parent.name, material.parent %>
 	<% end %>
 	<%= link_to "Edit this material", edit_material_path(material) %><br/>
 	<% if current_user.can?("sell_materials") %>

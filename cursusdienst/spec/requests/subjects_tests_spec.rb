@@ -237,6 +237,8 @@ describe "SubjectsTests" do
 					lambda do
 						visit new_subject_path
 						fill_in "subject_name", :with => "something"
+						fill_in "subject_year", :with => "1"
+						fill_in "subject_year_type", :with => "something"
 						click_link_or_button "Create new Subject"
 						#can't check the page, since i have no read access
 						#check if the subject was actually created instead

@@ -14,7 +14,7 @@ describe Subject do
   it { should have_many(:disciplines).through(:teachings) }
   
   it "should create a new instance given the correct attributes" do
-    @attr = { :name => "Statestiek" }
+    @attr = { :name => "Statestiek", :year => 1, :year_type => 'master' }
     subject = Subject.new(@attr)
     subject.should be_valid
   end

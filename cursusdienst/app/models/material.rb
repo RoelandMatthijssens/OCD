@@ -1,14 +1,12 @@
 class Material < ActiveRecord::Base
   attr_accessible :name, :subject_id, :guilds, :material_options, :parent_id, :path_name
   validates :name, :presence => true
-  #validates :nr, :presence => true
   belongs_to :subject
   belongs_to :parent, :class_name => 'Material', :foreign_key => 'parent_id'
   has_many :supplies
   has_many :guilds, :through => :supplies
   has_many :sales
   has_many :users, :through => :sales
-#  validates :subject, :presence => true
   has_and_belongs_to_many :options
   has_many :material_orders
   has_many :orders, :through => :material_orders
@@ -27,7 +25,22 @@ class Material < ActiveRecord::Base
   def institute_id
     subject && subject.disciplines && subject.disciplines.first.faculty.institute.id
   end
-  
+
+	def get_subject(ring_check = self)
+		if self.subject
+			return subject
+		elsif self.parent
+			if self.parent == ring_check
+				puts "ring detected"
+				return false
+			else
+				return self.parent.get_subject(ring_check)
+			end
+		else
+			puts "No subject attached"
+			return false
+		end
+	end
 end
 
 # == Schema Information
