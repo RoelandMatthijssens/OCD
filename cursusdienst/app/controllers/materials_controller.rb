@@ -92,6 +92,10 @@ class MaterialsController < ApplicationController
 			redirect_to materials_path
 		end
 	end
+
+	def add_to_cart
+		
+	end
 	
   def destroy
   end

@@ -16,8 +16,9 @@ describe Material do
   it { should have_many(:guilds).through(:supplies) }
   it { should have_many(:sales) }
   it { should have_many(:users).through(:sales) }
-  
-  it { should have_and_belong_to_many(:orders)}
+
+	it { should have_many(:material_orders) }
+  it { should have_many(:orders).through(:material_orders) }
   
   after do
     ::ActiveSupport::Deprecation.silenced = @old_silence_config
