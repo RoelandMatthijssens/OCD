@@ -5,14 +5,20 @@ class GuildsController < ApplicationController
     @title = "Guilds"
     @guilds = Guild.paginate(:page => params[:page], :per_page => 10)
   end
-
+  
   def show
     @guild = Guild.find(params[:id])
     @materials = @guild.materials
 		#deny_access and return unless signed_in?
 		#deny_privileged_access and return unless current_user.can?('view_guilds') || current_user.guilds.include?(@guild)
   end
-
+  
+  def update_filter
+    @guild = Guild.find(params[:id]) 
+    @materials =  Material.find_all_by_subject_id(params[:filter][:subject_id])  #@guild.materials
+    render :action => 'show'
+  end
+  
   def new
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('create_guilds')
@@ -72,7 +78,7 @@ class GuildsController < ApplicationController
   end
 
   private
-
+  
   def get_disciplines_from_guild par
     ds = []
     par[:disciplines_attributes].each_value { |v|

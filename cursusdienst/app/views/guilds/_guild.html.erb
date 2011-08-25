@@ -1,12 +1,12 @@
 <div>
   <h1><%= link_to guild.name, guild %></h1>
-  
-	<% if current_user && not(current_user.guilds.include?(guild) )%>
-		<%= link_to "Join this guild", join_guild_path(guild), :method => :put %>
-	<% else %>
-		<p>You are a member of this guild</p>
-	<% end %>
-	
+
+  <% if current_user && not(current_user.guilds.include?(guild) )%>
+    <%= link_to "Join this guild", join_guild_path(guild), :method => :put %>
+  <% else %>
+    <p>You are a member of this guild</p>
+  <% end %>
+
   <strong>Disciplines:</strong><br>
   <% guild.disciplines.each { |discipline| %>
     <strong><%= discipline.name %></strong><br/>
@@ -16,27 +16,65 @@
     </ul>
   <% } %>
 
-	<h2>Supplies</h2>
-	<%= link_to_function "Show", "$('#supplies').toggle()" %>
-	<div class="supplies" id="supplies" style="display:none;">
-             
-		<ul class="supplies">
-			<%= "not selling any materials" if guild.materials.empty?%>
-			<% guild.materials.each do |supply| %>
-				<%= render supply %>
-			<% end %>
-		</ul>
-	</div>
-	
-	<h2>Messages</h2>
-	<%= link_to_function "Show", "$('#messages').toggle()" %>
-	<div class="messages", id="messages", style="display:none;">
-		<ul class="messages">
-			<% guild.messages.each do |message| %>
-				<%= render message %>
-			<% end %>
-		</ul>
-		<%= link_to "New Message", new_message_path(:guild_id => guild.id) if (current_user && current_user.can?('create_all_messages')) || (current_user && current_user.can?('create_messages') && current_user.guilds.include?(guild)) %><br/>
-	</div><br/>
+  <h2>Supplies</h2>
+  <%= link_to_function "Show", "$('#supplies').toggle()" %>
+  <div class="supplies" id="supplies" style="display:none;">
+    <%= form_tag update_filter_guild_path, :method => :put do %>
+      <div style="display:none;">
+        <%= label_tag "institute" %>
+        <%= render :partial => "filters/select_box", :locals => {
+          :filter_key_ajax => "institute",
+          :id => "filter[institute_id]",
+          :dataset => get_institutes, 
+          :selected_id => guild.disciplines.first.faculty.institute_id.to_s,
+          :parent_id => "filter_institute_id",
+          :child_id => "filter_faculty_id"} %> <br />
+
+        <%= label_tag "faculty" %>    
+        <%= render :partial => "filters/select_box", :locals => {
+          :filter_key_ajax => "faculty",
+          :id => "filter[faculty_id]",
+          :dataset => get_faculties(guild.disciplines.first.faculty.institute_id.to_s), 
+          :selected_id => guild.disciplines.first.faculty.id.to_s,
+          :parent_id => "filter_faculty_id",
+          :child_id => "filtert_discipline_id"} %> <br />
+      </div>
+
+      <%= label_tag "discipline" %>    
+      <%= render :partial => "filters/select_box", :locals => {
+        :filter_key_ajax => "discipline",
+        :id => "filter[discipline_id]",
+        :dataset => get_disciplines(guild.disciplines.first.faculty.id.to_s), 
+        :selected_id => guild.disciplines.first.id.to_s,
+        :parent_id => "filter_discipline_id",
+        :child_id => "filter_subject_id"} %> <br />
+
+      <%= label_tag "subject" %>    
+      <%= render :partial => "filters/select_box_html_options", :locals => {
+        :filter_key_ajax => "subject",
+        :id => "filter[subject_id]",
+        :dataset => get_subjects(guild.disciplines.first.id.to_s), 
+        :selected_id => "",
+        :html_options => {:onchange => "if (this.value !='') {this.form.submit();} "}} %>
+
+      <ul class="supplies">
+        <%= "not selling any materials" if @materials.empty?%>
+        <% @materials.each do |supply| %>
+          <%= render supply %>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+
+  <h2>Messages</h2>
+  <%= link_to_function "Show", "$('#messages').toggle()" %>
+  <div class="messages", id="messages", style="display:none;">
+       <ul class="messages">
+      <% guild.messages.each do |message| %>
+        <%= render message %>
+      <% end %>
+    </ul>
+    <%= link_to "New Message", new_message_path(:guild_id => guild.id) if (current_user && current_user.can?('create_all_messages')) || (current_user && current_user.can?('create_messages') && current_user.guilds.include?(guild)) %><br/>
+  </div><br/>
   <%= link_to "Edit this guild", edit_guild_path(guild) %>
 </div>

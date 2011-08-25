@@ -27,6 +27,7 @@ Cursusdienst::Application.routes.draw do
 
 	resources :guilds do
 		put :join, :on => :member
+    put :update_filter, :on => :member
 	end
 
   resources :options
