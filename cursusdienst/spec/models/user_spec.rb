@@ -21,6 +21,7 @@ describe User do
   it { should have_and_belong_to_many(:disciplines)}
   it { should respond_to(:encrypted_password) }
   it { should have_many (:orders) }
+  it { should have_many (:shopping_cart_items) }
   
   
   describe "other tests" do

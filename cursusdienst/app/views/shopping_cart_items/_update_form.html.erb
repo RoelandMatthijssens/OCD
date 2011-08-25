@@ -1,0 +1,24 @@
+<%= form_for(@user) do |u| %>
+
+  <%= render 'shared/error_messages', :object => u.object %>
+
+  <div class='field'>
+    <%= u.label :name %> <br>
+    <%= u.text_field :name %> <br>
+  </div>
+  <div class='field'>
+    <%= u.label :last_name %> <br>
+    <%= u.text_field :last_name %> <br>
+  </div>
+  <div class='field'>
+    <%= u.label :email %> <br>
+    <%= u.text_field :email %> <br>
+  </div>
+  <div class='field'>
+    <%= u.submit @submit %>
+  </div>
+<% end %>
+
+<div>
+  <%= link_to "Edit permissions", "/users/" + @user.id.to_s + "/edit_permissions" %>  <!--TODO fix this with paths somehow-->
+</div>

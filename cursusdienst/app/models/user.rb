@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :guilds
   has_and_belongs_to_many :disciplines
   has_many :orders
+  has_many :shopping_cart_items
   
   default_scope :order => "users.last_name, users.name ASC"
   
