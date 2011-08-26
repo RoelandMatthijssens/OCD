@@ -44,7 +44,7 @@ module FiltersHelper
     elsif signed_in? && !current_user.disciplines.empty?
       current_user.disciplines.first.institute.faculties
     else
-      Institute.first.faculties
+      Institute.first ? Institute.first.faculties : []
     end
   end
   
@@ -54,7 +54,7 @@ module FiltersHelper
     elsif signed_in? && !current_user.disciplines.empty?
       current_user.disciplines.first.faculty.disciplines
     else
-      Institute.first.faculties.first.disciplines
+       Institute.first &&  Institute.first.faculties.first ? Institute.first.faculties.first.disciplines : []
     end
   end
   
@@ -64,7 +64,7 @@ module FiltersHelper
     elsif signed_in? && !current_user.disciplines.empty?
       current_user.disciplines.first.faculty.disciplines.first.subjects
     else
-      Institute.first.faculties.first.disciplines.first.subjects
+      Institute.first &&  Institute.first.faculties.first && Institute.first.faculties.first.disciplines.first ? Institute.first.faculties.first.disciplines.first.subjects : []
     end
   end
   
@@ -74,7 +74,7 @@ module FiltersHelper
     elsif signed_in? && !current_user.disciplines.empty?
       current_user.disciplines.first.faculty.disciplines.first.subjects.first.materials
     else
-      Institute.first.faculties.first.disciplines.first.subjects.first.materials
+      Institute.first &&  Institute.first.faculties.first && Institute.first.faculties.first.disciplines.first && Institute.first.faculties.first.disciplines.first.subjects.first ? Institute.first.faculties.first.disciplines.first.subjects.first.materials : []
     end
   end
   
