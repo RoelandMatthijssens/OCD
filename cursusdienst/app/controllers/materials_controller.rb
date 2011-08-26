@@ -27,9 +27,6 @@ class MaterialsController < ApplicationController
 		deny_privileged_access and return unless current_user.can?('create_materials')
     @material = Material.new(params[:material])
     @material.options= get_options_from_material(params[:material])
-    if remotipart_submitted?
-      flash[:succes] = "UPLOAD"
-    end
     if @material.save
       flash[:succes] = "Material succesfully created"
       redirect_to @material

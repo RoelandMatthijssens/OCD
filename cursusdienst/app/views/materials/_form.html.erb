@@ -1,10 +1,6 @@
 <%= form_for(@material) do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
 
-  <legend class='required'>
-    Required fields
-  </legend>
-
   <div class='field'>
     <%= f.label :name %> <br>
     <%= f.text_field :name %> <br>
