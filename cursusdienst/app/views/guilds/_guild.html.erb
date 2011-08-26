@@ -17,53 +17,53 @@
   <% } %>
 
   <h2>Supplies</h2>
-  <%= link_to_function "Show", "$('#supplies').toggle()" %>
-  <div class="supplies" id="supplies" style="display:none;">
-    <%= form_tag update_filter_guild_path, :method => :put do %>
-      <div style="display:none;">
-        <%= label_tag "institute" %>
-        <%= render :partial => "filters/select_box", :locals => {
-          :filter_key_ajax => "institute",
-          :id => "filter[institute_id]",
-          :dataset => get_institutes, 
-          :selected_id => guild.disciplines.first.faculty.institute_id.to_s,
-          :parent_id => "filter_institute_id",
-          :child_id => "filter_faculty_id"} %> <br />
+  <div class="supplies" id="supplies">
+    <div id="filter" style="display:none;">
+      <%= form_tag update_filter_guild_path, :method => :put do %>
+        <div style="display:none;">
+          <%= label_tag "institute" %>
+          <%= render :partial => "filters/select_box", :locals => {
+            :filter_key_ajax => "institute",
+            :id => "filter[institute_id]",
+            :dataset => get_institutes, 
+            :selected_id => guild.disciplines.first.faculty.institute_id.to_s,
+            :parent_id => "filter_institute_id",
+            :child_id => "filter_faculty_id"} %> <br />
 
-        <%= label_tag "faculty" %>    
-        <%= render :partial => "filters/select_box", :locals => {
-          :filter_key_ajax => "faculty",
-          :id => "filter[faculty_id]",
-          :dataset => get_faculties(guild.disciplines.first.faculty.institute_id.to_s), 
-          :selected_id => guild.disciplines.first.faculty.id.to_s,
-          :parent_id => "filter_faculty_id",
-          :child_id => "filtert_discipline_id"} %> <br />
-      </div>
+          <%= label_tag "faculty" %>    
+          <%= render :partial => "filters/select_box", :locals => {
+            :filter_key_ajax => "faculty",
+            :id => "filter[faculty_id]",
+            :dataset => get_faculties(guild.disciplines.first.faculty.institute_id.to_s), 
+            :selected_id => guild.disciplines.first.faculty.id.to_s,
+            :parent_id => "filter_faculty_id",
+            :child_id => "filtert_discipline_id"} %> <br />
+        </div>
 
-      <%= label_tag "discipline" %>    
-      <%= render :partial => "filters/select_box", :locals => {
-        :filter_key_ajax => "discipline",
-        :id => "filter[discipline_id]",
-        :dataset => get_disciplines(guild.disciplines.first.faculty.id.to_s), 
-        :selected_id => guild.disciplines.first.id.to_s,
-        :parent_id => "filter_discipline_id",
-        :child_id => "filter_subject_id"} %> <br />
+        <%= label_tag "discipline" %>    
+        <%= render :partial => "filters/select_box_html_options", :locals => {
+          :filter_key_ajax => "discipline",
+          :id => "filter[discipline_id]",
+          :dataset => get_disciplines(guild.disciplines.first.faculty.id.to_s), 
+          :selected_id => @selected_discipline,
+          :html_options => {:onchange => '$(filter_year_type).val("");'}} %> <br />
 
-      <%= label_tag "subject" %>    
-      <%= render :partial => "filters/select_box_html_options", :locals => {
-        :filter_key_ajax => "subject",
-        :id => "filter[subject_id]",
-        :dataset => get_subjects(guild.disciplines.first.id.to_s), 
-        :selected_id => "",
-        :html_options => {:onchange => "if (this.value !='') {this.form.submit();} "}} %>
+        <%= label_tag "Year" %>    
 
-      <ul class="supplies">
-        <%= "not selling any materials" if @materials.empty?%>
-        <% @materials.each do |supply| %>
-          <%= render supply %>
-        <% end %>
-      </ul>
-    <% end %>
+        <%= select_tag "filter[year_type]", 
+          options_for_select([["bachelor","bachelor"], ["master","master"]], @selected_year_type), 
+          {:prompt => 'select year', :onchange => "if (this.value !='') {this.form.submit();} "} %>
+      <% end %>
+    </div>
+    <%= link_to_function "Show", "$(filter).toggle()" %>
+    <ul class="supplies">
+      <%= "not selling any materials" if @materials.empty?%>
+      <% @materials.each do |supply| %>
+        <%= render supply %>
+      <% end %>
+    </ul>
+
+    
   </div>
 
   <h2>Messages</h2>
