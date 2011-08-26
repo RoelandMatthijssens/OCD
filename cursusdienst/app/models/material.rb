@@ -1,5 +1,8 @@
 class Material < ActiveRecord::Base
   attr_accessible :name, :subject_id, :guilds, :material_options, :parent_id, :path_name
+  
+ 
+  
   validates :name, :presence => true
   belongs_to :subject
   belongs_to :parent, :class_name => 'Material', :foreign_key => 'parent_id'
