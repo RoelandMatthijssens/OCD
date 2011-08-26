@@ -1,2 +1,6 @@
-<%= render @user %>
-
+<h1>Shopping Cart</h1>
+<ul class="shopping_cart_items">
+	<% @shopping_cart_items.each do |item| %>
+    <%= render item %>
+  <% end %>
+</ul>

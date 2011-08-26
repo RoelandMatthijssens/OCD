@@ -93,9 +93,15 @@ class MaterialsController < ApplicationController
 		@material = Material.find(params[:id])
 		#session[:cart] ||= []
 		#session[:cart] << {:material => @material.id, :amount => 1}
-		item = ShoppingCartItem.new(:amount => 1)
-		item.user = current_user
-		item.material = @material
+		items = []
+		item = ShoppingCartItem.find(:first,  :conditions => ['user_id = ? and material_id = ?',current_user.id , @material.id])
+		if item
+			item.amount += 1
+		else
+			item = ShoppingCartItem.new(:amount => 1)
+			item.user = current_user
+			item.material = @material
+		end
 		item.save!
 		respond_to do |format|
 			format.html{  "#{@material}" }
