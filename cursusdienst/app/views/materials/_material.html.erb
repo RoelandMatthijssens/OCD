@@ -3,7 +3,7 @@
 	<% subject = material.subject %>
 	<strong>Subject:</strong>
 		<% if subject %>
-				<%= link_to(subject.name, subject) %>
+				<%= link_to(subject.name + " " + subject.year.to_s + " " + subject.year_type, subject) %>
 		<% else %>
 			This material is not attached to a subject yet.
 		<% end %>
