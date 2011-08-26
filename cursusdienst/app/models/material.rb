@@ -26,19 +26,18 @@ class Material < ActiveRecord::Base
     subject && subject.disciplines && subject.disciplines.first.faculty.institute.id
   end
 
-	def get_subject(ring_check = self)
+	def get_subject(ring_check = [])
+		ring_check << self
 		if self.subject
 			return subject
 		elsif self.parent
-			if self.parent == ring_check
-				puts "ring detected"
-				return false
+			if ring_check.contains self.parent
+				raise "ring detected"
 			else
 				return self.parent.get_subject(ring_check)
 			end
 		else
-			puts "No subject attached"
-			return false
+			raise "No subject attached"
 		end
 	end
 end

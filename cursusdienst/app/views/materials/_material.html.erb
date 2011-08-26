@@ -23,5 +23,15 @@
 			<%= link_to "Add this material to the guilds supply", sell_material_path(material), :method => :put %>
 		<% end %>
 	<% end %>
+
+	<h2>guilds selling this material</h2>
+	<ul class="guilds">
+	
+		<% material.guilds.each do |guild| %>
+			<li><%= link_to guild.name, guild %></li>
+		<% end %>
+		
+	</ul>
+	
 	<%= link_to_function "add to cart", "add_to_cart( #{ material.id } )" %>
 </div>

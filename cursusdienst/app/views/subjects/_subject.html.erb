@@ -7,8 +7,8 @@
   <% subject.disciplines.each { |discipline| %>
     <strong><%= discipline.name %></strong><br/>
     <ul>
-      <li><strong>Faculty:</strong><%= discipline.faculty.name %> <br/></li>
-      <li><strong>Institute:</strong><%= discipline.faculty.institute.name %> <br/></li>
+      <li><strong>Faculty:</strong><%= link_to discipline.faculty.name, discipline.faculty %> <br/></li>
+      <li><strong>Institute:</strong><%= link_to discipline.faculty.institute.name, discipline.faculty.institute %> <br/></li>
     </ul>
   <% } %>
 
