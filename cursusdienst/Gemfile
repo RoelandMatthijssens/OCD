@@ -17,8 +17,6 @@ gem 'uglifier'
 
 gem 'jquery-rails'
 
-# for file uploads
-gem "remotipart"
 
 group :development do
 	gem 'rspec-rails', '2.6.1'
