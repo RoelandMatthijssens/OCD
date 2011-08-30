@@ -83,11 +83,12 @@ function filter_select_on_change(parent_id, child_id, data_key) {
     };
 }
 
-function add_to_cart(material_id) {
+function add_to_cart(material_id, guild_id) {
 	$.ajax({
 		dataType: "json",
 		cache: false,
 		url: '/materials/'+material_id+'/add_to_cart?',
+    data: "guild_id=" + guild_id,
 		timeout: 2000,
 		error: function(XMLHttpRequest, errorTextStatus, error){
 			// flash error message

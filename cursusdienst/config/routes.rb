@@ -18,8 +18,12 @@ Cursusdienst::Application.routes.draw do
   resources :sessions, :only => [:new, :create, :destroy]
 
   resources :institutes
+  resources :stocks
   
-  resources :shopping_cart_items
+  resources :shopping_cart_items do
+		put :add, :on => :member
+		put :substract, :on => :member
+  end
 
   resources :faculties
 

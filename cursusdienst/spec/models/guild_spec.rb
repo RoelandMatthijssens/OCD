@@ -20,6 +20,7 @@ describe Guild do
   it { should have_many(:supplies) }
   it { should have_many(:orders) }
   it { should have_many(:messages) }
+  it { should have_many(:shopping_cart_items) }
   it { should have_many(:materials).through(:supplies) }
   
   it "should create a new instance given valid attributes" do

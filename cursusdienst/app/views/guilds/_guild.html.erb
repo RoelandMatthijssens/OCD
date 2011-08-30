@@ -1,6 +1,5 @@
 <div>
   <h1><%= link_to guild.name, guild %></h1>
-
   <% if current_user && not(current_user.guilds.include?(guild) )%>
     <%= link_to "Join this guild", join_guild_path(guild), :method => :put %>
   <% else %>
@@ -18,7 +17,7 @@
 
   <h2>Supplies</h2>
   <div class="supplies" id="supplies">
-    <div id="filter" style="display:none;">
+    <div id="filter">
       <%= form_tag update_filter_guild_path, :method => :put do %>
         <div style="display:none;">
           <%= label_tag "institute" %>
@@ -55,13 +54,8 @@
           {:prompt => 'select year', :onchange => "if (this.value !='') {this.form.submit();} "} %>
       <% end %>
     </div>
-    <%= link_to_function "Show", "$(filter).toggle()" %>
-    <ul class="supplies">
-      <%= "not selling any materials" if @materials.empty?%>
-      <% @materials.each do |supply| %>
-        <%= render supply %>
-      <% end %>
-    </ul>
+
+		<%= render :partial => "supply" %>
 
     
   </div>

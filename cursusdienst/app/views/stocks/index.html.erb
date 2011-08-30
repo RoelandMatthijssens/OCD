@@ -1,0 +1,5 @@
+<h1><%= @title %></h1>
+<% @guilds.each do |guild| %>
+	<%= render :partial => "guild_stock", :locals => { :guild => guild } %>
+<% end %>
+</ul>

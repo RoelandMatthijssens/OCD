@@ -17,7 +17,7 @@ class GuildsController < ApplicationController
   
   def update_filter
     @guild = Guild.find(params[:id]) 
-    @materials =  get_materials params[:filter][:discipline_id], params[:filter][:year_type]
+    @materials = get_materials params[:filter][:discipline_id], params[:filter][:year_type]
     @selected_discipline = params[:filter][:discipline_id]
     @selected_year_type = params[:filter][:year_type]
     render :action => 'show'
@@ -132,7 +132,7 @@ class GuildsController < ApplicationController
   def get_materials discipline_id, year_type
     subjects = Subject.includes(:teachings).where("teachings.discipline_id = #{discipline_id} and subjects.year_type='#{year_type}'")
     materials = []
-    subjects.each { |s| materials << s.materials}
+    subjects.each { |s| materials.concat(s.materials)}
     return materials
   end
 end

@@ -1,0 +1,22 @@
+<% guild_stock_items = Stock.find(:all,  :conditions => ['guild_id = ?', guild.id]) %>
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>amount</th>
+			<th>floating</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% guild_stock_items.each do |item| %>
+			<tr>
+				<td><%= item.material.name %></td>
+				<td><%= item.amount %></td>
+				<td><%= item.floating %></td>
+				<td><%= link_to 'edit', edit_stock_path(item) %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+

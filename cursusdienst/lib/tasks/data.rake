@@ -73,7 +73,7 @@ namespace :db do
 		#			sell_all_materials => the user can mark materials as sellable for any guild.. even if he is not a member of it.
 		permissionNames = [
 			#admin permissions
-			"use_control_panel", "sell_materials", "sell_all_materials", 'create_all_messages',
+			"use_control_panel", "sell_materials", "sell_all_materials", 'create_all_messages', 'view_all_stock',
 			
 			#normal permissions
 			"edit_users"							,	"delete_users"							,	"view_users"							,	
@@ -86,7 +86,8 @@ namespace :db do
 			"edit_guilds"							,	"delete_guilds"							,	"view_guilds"							,	"create_guilds"							,
 			"edit_materials"					,	"delete_materials"					,	"view_materials"					,	"create_materials"					,
 			"edit_faculties"					,	"delete_faculties"					,	"view_faculties"					,	"create_faculties"					,
-			"edit_messages"						,	"delete_messages"																				,	"create_messages"					,
+			"edit_messages"						,	"delete_messages"																				,	"create_messages"						,
+			"edit_stock"							,	"delete_stock"							, "view_stock"																						,
 			]
 			#"edit_"						,	"delete_"						,	"view_"						,	"create_"						,
 		permissionNames.each do |name|
@@ -136,6 +137,14 @@ namespace :db do
 			:password_confirmation => "roeland1",
 			:user_name => "rik"
 			)
+		tyca = User.create!(
+			:name => "Tyca",
+			:last_name => "Tyca",
+			:email => "Tyca@tyca.com",
+			:password => "apuapu",
+			:password_confirmation => "apuapu",
+			:user_name => "Tyca"
+			)
 		test = User.create!(
 			:name => "Test",
 			:last_name => "Test",
@@ -171,6 +180,20 @@ namespace :db do
 			discipline.subjects.each do |subject|
 					x.materials << subject.materials
 			end
+		end
+
+		infogroep.materials.each do |m|
+			x = Stock.new(
+				:material => m,
+				:guild => infogroep,
+				:amount => 1,
+				:threshold => 2,
+				:step => 3,
+				:typee => 'JIT',
+				:floating => 4,
+				:floating_period => 5
+			)
+			x.save!
 		end
 	end
 end
