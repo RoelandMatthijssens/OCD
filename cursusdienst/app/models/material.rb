@@ -1,7 +1,9 @@
 class Material < ActiveRecord::Base
-  attr_accessible :name, :subject_id, :guilds, :material_options, :parent_id, :path_name
+  attr_accessible :name, :subject_id, :guilds, :material_options, :parent_id, :path_name, :attachments_attributes
   
- 
+  has_many :attachments
+  accepts_nested_attributes_for :attachments
+
   
   validates :name, :presence => true
   belongs_to :subject
