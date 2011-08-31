@@ -19,6 +19,7 @@ class StocksController < ApplicationController
 		deny_privileged_access and return unless current_user.can?('edit_stock') || current_user.can?('edit_all_stock')
 		@stock_item = Stock.find(params[:id])
 		deny_privileged_access and return unless current_user.guilds.includes( @stock_item.guild ) || current_user.can?('edit_all_stock')
+		@stock_item.update_attributes(params[:stock])
 		redirect_to stocks_path
   end
 end

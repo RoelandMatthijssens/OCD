@@ -1,0 +1,33 @@
+<h1><%= @title %></h1>
+
+
+	<table>
+		<thead>
+			<tr>
+				<th>Item</th>
+				<th>amount</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% current_user.shopping_cart_items.each do |item| %>
+				<tr>
+					<td><%= item.material.name %></td>
+					<td><%= item.amount %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<%= form_for(@order) do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+
+	<div class="form_row">
+		<label for="payment">Payment: </label>
+		<%= 'cash' %><%= radio_button_tag 'payment', 'cash' %> 
+		<%= 'transfer' %><%= radio_button_tag 'payment', 'transfer' %>
+	</div>
+  
+	<div class='field'>
+    <%= f.submit @submit %>
+  </div>
+<% end %>

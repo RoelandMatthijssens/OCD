@@ -12,6 +12,7 @@ describe Institute do
   it { should validate_presence_of(:location) }
   
   it { should have_many(:faculties) }
+  it { should have_many(:orders) }
   
   it { should validate_uniqueness_of(:name) }
   it { should validate_uniqueness_of(:initials) }
