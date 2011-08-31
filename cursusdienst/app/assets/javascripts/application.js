@@ -46,6 +46,12 @@ function delete_fields(link) {
     });
 }
 
+function remove_content(c) {
+    $('#'+c).hide('slow', function () {
+        $('#'+c).remove()
+    });
+}
+
 function filter_select_on_change(parent_id, child_id, data_key) {
     var id_value_string = $("select#"+parent_id).val();
     if (id_value_string == "") {
