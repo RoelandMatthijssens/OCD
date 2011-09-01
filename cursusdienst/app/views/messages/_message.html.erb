@@ -3,5 +3,5 @@
 	<div class="content">
 		<%= message.content %>
 	</div>
-  <%= link_to "Edit this message", edit_message_path(message) %>
+  <%= link_to t(:edit_message, :scope=>"message"), edit_message_path(message) %>
 </div>

@@ -1,42 +1,20 @@
 <ul class="supplies">
-	<%= "not selling any materials" if @materials.empty?%>
-	<% @materials.each do |material| %>
-		<div class="material">
-			<h1><%= link_to material.name, material %></h1>
-			<% subject = material.subject %>
-			<strong>Subject:</strong>
-				<% if subject %>
-						<%= link_to(subject.name + " " + subject.year.to_s + " " + subject.year_type, subject) %>
-				<% else %>
-					This material is not attached to a subject yet.
-				<% end %>
-				<br/>
-			<% if material.parent %>
-				<strong>Parent:</strong> <%= link_to material.parent.name, material.parent %>
-			<% end %>
-			<%= link_to "Edit this material", edit_material_path(material) %><br/>
-			<% if current_user && current_user.can?("sell_materials") %>
-				<% if current_user.guilds.size == 0 %>
-					<p>Join a guild to add materials for it.</p>
-				<% elsif current_user.guilds.size > 1 %>
-					<p>You are in more than one guild. We don't know which guild you want to sell the material.</p>
-				<% elsif current_user.guilds.first.materials.include?(material)%>
-					<p>material already added to <%= current_user.guilds.first.name %></p>
-				<% else %>
-					<%= link_to "Add this material to the guilds supply", sell_material_path(material), :method => :put %>
-				<% end %>
-			<% end %>
+  <%= "not selling any materials" if @subjects.empty?%>
+  <% @subjects.each do |subject| %>
+    <h2><%= subject.name %></h2>
+    <table>
+      <% subject.materials.each do |material| %>
+        <tr>
+          <td><%= link_to material.name, material %></td>
+          <td><%= link_to_function "add to cart", "add_to_cart( #{ material.id }, #{@guild.id} )" %></td>
+          <% if current_user && current_user.can?("edit_materials") %>
+            <td> <%= link_to "Edit this material", edit_material_path(material) %> </td>
+          <% end %>
 
-			<h2>guilds selling this material</h2>
-			<ul class="guilds">
-			
-				<% material.guilds.each do |guild| %>
-					<li><%= link_to guild.name, guild %></li>
-				<% end %>
-				
-			</ul>
-			
-			<%= link_to_function "add to cart", "add_to_cart( #{ material.id }, #{@guild.id} )" %>
-		</div>
-	<% end %>
+        </tr>
+      <% end %>
+    </table>
+
+  <% end %>
+
 </ul>

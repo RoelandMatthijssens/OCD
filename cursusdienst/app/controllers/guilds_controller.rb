@@ -8,16 +8,22 @@ class GuildsController < ApplicationController
   
   def show
     @guild = Guild.find(params[:id])
-    @materials = @guild.materials
+    @subjects = @guild.subjects
     @selected_discipline = ""
     @selected_year_type = ""
 		#deny_access and return unless signed_in?
 		#deny_privileged_access and return unless current_user.can?('view_guilds') || current_user.guilds.include?(@guild)
   end
   
+  def news
+    @guild = Guild.find(params[:id])
+    #deny_access and return unless signed_in?
+		#deny_privileged_access and return unless current_user.can?('view_guilds') || current_user.guilds.include?(@guild)
+  end
+  
   def update_filter
     @guild = Guild.find(params[:id]) 
-    @materials = get_materials params[:filter][:discipline_id], params[:filter][:year_type]
+    @subjects = get_materials params[:filter][:discipline_id], params[:filter][:year_type]
     @selected_discipline = params[:filter][:discipline_id]
     @selected_year_type = params[:filter][:year_type]
     render :action => 'show'
@@ -131,8 +137,6 @@ class GuildsController < ApplicationController
 
   def get_materials discipline_id, year_type
     subjects = Subject.includes(:teachings).where("teachings.discipline_id = #{discipline_id} and subjects.year_type='#{year_type}'")
-    materials = []
-    subjects.each { |s| materials.concat(s.materials)}
-    return materials
+    return subjects
   end
 end

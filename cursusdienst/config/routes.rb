@@ -9,6 +9,8 @@ Cursusdienst::Application.routes.draw do
   get "pages/access_denied"
 
   get "pages/control_panel"
+  
+  get "pages/manual"
 
   resources :users do
 		get :edit_permissions, :on => :member
@@ -37,6 +39,7 @@ Cursusdienst::Application.routes.draw do
 	resources :guilds do
 		put :join, :on => :member
     put :update_filter, :on => :member
+    get :news, :on => :member
 	end
 
   resources :options
@@ -57,6 +60,7 @@ Cursusdienst::Application.routes.draw do
   root :to => 'pages#home'
 
   match '/home', :to => 'pages#home'
+  match '/manual', :to => 'pages#manual'
   match '/about', :to => 'pages#about'
   match '/access_denied', :to => 'pages#access_denied'
   match '/control_panel', :to => 'pages#control_panel'
