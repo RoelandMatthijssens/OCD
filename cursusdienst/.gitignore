@@ -5,4 +5,5 @@ tmp/
 pulbic/attachment
 .sass-cache/
 *.autosave
+*.lock
 *~
