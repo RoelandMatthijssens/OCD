@@ -22,6 +22,15 @@ class Guild < ActiveRecord::Base
     errors.add(:disciplines, "can't be blank") if
       disciplines.empty?
   end
+  
+  def subjects
+    s = []
+    disciplines.each { |d|
+      s.concat d.subjects
+    }
+    s
+  end
+  
 end
 
 # == Schema Information

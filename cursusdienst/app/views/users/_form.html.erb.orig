@@ -27,7 +27,11 @@
     <%= f.password_field :password_confirmation %> <br>
   </div>
 	<div class="field">
+<<<<<<< HEAD
+		<%= f.collection_select :guild_id, Guild.find(:all), :id, :name, { :prompt => "Please select your guild" } %>
+=======
 		<%= f.collection_select :guild_id, Guild.find(:all), :id, :name, { :prompt => t(:select_guild, :scope => 'user.signup') } %>
+>>>>>>> 85a399b51ca00b6fe5b6960e66a78748a52394b2
 	</div>
   <div class='field'>
     <%= f.submit @submit %>

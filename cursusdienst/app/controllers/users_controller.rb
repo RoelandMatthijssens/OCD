@@ -17,17 +17,22 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    @submit = "Register"
+    @submit = t(:register, :scope => 'user.signup')
   end
 
   def create
+#    TODO Add user to guild on signup
     @user = User.new(params[:user])
     @guild = Guild.find(params[:guild])
     if @user.save
       sign_in @user
 			@guild.users << @user
       flash[:succes] = "Registration succesfull"
-      redirect_to @user
+      if @user.guilds.emty?
+        redirect_to @user
+      else
+        redirect_to @user.guilds.first
+      end
     else
       render 'new'
     end

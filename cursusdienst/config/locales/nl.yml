@@ -216,6 +216,13 @@ nl:
           one:    "%{model} niet opgeslagen: 1 fout gevonden"
           other:  "%{model} niet opgeslagen: %{count} fouten gevonden"
         body: "Controleer de volgende velden:"
+      models:
+        user: 
+          attributes:
+            email: 
+              taken: " is reeds geregistreerd"
+            user_name:
+              taken: " is reeds in gebruik"
 
       messages:
         taken: "is al in gebruik"
@@ -224,8 +231,24 @@ nl:
 
       full_messages:
         format: "%{attribute} %{message}"
+        
+  attributes:
+    user_name: "VUB Netid"
+    name: "Naam"
+    last_name: "Naam"
+    email: "email"
+    password: "Paswoord"
+    password_confirmation: "Bevestiging paswoord"
   
   example: "t(:cool, :scope => 'models.guild')"
+  
+  globals:
+    select: "Selecteer"
+    disciplines: "Richtingen"
+    discipline: "richting"
+    faculty: "Faculteit"
+    institute: "Instelling"
+    subject: "Vak"
   
   models:
     guild:
@@ -250,6 +273,37 @@ nl:
     introduction: "Inleiding"
     status: "Status"
     contact: "Contact"
+    news: "Nieuws"
+    manual: "Handleiding"
+    supply: "Aanbod"
 
   sponsor:
     thanks: 'Met dank aan'
+    
+  user:
+    first_name: "Voornaam"
+    signup:
+      select_guild: "Cursusdienst"
+      register: "Registreer"
+      first_name: "Voornaam"
+      
+  errors:
+    error: "Fout!"
+    probibited: "voorkomen om "
+    saved: " aan te maken:"
+    problems: "Fouten in de volgende velden:"
+    
+  guild:
+    member: "U bent lid van deze kring"
+    supplies: "aanbod"
+    supply:
+       material_added: "Dit item wordt al verkocht door "
+    news:
+      edit_message: "Edit bericht"
+      new_message: "Nieuw bericht"
+  
+  message:
+    new_message: "Nieuw bericht"
+    edit_message: "Edit bericht"
+      
+  

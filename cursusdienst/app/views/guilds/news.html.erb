@@ -1,0 +1,23 @@
+<h2><%= t :news, :scope => "side_menu" %></h2>
+  <div class="messages", id="messages">
+       <ul class="messages">
+           <% @guild.messages.each do |message| %>
+             <%= render message %>
+           <% end %>
+    </ul>
+    <%= link_to t(:new_message, :scope => "guild.news"), new_message_path(:guild_id => @guild.id) if (current_user && current_user.can?('create_all_messages')) || (current_user && current_user.can?('create_messages') && current_user.guilds.include?(@guild)) %><br/>
+  </div><br/>
+</div>
+
+<%= content_for :sidemenu do %>
+  <div class="topline"></div>
+  <div id="sidemenu">
+    <ul>
+      <li> <%= link_to t(:supply, :scope => "side_menu"), guild_path(@guild), :class=>"sidemenu link1" %> </li>
+      <li> <%= link_to t(:news, :scope => "side_menu"), news_guild_path(@guild), :class=>"sidemenu link1" %> </li>
+      <li> <%= link_to t(:manual, :scope => "side_menu"), manual_path, :class=>"sidemenu link1" %> </li>
+    </ul>
+  </div> 
+  <div class="topline"></div>
+<% end %>
+
