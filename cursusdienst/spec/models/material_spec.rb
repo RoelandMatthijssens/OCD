@@ -19,6 +19,8 @@ describe Material do
 
 	it { should have_many(:material_orders) }
   it { should have_many(:orders).through(:material_orders) }
+	it { should have_many(:print_job_items) }
+  it { should have_many(:print_jobs).through(:print_job_items) }
   
   after do
     ::ActiveSupport::Deprecation.silenced = @old_silence_config

@@ -10,23 +10,23 @@ namespace :db do
 				:location => "Pleinlaan 2"
 			)
 		suffix = [ "Elementary", "Middel school", "College", "University", "High school" ]
-		prefix = [ "Fort" ]
-		2.times do |n|
-			name = Faker::Name.name
-			name = 'Saint '+name if rand(5) < 1
-			if rand(10) < 9
-				name+=' '+suffix[rand(suffix.length-1)]
-			else
-				name = prefix[rand(prefix.length-1)] + ' ' + name
-			end
-			initials = ''
-			name.split(' ').each{|w| initials += w[0].capitalize}
-			Institute.create!(
-				:name => name,
-				:initials => initials,
-				:location => Faker::Address.street_address
-			)
-		end
+		#prefix = [ "Fort" ]
+		#2.times do |n|
+			#name = Faker::Name.name
+			##name = 'Saint '+name if rand(5) < 1
+			##if rand(10) < 9
+				##name+=' '+suffix[rand(suffix.length-1)]
+			##else
+				##name = prefix[rand(prefix.length-1)] + ' ' + name
+			##end
+			#initials = ''
+			#name.split(' ').each{|w| initials += w[0].capitalize}
+			#Institute.create!(
+				#:name => name,
+				#:initials => initials,
+				#:location => Faker::Address.street_address
+			#)
+		#end
 		
 		facultyNames = ["Recht en Criminologie", "Psychologie en Educatiewetenschappen",
 			"Wetenschappen en Bio-ingenieurswetenschappen"]
@@ -60,8 +60,8 @@ namespace :db do
 			3.times do
 				s = Subject.new(
 					:name => discipline.faculty.institute.initials + " - " + discipline.faculty.initials + " - " + discipline.name + " - " + id.to_s+" subject",
-					:year => rand(3)+1,
-					:year_type => ['bachelor', 'master'][rand(2)],
+					:year => 1,#rand(3)+1,
+					:year_type => ['bachelor', 'master'][1],#[rand(2)],
 					)
 				id += 1
 				s.disciplines << discipline
@@ -73,7 +73,7 @@ namespace :db do
 		#			sell_all_materials => the user can mark materials as sellable for any guild.. even if he is not a member of it.
 		permissionNames = [
 			#admin permissions
-			"use_control_panel", "sell_materials", "sell_all_materials", 'create_all_messages', 'view_all_stock',
+			"use_control_panel", "sell_materials", "sell_all_materials", 'create_all_messages', 'view_all_stock', 'view_all_orders',
 			
 			#normal permissions
 			"edit_users"							,	"delete_users"							,	"view_users"							,	
@@ -111,11 +111,11 @@ namespace :db do
 						:name => name
 						)
 					m.subject = subject
-					rand(3).times do |n|
-						nn = rand(Option.all.size)+1
-						o = Option.find(nn) unless nn == 0
-						m.options << o
-					end
+					#rand(3).times do |n|
+						#nn = rand(Option.all.size)+1
+						#o = Option.find(nn) unless nn == 0
+						#m.options << o
+					#end
 					m.save if m.valid?
 				end
 			end
@@ -154,18 +154,18 @@ namespace :db do
 			:user_name => "test"
 		)
 		[enermis, rik].each { |u| u.permission_groups << PermissionGroup.all}
-		18.times do |n|
-			password = "foobar"
-			u = User.new(
-				:name => Faker::Name.first_name,
-				:last_name => Faker::Name.last_name,
-				:email => Faker::Internet.email,
-				:password => password,
-				:password_confirmation => password,
-				:user_name => Faker::Internet.user_name
-				)
-			u.save if u.valid?
-		end
+		#18.times do |n|
+			#password = "foobar"
+			#u = User.new(
+				#:name => Faker::Name.first_name,
+				#:last_name => Faker::Name.last_name,
+				#:email => Faker::Internet.email,
+				#:password => password,
+				#:password_confirmation => password,
+				#:user_name => Faker::Internet.user_name
+				#)
+			#u.save if u.valid?
+		#end
 
 		infogroep = Guild.create!(
 			:name => "InfoGroep",

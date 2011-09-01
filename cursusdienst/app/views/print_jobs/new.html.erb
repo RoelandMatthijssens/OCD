@@ -1,0 +1,19 @@
+<h1><%= @title %></h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Item</th>
+				<th>amount</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @payed_materials.each do |k, v| %>
+				<tr>
+					<td><%= k.name %></td>
+					<td><%= v %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+

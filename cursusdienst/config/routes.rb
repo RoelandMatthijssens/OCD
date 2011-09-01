@@ -21,7 +21,11 @@ Cursusdienst::Application.routes.draw do
   
   resources :stocks
 
-  resources :orders
+	resources :orders do
+		put :mark_as_payed, :on => :member
+	end
+  
+  resources :print_jobs
   
   resources :shopping_cart_items do
 		put :add, :on => :member

@@ -9,7 +9,10 @@ class OrdersController < ApplicationController
 			redirect_to control_panel_path
 		else
 			institute = current_user.guilds.first.disciplines.first.faculty.institute
-			@orders = Order.find(:all,  :conditions => ['institute_id = ?', institute.id])
+			@own_orders = Order.find(:all, :conditions => ['institute_id = ? and user_id=?', institute.id, current_user.id])
+			if current_user.can?('view_all_orders')
+				@orders = Order.find(:all, :conditions => ['institute_id = ?', institute.id])
+			end
 		end
 	end
 
@@ -49,7 +52,14 @@ class OrdersController < ApplicationController
 					message << "something bad happened with material #{item.material.name}"
 				end
 			end
-			redirect_to shopping_cart_items_path
+			redirect_to orders_path
 		end
+	end
+
+	def mark_as_payed
+		@order = Order.find(params[:id])
+		@order.status = 'payed'
+		@order.save!
+		redirect_to orders_path
 	end
 end

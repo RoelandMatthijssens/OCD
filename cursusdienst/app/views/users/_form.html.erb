@@ -27,7 +27,7 @@
     <%= f.password_field :password_confirmation %> <br>
   </div>
 	<div class="field">
-		<%= f.collection_select :id, Guild.find(:all), :id, :name, { :prompt => "Please select your guild" } %>
+		<%= f.collection_select :guild_id, Guild.find(:all), :id, :name, { :prompt => "Please select your guild" } %>
 	</div>
   <div class='field'>
     <%= f.submit @submit %>

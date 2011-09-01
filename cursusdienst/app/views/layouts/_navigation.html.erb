@@ -5,6 +5,8 @@
 
   <% if signed_in? && current_user.can?("use_control_panel") %>
     <%= link_to content_tag(:span, 'CONTROL PANEL'), control_panel_path, :class=>@button_style %>
+    <%= link_to content_tag(:span, 'USERS'), "", :class=>@button_style %>
+    <%= link_to content_tag(:span, 'ORDERS'), print_jobs_path, :class=>@button_style %>
   <% end %>
 
 

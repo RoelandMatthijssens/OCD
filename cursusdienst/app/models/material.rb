@@ -12,6 +12,8 @@ class Material < ActiveRecord::Base
   has_many :guilds, :through => :supplies
   has_many :sales
   has_many :users, :through => :sales
+  has_many :print_job_items
+  has_many :print_jobs, :through => :print_job_items
   has_and_belongs_to_many :options
   has_many :material_orders
   has_many :orders, :through => :material_orders

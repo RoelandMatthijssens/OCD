@@ -22,8 +22,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    @guild = Guild.find(params[:guild])
     if @user.save
       sign_in @user
+			@guild.users << @user
       flash[:succes] = "Registration succesfull"
       redirect_to @user
     else

@@ -1,0 +1,13 @@
+<h1><%= @print_jobs %></h1>
+
+<% content_for :sidemenu do  %>
+	<div class="topline"></div>
+	<div id="sidemenu">
+		<ul>
+			<li> <%= link_to "Overview", orders_path %> </li>
+			<li> <%= link_to "Process", "#" %> </li> 
+			<li> <%= link_to "Printjobs", print_jobs_path %> </li>
+		</ul>
+	</div> 
+	<div class="topline"></div>
+<% end %>
