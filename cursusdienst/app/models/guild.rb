@@ -12,7 +12,8 @@ class Guild < ActiveRecord::Base
   has_many :supplies, :dependent => :destroy
   has_many :materials, :through => :supplies
   has_many :messages
-  has_many :orders
+  has_many :shopping_cart_items
+  has_many :material_orders
   default_scope :order => "guilds.name ASC"
   
   accepts_nested_attributes_for :disciplines

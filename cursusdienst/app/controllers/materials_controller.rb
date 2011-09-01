@@ -91,16 +91,16 @@ class MaterialsController < ApplicationController
 		deny_access and return unless signed_in?
 		#deny_privileged_access and return unless current_user.can?('buy_materials')
 		@material = Material.find(params[:id])
-		#session[:cart] ||= []
-		#session[:cart] << {:material => @material.id, :amount => 1}
+		@guild = Guild.find(params[:guild_id])
 		items = []
-		item = ShoppingCartItem.find(:first,  :conditions => ['user_id = ? and material_id = ?',current_user.id , @material.id])
+		item = ShoppingCartItem.find(:first,  :conditions => ['user_id = ? and material_id = ? and guild_id = ?',current_user.id , @material.id, @guild.id])
 		if item
 			item.amount += 1
 		else
 			item = ShoppingCartItem.new(:amount => 1)
 			item.user = current_user
 			item.material = @material
+			item.guild = @guild
 		end
 		item.save!
 		respond_to do |format|

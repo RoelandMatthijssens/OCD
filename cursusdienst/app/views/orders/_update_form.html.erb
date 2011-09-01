@@ -1,0 +1,12 @@
+<%= form_for(@stock_item) do |s| %>
+
+  <%= render 'shared/error_messages', :object => s.object %>
+
+  <div class='field'>
+    <%= s.label :amount %> <br>
+    <%= s.text_field :amount %> <br>
+  </div>
+  <div class='field'>
+    <%= s.submit @submit %>
+  </div>
+<% end %>

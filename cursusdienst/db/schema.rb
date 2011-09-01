@@ -11,16 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110831161640) do
-
-  create_table "attachments", :force => true do |t|
-    t.integer  "material_id"
-    t.string   "item"
-    t.string   "content_type"
-    t.integer  "file_size"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(:version => 20110831130957) do
 
   create_table "disciplines", :force => true do |t|
     t.string   "name"
@@ -73,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20110831161640) do
     t.integer  "material_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "guild_id"
   end
 
   create_table "materials", :force => true do |t|
@@ -107,11 +99,12 @@ ActiveRecord::Schema.define(:version => 20110831161640) do
 
   create_table "orders", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "guild_id"
     t.string   "order_key"
     t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "institute_id"
+    t.string   "payment_type"
   end
 
   create_table "permission_groups", :force => true do |t|
@@ -141,6 +134,20 @@ ActiveRecord::Schema.define(:version => 20110831161640) do
     t.integer  "user_id"
     t.integer  "material_id"
     t.integer  "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "guild_id"
+  end
+
+  create_table "stocks", :force => true do |t|
+    t.integer  "material_id"
+    t.integer  "guild_id"
+    t.integer  "amount"
+    t.integer  "threshold"
+    t.integer  "step"
+    t.string   "typee"
+    t.integer  "floating"
+    t.integer  "floating_period"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

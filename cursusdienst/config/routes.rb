@@ -19,7 +19,14 @@ Cursusdienst::Application.routes.draw do
 
   resources :institutes
   
-  resources :shopping_cart_items
+  resources :stocks
+
+  resources :orders
+  
+  resources :shopping_cart_items do
+		put :add, :on => :member
+		put :substract, :on => :member
+  end
 
   resources :faculties
 

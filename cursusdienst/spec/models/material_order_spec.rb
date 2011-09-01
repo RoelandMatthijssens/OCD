@@ -8,6 +8,11 @@ describe MaterialOrder do
 
   it { should belong_to(:order) }
   it { should belong_to(:material) }
+  it { should belong_to(:guild) }
+
+  it { should validate_presence_of(:guild) }
+  it { should validate_presence_of(:material) }
+  it { should validate_presence_of(:order) }
   
   after do
     ::ActiveSupport::Deprecation.silenced = @old_silence_config
