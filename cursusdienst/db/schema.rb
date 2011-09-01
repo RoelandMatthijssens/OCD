@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110831130957) do
+ActiveRecord::Schema.define(:version => 20110831161640) do
+
+  create_table "attachments", :force => true do |t|
+    t.integer  "material_id"
+    t.string   "item"
+    t.string   "content_type"
+    t.integer  "file_size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "disciplines", :force => true do |t|
     t.string   "name"
