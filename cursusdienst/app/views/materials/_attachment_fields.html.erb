@@ -1,7 +1,7 @@
 <!-- hidden field to make sure the id doesnt get overloaded -->
 <% tag = 'new_attachments' %>
 <div id="<%= tag %>" class="fields">
-  <%= f.hidden_field :id, :value => 0 %>
+  <%= f.hidden_field :id, :value => "" %>
   <%= f.label :item %>
   <%= f.file_field :item %>
   <%= link_to_perform_javascript "remove", ['remove_content'], [[tag]] %>

@@ -8,9 +8,7 @@
   <div class='field'>
     <%= f.label :attachments %> <br>
     <div class='fields'>
-      <%= f.fields_for :attachments, @material.attachments do |builder| %>
-        <%=  render 'attachment_fields' , :f => builder %>
-      <% end %>
+
       <%= link_to_add_fields "add one", f, :attachments %>
     </div>
   </div>
