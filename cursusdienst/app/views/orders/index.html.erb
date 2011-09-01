@@ -1,4 +1,38 @@
 <h1><%= @title %></h1>
-<% @orders.each do |order| %>
-	<%= order.material.name %>
-<% end %>
+<table>
+	<thead>
+		<tr>
+			<th>User</th>
+			<th>Order key</th>
+			<th>Status</th>
+			<th>materials</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @orders.each do |order| %>
+		<tr>
+			<td><%= order.user.name %></td>
+			<td><%= order.order_key %></td>
+			<td><%= order.status %></td>
+			<td><table>
+				<thead>
+					<tr>
+						<th>item name</th>
+						<th>bought at</th>
+						<th>amount</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% order.material_orders.each do |item| %>
+					<tr>
+						<td><%= item.material.name %></td>
+						<td><%= item.guild.name %></td>
+						<td><%= item.amount %></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table></td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>

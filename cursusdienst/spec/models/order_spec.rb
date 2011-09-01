@@ -16,7 +16,6 @@ describe Order do
 
   it { should validate_presence_of(:payment_type) }
   it { should validate_presence_of(:user) }
-  it { should validate_presence_of(:guild) }
   it { should validate_presence_of(:institute) }
   
   after do

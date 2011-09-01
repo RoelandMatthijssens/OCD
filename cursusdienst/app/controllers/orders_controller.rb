@@ -25,25 +25,29 @@ class OrdersController < ApplicationController
 			flash[:error] = 'no payment option given'
 			redirect_to new_order_path
 		else
-			@order = Order.new()
-			materials = []
-			current_user.shopping_cart_items.each do |item|
-				materials << item.material
-			end
 			institute = current_user.guilds.first.disciplines.first.faculty.institute
-			@order.materials = materials
+			@order = Order.new()
 			@order.status = "posted"
 			@order.payment_type = params[:payment]
 			@order.institute = institute
 			@order.user = current_user
-			
+			@order.order_key = 'RANDOM STRING O_o'
 			if @order.save!
 				flash[:success] = 'shopping cart emptied, and added to orders'
 			else
 				flash[:error] = 'something went horribly wrong'
 			end
 			current_user.shopping_cart_items.each do |item|
-				item.delete
+				x = MaterialOrder.new()
+				x.order = @order
+				x.guild = item.guild
+				x.material = item.material
+				x.amount = item.amount
+				if x.save!
+					item.delete
+				else
+					message << "something bad happened with material #{item.material.name}"
+				end
 			end
 			redirect_to shopping_cart_items_path
 		end
