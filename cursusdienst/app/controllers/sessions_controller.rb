@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       @errors = ["User name - Password combination did not match"]
       render 'new'
     else
-      flash[:succes] =  "Successfully signed in"
+      flash[:succes] =  t(:signed_in, :scope => "flash.message")
       sign_in user
       if session[:return_to]
 				x = session[:return_to]
@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
   end
   
   def destroy
-    flash[:succes] =  "Successfully signed out"
+    flash[:succes] =  t(:signed_out, :scope => "flash.message")
     sign_out
     redirect_to root_path
   end

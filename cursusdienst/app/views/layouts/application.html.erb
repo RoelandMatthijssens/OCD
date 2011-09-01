@@ -79,13 +79,16 @@
           </div>
           <!-- Footer is a bit overly complicated but the only way I was 100% sure it would work from the first time --> 
           <div id="footer">
-            <div id="footer1"></div>
+            <div id="footer1">
+						</div>
             <div id="footer2">
               <div id="footerbannerdiv">
                 <%= image_tag "banners/footerbanner.gif", :alt=>"Footer Banner" %>
               </div>
             </div>
-            <div id="footer3"></div>
+            <div id="footer3">
+							<%= render :partial => "layouts/footer" %>
+						</div><br/>
 						<div id="debug">
 							DEBUG
 							<%= debug(params) if Rails.env.development? %><br/>

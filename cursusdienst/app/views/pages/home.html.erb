@@ -3,6 +3,37 @@
 		<%= current_user.guilds.first && current_user.guilds.first.name %>
 	<% end %>
 	<div class="content">
-		<p>This is the general home page, and is not linked to any guilds.</p>
-		<p>General newsfeeds for the platform will be broadcast here.</p>
+		<h2><%= t(:welcome_message_about_platform_title, :scope => 'page.home') %><br/></h2>
+		<%= t(:welcome_message_about_platform_html, :scope => 'page.home') %><br/>
+		<h2><%= t(:welcome_message_about_us_title, :scope => 'page.home') %><br/></h2>
+		<%= t(:welcome_message_about_us, :scope => 'page.home') %><br/>
+		<h2><%= t(:welcome_message_join_us_title, :scope => 'page.home') %><br/></h2>
+		<%= t(:welcome_message_join_us, :scope => 'page.home') %><br/>
 	</div>
+<br/>
+	<div class="sponsors">
+		<fieldset>
+			<legend><%= t(:thanks, :scope => 'sponsor') %></legend>
+			<table>
+				<tbody>
+					<tr>
+						<td><a href="http://www.ubuntu.com/" ><%= image_tag("partners/tux2.png", :size => "80x80" ) %></td>
+						<td><a href="http://www.ubuntu.com/" ><%= image_tag("partners/vub.jpg", :size => "300x69" ) %></td>
+						<td><a href="http://www.ubuntu.com/" ><%= image_tag("partners/chrome-fox.png", :size => "80x80" ) %></td>
+					</tr>
+				</tbody>
+			</table>
+		</fieldset>
+	</div>
+
+<% content_for :sidemenu do  %>
+	<div class="topline"></div>
+	<div id="sidemenu">
+		<ul>
+			<li> <%= link_to t(:introduction, :scope => 'side_menu'), root_path %> </li>
+			<li> <%= link_to t(:status, :scope => 'side_menu'), "#" %> </li> 
+			<li> <%= link_to t(:contact, :scope => 'side_menu'), "#" %> </li>
+		</ul>
+	</div> 
+	<div class="topline"></div>
+<% end %>

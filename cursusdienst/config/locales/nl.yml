@@ -23,7 +23,7 @@ nl:
       - zon
       - maa
       - din
-      - woe
+      - woe	
       - don
       - vri
       - zat
@@ -230,3 +230,26 @@ nl:
   models:
     guild:
       cool: "blabla"
+
+  flash:
+   message:
+      signed_out: "Succesvol uitgelogd"
+      signed_in: "Succesvol ingelogd"
+
+  page:
+    home:
+      home: "Home"
+      welcome_message_about_platform_title: "Over dit platform"
+      welcome_message_about_us_title: "Over ons"
+      welcome_message_join_us_title: "Deelname"
+      welcome_message_about_platform_html: "Het Cursusdienst.net-platform is een online bestel- en betaalsysteem ontwikkeld voor studentenverenigingen. <br /> Zo staat het Cursusdienst.net platform open voor kringen aan eender welke universiteiten of hogescholen. De site is zo opgebouwd dat er sprake is van \"economies of scale & scope\". Zo blijft de uitbatingskost beperkt en is het platform dus voor iedereen een optie. De eenvoud van gebruik zowel voor de beheerders als voor de eindgebruiker is bovendien een primordiaal aspect van het platform net als de samenwerkingsmogelijkheden tussen de verschillende cursusdiensten op vlak van dienstverlening, uitwisseling van uitgaves en dergelijke. Door een gezamelijk platform te gebruiken staan onze cursusdiensten zo ook sterker tegenover derden, zoals onze leverancier(s)."
+      welcome_message_about_us: "Wij zijn drie studenten aan de VUB die de waarden van onze alma mater in zich dragen: we wensten met dit project eenheid uit te stralen, een platform te ontwikkelen dat de kringen van de VUB verbindt, en dat elke student van elke faculteit dezelfde dienstverlening biedt rond een kwaliteitsvolle cursusdienst. Dit doel werd na een pilootjaar veralgemeend naar alle instellingen in het hoger onderwijs."
+      welcome_message_join_us: "Hoewel deze site zijn roots heeft binnen de ESP-faculteit van de VUB (meer bepaald bij Promeco en KEPS) werd het van dag 1 zo ontwikkeld dat andere (VUB-)kringen eenvoudig zouden kunnen instappen.<br />Is jouw kring op zoek naar een goedkoop online systeem voor de cursusdienst? Neem dan zeker contact op via info@tyca.be."
+
+  side_menu:
+    introduction: "Inleiding"
+    status: "Status"
+    contact: "Contact"
+
+  sponsor:
+    thanks: 'Met dank aan'
