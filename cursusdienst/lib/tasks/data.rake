@@ -74,7 +74,7 @@ namespace :db do
 		permissionNames = [
 			#admin permissions
 			"use_control_panel", "sell_materials", "sell_all_materials", 'create_all_messages', 'view_all_stock', 'view_all_orders',
-			
+			"print",
 			#normal permissions
 			"edit_users"							,	"delete_users"							,	"view_users"							,	
 			"edit_permissions"				,	"delete_permissions"				,	"view_permissions"				,	"create_permissions"				,
@@ -108,7 +108,8 @@ namespace :db do
 			1.times do
 				materialNames.each do |name|
 					m = Material.new(
-						:name => name
+						:name => name,
+						:price => rand(20)
 						)
 					m.subject = subject
 					#rand(3).times do |n|

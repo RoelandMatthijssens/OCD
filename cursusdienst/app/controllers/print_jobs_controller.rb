@@ -1,7 +1,21 @@
 class PrintJobsController < ApplicationController
 
 	def index
-		@print_jobs = PrintJob.all()
+		deny_access unless signed_in?
+		@print_job = PrintJob.new()
+		@payed_orders = Order.find(:all, :conditions => ['status = ?', 'payed'])
+		@payed_materials = {}
+		@payed_orders.each do |order|
+			order.material_orders.each do |item|
+				if @payed_materials[item.material]
+					@payed_materials[item.material] += item.amount
+				else
+					@payed_materials[item.material] = item.amount
+				end
+			end
+		end
+		@printed_print_jobs = PrintJob.find(:all, :conditions => ['status = ?', 'printed'])
+		@ordered_print_jobs = PrintJob.find(:all, :conditions => ['status = ?', 'ordered'])
 	end
 
 	def new
@@ -20,7 +34,6 @@ class PrintJobsController < ApplicationController
 	end
 
 	def create
-		redirect_to shopping_cart_items_path
 		@print_job = PrintJob.new
 		@print_job.status = 'ordered'
 		if @print_job.save!
@@ -33,6 +46,8 @@ class PrintJobsController < ApplicationController
 					else
 						@payed_materials[item.material] = item.amount
 					end
+				order.status = 'Ordered'
+				order.save!
 				end
 			end
 			@payed_materials.each do |k, v|
@@ -45,6 +60,12 @@ class PrintJobsController < ApplicationController
 		else
 			flash[:error] = 'something went horribly wrong'
 		end
+		redirect_to print_jobs_path
+	end
+
+	def logs
+		@title = 'Logs'
+		@delivered_print_jobs = PrintJob.find(:all, :conditions => ['status = ?', 'delivered'])
 	end
 
 end

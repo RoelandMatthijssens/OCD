@@ -1,11 +1,12 @@
 class Material < ActiveRecord::Base
-  attr_accessible :name, :subject_id, :guilds, :material_options, :parent_id, :path_name, :attachments_attributes
+  attr_accessible :name, :subject_id, :guilds, :material_options, :parent_id, :path_name, :attachments_attributes, :price
   
   has_many :attachments
   accepts_nested_attributes_for :attachments
 
   
   validates :name, :presence => true
+  validates :price, :presence => true
   belongs_to :subject
   belongs_to :parent, :class_name => 'Material', :foreign_key => 'parent_id'
   has_many :supplies

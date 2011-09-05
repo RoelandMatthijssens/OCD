@@ -1,96 +1,10 @@
 <h1><%= @title %></h1>
-<h3>My Orders</h3>
-<table>
-	<thead>
-		<tr>
-			<th>User</th>
-			<th>Order key</th>
-			<th>Status</th>
-			<th>materials</th>
-			<th>action</th>
-		</tr>
-	</thead>
-	<tbody>
-	<% @own_orders.each do |order| %>
-		<tr>
-			<td><%= order.user.name %></td>
-			<td><%= order.order_key %></td>
-			<td><%= order.status %></td>
-			<td><table>
-				<thead>
-					<tr>
-						<th>item name</th>
-						<th>bought at</th>
-						<th>amount</th>
-					</tr>
-				</thead>
-				<tbody>
-					<% order.material_orders.each do |item| %>
-					<tr>
-						<td><%= item.material.name %></td>
-						<td><%= item.guild.name %></td>
-						<td><%= item.amount %></td>
-					</tr>
-					<% end %>
-				</tbody>
-			</table></td>
-			<td><%= link_to 'mark as payed', mark_as_payed_order_path(order), :method => :put %></td>
-		</tr>
-	<% end %>
-	</tbody>
-</table>
+<%= render :partial => 'filters' %>
+<%= render :partial => 'my_orders' %>
+
 <% if @orders && @orders.any?%>
-<h3>All Orders</h3>
-	<table>
-		<thead>
-			<tr>
-				<th>User</th>
-				<th>Order key</th>
-				<th>Status</th>
-				<th>materials</th>
-				<th>action</th>
-			</tr>
-		</thead>
-		<tbody>
-		<% @orders.each do |order| %>
-			<tr>
-				<td><%= order.user.name %></td>
-				<td><%= order.order_key %></td>
-				<td><%= order.status %></td>
-				<td><table>
-					<thead>
-						<tr>
-							<th>item name</th>
-							<th>bought at</th>
-							<th>amount</th>
-						</tr>
-					</thead>
-					<tbody>
-						<% order.material_orders.each do |item| %>
-						<tr>
-							<td><%= item.material.name %></td>
-							<td><%= item.guild.name %></td>
-							<td><%= item.amount %></td>
-						</tr>
-						<% end %>
-					</tbody>
-				</table></td>
-			<td><%= link_to 'mark as payed', mark_as_payed_order_path(order), :method => :put %></td>
-			</tr>
-		<% end %>
-		</tbody>
-	</table>
+<%= render :partial => 'active_orders' %>
 <% end %>
 
-<% content_for :sidemenu do  %>
-	<div class="topline"></div>
-	<div id="sidemenu">
-		<ul>
-			<li> <%= link_to "Overview", orders_path %> </li>
-			<li> <%= link_to "Process", "#" %> </li> 
-			<li> <%= link_to "Printjobs", print_jobs_path %> </li>
-		</ul>
-	</div> 
-	<div class="topline"></div>
-<% end %>
+<%= render :partial => 'menu' %>
 

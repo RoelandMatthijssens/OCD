@@ -3,13 +3,13 @@ class OrdersController < ApplicationController
 	def index
 		deny_access and return unless signed_in?
 
-		@title = "Orders"
+		@title = "User orders of Order Users"
 		if current_user.guilds.empty? || current_user.guilds.first.disciplines.empty?
 			flash[:error] = "unable to associate user with institute"
 			redirect_to control_panel_path
 		else
 			institute = current_user.guilds.first.disciplines.first.faculty.institute
-			@own_orders = Order.find(:all, :conditions => ['institute_id = ? and user_id=?', institute.id, current_user.id])
+			@own_orders = Order.find(:all, :conditions => ['institute_id = ? and user_id=? and status!=?' , institute.id, current_user.id, 'Ready'])
 			if current_user.can?('view_all_orders')
 				@orders = Order.find(:all, :conditions => ['institute_id = ?', institute.id])
 			end
@@ -58,8 +58,15 @@ class OrdersController < ApplicationController
 
 	def mark_as_payed
 		@order = Order.find(params[:id])
-		@order.status = 'payed'
+		@order.status = 'Payed'
 		@order.save!
 		redirect_to orders_path
+	end
+
+	def logs
+		institute = current_user.guilds.first.disciplines.first.faculty.institute
+		@orders = Order.find(:all, :conditions => ['institute_id = ? and user_id=? and status=?' , institute.id, current_user.id, 'Ready'])
+		@all_orders = Order.find(:all, :conditions => ['status=?' , 'Ready'])
+
 	end
 end

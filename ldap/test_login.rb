@@ -20,4 +20,3 @@ def login_curl uname, pw
 #   c.body_str.index('success') && true
 end
 
-puts login_curl "rivmeche", "LALALA"

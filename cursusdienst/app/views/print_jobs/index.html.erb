@@ -1,13 +1,11 @@
-<h1><%= @print_jobs %></h1>
+<%= render :partial => 'menu' %>
 
-<% content_for :sidemenu do  %>
-	<div class="topline"></div>
-	<div id="sidemenu">
-		<ul>
-			<li> <%= link_to "Overview", orders_path %> </li>
-			<li> <%= link_to "Process", "#" %> </li> 
-			<li> <%= link_to "Printjobs", print_jobs_path %> </li>
-		</ul>
-	</div> 
-	<div class="topline"></div>
+<h1><%= @title %></h1>
+
+<% if current_user.can?('print') %>
+	<%= render :partial => "print_job_list", :locals => { :print_jobs => @ordered_print_jobs } %>
 <% end %>
+
+
+<%= render :partial => 'pending_print_jobs' %>
+<%= render :partial => "print_job_list", :locals => { :print_jobs => @printed_print_jobs } %>
