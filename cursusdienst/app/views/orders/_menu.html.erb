@@ -1,0 +1,10 @@
+<% content_for :sidemenu do  %>
+	<div class="topline"></div>
+	<div id="sidemenu">
+		<ul>
+			<li> <%= link_to "Overview", orders_path %> </li>
+			<li> <%= link_to "Logs", logs_orders_path %> </li>
+		</ul>
+	</div> 
+	<div class="topline"></div>
+<% end %>

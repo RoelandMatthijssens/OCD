@@ -1,0 +1,39 @@
+<h1><%= @title %></h1>
+<h2>Ordered PrintJob</h2>
+<table>
+	<thead>
+		<tr>
+			<th>OrderID</th>
+			<th>Status</th>
+			<th>Info</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @ordered_print_jobs.each do |print_job| %>
+			<tr>
+				<td><%= print_job.id %></td>
+				<td><%= print_job.status %></td>
+				<td>
+					<table>
+						<thead>
+							<tr>
+								<th>itemName</th>
+								<th>amount</th>
+								<th>itemName</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% print_job.print_job_items.each do |item| %>
+								<tr>
+									<td><%= item.material.name %></td>
+									<td><%= item.amount %></td>
+									<td></td>
+								</tr>
+							<% end %>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

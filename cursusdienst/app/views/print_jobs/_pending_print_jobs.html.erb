@@ -1,0 +1,23 @@
+<h2>Pending PrintJob</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Item</th>
+				<th>amount</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @payed_materials.each do |k, v| %>
+				<tr>
+					<td><%= k.name %></td>
+					<td><%= v %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+<%= form_for(@print_job) do |f| %>
+	<div class='field'>
+		<%= f.submit @submit %>
+	</div>
+<% end %>
