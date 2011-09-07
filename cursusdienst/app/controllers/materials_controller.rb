@@ -3,7 +3,7 @@ class MaterialsController < ApplicationController
   def index
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('view_materials')
-    @title = "Materials"
+    @title = t(:all_materials, :scope => "titles")
     @materials = Material.paginate(:page => params[:page], :per_page => 10)
   end
 
@@ -17,8 +17,7 @@ class MaterialsController < ApplicationController
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('create_materials')
     @material = Material.new
-    @submit = "Create new Material"
-    @title = "Create new Material"
+    @submit = t(:new_material, :scope => "buttons")
     set_dataset
   end
 
@@ -27,12 +26,12 @@ class MaterialsController < ApplicationController
 		deny_privileged_access and return unless current_user.can?('create_materials')
     @material = Material.new(params[:material])
     @material.options= get_options_from_material(params[:material])
-    if @material.save
-      flash[:succes] = "Material succesfully created"
+    if @material.save!
+      flash[:succes] = t(:new_material_success, :scope => "flash")
       redirect_to @material
     else
       filter = params[:material]
-			flash[:notice] = "NOT created material. #{params[:material]}"
+			flash[:notice] = t(:new_material_fail, :scope => "flash")
       set_dataset_from_params params
       render 'new'
     end
@@ -45,7 +44,7 @@ class MaterialsController < ApplicationController
     @parents = @material.subject ? @material.subject.materials : nil
     set_given_subject @material
     set_given_parent @material
-    @submit = "Update Material"
+    @submit = t(:update_material, :scope => "buttons")
   end
 
   def update
@@ -57,7 +56,7 @@ class MaterialsController < ApplicationController
     #    @material.subject_id = nil if !params[:material][:subject_id]
     #    @material.parent_id = nil if !params[:material][:parent_id]
     if @material.update_attributes(params[:material])
-      flash[:succes] = "Material updated succesfully"
+      flash[:succes] = t(:update_material_success, :scope => "flash" )
       redirect_to @material
     else
       set_dataset_from_params params
@@ -75,21 +74,20 @@ class MaterialsController < ApplicationController
 		elsif g.size == 1
 			g = g.first
 			if g.materials.include?(@material)
-				flash[:succes] = "#{g.name} is already selling #{@material.name}"
+				flash[:succes] = t(:already_selling, :scope => "flash", :guild => g.name, :material => @material.name)
 			else
 				g.materials << @material
-				flash[:succes] = "#{g.name} is now selling #{@material.name}"
+				flash[:succes] = t(:now_selling, :scope => "flash", :guild => g.name, :material => @material.name)
 			end
 			redirect_to materials_path
 		else
-			flash[:succes] = "you have more than one guild, we dont know what guild to add the material to"
+			flash[:succes] = t(:too_many_guilds, :scope => "flash")
 			redirect_to materials_path
 		end
 	end
 
 	def add_to_cart
 		deny_access and return unless signed_in?
-		#deny_privileged_access and return unless current_user.can?('buy_materials')
 		@material = Material.find(params[:id])
 		@guild = Guild.find(params[:guild_id])
 		items = []
@@ -104,8 +102,9 @@ class MaterialsController < ApplicationController
 		end
 		item.save!
 		respond_to do |format|
-			format.html{  "#{@material}" }
-			format.json{ render :json => @material }
+			format.html{  flash[:success] = "#{@material}" }
+			#format.json { render :json => [t(:added_to_cart, :scope => "flash", :materials => @material.name )] }
+			format.json { render :json => [t(:added_to_cart, :scope => "flash", :material => @material.name)] }
 		end
 	end
 

@@ -2,7 +2,7 @@ class PermissionGroupsController < ApplicationController
   def index
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?("view_permission_groups")
-    @title = "Permission Groups"
+		@title = t(:all_permission_groups, :scope => "titles" )
     @permission_groups = PermissionGroup.paginate(:page => params[:page], :per_page => 10)
   end
 
@@ -16,7 +16,7 @@ class PermissionGroupsController < ApplicationController
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?("create_permission_groups")
     @permission = PermissionGroup.new
-    @submit = "Create new Permission Group"
+		@submit = t(:new_permission_group, :scope => "buttons" )
   end
 
   def create
@@ -24,10 +24,10 @@ class PermissionGroupsController < ApplicationController
 		deny_privileged_access and return unless current_user.can?("create_permission_groups")
     @permission = PermissionGroup.new(params[:permission_group])
     if @permission.save
-      flash[:notice] = "Permission Group succesfully created"
+			flash[:notice] = t(:new_permission_group_success, :scope => "flash" )
       redirect_to @permission
     else
-      flash[:notice] = "NOT created permission. #{params[:permission_group]}"
+			flash[:notice] = t(:new_permission_group_fail, :scope => "flash" )
       render :action => 'new'
     end
   end
@@ -36,7 +36,7 @@ class PermissionGroupsController < ApplicationController
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?("edit_permission_groups")
     @permission = PermissionGroup.find(params[:id])
-    @submit = "Update Permission Group"
+		@submit = t(:upate_permission_group, :scope => "flash" )
   end
 
   def update
@@ -44,7 +44,7 @@ class PermissionGroupsController < ApplicationController
 		deny_privileged_access and return unless current_user.can?("edit_permission_groups")
     @permission = PermissionGroup.find(params[:id])
     if @permission.update_attributes(params[:permission_group])
-      flash[:notice] = "Permission Group succesfully updated"
+			flash[:notice] = t(:update_permission_group, :scope => "flash" )
       redirect_to @permission
     else
       render :action => 'edit'

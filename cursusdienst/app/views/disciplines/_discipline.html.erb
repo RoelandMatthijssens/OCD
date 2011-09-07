@@ -1,6 +1,15 @@
 <div>
 <h1><%= link_to discipline.name, discipline %></h1>
-<strong>Faculty:</strong> <%= discipline.faculty.name %> <br/>
-<strong>Institute:</strong> <%= discipline.faculty.institute.name %> <br/>
-<%= link_to "Edit this discipline", edit_discipline_path(discipline) %>
+<strong><%= t(:faculty) %></strong> <%= discipline.faculty.name %> <br/>
+<strong><%= t(:institute) %></strong>:</strong> <%= discipline.faculty.institute.name %> <br/>
+<%= link_to "Edit this discipline(symbol)", edit_discipline_path(discipline) %>
+<div class="subjects">
+	<h3>Subjects</h3>
+	<ul class="">
+	<% discipline.subjects.each do |subject| %>
+		<li><%= link_to subject.name, subject %></li>
+	<% end %>
+	</ul>
+	<%= link_to "add a new subject", new_subject_path %>
+</div>
 </div>

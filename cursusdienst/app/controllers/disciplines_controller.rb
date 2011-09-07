@@ -3,7 +3,7 @@ class DisciplinesController < ApplicationController
   def index
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?("view_disciplines")
-		@title = "Disciplines"
+		@title = t(:all_disciplines, :scope => "titles")
 		@disciplines = Discipline.paginate(:page => params[:page], :per_page => 10)
   end
 
@@ -20,7 +20,7 @@ class DisciplinesController < ApplicationController
     @faculties = get_data_from_filter params[:discipline], :faculty_id, Faculty
     @selected_institute = ""
     @selected_faculty = ""
-    @submit = "Create new Discipline"
+    @submit = t(:new_discipline, :scope => "button")
   end
 
   def create
@@ -28,7 +28,7 @@ class DisciplinesController < ApplicationController
 		deny_privileged_access and return unless current_user.can?("create_disciplines")
     @discipline = Discipline.new(params[:discipline])
     if @discipline.save
-      flash[:succes] = "Discipline created succesfully"
+      flash[:succes] = t(:new_discipline_success, :scope => "flash")
       redirect_to @discipline
     else
       @faculties = get_data_from_filter params[:discipline], :faculty_id, Faculty
@@ -45,7 +45,7 @@ class DisciplinesController < ApplicationController
     @faculties = get_data_from_material @discipline, :faculty_id
     @selected_institute = @discipline.faculty.institute.id.to_s
     @selected_faculty = @discipline.faculty_id.to_s
-    @submit = "Update Discipline"
+    @submit = t(:update_discipline, :scope => "buttons")
   end
 
   def update
@@ -53,7 +53,7 @@ class DisciplinesController < ApplicationController
 		deny_privileged_access and return unless current_user.can?("edit_disciplines")
     @discipline = Discipline.find(params[:id])
     if @discipline.update_attributes(params[:discipline])
-      flash[:succes] = "Discipline updated succesfully"
+      flash[:succes] = t(:update_discipline_success, :scope => "flash")
       redirect_to @discipline
     else
       @faculties = get_data_from_material @discipline, :faculty_id

@@ -102,7 +102,9 @@ function add_to_cart(material_id, guild_id) {
 		},
 		success: function(data){
 			// flash success message
-			$('#ajax_messages').append("Material added to cart")
+			$.each(data, function(i, j){
+				$('#ajax_messages').append(j).append("<br/>")
+			});
 		}
 	});
 }

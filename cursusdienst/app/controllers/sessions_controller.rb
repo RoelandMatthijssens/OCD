@@ -8,10 +8,10 @@ class SessionsController < ApplicationController
   def create
     user = User.autenticate(params[:session][:user_name], params[:session][:password])
     if user.nil?
-      @errors = ["User name - Password combination did not match"]
+			@errors = [t(:password_mismatch, :scope => "flash" )]
       render 'new'
     else
-      flash[:succes] =  t(:signed_in, :scope => "flash.message")
+      flash[:succes] =  t(:signed_in, :scope => "flash")
       sign_in user
       if session[:return_to]
 				x = session[:return_to]
@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
   end
   
   def destroy
-    flash[:succes] =  t(:signed_out, :scope => "flash.message")
+    flash[:succes] =  t(:signed_out, :scope => "flash")
     sign_out
     redirect_to root_path
   end

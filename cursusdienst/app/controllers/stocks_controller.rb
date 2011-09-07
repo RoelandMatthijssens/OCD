@@ -2,7 +2,7 @@ class StocksController < ApplicationController
 	def index
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('view_stock') || current_user.can?('view_all_stock')
-		@title = "Stock"
+		@title = t(:stock, :scope => "titles" )
 		@guilds = current_user.guilds
   end
 
@@ -10,8 +10,7 @@ class StocksController < ApplicationController
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('edit_stock') || current_user.can?('edit_all_stock')
 		@stock_item = Stock.find(params[:id])
-		@submit = "edit Stock"
-		
+		@submit = t(:edit_stock, :scope => "buttons" )
 	end
 
   def update

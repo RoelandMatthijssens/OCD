@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110905141932) do
+ActiveRecord::Schema.define(:version => 20110906110449) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "material_id"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(:version => 20110905141932) do
     t.integer  "parent_id"
     t.string   "path_name"
     t.float    "price"
+    t.string   "typee"
   end
 
   create_table "materials_options", :id => false, :force => true do |t|

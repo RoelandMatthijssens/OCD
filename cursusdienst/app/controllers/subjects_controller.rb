@@ -3,7 +3,7 @@ class SubjectsController < ApplicationController
   def index
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('view_subjects')
-    @title = "Subjects"
+		@title = t(:all_subjects, :scope => "titles" )
     @subjects = Subject.paginate(:page => params[:page], :per_page => 10)
   end
 
@@ -18,7 +18,7 @@ class SubjectsController < ApplicationController
 		deny_privileged_access and return unless current_user.can?('create_subjects')
     @subject = Subject.new
     @dis_fac_inst = []
-    @submit = "Create new Subject"
+		@submit = t(:new_subject, :scope => "buttons" )
   end
 
   def create
@@ -26,12 +26,12 @@ class SubjectsController < ApplicationController
 		deny_privileged_access and return unless current_user.can?('create_subjects')
     @subject = Subject.new(params[:subject])
     @subject.disciplines= get_disciplines_from_subject(params[:subject])
-    if @subject.save
-      flash[:notice] = "Subject succesfully created"
+    if @subject.save!
+			flash[:success] = t(:new_subject_success, :scope => "flash" )
       redirect_to @subject
     else
       @dis_fac_inst = get_dis_fac_inst_from_par(params[:subject])
-      flash[:notice] = "NOT created subject. #{params[:subject]}"
+			flash[:error] = t(:new_subject_fail, :scope => "flash", :subject => params[:subject])
       render :action => 'new'
     end
   end
@@ -41,7 +41,7 @@ class SubjectsController < ApplicationController
 		deny_privileged_access and return unless current_user.can?('edit_subjects')
     @subject = Subject.find(params[:id])
     @dis_fac_inst = get_dis_fac_inst_from_subject(@subject)
-    @submit = "Update Subject"
+		@submit = t(:update_subject, :scope => "buttons" )
   end
 
   def update
@@ -50,7 +50,7 @@ class SubjectsController < ApplicationController
     @subject = Subject.find(params[:id])
     @subject.disciplines= get_disciplines_from_subject(params[:subject])
     if @subject.update_attributes(params[:subject])
-      flash[:notice] = "Subject succesfully updated"
+			flash[:notice] = t(:update_subject_success, :scope => "flash"  )
       redirect_to @subject
     else
       @dis_fac_inst = get_dis_fac_inst_from_par(params[:subject])

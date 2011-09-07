@@ -1,7 +1,10 @@
 <h1>Shopping Cart</h1>
 <ul class="shopping_cart_items">
+	<% total = 0 %>
 	<% @shopping_cart_items.each do |item| %>
     <%= render item %>
+		<% total += item.material.price %>
   <% end %>
 </ul>
+<strong>Total:</strong>€<%= total %><br/>
 <%= link_to "Proceed to order", new_order_path %>

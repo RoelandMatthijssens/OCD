@@ -1,12 +1,15 @@
 <div class="institute">
   <h1><%= link_to institute.name, institute %></h1>
-  <strong>Initials:</strong> <%= institute.initials %> <br/>
-  <strong>Location:</strong> <%= institute.location %> <br/>
-	<%= link_to "Edit this institute", edit_institute_path(institute) %><br/><br/> <!--	#TODO: in css -->
-	<h2>Faculties</h2>
-	<ul class="faculties">
-		<% institute.faculties.each do |faculty| %>
-			<li><%= faculty.name %></li>
-		<% end %>
-	</ul>
+	<strong><%= t(:initials) %>:</strong> <%= institute.initials %> <br/>
+	<strong><%= t(:location) %>:</strong> <%= institute.location %> <br/>
+	<%= link_to "Edit this institute(symbol)", edit_institute_path(institute) %><br/><br/> <!--	#TODO: in css -->
+	<div class="Faculties">
+		<h2><%= t(:faculties) %></h2>
+		<%= link_to "add new", new_faculty_path %>
+		<ul class="faculties">
+			<% institute.faculties.each do |faculty| %>
+				<li><%= faculty.name %></li>
+			<% end %>
+		</ul>
+	</div>
 </div>

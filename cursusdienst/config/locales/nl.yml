@@ -208,6 +208,8 @@ nl:
       less_than_or_equal_to: "moet minder dan of gelijk zijn aan %{count}"
       odd: "moet oneven zijn"
       even: "moet even zijn"
+      taken: " is reeds in gebruik"
+      
 
   activerecord:
     errors:
@@ -223,12 +225,21 @@ nl:
               taken: " is reeds geregistreerd"
             user_name:
               taken: " is reeds in gebruik"
-
+        institute:
+          attributes:
+            name:
+              taken: " is reeds in gebruik"
+            initials:
+              taken: " is reeds in gebruik"
+        guild:
+          attributes:
+            blank: "moet opgegeven zijn"
+            empty: "moet opgegeven zijn"
       messages:
         taken: "is al in gebruik"
         record_invalid: "Validatie mislukt: %{errors}"
         <<: *errors_messages
-
+        
       full_messages:
         format: "%{attribute} %{message}"
         
@@ -239,6 +250,15 @@ nl:
     email: "email"
     password: "Paswoord"
     password_confirmation: "Bevestiging paswoord"
+    initials: "Initialen"
+    year: "Jaar"
+    location: "Locatie"
+    institute: "Instelling"
+    faculty: "Faculteit"
+    year_type: "BA/MA"
+    price: "Prijs"
+    attachments: "Bijlage"
+    options: "Opties"
   
   example: "t(:cool, :scope => 'models.guild')"
   
@@ -248,16 +268,12 @@ nl:
     discipline: "richting"
     faculty: "Faculteit"
     institute: "Instelling"
+    institutes: "Instellingen"
     subject: "Vak"
   
   models:
     guild:
       cool: "blabla"
-
-  flash:
-   message:
-      signed_out: "Succesvol uitgelogd"
-      signed_in: "Succesvol ingelogd"
 
   page:
     home:
@@ -305,5 +321,107 @@ nl:
   message:
     new_message: "Nieuw bericht"
     edit_message: "Edit bericht"
-      
-  
+
+  institutes: "Instellingen"
+  institute: "Instelling"
+  faculties: "Faculteiten"
+  faculty: "Faculteit"
+  disciplines: "Richtingen"
+  subjects: "Vakken"
+  materials: "Cursusmateriaal"
+  users: "Gebruikers"
+  guilds: "Kringen"
+  stock: "Stock"
+  initials: "initialen"
+  location: "locatie"
+
+  titles:
+    new_institute: "Een nieuwe instelling aanmaken"
+    new_discipline: "Een nieuwe richting aanmaken"
+    new_subject: "Een nieuw vak aanmaken"
+    new_guild: "Een nieuwe kring aanmaken"
+    all_disciplines: "Alle vakken"
+    all_guilds: "Alle kringen"
+    all_institutes: "Alle instellingen"
+    all_materials: "Alle cursusmateriaal"
+    all_options: "Alle opties"
+    all_orders: "Alle bestellingen"
+    home: "Home"
+    about: "Over ons"
+    access_denied: "Toegang geweigerd"
+    control_panel: "Beheeraneel"
+    all_permission_groups: "Alle rechten"
+    stock: "Stock"
+    all_subjects: "Alle onderwerpen"
+    all_users: "Alle gebruikers"
+
+  buttons:
+    new_institute: "creëer instelling"
+    update_institute: "pas instelling aan"
+    new_discipline: "creëer richting"
+    update_discipline: "pas richting aan"
+    new_faculty: "creëer faculteit"
+    update_faculty: "pas faculteit aan"
+    new_guild: "creëer kring"
+    update_guild: "pas kring aan"
+    new_material: "creëer cursusmateriaal"
+    update_material: "pas cursusmateriaal aan"
+    new_message: "creëer bericht"
+    update_message: "pas bericht aan"
+    new_option: "creëer optie"
+    update_option: "pas optie aan"
+    proceed: "ga verder"
+    new_permission_group: "creëer nieuw recht"
+    update_permission_group: "update recht"
+    edit_stock: "Stock aanpassen"
+    new_subject: "Creëer Vak"
+    update_subject: "Pas vak aan"
+    update_user_permissions: "Pas rechten aan"
+
+  flash:
+    new_institute_success: "instelling succesvol aangemaakt"
+    update_institute_success: "instelling succesvol aangepast"
+    new_discipline_success: "richting succesvol aangemaakt"
+    update_discipline_success: "richting succesvol aangepast"
+    new_faculty_success: "faculteit succesvol aangemaakt"
+    update_faculty_success: "faculteit succesvol aangepast"
+    new_guild_success: "kring succesvol aangemaakt"
+    new_guild_fail: "kring niet aangemaakt. Er is iets misgegaan"
+    update_guild_success: "kring succesvol aangepast"
+    join_guild_success: "U bent succesvol aan de kring toegevoegd"
+    new_material_success: "cursusmateriaal succesvol aangemaakt"
+    update_material_success: "cursusmateriaal succesvol aangepast"
+    new_material_fail: "cursusmateriaal niet aangemaakt. Er is iets misgegaan"
+    already_selling: "%{guild} verkoop het cursusmateriaal %{material} al"
+    now_selling: "%{material} is toegevoegd aan het aanbod van %{guild} "
+    to_many_guild: "U bent lid van meerdere kringen, we weten niet aan welke kring het cursusmateriaal toegevoegd moet worden"
+    added_to_cart: "%{material} is aan het winkelmandje toegevoegd "
+    new_message_success: "bericht succesvol aangemaakt"
+    new_message_fail: "bericht niet aangemaakt. Er is iets misgegaan"
+    update_message_success: "bericht succesvol aangepast"
+    new_option_success: "optie succesvol aangemaakt"
+    new_option_fail: "optie niet aangemaakt. Er is iets misgegaan"
+    update_option_success: "optie succesvol aangepast"
+    no_institute: "Gebruiker kon niet met een instelling geassocieerd worden"
+    no_payment_option: "Geen betalings-optie meegegeven"
+    new_order_success: "Bestelling is verstuurd, en winkelmandje is geledigd"
+    new_order_fail: "Er is iets fout gegaan bij het versturen van de bestelling"
+    material_added_to_order_fail: "er is iets misgegaan, %{material} werd niet aan de bestelling toegevoegd"
+    new_permission_group_success: "Rechten succesvol aangemaakt"
+    new_permission_group_fail: "Rechten niet aangemaakt. Er is iets misgegaan"
+    upate_permission_group_success: "Rechten succesvol aangepast"
+    new_print_job_success: "Drukker bestelling aangemaakt"
+    new_print_job_fail: "Drukker bestelling niet aangemaakt. Er is iets misgegaan"
+    signed_out: "Succesvol uitgelogd"
+    signed_in: "Succesvol ingelogd"
+    password_mismatch: "Passwoord Username combinatie is foutief"
+    add_to_shopping_cart_fail: "item niet aan winkelmandje toegevoegd. Er is iets misgegaan"
+    shopping_cart_item_not_found: "Opgegeven item werd niet gevonden (ID mismatch)"
+    shopping_cart_amount_change_fail: "Aantal niet veranderd. Er is iets misgegaan"
+    new_subject_success: "Vak succesvol aangemaakt"
+    new_subject_fail: "Vak niet aangemaakt. Er is iets misgegaan (PARAMETERS %{subject})"
+    update_subject_success: "Vak succesvol aangepast"
+    new_user_success: "Gebruiker succesvol aangemaakt"
+    new_user_fail: "Gebruiker fail aangemaakt. Er is iets misgegaan"
+    update_user_success: "Gebruiker succesvol aangepast"
+    update_user_permissions_success: "Rechten van %{user} succesvol aangepast"

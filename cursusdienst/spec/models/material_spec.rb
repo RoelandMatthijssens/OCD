@@ -8,6 +8,7 @@ describe Material do
   subject { Factory(:material) }
   
   it { should validate_presence_of(:name) }
+  it { should validate_presence_of(:type) }
   
   it { should belong_to(:subject) }
   it { should belong_to(:parent) }

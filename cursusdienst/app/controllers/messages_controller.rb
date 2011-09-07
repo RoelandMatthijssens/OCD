@@ -10,7 +10,7 @@ class MessagesController < ApplicationController
   def new
 		@message = Message.new
 		@guild = params[:guild_id]
-    @submit = "Create new Message"
+    @submit = t(:new_message, :scope => "buttons" )
   end
 
   def create
@@ -18,30 +18,28 @@ class MessagesController < ApplicationController
 		@message = Message.new(params[:message])
 		@message.guild = @guild
     if @message.save
-      flash[:succes] = "Message succesfully created"
+      flash[:succes] = t(:new_message_success, :scope => "flash" )
       redirect_to @guild
     else
-			flash[:notice] = "NOT created message. #{params[:subject]}"
+			flash[:notice] = t(:new_message_fail, :scope => "flash" )
       render 'new'
     end
   end
 
   def edit
 		@message = Message.find(params[:id])
-    @submit = "Update Message"
+    @submit = t(:update_message_success, :scope => "buttons" )
   end
 
   def update
 		@message = Message.find(params[:id])
     if @message.update_attributes(params[:message])
-      flash[:succes] = "Message updated succesfully"
+      flash[:succes] = t(:update_message_success, :scope => "flash" )
       redirect_to @message.guild
     else
       render 'edit'
     end
   end
-
-  #def mark_
 
   def destroy
   end

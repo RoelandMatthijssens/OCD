@@ -1,8 +1,6 @@
 class GuildsController < ApplicationController
-  def index
-		#deny_access and return unless signed_in?
-		#deny_privileged_access and return unless current_user.can?('view_guilds')
-    @title = "Guilds"
+	def index
+    @title = t(:all_guilds, :scope => "titles")
     @guilds = Guild.paginate(:page => params[:page], :per_page => 10)
   end
   
@@ -11,14 +9,10 @@ class GuildsController < ApplicationController
     @subjects = @guild.subjects
     @selected_discipline = ""
     @selected_year_type = ""
-		#deny_access and return unless signed_in?
-		#deny_privileged_access and return unless current_user.can?('view_guilds') || current_user.guilds.include?(@guild)
   end
   
   def news
     @guild = Guild.find(params[:id])
-    #deny_access and return unless signed_in?
-		#deny_privileged_access and return unless current_user.can?('view_guilds') || current_user.guilds.include?(@guild)
   end
   
   def update_filter
@@ -35,7 +29,7 @@ class GuildsController < ApplicationController
     @guild = Guild.new
     #@guild.disciplines << Discipline.find(:first) # if Discipline.count > 0
     @dis_fac_inst = []
-    @submit = "Create new Guild"
+    @submit = t(:new_guild, :scope => "buttons")
   end
 
   def create
@@ -44,12 +38,11 @@ class GuildsController < ApplicationController
     @guild = Guild.new(params[:guild])
     @guild.disciplines= get_disciplines_from_guild(params[:guild])
     if @guild.save
-      flash[:notice] = "Guild succesfully created"
+      flash[:notice] = t(:new_guild_success, :scope => "flash")
       redirect_to @guild
     else
       @dis_fac_inst = get_dis_fac_inst_from_par(params[:guild])
-      flash[:notice] = "NOT created guild. #{params[:guild]}"
-      #      flash[:notice] = "NOT created guild. #{get_disciplines_from_guild(params[:guild])}"
+      flash[:notice] = t(:new_guild_fail, :scope => "flash")
       render :action => 'new'
     end
   end
@@ -59,7 +52,7 @@ class GuildsController < ApplicationController
 		deny_privileged_access and return unless current_user.can?('edit_guilds')
     @guild = Guild.find(params[:id])
     @dis_fac_inst = get_dis_fac_inst_from_guild(@guild)
-    @submit = "Update Guild"
+    @submit = t(:update_guild, :scope => "buttons")
   end
 
   def update
@@ -68,7 +61,7 @@ class GuildsController < ApplicationController
     @guild = Guild.find(params[:id])
     @guild.disciplines= get_disciplines_from_guild(params[:guild])
     if @guild.update_attributes(params[:guild])
-      flash[:notice] = "Guild succesfully updated"
+      flash[:notice] = t(:update_guild_success, :scope => "flash")
       redirect_to @guild
     else
       @dis_fac_inst = get_dis_fac_inst_from_par(params[:guild])
@@ -83,7 +76,7 @@ class GuildsController < ApplicationController
 		deny_access and return unless signed_in?
 		@guild = Guild.find(params[:id])
 		current_user.guilds << @guild unless current_user.guilds.include? @guild
-		flash[:notice] = "Succesfully joined the guild"
+		flash[:notice] = t(:join_guild_success, :scope => "flash")
 		redirect_to @guild
   end
 

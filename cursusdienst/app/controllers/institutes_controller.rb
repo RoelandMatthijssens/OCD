@@ -3,7 +3,7 @@ class InstitutesController < ApplicationController
   def index
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('view_institutes')
-    @title = "Institutes"
+    @title = t(:all_institutes, :scope => "titles")
     @institutes = Institute.paginate(:page => params[:page], :per_page => 10)
   end
 
@@ -17,7 +17,7 @@ class InstitutesController < ApplicationController
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('create_institutes')
     @institute = Institute.new
-    @submit = "Create new Institute"
+    @submit = t(:new_institute, :scope => "buttons")
   end
   
   def create
@@ -25,7 +25,7 @@ class InstitutesController < ApplicationController
 		deny_privileged_access and return unless current_user.can?('create_institutes')
     @institute = Institute.new(params[:institute])
     if @institute.save
-      flash[:succes] = "Institution create succesfully"
+      flash[:succes] = t(:new_institute_success, :scope => "flash")
       redirect_to @institute
     else
       render 'new'
@@ -36,7 +36,7 @@ class InstitutesController < ApplicationController
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('edit_institutes')
     @institute = Institute.find(params[:id])
-    @submit = "Update Institute"
+    @submit = t(:update_institute, :scope => "buttons")
   end
   
   def update
@@ -44,7 +44,7 @@ class InstitutesController < ApplicationController
 		deny_privileged_access and return unless current_user.can?('edit_institutes')
     @institute = Institute.find(params[:id])
     if @institute.update_attributes(params[:institute])
-      flash[:succes] = "Institute updated succesfully"
+      flash[:succes] = t(:update_institute_success, :scope => "flash")
       redirect_to @institute
     else
       render 'edit'

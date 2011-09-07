@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   def index
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('view_users')
-		@title = "Users"
+		@title = t(:all_users, :scope => "titles" )
 		@users = User.paginate(:page => params[:page], :per_page => 10)
   end
 
@@ -27,13 +27,14 @@ class UsersController < ApplicationController
     if @user.save
       sign_in @user
 			@guild.users << @user
-      flash[:succes] = "Registration succesfull"
+			flash[:succes] = t(:new_user_success, :scope => "flash" )
       if @user.guilds.emty?
         redirect_to @user
       else
         redirect_to @user.guilds.first
       end
     else
+      flash[:succes] = t(:new_user_fail, :scope => "flash" )
       render 'new'
     end
   end
@@ -52,7 +53,7 @@ class UsersController < ApplicationController
     if signed_in?
 			deny_privileged_access unless current_user == @user || current_user.can?("edit_users")
 			if @user.update_attributes(params[:user])
-				flash[:succes] = "User updated succesfully"
+				flash[:succes] = t(:update_user_success, :scope => "flash" )
 				redirect_to @user
 			else
 				render 'edit'
@@ -70,7 +71,7 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		if signed_in?
 			deny_privileged_access unless current_user.can?("edit_permissions")
-		@submit = "Save permissions"
+		@submit = t(:update_user_permissions, :scope => "buttons" )
 		else
 			deny_access
 		end
@@ -96,7 +97,7 @@ class UsersController < ApplicationController
 				@user.permission_groups.delete(permission)
 			end
 		end
-		flash[:succes] = "Permissions updated"
+		flash[:succes] = t(:update_user_permissions_success, :scope => "flash", :user => @user.name )
 		redirect_to edit_permissions_user_path
   end
 

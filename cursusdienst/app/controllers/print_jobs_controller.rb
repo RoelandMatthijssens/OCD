@@ -49,6 +49,7 @@ class PrintJobsController < ApplicationController
 				order.status = 'Ordered'
 				order.save!
 				end
+			flash[:success] = t(:new_print_job_success, :scope => "flash" )
 			end
 			@payed_materials.each do |k, v|
 				@print_job_item = PrintJobItem.new()
@@ -58,7 +59,7 @@ class PrintJobsController < ApplicationController
 				@print_job_item.save!
 			end
 		else
-			flash[:error] = 'something went horribly wrong'
+			flash[:error] = t(:new_print_job_fail, :scope => "flash" )
 		end
 		redirect_to print_jobs_path
 	end

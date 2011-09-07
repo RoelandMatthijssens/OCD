@@ -3,9 +3,9 @@ class OrdersController < ApplicationController
 	def index
 		deny_access and return unless signed_in?
 
-		@title = "User orders of Order Users"
+		@title = t(:all_orders, :scope => "titles" )
 		if current_user.guilds.empty? || current_user.guilds.first.disciplines.empty?
-			flash[:error] = "unable to associate user with institute"
+			flash[:error] = t(:no_institute, :scope => "flash" )
 			redirect_to control_panel_path
 		else
 			institute = current_user.guilds.first.disciplines.first.faculty.institute
@@ -17,15 +17,14 @@ class OrdersController < ApplicationController
 	end
 
 	def new
-		@title = "verify the order"
 		deny_access and return unless signed_in?
 		@order = Order.new()
-    @submit = "Proceed"
+		@submit = t(:proceed, :scope => "buttons" )
 	end
 
 	def create
 		if not (params[:payment] || ['cash', 'transfer'].include?(params[:payment]))
-			flash[:error] = 'no payment option given'
+			flash[:error] = t(:no_payment_option, :scope => "flash" )
 			redirect_to new_order_path
 		else
 			institute = current_user.guilds.first.disciplines.first.faculty.institute
@@ -36,9 +35,9 @@ class OrdersController < ApplicationController
 			@order.user = current_user
 			@order.order_key = 'RANDOM STRING O_o'
 			if @order.save!
-				flash[:success] = 'shopping cart emptied, and added to orders'
+				flash[:success] = t(:new_order_success, :scope => "flash" )
 			else
-				flash[:error] = 'something went horribly wrong'
+				flash[:error] = t(:new_order_fail, :scope => "flash" )
 			end
 			current_user.shopping_cart_items.each do |item|
 				x = MaterialOrder.new()
@@ -49,7 +48,7 @@ class OrdersController < ApplicationController
 				if x.save!
 					item.delete
 				else
-					message << "something bad happened with material #{item.material.name}"
+					flash[:error] = t(:material_added_to_order_fail, :scope => "flash", :material => item.material.name)
 				end
 			end
 			redirect_to orders_path
@@ -67,6 +66,5 @@ class OrdersController < ApplicationController
 		institute = current_user.guilds.first.disciplines.first.faculty.institute
 		@orders = Order.find(:all, :conditions => ['institute_id = ? and user_id=? and status=?' , institute.id, current_user.id, 'Ready'])
 		@all_orders = Order.find(:all, :conditions => ['status=?' , 'Ready'])
-
 	end
 end
