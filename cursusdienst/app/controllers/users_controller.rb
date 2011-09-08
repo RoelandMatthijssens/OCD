@@ -28,7 +28,7 @@ class UsersController < ApplicationController
       sign_in @user
 			@guild.users << @user
 			flash[:succes] = t(:new_user_success, :scope => "flash" )
-      if @user.guilds.emty?
+      if @user.guilds.empty?
         redirect_to @user
       else
         redirect_to @user.guilds.first

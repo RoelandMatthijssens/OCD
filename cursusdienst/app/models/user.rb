@@ -1,4 +1,33 @@
 require 'digest'
+require 'curl'
+
+class InstitutePasswordCheck < ActiveModel::Validator
+
+  def login_curl uname, pw
+    c	= Curl::Easy.new
+    c.header_in_body = false
+    c.ssl_verify_host = false
+    c.follow_location = false
+    c.url = "https://idsserve.vub.ac.be/cgi-bin/vrfy-pw"
+    f = "username=" + c.escape(uname)
+    f += "&password=" + c.escape(pw)
+    f += "&failure=" + c.escape("http://igwe.vub.ac.be/failure")
+    f += "&location=" + c.escape("http://igwe.vub.ac.be/success")
+    f += "&fields=username&options=valid%20relation"
+    c.http_post(f)
+    c.body_str.index('success') ? true : false
+    #   c.body_str.index('success') && true
+  end
+  
+  def validate(record)
+    unless login_curl(record.user_name, record.password)
+      record.errors[:password] << "Your Password is not correct"
+      #    if options[:fields].any?{|field| record.send(field) == "Evil" }
+      #      record.errors[:base] << "This person is evil"
+      #    end
+    end
+  end
+end
 
 class User < ActiveRecord::Base
   attr_accessible :last_name, :name, :user_name, :email, :password, :password_confirmation, :permission_group, :salt
@@ -11,7 +40,9 @@ class User < ActiveRecord::Base
     :confirmation => true,
     :length => { :within => 6..40 },
     :on => :create
-#  validates :password_confirmation, :presence => true
+  #  validates :password_confirmation, :presence => true
+
+  validates_with InstitutePasswordCheck
   validates :name, :presence => true
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -19,11 +50,11 @@ class User < ActiveRecord::Base
     :format => {:with => email_regex}, 
     :uniqueness => {:case_sensitive => false}
   
-#  validates :permission_group, :presence => true
+  #  validates :permission_group, :presence => true
   
   validates_uniqueness_of :user_name
   
-#  belongs_to :discipline
+  #  belongs_to :discipline
   has_and_belongs_to_many :permission_groups
   
   has_and_belongs_to_many :guilds
@@ -44,7 +75,7 @@ class User < ActiveRecord::Base
   end
   def User.autenticate(user_name, submitted_password)
     user = User.find_by_user_name(user_name)
-#    (user && user.has_password?(submitted_password)) ? user : nil
+    #    (user && user.has_password?(submitted_password)) ? user : nil
     return nil if user.nil?
     return user if user.has_password?(submitted_password)
   end
@@ -56,7 +87,7 @@ class User < ActiveRecord::Base
 	def can?(permission)
 		permission_groups.map{|x| x.name}.include?(permission)
 	end
-private
+  private
   def encrypt_password
     self.salt = make_salt if new_record?
     self.encrypted_password = encrypt(password)
@@ -72,6 +103,10 @@ private
   end
 
 end
+
+
+
+
 
 # == Schema Information
 #

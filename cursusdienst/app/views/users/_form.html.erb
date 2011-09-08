@@ -26,10 +26,12 @@
     <%= f.label :password_confirmation %> <br>
     <%= f.password_field :password_confirmation %> <br>
   </div>
-	<div class="field">
-		<%= f.collection_select :guild_id, Guild.find(:all), :id, :name, { :prompt => t(:select_guild, :scope => 'user.signup') } %>
-	</div>
-  <div class='field'>
-    <%= f.submit @submit %>
-  </div>
-<% end %>
+  <div class="field">
+    <%= select_tag :guild, options_from_collection_for_select(Guild.find(:all), 
+      :id, :name, params[:guild] ? params[:guild] : "") , { :prompt => t(:select_guild, :scope => 'user.signup')} %>
+      
+    </div>
+    <div class='field'>
+      <%= f.submit @submit %>
+    </div>
+  <% end %>
