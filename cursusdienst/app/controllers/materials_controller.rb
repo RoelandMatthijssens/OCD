@@ -20,8 +20,10 @@ class MaterialsController < ApplicationController
     parent = params[:parent] && Material.find(params[:parent])
     if subject 
       @material = subject.materials.new
+      set_given_subject @material
     elsif parent
       @material = Material.new :parent => parent
+      set_given_parent @material
     else
       @material = Material.new
     end
