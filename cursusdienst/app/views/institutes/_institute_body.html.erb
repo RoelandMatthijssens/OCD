@@ -1,0 +1,13 @@
+<strong><%= t(:initials) %>:</strong> <%= institute.initials %> <br/>
+<strong><%= t(:location) %>:</strong> <%= institute.location %> <br/>
+<%= link_to "Edit this institute(symbol)", edit_institute_path(institute) %><br/><br/> <!--	#TODO: in css -->
+<div class="Faculties">
+  <h3><%= t(:faculties) %></h3>
+  <%= link_to "add new", new_faculty_path %>
+  <ul class="faculties">
+    <% institute.faculties.each do |faculty| %>
+      <li><%= faculty.name %></li>
+    <% end %>
+  </ul>
+</div>
+
