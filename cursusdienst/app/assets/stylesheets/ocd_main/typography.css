@@ -10,14 +10,14 @@
 html { font-size:100.01%; }
 body {
   margin-left: 10px;
-  font-size: 75%;
+  font-size: 12px;
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
   color: #6E6D6D;
 }
 
-p {
-  margin-left: 10px;
-  font-size: 75%;
+.indentbody {
+  margin-left: 4em;
+  font-size: 12px;
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
   color: #6E6D6D;
 }
@@ -26,16 +26,16 @@ p {
 
 h1,h2,h3,h4,h5,h6 { font-weight: normal; color: #111; }
 
-h1 { font: bolder 1.3em Verdana,Arial,sans-serif;
+h1 { font: bolder 1.5em Verdana,Arial,sans-serif;
      color:#4E443C;
-     letter-spacing: 2px;
+     letter-spacing: 1px;
      margin-left:  0em; 
      margin-bottom: 0px;
      text-transform:uppercase;
      line-height: 1;
      padding-top:3px;
      padding-bottom:8px;
-     padding-left:10px;
+     padding-left:14px;
      border-top:0px;
      border-left:0px;
      border-right:0px;
