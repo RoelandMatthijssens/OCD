@@ -39,6 +39,7 @@ class SubjectsController < ApplicationController
   def edit
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('edit_subjects')
+    @title = t(:edit_subject, :scope => "titles")
     @subject = Subject.find(params[:id])
     @dis_fac_inst = get_dis_fac_inst_from_subject(@subject)
 		@submit = t(:update_subject, :scope => "buttons" )
@@ -99,5 +100,4 @@ class SubjectsController < ApplicationController
     }
     return [inst, fac, ds]
   end
-
 end

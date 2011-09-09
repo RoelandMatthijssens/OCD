@@ -354,6 +354,7 @@ nl:
     stock: "Stock"
     all_subjects: "Alle onderwerpen"
     all_users: "Alle gebruikers"
+    edit_subject: "Pas dit vak aan"
 
   buttons:
     new_institute: "creëer instelling"
@@ -425,3 +426,7 @@ nl:
     new_user_fail: "Gebruiker fail aangemaakt. Er is iets misgegaan"
     update_user_success: "Gebruiker succesvol aangepast"
     update_user_permissions_success: "Rechten van %{user} succesvol aangepast"
+
+  links:
+    edit_subject: "Edit"
+ 

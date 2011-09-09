@@ -1,7 +1,7 @@
 <ul class="supplies">
   <%= "not selling any materials" if @subjects.empty?%>
   <% @subjects.each do |subject| %>
-    <h2><%= subject.name %></h2>
+    <h2><%= subject.name %></h2> <%= link_to t(:edit_subject, :scope => 'links'), edit_subject_path(subject) %>
     <table>
       <% subject.materials.each do |material| %>
         <tr>
