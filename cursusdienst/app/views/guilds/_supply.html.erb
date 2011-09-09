@@ -1,24 +1,33 @@
-<ul class="supplies">
-  <%= "not selling any materials" if @subjects.empty?%>
-  <% @subjects.each do |subject| %>
-    <div class="supply">
-      <h2><%= subject.name %></h2> <%= link_to t(:edit_subject, :scope => 'links'), edit_subject_path(subject) %>
-      <table>
-        <% i = 1 %>
-        <% subject.materials.each do |material| %>
-          <tr>
-            
-            <td <%= "class='alt'" if i.odd? %> ><%= link_to material.name, material %></td>
-            <td <%= "class='alt'" if i.odd? %> >€<%= material.price %></td>
-            <td <%= "class='alt'" if i.odd? %> ><%= link_to_function "add to cart(symbol)", "add_to_cart( #{ material.id }, #{@guild.id} )" %></td>
-            <% if current_user && current_user.can?("edit_materials") %>
-              <td <%= "class='alt'" if i.odd? %> > <%= link_to "Edit this material(symbol)", edit_material_path(material) %> </td>
-            <% end %>
-          </tr>
-          <% i+=1 %>
-        <% end %>
-      </table>
-    </div>
-  <% end %>
 
-</ul>
+<%= "not selling any materials" if @subjects.empty?%>
+<% @subjects.each do |subject| %>
+  <div class="supply">
+    <table class="header">
+      <tr>
+        <td><h3><%= subject.name %></h3></td>
+        <td><%= link_to t(:edit_subject, :scope => 'links'), edit_subject_path(subject) %></td>
+      </tr>
+    </table>
+     
+    <table>
+      <th> <%= t(:item, :scope => "guild.supply") %> </th>
+      <th> <%= t(:price, :scope => "guild.supply") %> </th>
+      <th> <%= t(:to_cart, :scope => "guild.supply") %> </th>
+      <th> <%= t(:edit, :scope => "guild.supply") %> </th>
+      <% i = 1 %> <!-- dirty ruby fix to get the alternating alt class -->
+      <% subject.materials.each do |material| %>
+        <tr>
+
+          <td <%= "class='alt'" if i.odd? %> ><%= link_to material.name, material %></td>
+          <td <%= "class='alt'" if i.odd? %> >€<%= material.price %></td>
+          <td <%= "class='alt'" if i.odd? %> ><%= link_to_function "add to cart(symbol)", "add_to_cart( #{ material.id }, #{@guild.id} )" %></td>
+          <% if current_user && current_user.can?("edit_materials") %>
+            <td <%= "class='alt'" if i.odd? %> > <%= link_to "Edit this material(symbol)", edit_material_path(material) %> </td>
+          <% end %>
+        </tr>
+        <% i+=1 %>
+      <% end %>
+    </table>
+  </div>
+<% end %>
+

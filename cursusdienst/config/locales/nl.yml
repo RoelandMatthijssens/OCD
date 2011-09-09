@@ -314,6 +314,11 @@ nl:
     member: "U bent lid van deze kring"
     supplies: "aanbod"
     supply:
+       filter: "Filter"
+       item: "Item"
+       price: "Prijs"
+       to_cart: "Koop"
+       edit: "Edit"
        material_added: "Dit item wordt al verkocht door "
     news:
       edit_message: "Edit bericht"
