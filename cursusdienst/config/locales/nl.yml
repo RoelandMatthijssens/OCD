@@ -218,6 +218,7 @@ nl:
           one:    "%{model} niet opgeslagen: 1 fout gevonden"
           other:  "%{model} niet opgeslagen: %{count} fouten gevonden"
         body: "Controleer de volgende velden:"
+        record_invalid: "Validatie mislukt: %{errors}"
       models:
         user: 
           attributes:
@@ -238,7 +239,7 @@ nl:
       messages:
         taken: "is al in gebruik"
         record_invalid: "Validatie mislukt: %{errors}"
-        <<: *errors_messages
+#        <<: *errors_messages
         
       full_messages:
         format: "%{attribute} %{message}"
@@ -317,7 +318,16 @@ nl:
     news:
       edit_message: "Edit bericht"
       new_message: "Nieuw bericht"
-  
+      
+  material:
+    types:
+      select_type: "Selecteer type"
+      book: "Boek"
+      slides: "Slides"
+      summary: "Samenvatting"
+      syllabus: "Syllabus"
+      misc: "Varia"
+      
   message:
     new_message: "Nieuw bericht"
     edit_message: "Edit bericht"

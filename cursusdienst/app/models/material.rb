@@ -1,5 +1,5 @@
 class Material < ActiveRecord::Base
-  attr_accessible :name, :subject_id, :guilds, :material_options, :parent_id, :path_name, :attachments_attributes, :price, :typee
+  attr_accessible :name, :subject_id, :guilds, :material_options, :parent, :parent_id, :path_name, :attachments_attributes, :price, :typee
   
   has_many :attachments
   accepts_nested_attributes_for :attachments

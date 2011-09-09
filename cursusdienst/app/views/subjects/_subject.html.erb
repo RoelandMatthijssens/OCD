@@ -1,8 +1,8 @@
 <div>
   <h1><%= link_to subject.name, subject %></h1>
-	<ul class="info">
-		<li><strong>Year: </strong><%= subject.year.to_s + ' ' + subject.year_type %></li>
-	</ul>
+  <ul class="info">
+    <li><strong>Year: </strong><%= subject.year.to_s + ' ' + subject.year_type %></li>
+  </ul>
   <strong>Disciplines:</strong><br>
   <% subject.disciplines.each { |discipline| %>
     <strong><%= discipline.name %></strong><br/>
@@ -11,15 +11,15 @@
       <li><strong>Institute:</strong><%= link_to discipline.faculty.institute.name, discipline.faculty.institute %> <br/></li>
     </ul>
   <% } %>
-	<div class="materials">
-	<h3>Materials</h3>
-	<ul class="materials">
-	<% subject.materials.each do |material| %>
-		<li><%= link_to material.name, material %></li>
-	<% end %>
-	<%= link_to 'add new material', new_material_path %>
-	</ul>
-	</div>
+  <div class="materials">
+    <h3>Materials</h3>
+    <ul class="materials">
+      <% subject.materials.each do |material| %>
+        <li><%= link_to material.name, material %></li>
+      <% end %>
+      <%= link_to 'add new material', :controller => "materials", :action => "new", :subject => subject.id %>
+    </ul>
+  </div>
 
   <%= link_to "Edit this subject", edit_subject_path(subject) %>
 </div>

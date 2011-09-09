@@ -28,6 +28,7 @@ class Subject < ActiveRecord::Base
       end
     end
   end
+  
 end
 
 # == Schema Information

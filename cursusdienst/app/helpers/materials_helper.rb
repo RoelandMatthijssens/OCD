@@ -10,6 +10,16 @@ module MaterialsHelper
       params && params[type] &&  params[type][key] ? params[type][key] : ""
     end
   end
-  
-  
+
+  def get_types
+    [
+      t(:book, :scope => "material.types"), 
+      t(:slides, :scope => "material.types"),
+      t(:summary, :scope => "material.types"),
+      t(:syllabus, :scope => "material.types"),
+      t(:misc, :scope => "material.types"),
+    ]
+  end
+
+   
 end

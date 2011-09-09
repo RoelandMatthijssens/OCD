@@ -16,7 +16,15 @@ class MaterialsController < ApplicationController
   def new
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('create_materials')
-    @material = Material.new
+    subject =  params[:subject] && Subject.find(params[:subject])
+    parent = params[:parent] && Material.find(params[:parent])
+    if subject 
+      @material = subject.materials.new
+    elsif parent
+      @material = Material.new :parent => parent
+    else
+      @material = Material.new
+    end
     @submit = t(:new_material, :scope => "buttons")
     set_dataset
   end
@@ -26,7 +34,7 @@ class MaterialsController < ApplicationController
 		deny_privileged_access and return unless current_user.can?('create_materials')
     @material = Material.new(params[:material])
     @material.options= get_options_from_material(params[:material])
-    if @material.save!
+    if @material.save
       flash[:succes] = t(:new_material_success, :scope => "flash")
       redirect_to @material
     else
