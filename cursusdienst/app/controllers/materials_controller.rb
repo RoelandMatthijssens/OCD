@@ -20,7 +20,7 @@ class MaterialsController < ApplicationController
     @parent = params[:parent] && Material.find(params[:parent])
     if @subject 
       @material = @subject.materials.new
-      set_given_subject @material
+      set_given_subj @subject
     elsif @parent
       @material = Material.new :parent => @parent
       set_given_parent @material
@@ -182,6 +182,18 @@ class MaterialsController < ApplicationController
       @subject_params_faculty = [get_faculties(material.institute_id.to_s), material.faculty_id.to_s]
       @subject_params_discipline = [get_disciplines(material.faculty_id.to_s), material.discipline_id.to_s]
       @subject_params_subject = [get_subjects(material.discipline_id.to_s), material.subject_id.to_s]
+    else
+      set_empty_subject
+    end
+  end
+  
+  def set_given_subj subject
+    if subject
+      discipline = subject.disciplines.first
+      @subject_params_institute = [get_institutes, discipline.faculty.institute_id.to_s]
+      @subject_params_faculty = [get_faculties(discipline.faculty.institute_id.to_s), discipline.faculty_id.to_s]
+      @subject_params_discipline = [get_disciplines(discipline.faculty_id.to_s), discipline.id.to_s]
+      @subject_params_subject = [get_subjects(discipline.id.to_s), subject.id.to_s]
     else
       set_empty_subject
     end

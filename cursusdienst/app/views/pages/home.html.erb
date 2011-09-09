@@ -3,12 +3,12 @@
 		<%= current_user.guilds.first && current_user.guilds.first.name %>
 	<% end %>
 	<div class="content">
-		<h2><%= t(:welcome_message_about_platform_title, :scope => 'page.home') %><br/></h2>
-                <p><%= t(:welcome_message_about_platform_html, :scope => 'page.home') %></p><br/>
-		<h2><%= t(:welcome_message_about_us_title, :scope => 'page.home') %><br/></h2>
-		<p><%= t(:welcome_message_about_us, :scope => 'page.home') %></p><br/>
-		<h2><%= t(:welcome_message_join_us_title, :scope => 'page.home') %><br/></h2>
-		<p><%= t(:welcome_message_join_us, :scope => 'page.home') %></p><br/>
+		<h2><%= t(:welcome_message_about_platform_title, :scope => 'page.home') %></h2>
+                <p class="indentbody"><%= t(:welcome_message_about_platform_html, :scope => 'page.home') %></p>
+		<h2><%= t(:welcome_message_about_us_title, :scope => 'page.home') %></h2>
+		<p class="indentbody"><%= t(:welcome_message_about_us, :scope => 'page.home') %></p>
+		<h2><%= t(:welcome_message_join_us_title, :scope => 'page.home') %></h2>
+		<p class="indentbody"><%= t(:welcome_message_join_us, :scope => 'page.home') %></p>
 	</div>
 <br/>
 	<div class="sponsors">
