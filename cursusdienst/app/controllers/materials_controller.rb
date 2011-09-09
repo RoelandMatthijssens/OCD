@@ -16,12 +16,14 @@ class MaterialsController < ApplicationController
   def new
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('create_materials')
-    subject =  params[:subject] && Subject.find(params[:subject])
-    parent = params[:parent] && Material.find(params[:parent])
-    if subject 
-      @material = subject.materials.new
-    elsif parent
-      @material = Material.new :parent => parent
+    @subject =  params[:subject] && Subject.find(params[:subject])
+    @parent = params[:parent] && Material.find(params[:parent])
+    if @subject 
+      @material = @subject.materials.new
+      set_given_subject @material
+    elsif @parent
+      @material = Material.new :parent => @parent
+      set_given_parent @material
     else
       @material = Material.new
     end
