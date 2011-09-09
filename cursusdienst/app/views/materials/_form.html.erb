@@ -1,8 +1,5 @@
 <%= form_for(@material, :html => {:multipart => true}) do |f| %>
-  <%= @subject_params_subject %> <br />
-  <%= @material.institute_id.to_s %>
   <%= render 'shared/error_messages', :object => f.object %>
-  <h1><%= @bla %></h1>
   <div class='field'>
     <%= f.label :name %> <br>
     <%= f.text_field :name %> <br>

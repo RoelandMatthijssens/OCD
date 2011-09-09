@@ -1,21 +1,22 @@
 <ul class="supplies">
   <%= "not selling any materials" if @subjects.empty?%>
   <% @subjects.each do |subject| %>
-    <h2><%= subject.name %></h2> <%= link_to t(:edit_subject, :scope => 'links'), edit_subject_path(subject) %>
-    <table>
-      <% subject.materials.each do |material| %>
-        <tr>
-          <td><%= link_to material.name, material %></td>
-					<td>€<%= material.price %></td>
-          <td><%= link_to_function "add to cart(symbol)", "add_to_cart( #{ material.id }, #{@guild.id} )" %></td>
-          <% if current_user && current_user.can?("edit_materials") %>
-            <td> <%= link_to "Edit this material(symbol)", edit_material_path(material) %> </td>
-          <% end %>
+    <div class="supply">
+      <h2><%= subject.name %></h2> <%= link_to t(:edit_subject, :scope => 'links'), edit_subject_path(subject) %>
+      <table>
+        <% subject.materials.each do |material| %>
+          <tr>
+            <td><%= link_to material.name, material %></td>
+            <td>€<%= material.price %></td>
+            <td><%= link_to_function "add to cart(symbol)", "add_to_cart( #{ material.id }, #{@guild.id} )" %></td>
+            <% if current_user && current_user.can?("edit_materials") %>
+              <td> <%= link_to "Edit this material(symbol)", edit_material_path(material) %> </td>
+            <% end %>
 
-        </tr>
-      <% end %>
-    </table>
-
+          </tr>
+        <% end %>
+      </table>
+    </div>
   <% end %>
 
 </ul>
