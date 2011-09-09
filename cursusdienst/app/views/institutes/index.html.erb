@@ -3,7 +3,10 @@
 <%= will_paginate %>
 <ul class="institutes">
   <% @institutes.each do |institute| %>
-    <%= render institute %>
+  <div class="institute">
+    <h2><%= link_to institute.name, institute %></h2>
+    <%= render :partial => "institute_body", :locals => {:institute => institute} %>
+  </div>
   <% end %>
 </ul>
 <%= will_paginate %>
