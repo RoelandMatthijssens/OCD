@@ -4,15 +4,16 @@
     <div class="supply">
       <h2><%= subject.name %></h2> <%= link_to t(:edit_subject, :scope => 'links'), edit_subject_path(subject) %>
       <table>
+        <% i = 1 %>
         <% subject.materials.each do |material| %>
-          <tr>
+          <tr <%= "class='alt'" if i.odd? %> >
+            <% i+=1 %>
             <td><%= link_to material.name, material %></td>
-            <td class ="alt">€<%= material.price %></td>
+            <td>€<%= material.price %></td>
             <td><%= link_to_function "add to cart(symbol)", "add_to_cart( #{ material.id }, #{@guild.id} )" %></td>
             <% if current_user && current_user.can?("edit_materials") %>
-              <td class="alt" > <%= link_to "Edit this material(symbol)", edit_material_path(material) %> </td>
+              <td> <%= link_to "Edit this material(symbol)", edit_material_path(material) %> </td>
             <% end %>
-
           </tr>
         <% end %>
       </table>
