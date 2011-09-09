@@ -7,10 +7,10 @@
         <% subject.materials.each do |material| %>
           <tr>
             <td><%= link_to material.name, material %></td>
-            <td>€<%= material.price %></td>
+            <td class ="alt">€<%= material.price %></td>
             <td><%= link_to_function "add to cart(symbol)", "add_to_cart( #{ material.id }, #{@guild.id} )" %></td>
             <% if current_user && current_user.can?("edit_materials") %>
-              <td> <%= link_to "Edit this material(symbol)", edit_material_path(material) %> </td>
+              <td class="alt" > <%= link_to "Edit this material(symbol)", edit_material_path(material) %> </td>
             <% end %>
 
           </tr>
