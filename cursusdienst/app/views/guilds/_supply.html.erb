@@ -8,26 +8,27 @@
         <td><%= link_to t(:edit_subject, :scope => 'links'), edit_subject_path(subject) %></td>
       </tr>
     </table>
-     
-    <table>
-      <th class='col1width'> <%= t(:item, :scope => "guild.supply") %> </th>
-      <th> <%= t(:price, :scope => "guild.supply") %> </th>
-      <th> <%= t(:to_cart, :scope => "guild.supply") %> </th>
-      <th> <%= t(:edit, :scope => "guild.supply") %> </th>
-      <% i = 1 %> <!-- dirty ruby fix to get the alternating alt class -->
-      <% subject.materials.each do |material| %>
-        <tr>
+    <ul>
+      <table>
+        <th class='col1width'> <%= t(:item, :scope => "guild.supply") %> </th>
+        <th> <%= t(:price, :scope => "guild.supply") %> </th>
+        <th> <%= t(:to_cart, :scope => "guild.supply") %> </th>
+        <th> <%= t(:edit, :scope => "guild.supply") %> </th>
+        <% i = 1 %> <!-- dirty ruby fix to get the alternating alt class -->
+        <% subject.materials.each do |material| %>
+          <tr>
 
-          <td <%= "class='alt'" if i.odd? %> ><%= link_to material.name, material %></td>
-          <td <%= "class='alt'" if i.odd? %> >€<%= material.price %></td>
-          <td <%= "class='alt'" if i.odd? %> ><%= link_to_function "add to cart(symbol)", "add_to_cart( #{ material.id }, #{@guild.id} )" %></td>
-          <% if current_user && current_user.can?("edit_materials") %>
-            <td <%= "class='alt'" if i.odd? %> > <%= link_to "Edit this material(symbol)", edit_material_path(material) %> </td>
-          <% end %>
-        </tr>
-        <% i+=1 %>
-      <% end %>
-    </table>
+            <td <%= "class='alt'" if i.odd? %> ><%= link_to material.name, material %></td>
+            <td <%= "class='alt'" if i.odd? %> >€<%= material.price %></td>
+            <td <%= "class='alt'" if i.odd? %> ><%= link_to_function "add to cart(symbol)", "add_to_cart( #{ material.id }, #{@guild.id} )" %></td>
+            <% if current_user && current_user.can?("edit_materials") %>
+              <td <%= "class='alt'" if i.odd? %> > <%= link_to "Edit this material(symbol)", edit_material_path(material) %> </td>
+            <% end %>
+          </tr>
+          <% i+=1 %>
+        <% end %>
+      </table>
+    </ul>
   </div>
 <% end %>
 
