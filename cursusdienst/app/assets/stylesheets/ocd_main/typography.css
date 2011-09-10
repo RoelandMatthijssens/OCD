@@ -9,20 +9,51 @@
    The font-size percentage is of 16px. (0.75 * 16px = 12px) */
 html { font-size:100.01%; }
 body {
-  font-size: 75%;
-  color: #222;
-  background: #fff;
+  margin-left: 10px;
+  font-size: 12px;
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+  color: #6E6D6D;
 }
 
+.indentbody {
+  margin-left: 4px;
+  font-size: 12px;
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+  color: #6E6D6D;
+}
 
 /* Headings
 -------------------------------------------------------------- */
 
 h1,h2,h3,h4,h5,h6 { font-weight: normal; color: #111; }
 
-h1 { font-size: 3em; line-height: 1; margin-bottom: 0.5em; }
-h2 { font-size: 2em; margin-bottom: 0.75em; }
+h1 { font: bolder 1.5em Verdana,Arial,sans-serif;
+     color:#4E443C;
+     letter-spacing: 1px;
+     margin-left:  0em; 
+     margin-bottom: 0px;
+     text-transform:uppercase;
+     line-height: 1;
+     padding-top:3px;
+     padding-bottom:8px;
+     padding-left:14px;
+     border-top:0px;
+     border-left:0px;
+     border-right:0px;
+     border-bottom:1px;
+     border-style:solid;
+     background: #fff}
+h2 { font-size: 2em; 
+     color:#4E443C;
+     font: 1.3em Verdana,Arial,sans-serif;
+     letter-spacing: 1px;
+     margin-bottom:10px; 
+     margin-top: 10px;
+     padding-left: 15px;
+     background-image:url('images/h2_bullet.png');
+     background-repeat: no-repeat;
+     background-position: left center;
+   }
 h3 { font-size: 1.5em; line-height: 1; margin-bottom: 1em; }
 h4 { font-size: 1.2em; line-height: 1.25; margin-bottom: 1.25em; }
 h5 { font-size: 1em; font-weight: bold; margin-bottom: 1.5em; }
@@ -41,9 +72,19 @@ p           { margin: 0 0 1.5em; }
 p img.left  { float: left; margin: 1.5em 1.5em 1.5em 0; padding: 0; }
 p img.right { float: right; margin: 1.5em 0 1.5em 1.5em; }
 
+a:link,	    
 a:focus,
+a:visited,
 a:hover     { color: #000; }
-a           { color: #009; text-decoration: underline; }
+a           { color: #000; text-decoration: none; 
+}
+
+h1 a,a:visited, h1 a:link { color:#4E443C;}
+h1 a:hover { color: #000}
+
+.h2_link:hover {
+	background-image:url('images/h2_bullet_hover.png');
+}
 
 blockquote  { margin: 1.5em; color: #666; font-style: italic; }
 strong      { font-weight: bold; }
@@ -82,9 +123,67 @@ table       { margin-bottom: 1.4em; width:100%; }
 th          { font-weight: bold; }
 thead th    { background: #c3d9ff; }
 th,td,caption { padding: 4px 10px 4px 5px; }
-tr.even td  { background: #e5ecf9; }
+tr.even td  { background: #e5ecf9; margin 0}
 tfoot       { font-style: italic; }
 caption     { background: #eee; }
+
+
+.supply {
+        padding: 0px;
+        margin: 0px;
+        }
+
+.supply th {
+	font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	color: #4f6b72;
+	border-right: 1px solid #C1DAD7;
+	border-bottom: 1px solid #C1DAD7;
+	border-top: 1px solid #C1DAD7;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	text-align: left;
+	padding: 6px 6px 6px 12px;
+	background: #CAE8EA url(images/bg_header.jpg) no-repeat;
+}
+
+.supply th.nobg {
+ 	border-top: 0;
+	border-left: 0;
+	border-right: 1px solid #C1DAD7;
+	background: none;
+}
+
+
+.supply td {
+	border-right: 1px solid #C1DAD7;
+	border-bottom: 1px solid #C1DAD7;
+	background: #fff;
+	padding: 6px 6px 6px 12px;
+	color: #4f6b72;
+}
+
+
+.supply td.alt {
+	background: #F5FAFA;
+	color: #797268;
+        margin-top:0px;
+}
+
+#supply th.spec {
+	border-left: 1px solid #C1DAD7;
+	border-top: 0;
+	background: #fff url(images/bullet1.gif) no-repeat;
+	font: bold 10px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+}
+
+#supply th.specalt {
+	border-left: 1px solid #C1DAD7;
+	border-top: 0;
+	background: #f5fafa url(images/bullet2.gif) no-repeat;
+	font: bold 10px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	color: #797268;
+}
+
 
 
 /* Misc classes

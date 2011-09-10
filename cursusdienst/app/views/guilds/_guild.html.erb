@@ -21,65 +21,68 @@
   <h2><%= t(:supplies, :scope => "guild") %></h2>
   <div class="supplies" id="supplies">
     <div id="filter">
-      <%= form_tag update_filter_guild_path, :method => :put do %>
-        <div style="display:none;">
-          <%= label_tag "institute" %>
-          <%= render :partial => "filters/select_box", :locals => {
-            :filter_key_ajax => "institute",
-            :id => "filter[institute_id]",
-            :dataset => get_institutes, 
-            :selected_id => guild.disciplines.first.faculty.institute_id.to_s,
-            :parent_id => "filter_institute_id",
-            :child_id => "filter_faculty_id"} %> <br />
+      <fieldset>
+        <legend><%= t(:filter, :scope => "guild.supply") %></legend>
+        <%= form_tag update_filter_guild_path, :method => :put do %>
+          <div style="display:none;">
+            <%= label_tag "institute" %>
+            <%= render :partial => "filters/select_box", :locals => {
+              :filter_key_ajax => "institute",
+              :id => "filter[institute_id]",
+              :dataset => get_institutes, 
+              :selected_id => guild.disciplines.first.faculty.institute_id.to_s,
+              :parent_id => "filter_institute_id",
+              :child_id => "filter_faculty_id"} %> <br />
 
-          <%= label_tag "faculty" %>    
-          <%= render :partial => "filters/select_box", :locals => {
-            :filter_key_ajax => "faculty",
-            :id => "filter[faculty_id]",
-            :dataset => get_faculties(guild.disciplines.first.faculty.institute_id.to_s), 
-            :selected_id => guild.disciplines.first.faculty.id.to_s,
-            :parent_id => "filter_faculty_id",
-            :child_id => "filtert_discipline_id"} %> <br />
-        </div>
-        <table>
-          <tr>
-            <td>
-              <%= label_tag t :disciplines, :scope =>'globals' %> 
-            </td>
-            <td>
-              <%= render :partial => "filters/select_box_html_options", :locals => {
-                :filter_key_ajax => "discipline",
-                :id => "filter[discipline_id]",
-                :dataset => get_disciplines(guild.disciplines.first.faculty.id.to_s), 
-                :selected_id => @selected_discipline,
-                :html_options => {:onchange => '$(filter_year_type).val("");'}} %> <br />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <%= label_tag t :year, :scope => "datetime.prompts" %> 
-            </td>
-            <td>
-              <%= select_tag "filter[year_type]", 
-                options_for_select([["bachelor","bachelor"], ["master","master"]], @selected_year_type), 
-                {:prompt => t(:select, :scope =>'globals'), :onchange => "if (this.value !='') {this.form.submit();} "} %>
-            </td>
-          </tr>
-        </table>
-      <% end %>
+            <%= label_tag "faculty" %>    
+            <%= render :partial => "filters/select_box", :locals => {
+              :filter_key_ajax => "faculty",
+              :id => "filter[faculty_id]",
+              :dataset => get_faculties(guild.disciplines.first.faculty.institute_id.to_s), 
+              :selected_id => guild.disciplines.first.faculty.id.to_s,
+              :parent_id => "filter_faculty_id",
+              :child_id => "filtert_discipline_id"} %> <br />
+          </div>
+          <table>
+            <tr>
+              <td>
+                <%= label_tag t :disciplines, :scope =>'globals' %> 
+              </td>
+              <td>
+                <%= render :partial => "filters/select_box_html_options", :locals => {
+                  :filter_key_ajax => "discipline",
+                  :id => "filter[discipline_id]",
+                  :dataset => get_disciplines(guild.disciplines.first.faculty.id.to_s), 
+                  :selected_id => @selected_discipline,
+                  :html_options => {:onchange => '$(filter_year_type).val("");'}} %> <br />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <%= label_tag t :year, :scope => "datetime.prompts" %> 
+              </td>
+              <td>
+                <%= select_tag "filter[year_type]", 
+                  options_for_select([["bachelor","bachelor"], ["master","master"]], @selected_year_type), 
+                  {:prompt => t(:select, :scope =>'globals'), :onchange => "if (this.value !='') {this.form.submit();} "} %>
+              </td>
+            </tr>
+          </table>
+        <% end %>
+      </fieldset>
     </div>
 
     <%= render :partial => "supply" %>
   </div>
 
-<%= content_for :sidemenu do %>
-  <div class="topline"></div>
-  <div id="sidemenu">
-    <ul>
-      <li> <%= link_to t(:supply, :scope => "side_menu"), guild_path(guild), :class=>"sidemenu link1" %> </li>
-      <li> <%= link_to t(:news, :scope => "side_menu"), news_guild_path(guild), :class=>"sidemenu link1" %> </li>
-      <li> <%= link_to t(:manual, :scope => "side_menu"), manual_path, :class=>"sidemenu link1" %> </li>
-    </ul>
-  </div> 
-  <div class="topline"></div>
-<% end %>
+  <%= content_for :sidemenu do %>
+    <div class="topline"></div>
+    <div id="sidemenu">
+      <ul>
+        <li> <%= link_to t(:supply, :scope => "side_menu"), guild_path(guild), :class=>"sidemenu link1" %> </li>
+        <li> <%= link_to t(:news, :scope => "side_menu"), news_guild_path(guild), :class=>"sidemenu link1" %> </li>
+        <li> <%= link_to t(:manual, :scope => "side_menu"), manual_path, :class=>"sidemenu link1" %> </li>
+      </ul>
+    </div> 
+    <div class="topline"></div>
+  <% end %>

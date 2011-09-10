@@ -1,10 +1,14 @@
 <h1><%= t(:all) %> <%= t(:institutes) %></h1>
 <%= link_to "Add a new institute", new_institute_path %>
 <%= will_paginate %>
-<ul class="institutes">
+
+<div class="institutes">
   <% @institutes.each do |institute| %>
-    <%= render institute %>
+  <div class="item_content">
+    <h2 class="h2_link"><%= link_to institute.name, institute %></h2>
+    <%= render :partial => "institute_body", :locals => {:institute => institute} %>
+  </div>
   <% end %>
-</ul>
+</div>
 <%= will_paginate %>
 
