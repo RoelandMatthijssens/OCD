@@ -1,24 +1,6 @@
 <div>
-  <h1><%= link_to guild.name, guild %></h1>
-  <div style="display: none;">
-    <% if current_user && not(current_user.guilds.include?(guild) )%>
-      <p><%= link_to "Join this guild", join_guild_path(guild), :method => :put %></p>
-    <% else %>
-      <p><%= t :member, :scope => 'guild' %></p>
-    <% end %>
+  <h1><%= link_to guild.name, guild %>  <%= t(:supplies, :scope => "guild") %> </h1>
 
-
-    <strong><%= t :disciplines, :scope =>'globals' %>:</strong><br>
-    <% guild.disciplines.each { |discipline| %>
-      <strong><%= discipline.name %></strong><br/>
-      <ul>
-        <li><strong><%= t :faculty, :scope =>'globals' %>:</strong><%= link_to discipline.faculty.name, discipline.faculty %> <br/></li>
-        <li><strong><%= t :institute, :scope =>'globals' %>:</strong><%= link_to discipline.faculty.institute.name, discipline.faculty.institute %> <br/></li>
-      </ul>
-    <% } %>
-  </div>
-
-  <h2><%= t(:supplies, :scope => "guild") %></h2>
   <div class="supplies" id="supplies">
     <div id="filter">
       <fieldset>

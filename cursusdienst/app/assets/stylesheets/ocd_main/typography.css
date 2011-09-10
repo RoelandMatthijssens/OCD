@@ -119,13 +119,28 @@ dd          { margin-left: 1.5em;}
 /* Tables
 -------------------------------------------------------------- */
 
-table       { margin-bottom: 1.4em; width:100%; }
+table       { 
+	margin-bottom: 1.4em; width:100%; 
+	border-collapse: collapse;
+	border-spacing: 0;
+}
 th          { font-weight: bold; }
 thead th    { background: #c3d9ff; }
 th,td,caption { padding: 4px 10px 4px 5px; }
 tr.even td  { background: #e5ecf9; margin 0}
 tfoot       { font-style: italic; }
 caption     { background: #eee; }
+
+
+.supply h3 {
+     font: bolder 1em Verdana,Arial,sans-serif;
+     color:#4E443C;
+     letter-spacing: 1px;
+     margin-left:  0em;
+     margin-bottom: 0px;
+     text-transform:uppercase;
+     line-height: 1;
+}
 
 
 .supply {
@@ -153,6 +168,7 @@ caption     { background: #eee; }
 	background: none;
 }
 
+.supply td
 
 .supply td {
 	border-right: 1px solid #C1DAD7;
@@ -169,14 +185,18 @@ caption     { background: #eee; }
         margin-top:0px;
 }
 
-#supply th.spec {
+.supply th.col1width {
+    width: 100%;
+}
+
+.supply th.spec {
 	border-left: 1px solid #C1DAD7;
 	border-top: 0;
 	background: #fff url(images/bullet1.gif) no-repeat;
 	font: bold 10px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
 }
 
-#supply th.specalt {
+.supply th.specalt {
 	border-left: 1px solid #C1DAD7;
 	border-top: 0;
 	background: #f5fafa url(images/bullet2.gif) no-repeat;
