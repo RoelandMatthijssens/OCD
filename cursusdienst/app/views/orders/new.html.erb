@@ -12,7 +12,7 @@
 		<tbody>
 			<% current_user.shopping_cart_items.each do |item| %>
 				<tr>
-					<% total +=item.material.price %>
+					<% total +=( item.material.price * item.amount ) %>
 					<td><%= item.material.name %></td>
 					<td><%= item.amount %></td>
 					<td>€<%= item.material.price %></td>

@@ -2,9 +2,9 @@
 <table>
 	<thead>
 		<tr>
-			<th>Name</th>
-			<th>amount</th>
-			<th>floating</th>
+			<th><%= t(:name, :scope => "stock" ) %></th>
+			<th><%= t(:amount, :scope => "stock" ) %></th>
+			<th><%= t(:floating, :scope => "stock" ) %></th>
 			<th></th>
 		</tr>
 	</thead>
@@ -14,7 +14,7 @@
 				<td><%= item.material.name %></td>
 				<td><%= item.amount %></td>
 				<td><%= item.floating %></td>
-				<td><%= link_to 'edit', edit_stock_path(item) %></td>
+				<td><%= link_to 'edit (symbol)', edit_stock_path(item) %></td>
 			</tr>
 		<% end %>
 	</tbody>

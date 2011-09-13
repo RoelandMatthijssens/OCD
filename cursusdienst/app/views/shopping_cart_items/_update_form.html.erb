@@ -20,5 +20,5 @@
 <% end %>
 
 <div>
-  <%= link_to "Edit permissions", "/users/" + @user.id.to_s + "/edit_permissions" %>  <!--TODO fix this with paths somehow-->
+	<%= link_to t(:edit_permissions, :scope => "links" ), "/users/" + @user.id.to_s + "/edit_permissions" %>  <!--TODO fix this with paths somehow-->
 </div>

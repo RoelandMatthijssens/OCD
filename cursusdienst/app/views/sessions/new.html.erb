@@ -1,6 +1,6 @@
-<h1>Sign in</h1>
+<h1><%= t(:sign_in, :scope => "titles" ) %></h1>
 <%= render :partial => 'form' %>
 <div>
-  New user? <%= link_to "Sign up now!", signup_path %>
+	<%= t(:q_new_user, :scope => "message" ) %> <%= link_to t(:sign_up_now, :scope => "links" ), signup_path %>
 </div>
 

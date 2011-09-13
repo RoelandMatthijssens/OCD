@@ -1,13 +1,13 @@
-<h1>Permissions of <%= @user.name + ' ' + @user.last_name%></h1>
+<h1><%= t(:permissions_of,:scope => "titles",:user => @user.name + ' ' + @user.last_name) %></h1>
 
 <%= form_tag update_permissions_user_path, :method => :put do %>
 	<div class="field">
 		<%= check_box_tag "permission_ids[]", 0 %>
-		All
+		<%= t(:all,:scope => "permissions") %>
 	</div>
 	<div class="field">
 		<%= check_box_tag "permission_ids[]", -1 %>
-		None
+		<%= t(:none,:none => "permissions") %>
 	</div>
 	<h1></h1>
 	<% PermissionGroup.all.each do |permission| %>

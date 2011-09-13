@@ -1,5 +1,5 @@
 <h1>All Guilds</h1>
-<%= link_to "Add a new guild", new_guild_path %>
+<%= link_to t(:add_guild, :scope => "links" ), new_guild_path %>
 <%= will_paginate %>
 <ul class="guilds">
   <% @guilds.each do |guild| %>

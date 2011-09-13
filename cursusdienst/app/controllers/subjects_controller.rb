@@ -26,7 +26,7 @@ class SubjectsController < ApplicationController
 		deny_privileged_access and return unless current_user.can?('create_subjects')
     @subject = Subject.new(params[:subject])
     @subject.disciplines= get_disciplines_from_subject(params[:subject])
-    if @subject.save!
+    if @subject.save
 			flash[:success] = t(:new_subject_success, :scope => "flash" )
       redirect_to @subject
     else

@@ -67,4 +67,26 @@ class OrdersController < ApplicationController
 		@orders = Order.find(:all, :conditions => ['institute_id = ? and user_id=? and status=?' , institute.id, current_user.id, 'Ready'])
 		@all_orders = Order.find(:all, :conditions => ['status=?' , 'Ready'])
 	end
+
+	def results
+		@title = t(:results, :scope => "titles" )
+		@orders = Order.find(:all, :conditions => ['status = ?', 'Done'])
+		@per_material = {}
+		@per_guild = {}
+		#@everything = {} #gesorteerd op winst/guild
+		@orders.each do |order|
+			order.material_orders.each do |item|
+				if @per_material[item.material]
+					@per_material[item.material] << item
+				else
+					@per_material[item.material] = [item]
+				end
+				if @per_guild[item.guild]
+					@per_guild[item.guild] << item
+				else
+					@per_guild[item.guild] = [item]
+				end
+			end
+		end
+	end
 end

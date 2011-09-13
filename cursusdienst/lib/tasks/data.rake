@@ -125,7 +125,7 @@ namespace :db do
 		enermis = User.create!(
 			:name => "Roeland",
 			:last_name => "Matthijssens",
-			:email => "Fulgens.ailurus@gmail.com",
+			:email => "fulgens.ailurus@gmail.com",
 			:password => "roeland1",
 			:password_confirmation => "roeland1",
 			:user_name => "Enermis"

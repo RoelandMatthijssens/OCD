@@ -20,7 +20,7 @@ class DisciplinesController < ApplicationController
     @faculties = get_data_from_filter params[:discipline], :faculty_id, Faculty
     @selected_institute = ""
     @selected_faculty = ""
-    @submit = t(:new_discipline, :scope => "button")
+    @submit = t(:new_discipline, :scope => "buttons")
   end
 
   def create

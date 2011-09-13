@@ -7,7 +7,7 @@
   </div>
   <div class='field'>
      
-     <%= label_tag "institute" %>
+		 <%= label_tag t(:institute, :scope => "globals" ) %>
     <%= render :partial => "filters/select_box", :locals => {
       :filter_key_ajax => "institute",
       :id => "discipline[institute_id]",
@@ -16,7 +16,7 @@
       :parent_id => "discipline_institute_id",
       :child_id => "discipline_faculty_id"} %> <br />
 
-    <%= label_tag "faculty" %>    
+		<%= label_tag t(:faculty, :scope => "globals" ) %>    
     <%= render :partial => "filters/select_box", :locals => {
       :filter_key_ajax => "faculty",
       :id => "discipline[faculty_id]",

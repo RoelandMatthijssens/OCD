@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
     :on => :create
   #  validates :password_confirmation, :presence => true
 
-  validates_with InstitutePasswordCheck
+  #validates_with InstitutePasswordCheck
   validates :name, :presence => true
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

@@ -1,16 +1,16 @@
-<h2>Printed PrintJob</h2>
+<h2><%= t(:printed_printjob, :scope => "" ) %></h2>
 
 <% print_jobs.each do |print_job| %>
 	<div class="print_job" id=<%= "print_job_" + print_job.id.to_s %> onclick="$('#print_job_1 div.print_job_info').show('slow')">
-		Id = <%= print_job.id %><br/>
-		Status = <%= print_job.status %><br/>
+		<%= t(:id, :scope => "print_jobs" ) %> = <%= print_job.id %><br/>
+		<%= t(:status, :scope => "print_jobs" ) %> = <%= print_job.status %><br/>
 			<div class="print_job_info", style='display:none;'>
 				<table>
 					<thead>
 						<tr>
-							<th>itemName</th>
-							<th>amount</th>
-							<th>itemName</th>
+							<th><%= t(:item_name, :scope => "print_job" ) %></th>
+							<th><%= t(:amount, :scope => "print_job" ) %></th>
+							<th><%= t(:item_name, :scope => "print_job" ) %></th>
 						</tr>
 					</thead>
 					<tbody>

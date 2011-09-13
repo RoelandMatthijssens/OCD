@@ -1,0 +1,20 @@
+<h3><%= @title %></h3>
+<table>
+	<thead>
+		<tr>
+			<th><%= t(:guild, :scope => "globals" ) %></th>
+			<th><%= t(:amount, :scope => "globals" ) %></th>
+			<th><%= t(:amount, :scope => "globals" ) %></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @per_guild.each do |guild, items| %>
+		<tr>
+			<td><%= link_to guild.name, guild %></td>
+			<td><%= items.inject(0.0) { |sum, el| sum + el.price } / items.size %></td>
+			<td></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+<%= render :partial => 'menu' %>

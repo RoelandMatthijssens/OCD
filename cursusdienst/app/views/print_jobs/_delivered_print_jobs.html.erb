@@ -1,11 +1,11 @@
-<h2>Delivered PrintJob</h2>
+<h2><%= t(:delivered_printjob, :scope => "titles" ) %></h2>
 
 <table>
 	<thead>
 		<tr>
-			<th>OrderID</th>
-			<th>Status</th>
-			<th>Info</th>
+			<th><%= t(:orderid, :scope => "print_jobs" ) %></th>
+			<th><%= t(:status, :scope => "print_jobs" ) %></th>
+			<th><%= t(:info, :scope => "print_jobs" ) %></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -17,9 +17,9 @@
 					<table>
 						<thead>
 							<tr>
-								<th>itemName</th>
-								<th>amount</th>
-								<th>itemName</th>
+								<th><%= t(:item_name, :scope => "print_jobs" ) %></th>
+								<th><%= t(:amount, :scope => "print_jobs" ) %></th>
+								<th><%= t(:item_name, :scope => "print_jobs" ) %></th>
 							</tr>
 						</thead>
 						<tbody>

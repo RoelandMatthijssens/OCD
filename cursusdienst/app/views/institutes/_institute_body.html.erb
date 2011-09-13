@@ -1,15 +1,15 @@
 <fieldset>
-  <legend>Info</legend>
+	<legend>t(:info, :scope => "message" )</legend>
   <strong><%= t(:initials) %>:</strong> <%= institute.initials %> <br/>
   <strong><%= t(:location) %>:</strong> <%= institute.location %> <br/>
-  <%= link_to "Edit this institute(symbol)", edit_institute_path(institute) %>
+	<%= link_to t(:edit, :scope => "links" ), edit_institute_path(institute) %>
 </fieldset>
 
 <fieldset>
-  <legend><%= t(:faculties) %></legend>
+  <legend><%= t(:faculties, :scope => "globals") %></legend>
   <div class="Faculties">
 
-    <%= link_to "add new", new_faculty_path %>
+		<%= link_to t(:add_faculty, :scope => "links" ), new_faculty_path %>
     <ul class="faculties">
       <% institute.faculties.each do |faculty| %>
         <li><%= faculty.name %></li>

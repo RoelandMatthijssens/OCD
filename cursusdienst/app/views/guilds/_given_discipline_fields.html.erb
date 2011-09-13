@@ -4,7 +4,7 @@
     <% tag = f.object_name.gsub(/[^0-9]+/,'') %>
     <%= f.hidden_field :id, :value => 0 %>
 
-    <%= label_tag "institute" %>
+		<%= label_tag t(:institute, :scope => "globals" ) %>
     <%= render :partial => "filters/select_box", :locals => {
       :filter_key_ajax => "institute",
       :id => "guild[disciplines_attributes][#{tag}][institute_id]",
@@ -13,7 +13,7 @@
       :parent_id => "guild_disciplines_attributes_#{tag}_institute_id",
       :child_id => "guild_disciplines_attributes_#{tag}_faculty_id"} %> <br />
 
-    <%= label_tag "faculty" %>    
+		<%= label_tag t(:faculty, :scope => "globals" ) %>    
     <%= render :partial => "filters/select_box", :locals => {
       :filter_key_ajax => "faculty",
       :id => "guild[disciplines_attributes][#{tag}][faculty_id]",
@@ -22,7 +22,7 @@
       :parent_id => "guild_disciplines_attributes_#{tag}_faculty_id",
       :child_id => "guild_disciplines_attributes_#{tag}_id"} %> <br />
 
-    <%= label_tag "discipline" %>    
+		<%= label_tag t(:discipline, :scope => "globals" ) %>    
     <%= render :partial => "filters/select_box", :locals => {
       :filter_key_ajax => "discipline",
       :id => "guild[disciplines_attributes][#{tag}][id]",
@@ -31,7 +31,7 @@
       :parent_id => "",
       :child_id => ""} %> <br />
 
-    <%= link_to_remove_fields "remove", f %>
+    <%= link_to_remove_fields "remove(symbol)", f %>
     <h1></h1> <!-- TODO: remove this, just gives us a line css abuse -->
   <% end %>
 </div>

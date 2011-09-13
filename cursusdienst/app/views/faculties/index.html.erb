@@ -1,5 +1,5 @@
-<h1>All faculties</h1>
-<%= link_to "Add a new faculty", new_faculty_path %>
+<h1><%= t(:all_faculties, :scope => "titles" ) %></h1>
+<%= link_to t(:add_faculty, :scope => "links" ), new_faculty_path %>
 <%= will_paginate %>
 <ul class="faculties">
   <% @faculties.each do |faculty| %>

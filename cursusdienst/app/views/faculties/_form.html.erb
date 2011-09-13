@@ -11,7 +11,7 @@
     <%= f.text_field :initials %> <br>
   </div>
   <div class='field'>
-    <%= label_tag "institute" %>
+		<%= label_tag t(:institute, :scope => "globals" ) %>
     <%= render :partial => "filters/select_box", :locals => {
       :filter_key_ajax => "institute",
       :id => "faculty[institute_id]",

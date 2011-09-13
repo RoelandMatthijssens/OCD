@@ -1,4 +1,4 @@
-<h1>Shopping Cart</h1>
+<h1><%= t(:shopping_cart, :scope => "shopping_cart" ) %></h1>
 <ul class="shopping_cart_items">
 	<% total = 0 %>
 	<% @shopping_cart_items.each do |item| %>
@@ -6,5 +6,5 @@
 		<% total += item.material.price %>
   <% end %>
 </ul>
-<strong>Total:</strong>€<%= total %><br/>
-<%= link_to "Proceed to order", new_order_path %>
+<strong><%= t(:total, :scope => "shopping_cart" ) %>:</strong>€<%= total %><br/>
+<%= link_to t(:proceed_to_order, :scope => "links" ), new_order_path %>

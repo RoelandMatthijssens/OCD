@@ -1,6 +1,6 @@
-<h1>All disciplines</h1>
+<h1><%= t(:all_disciplines, :scope => "titles" ) %></h1>
 <%= will_paginate %>
-<%= link_to "Add a new discipline", new_discipline_path %>
+<%= link_to t(:add_discipline, :scope => "links" ), new_discipline_path %>
 <ul class="disciplines">
   <% @disciplines.each do |discipline| %>
     <%= render discipline %>

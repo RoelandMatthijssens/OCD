@@ -1,5 +1,5 @@
-<h1>All Subjects</h1>
-<%= link_to "Add a new subject", new_subject_path %>
+<h1><%= t(:all_subjects, :scope => "titles" ) %></h1>
+<%= link_to t(:add_subject, :scope => "links" ), new_subject_path %>
 <%= will_paginate %>
 <ul class="subjects">
   <% @subjects.each do |subject| %>

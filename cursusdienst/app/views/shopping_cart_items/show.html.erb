@@ -1,4 +1,4 @@
-<h1>Shopping Cart</h1>
+<h1><%= t(:shopping_cart, :scope => "shopping_cart" ) %></h1>
 <ul class="shopping_cart_items">
 	<% @shopping_cart_items.each do |item| %>
     <%= render item %>

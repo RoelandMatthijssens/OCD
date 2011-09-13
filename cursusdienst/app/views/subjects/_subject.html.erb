@@ -1,25 +1,25 @@
 <div>
   <h1><%= link_to subject.name, subject %></h1>
   <ul class="info">
-    <li><strong>Year: </strong><%= subject.year.to_s + ' ' + subject.year_type %></li>
+		<li><strong><%= t(:year, :scope => "attributes" ) %>: </strong><%= subject.year.to_s + ' ' + subject.year_type %></li>
   </ul>
-  <strong>Disciplines:</strong><br>
+	<strong><%= t(:disciplines, :scope => "globals" ) %>:</strong><br>
   <% subject.disciplines.each { |discipline| %>
     <strong><%= discipline.name %></strong><br/>
     <ul>
-      <li><strong>Faculty:</strong><%= link_to discipline.faculty.name, discipline.faculty %> <br/></li>
-      <li><strong>Institute:</strong><%= link_to discipline.faculty.institute.name, discipline.faculty.institute %> <br/></li>
+			<li><strong><%= t(:faculty, :scope => "globals" ) %>:</strong><%= link_to discipline.faculty.name, discipline.faculty %> <br/></li>
+			<li><strong><%= t(:institute, :scope => "globals" ) %>:</strong><%= link_to discipline.faculty.institute.name, discipline.faculty.institute %> <br/></li>
     </ul>
   <% } %>
   <div class="materials">
-    <h3>Materials</h3>
+		<h3><%= t(:materials, :scope => "globals" ) %></h3>
     <ul class="materials">
       <% subject.materials.each do |material| %>
         <li><%= link_to material.name, material %></li>
       <% end %>
-      <%= link_to 'add new material', :controller => "materials", :action => "new", :subject => subject.id %>
+			<%= link_to t(:add_material, :scope => "links" ), :controller => "materials", :action => "new", :subject => subject.id %>
     </ul>
   </div>
 
-  <%= link_to "Edit this subject", edit_subject_path(subject) %>
+	<%= link_to t(:edit_subject, :scope => "links" ), edit_subject_path(subject) %>
 </div>

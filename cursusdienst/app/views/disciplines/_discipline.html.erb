@@ -2,14 +2,14 @@
 <h1><%= link_to discipline.name, discipline %></h1>
 <strong><%= t(:faculty) %></strong> <%= discipline.faculty.name %> <br/>
 <strong><%= t(:institute) %></strong>:</strong> <%= discipline.faculty.institute.name %> <br/>
-<%= link_to "Edit this discipline(symbol)", edit_discipline_path(discipline) %>
+<%= link_to "Edit(symbol)", edit_discipline_path(discipline) %>
 <div class="subjects">
-	<h3>Subjects</h3>
+	<h3><%= t(:subjects, :scope => "globals" ) %></h3>
 	<ul class="">
 	<% discipline.subjects.each do |subject| %>
 		<li><%= link_to subject.name, subject %></li>
 	<% end %>
 	</ul>
-	<%= link_to "add a new subject", new_subject_path %>
+	<%= link_to t(:add_subject, :scope => "links" ), new_subject_path %>
 </div>
 </div>

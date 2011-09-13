@@ -1,6 +1,6 @@
-<h1>All users</h1>
-<%= link_to "Add a new user", new_user_path %><br/>
-<%= link_to "Me", current_user %>
+<h1><%= t(:all_users,:scope => "titles") %></h1>
+<%= link_to t(:add_user,:scope => "links"), new_user_path %><br/>
+<%= link_to t(:me,:scope => "links"), current_user %>
 <%= will_paginate %>
 <ul class="users">
   <% @users.each do |user| %>
