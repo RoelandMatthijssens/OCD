@@ -2,6 +2,8 @@
 <%= render :partial => 'filters' %>
 <%= render :partial => 'my_orders' %>
 
+<%= render :partial => 'info' %>
+
 <% if @orders && @orders.any?%>
 <%= render :partial => 'active_orders' %>
 <% end %>

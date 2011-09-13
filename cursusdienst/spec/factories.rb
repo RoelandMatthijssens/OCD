@@ -85,7 +85,9 @@ Factory.define :material do |material|
   material.after_build do |m|
     id = Factory.next :material_id
     m.name = "material_name #{id}"
+    m.price = id
     m.nr = id
+    m.typee = 'Boek'
   end
 end
 

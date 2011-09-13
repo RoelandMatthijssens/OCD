@@ -517,3 +517,8 @@ nl:
     add_faculty: "Nieuwe faculteit aanmaken"
     add_guild: "Nieuwe kring aanmaken"
     join_guild: "Wordt lid"
+
+  order_info:
+    cash_info_html:"lala cash info"
+    transfer_info_html:"lala transfer info"
+    general_info_html:"lala general info"

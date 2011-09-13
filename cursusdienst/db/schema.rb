@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110906110449) do
+ActiveRecord::Schema.define(:version => 20110913130732) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "material_id"
@@ -58,6 +58,14 @@ ActiveRecord::Schema.define(:version => 20110906110449) do
   create_table "guilds_users", :id => false, :force => true do |t|
     t.integer "guild_id"
     t.integer "user_id"
+  end
+
+  create_table "info_strings", :force => true do |t|
+    t.string   "key"
+    t.string   "content"
+    t.integer  "guild_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "institutes", :force => true do |t|
