@@ -2,7 +2,7 @@
 <%= render :partial => 'filters' %>
 <%= render :partial => 'my_orders' %>
 
-<%= render :partial => 'info' %>
+<%= render :partial => 'info', :locals => {:guild => @guild} %>
 
 <% if @orders && @orders.any?%>
 <%= render :partial => 'active_orders' %>

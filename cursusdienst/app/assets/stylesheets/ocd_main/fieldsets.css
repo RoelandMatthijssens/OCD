@@ -1,25 +1,30 @@
-form.cmxform fieldset {
+fieldset {
   margin-bottom: 10px;
+  background: #DFf7FF;
+  border: 0; 
+  border-top: solid 1px;
 }
-form.cmxform legend {
-  padding: 0 2px;
-  font-weight: bold;
+legend {
+  padding: 0 5px;
+  font-size: 14px;
+  color: #000;
+  border-color: #999;
 }
-form.cmxform label {
+label {
   display: inline-block;
   line-height: 1.8;
   vertical-align: top;
 }
-form.cmxform fieldset ol {
+fieldset ol {
   margin: 0;
   padding: 0;
 }
-form.cmxform fieldset li {
+fieldset li {
   list-style: none;
   padding: 5px;
   margin: 0;
 }
-form.cmxform fieldset fieldset {
+fieldset fieldset {
   border: none;
   margin: 3px 0 0;
 }

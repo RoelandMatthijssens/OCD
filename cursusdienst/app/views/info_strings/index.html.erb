@@ -1,0 +1,21 @@
+<h3><%= @title %></h3>
+<table>
+	<thead>
+		<tr>
+			<th><%= t(:guild, :scope => "globals" ) %></th>
+			<th><%= t(:key, :scope => "globals" ) %></th>
+			<th><%= t(:value, :scope => "globals" ) %></th>
+		</tr>
+	</thead>
+	<tbody>
+	<% Guild.all.each do |guild| %>
+		<% guild.info_strings.each do |info| %>
+			<tr>
+				<td><%= guild.name %></td>
+				<td><%= info.key %></td>
+				<td><%= info.content %></td>
+			</tr>
+		<% end %>
+	<% end %>
+	</tbody>
+</table>

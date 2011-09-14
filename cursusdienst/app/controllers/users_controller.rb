@@ -23,11 +23,15 @@ class UsersController < ApplicationController
   def create
 #    TODO Add user to guild on signup
     @user = User.new(params[:user])
-    @guild = Guild.find(params[:guild])
+    guild_id = params[:guild]
+    if guild_id.nil?
+	    @guild = Guild.find(guild_id)
+	  end
     if @user.save
       sign_in @user
-			@guild.users << @user
+			@guild.users << @user if @guild
 			flash[:succes] = t(:new_user_success, :scope => "flash" )
+			flash[:error] = guild_id ? "True" : "False"
       if @user.guilds.empty?
         redirect_to @user
       else

@@ -1,0 +1,16 @@
+<%= form_for(@info_string) do |f| %>
+
+  <%= render 'shared/error_messages', :object => f.object %>
+
+	<div class='field'>
+    <%= label_tag t(:key, :scope => 'globals') %> <br>
+		<%= f.text_field :key %> <br>
+  </div>
+  <div class='field'>
+    <%= label_tag t(:content, :scope => 'globals') %> <br>
+    <%= f.text_area :content %> <br>
+  </div>
+	<div class='field'>
+		<%= f.submit @submit %>
+	</div>
+  <% end %>

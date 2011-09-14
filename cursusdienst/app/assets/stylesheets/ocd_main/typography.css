@@ -1,5 +1,4 @@
 /* --------------------------------------------------------------
-
    typography.css
    * Sets up some sensible default typography.
 
@@ -168,7 +167,6 @@ caption     { background: #eee; }
 	background: none;
 }
 
-.supply td
 
 .supply td {
 	border-right: 1px solid #C1DAD7;

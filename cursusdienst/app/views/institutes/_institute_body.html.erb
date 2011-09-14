@@ -1,14 +1,24 @@
 <fieldset>
-	<legend>t(:info, :scope => "message" )</legend>
-  <strong><%= t(:initials) %>:</strong> <%= institute.initials %> <br/>
-  <strong><%= t(:location) %>:</strong> <%= institute.location %> <br/>
-	<%= link_to t(:edit, :scope => "links" ), edit_institute_path(institute) %>
+	<legend>
+		<%= t(:info, :scope => "message" ) %>  
+		<%= link_to t(:edit, :scope => "links" ), edit_institute_path(institute) %>
+	</legend>
+   <table class="plaintable">
+		<col>
+		<tr> 
+			<td> <%= t(:initials) %>: </td>
+		  <td> <%= institute.initials %> </td> 
+		</tr> 
+  	<tr> 
+			<td><%= t(:location) %>:</td> 
+      <td> <%= institute.location %> </td>
+		</tr> 
+   </table>
 </fieldset>
 
 <fieldset>
   <legend><%= t(:faculties, :scope => "globals") %></legend>
   <div class="Faculties">
-
 		<%= link_to t(:add_faculty, :scope => "links" ), new_faculty_path %>
     <ul class="faculties">
       <% institute.faculties.each do |faculty| %>

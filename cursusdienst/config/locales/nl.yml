@@ -276,6 +276,7 @@ nl:
     users: "Gebruikers"
     subjects: "Vakken"
     amount: "Aantal"
+    content: "Inhoud"
 
   shopping_cart:
     shopping_cart: "Winkelmandje"
@@ -366,7 +367,7 @@ nl:
     select_your_guild: "Selecteer uw kring"
     q_new_user: "Nieuwe gebruiker?"
     not_a_member_of_guild: "Nog geen lid van deze kring"
-    info: ""
+    info: "Info"
 
   permissions:
     all: "Alle"
@@ -399,6 +400,7 @@ nl:
     all_options: "Alle opties"
     all_orders: "Alle bestellingen"
     all_faculties: "Alle faculteiten"
+    all_info_strings: "Alle info berichten"
     home: "Home"
     about: "Over ons"
     access_denied: "Toegang geweigerd"
@@ -421,6 +423,7 @@ nl:
     delivered_printjob: "Afgeleverde Afdruktaak"
     new_option: "Een nieuwe Optie aanmaken"
     edit_permission: "Recht bewerken"
+    edit_info: "Info aanpassen"
 
   buttons:
     new_institute: "creëer instelling"
@@ -495,6 +498,9 @@ nl:
     error_prohibited_login: "Een fout verhinderde het inloggen:"
     errors_prohibited_login: "Fouten verhinderden het inloggen:"
     problems_with_following_fields: "Er waren problemen met de volgende velden:"
+    new_info_string_success: "Info succesvol aangemaakt"
+    new_info_string_fail: "Info  niet aangemaakt. Er is iets misgegaan"
+    update_info_string_success: "Info succesvol aangepast"
 
   links:
     edit: "Edit"
@@ -517,8 +523,11 @@ nl:
     add_faculty: "Nieuwe faculteit aanmaken"
     add_guild: "Nieuwe kring aanmaken"
     join_guild: "Wordt lid"
+    set_cash_info: "Plaats informatie over cash-betaling"
+    set_cash_info: "Plaats informatie over overschrijving-betaling"
+    set_general_payment_info: "Plaats informatie over algemene-betaling"
 
-  order_info:
-    cash_info_html:"lala cash info"
-    transfer_info_html:"lala transfer info"
-    general_info_html:"lala general info"
+  info:
+    cash: "Cash info"
+    transfer: "Overschrijvings info"
+    general_payment: "Algemene info"

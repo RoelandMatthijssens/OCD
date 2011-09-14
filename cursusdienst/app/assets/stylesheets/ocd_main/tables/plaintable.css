@@ -1,0 +1,18 @@
+table.plaintable{
+	border: 0px;
+	padding: 0;
+	margin: 0;
+	margin-left: 5px;
+	overflow: hidden;
+	font-size: 13px;
+	line-height: 8px;
+}
+table.plaintable tr{
+	height: 4px;
+}
+table.plaintable col{
+	font-size: 13px;
+	height: 8px;
+	width: 40px;
+}
+

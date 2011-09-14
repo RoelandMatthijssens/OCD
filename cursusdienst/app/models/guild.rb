@@ -31,6 +31,15 @@ class Guild < ActiveRecord::Base
     }
     s
   end
+
+	def info info_type
+		r = info_strings.find_all{|item| item.key == info_type }
+		if r.size > 0
+			r[0]
+		else
+			nil
+		end
+	end
   
 end
 

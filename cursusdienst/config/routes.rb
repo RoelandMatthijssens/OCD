@@ -22,6 +22,8 @@ Cursusdienst::Application.routes.draw do
   resources :institutes
   
   resources :stocks
+  
+  resources :info_strings
 
 	resources :orders do
 		put :mark_as_payed, :on => :member

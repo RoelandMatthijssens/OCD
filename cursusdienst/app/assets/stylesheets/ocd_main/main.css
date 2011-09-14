@@ -218,6 +218,12 @@
 	width: 		468px;
 }
 
+#footertext{
+	margin: 	0 auto; 
+	width: 		920px;
+	text-align:	right;
+}
+
 /***************************
  * Design > Images > errors*
  ***************************/

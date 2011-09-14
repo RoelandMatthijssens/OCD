@@ -9,6 +9,7 @@ class OrdersController < ApplicationController
 			redirect_to control_panel_path
 		else
 			institute = current_user.guilds.first.disciplines.first.faculty.institute
+			@guild = current_user.guilds.first
 			@own_orders = Order.find(:all, :conditions => ['institute_id = ? and user_id=? and status!=?' , institute.id, current_user.id, 'Ready'])
 			if current_user.can?('view_all_orders')
 				@orders = Order.find(:all, :conditions => ['institute_id = ?', institute.id])

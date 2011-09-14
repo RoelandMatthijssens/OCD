@@ -36,7 +36,7 @@ a.style4 span {
 	font-size:		16px;
 }
 
-a.button {
+a.button,a.button:visited {
    
     color: #FFF;
     display: block;
@@ -91,18 +91,5 @@ a.button:active span {
     background-position: bottom left;
 
 } 
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
