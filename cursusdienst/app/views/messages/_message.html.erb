@@ -1,7 +1,7 @@
 <div class="message">
   <h1></h1>
 	<div class="content">
-		<%= message.content %>
+		<%= raw message.content %>
 	</div>
   <%= link_to t(:edit_message, :scope=>"message"), edit_message_path(message) %>
 </div>

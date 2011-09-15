@@ -4,8 +4,19 @@
   <div class='field'>
     <%= f.label :content %> <br>
     <%= f.text_area :content, :cols => 61, :rows => 7%> <br>
-		<%= f.hidden_field 'guild_id', :value => @guild %>
+    <%= f.hidden_field 'guild_id', :value => @guild %>
   </div>
+
+
+
+  <script type="text/javascript">
+    $(function() {
+      $('#message_content').tinymce({
+        theme: 'ocd'
+      });
+    });
+  </script>
+
 
   <div class="actions">
     <%= f.submit @submit %>
