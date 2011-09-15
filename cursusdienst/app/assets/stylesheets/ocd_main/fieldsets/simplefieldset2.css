@@ -1,0 +1,17 @@
+.simplefieldset2 {
+  margin-bottom: 10px;
+  background: #EEE;
+  border: 0; 
+  border-top: solid 1px;
+}
+.simplefieldset2 legend {
+  padding: 0 5px;
+  font-size: 14px;
+  color: #000;
+  border-color: #999;
+}
+.simplefieldset2 label {
+  display: inline-block;
+  line-height: 1.8;
+  vertical-align: top;
+}

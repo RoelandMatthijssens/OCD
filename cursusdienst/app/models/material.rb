@@ -1,12 +1,11 @@
 class Material < ActiveRecord::Base
-  attr_accessible :name, :subject_id, :guilds, :material_options, :parent, :parent_id, :path_name, :attachments_attributes, :price, :typee
+  attr_accessible :name, :subject_id, :guilds, :material_options, :parent, :parent_id, :path_name, :attachments_attributes, :price, :typee, :info
   
   has_many :attachments
   accepts_nested_attributes_for :attachments
-
   
   validates :name, :presence => true
-  validates :price, :presence => true
+  #validates :price, :presence => true
   validates :typee, :presence => true
   belongs_to :subject
   belongs_to :parent, :class_name => 'Material', :foreign_key => 'parent_id'
@@ -47,6 +46,16 @@ class Material < ActiveRecord::Base
 			end
 		else
 			raise "No subject attached"
+		end
+	end
+
+	def get_price
+		if price
+			return price
+		elsif parent
+			return parent.get_price
+		else
+			return nil
 		end
 	end
 end

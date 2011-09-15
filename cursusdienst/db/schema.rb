@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110913130732) do
+ActiveRecord::Schema.define(:version => 20110914184151) do
+
+  create_table "action_logs", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "action"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "attachments", :force => true do |t|
     t.integer  "material_id"
@@ -95,6 +102,7 @@ ActiveRecord::Schema.define(:version => 20110913130732) do
     t.string   "path_name"
     t.float    "price"
     t.string   "typee"
+    t.string   "info"
   end
 
   create_table "materials_options", :id => false, :force => true do |t|

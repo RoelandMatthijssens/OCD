@@ -61,6 +61,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :disciplines
   has_many :orders
   has_many :shopping_cart_items
+  has_many :action_logs
   
   default_scope :order => "users.last_name, users.name ASC"
   

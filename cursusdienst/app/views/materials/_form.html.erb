@@ -4,12 +4,14 @@
     <%= f.label :name %> <br>
     <%= f.text_field :name %> <br>
     <%= f.label :type %> <br>
-    <%= select_tag "material[typee]", options_for_select(get_types, 
-      params[:material] && params[:material][:typee] ? params[:material][:typee] : "") , 
+    <%= select_tag "material[typee]", options_for_select(get_types,
+      @material.typee),
       { :prompt => t(:select_type, :scope => 'material.types')} %> <br />
 
     <%= f.label :price %> <br>
     <%= f.text_field :price %> <br>
+    <%= f.label :info %> <br/>
+    <%= f.text_area :info, :cols => 60, :rows => 7  %> <br/>
   </div>
   <div class='field'>
     <%= f.label :attachments %> <br>

@@ -1,9 +1,9 @@
-<fieldset>
+<fieldset class="simplefieldset2">
 	<legend>
 		<%= t(:info, :scope => "message" ) %>  
 		<%= link_to t(:edit, :scope => "links" ), edit_institute_path(institute) %>
 	</legend>
-   <table class="plaintable">
+   <table class="simpletable1">
 		<col>
 		<tr> 
 			<td> <%= t(:initials) %>: </td>
@@ -16,7 +16,7 @@
    </table>
 </fieldset>
 
-<fieldset>
+<fieldset class="simplefieldset2">
   <legend><%= t(:faculties, :scope => "globals") %></legend>
   <div class="Faculties">
 		<%= link_to t(:add_faculty, :scope => "links" ), new_faculty_path %>

@@ -1,0 +1,22 @@
+<h1><%= @title %></h1>
+<% @action_logs.each do |action| %>
+<% end %>
+
+<table>
+	<thead>
+		<tr>
+			<th><%= t(:user_name, :scope => "attributes" ) %></th>
+			<th><%= t(:action, :scope => "globals" ) %></th>
+			<th><%= t(:timestamp, :scope => "globals" ) %></th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @action_logs.each do |action| %>
+		<tr>
+			<td><%= action.user.name %></td>
+			<td><%= action.action %></td>
+			<td><%= l action.created_at, :format => :short %></td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>

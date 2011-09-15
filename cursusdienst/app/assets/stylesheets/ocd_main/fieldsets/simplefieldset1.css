@@ -1,0 +1,16 @@
+.simplefieldset1 {
+  margin-bottom: 10px;
+  background: #EEE; 
+  border: 0;
+}
+.simplefieldset1 legend {
+  padding: 0 5px;
+  font-size: 24px;
+  color: #000;
+  border-color: #999;
+}
+label {
+  display: inline-block;
+  line-height: 1.8;
+  vertical-align: top;
+}

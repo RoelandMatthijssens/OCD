@@ -9,35 +9,38 @@ Cursusdienst::Application.routes.draw do
   get "pages/access_denied"
 
   get "pages/control_panel"
-  
+
   get "pages/manual"
 
   resources :users do
-		get :edit_permissions, :on => :member
-		put :update_permissions, :on => :member
+    get :edit_permissions, :on => :member
+    put :update_permissions, :on => :member
   end
 
   resources :sessions, :only => [:new, :create, :destroy]
 
   resources :institutes
-  
+
+  resources :action_logs, :only => [:index]
+
   resources :stocks
-  
+
   resources :info_strings
 
-	resources :orders do
-		put :mark_as_payed, :on => :member
-		get :logs, :on => :collection
-		get :results, :on => :collection
-	end
-  
-	resources :print_jobs do
-		get :logs, :on => :collection
-	end
-  
+  resources :orders do
+    put :mark_as_payed, :on => :member
+    get :logs, :on => :collection
+    get :results, :on => :collection
+    get :my_orders, :on => :collection
+  end
+
+  resources :print_jobs do
+    get :logs, :on => :collection
+  end
+
   resources :shopping_cart_items do
-		put :add, :on => :member
-		put :substract, :on => :member
+    put :add, :on => :member
+    put :substract, :on => :member
   end
 
   resources :faculties
@@ -46,17 +49,17 @@ Cursusdienst::Application.routes.draw do
 
   resources :subjects
 
-	resources :guilds do
-		put :join, :on => :member
+  resources :guilds do
+    put :join, :on => :member
     put :update_filter, :on => :member
     get :news, :on => :member
-	end
+  end
 
   resources :options
 
   resources :materials do
-		put :sell, :on => :member
-		get :add_to_cart, :on => :member
+    put :sell, :on => :member
+    get :add_to_cart, :on => :member
   end
 
   resources :messages

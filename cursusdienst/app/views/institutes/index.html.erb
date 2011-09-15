@@ -5,8 +5,10 @@
 <div class="institutes">
   <% @institutes.each do |institute| %>
   <div class="item_content">
-    <h2 class="h2_link"><%= link_to institute.name, institute %></h2>
-    <%= render :partial => "institute_body", :locals => {:institute => institute} %>
+    <fieldset class="simplefieldset1">
+      <legend> <%= link_to institute.name, institute %> </legend>
+      <%= render :partial => "institute_body", :locals => {:institute => institute} %>
+    </fieldset>
   </div>
   <% end %>
 </div>

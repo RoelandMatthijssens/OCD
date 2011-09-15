@@ -1,38 +1,37 @@
 <div class="material">
-  <h1><%= material.attachments %></h1>
   <h1><%= link_to material.name, material %></h1>
-  <h1>€<%= material.price %></h1>
-	<% subject = material.subject %>
-	<strong>Subject:</strong>
-		<% if subject %>
-				<%= link_to(subject.name + " " + subject.year.to_s + " " + subject.year_type, subject) %>
-		<% else %>
-			This material is not attached to a subject yet.
-		<% end %>
-		<br/>
-	<% if material.parent %>
-		<strong>Parent:</strong> <%= link_to material.parent.name, material.parent %>
-	<% end %>
-	<%= link_to "Edit this material", edit_material_path(material) %><br/>
+  <% subject = material.subject %>
+  <strong>Subject:</strong>
+    <% if subject %>
+        <%= link_to(subject.name + " " + subject.year.to_s + " " + subject.year_type, subject) %><br/>
+    <% else %>
+      This material is not attached to a subject yet. <br/>
+    <% end %>
+  <strong><%= t(:price, :scope => "globals" ) %>:</strong> €<%= material.get_price %><br/>
+  <strong><%= t(:info, :scope => "globals" ) %>:</strong> <%= material.info %><br/>
+  <% if material.parent %>
+    <strong>Parent:</strong> <%= link_to material.parent.name, material.parent %>
+  <% end %>
+  <%= link_to "Edit this material", edit_material_path(material) %><br/>
         <%= link_to 'add new version', :controller => "materials", :action => "new", :parent => material.id %>
-	<% if current_user.can?("sell_materials") %>
-		<% if current_user.guilds.size == 0 %>
-			<p>Join a guild to add materials for it.</p>
-		<% elsif current_user.guilds.size > 1 %>
-			<p>You are in more than one guild. We don't know which guild you want to sell the material.</p>
-		<% elsif current_user.guilds.first.materials.include?(material)%>
-			<p>material already added to <%= current_user.guilds.first.name %></p>
-		<% else %>
-			<%= link_to "Add this material to the guilds supply", sell_material_path(material), :method => :put %>
-		<% end %>
-	<% end %>
+  <% if current_user.can?("sell_materials") %>
+    <% if current_user.guilds.size == 0 %>
+      <p>Join a guild to add materials for it.</p>
+    <% elsif current_user.guilds.size > 1 %>
+      <p>You are in more than one guild. We don't know which guild you want to sell the material.</p>
+    <% elsif current_user.guilds.first.materials.include?(material)%>
+      <p>material already added to <%= current_user.guilds.first.name %></p>
+    <% else %>
+      <%= link_to "Add this material to the guilds supply", sell_material_path(material), :method => :put %>
+    <% end %>
+  <% end %>
 
-	<h2>guilds selling this material</h2>
-	<ul class="guilds">
-	
-		<% material.guilds.each do |guild| %>
-			<li><%= link_to guild.name, guild %></li>
-		<% end %>
-		
-	</ul>
+  <h2>guilds selling this material</h2>
+  <ul class="guilds">
+
+    <% material.guilds.each do |guild| %>
+      <li><%= link_to guild.name, guild %></li>
+    <% end %>
+
+  </ul>
 </div>

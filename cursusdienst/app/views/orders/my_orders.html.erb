@@ -1,0 +1,22 @@
+<h1><%= @title %></h1>
+<% statuses = ['Posted','Payed','Ordered','Delivered','Ready','Done','Cancled'] %>
+<% statuses.each do |status| %>
+  <% if @orders[status] %>
+    <h3><%= status %> <%= t(:orders, :scope => "globals" ) %></h3>
+    <table>
+      <thead>
+        <tr>
+          <th><%= t(:user_name , :scope => "globals" ) %></th>
+          <th><%= t(:status , :scope => "globals" ) %></th>
+          <th><%= t(:items , :scope => "globals" ) %></th>
+          <th><%= t(:actions , :scope => "globals" ) %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @orders[status].each do |order|%>
+          <%= render order %>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+<% end %>

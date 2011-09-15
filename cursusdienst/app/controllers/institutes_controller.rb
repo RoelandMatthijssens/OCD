@@ -27,6 +27,7 @@ class InstitutesController < ApplicationController
     if @institute.save
       flash[:succes] = t(:new_institute_success, :scope => "flash")
       redirect_to @institute
+	    log("created institute #{@institute.name}")
     else
       render 'new'
     end

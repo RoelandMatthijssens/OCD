@@ -1,5 +1,6 @@
-table.plaintable{
-	border: 0px;
+table.simpletable1{
+	border-top: 1px;
+	border: 0;
 	padding: 0;
 	margin: 0;
 	margin-left: 5px;
@@ -7,10 +8,10 @@ table.plaintable{
 	font-size: 13px;
 	line-height: 8px;
 }
-table.plaintable tr{
+table.simpletable1 tr{
 	height: 4px;
 }
-table.plaintable col{
+table.simpletable1 col{
 	font-size: 13px;
 	height: 8px;
 	width: 40px;

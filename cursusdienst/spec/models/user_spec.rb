@@ -22,6 +22,7 @@ describe User do
   it { should respond_to(:encrypted_password) }
   it { should have_many (:orders) }
   it { should have_many (:shopping_cart_items) }
+  it { should have_many (:action_logs) }
   
   
   describe "other tests" do

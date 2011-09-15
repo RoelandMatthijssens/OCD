@@ -1,0 +1,18 @@
+<table>
+  <thead>
+    <tr>
+      <th>item name</th>
+      <th>bought at</th>
+      <th>amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% items.each do |items| %>
+    <tr>
+      <td><%= items.material.name %></td>
+      <td><%= items.guild.name %></td>
+      <td><%= items.amount %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
