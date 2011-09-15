@@ -65,7 +65,7 @@ table       {
 th          { font-weight: bold; }
 thead th    { background: #c3d9ff; }
 th,td,caption { padding: 4px 10px 4px 5px; }
-tr.even td  { background: #e5ecf9; margin 0}
+tr.even td  { background: #e5ecf9; margin: 0; }
 tfoot       { font-style: italic; }
 caption     { background: #eee; }
 

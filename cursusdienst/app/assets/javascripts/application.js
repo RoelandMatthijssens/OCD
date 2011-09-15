@@ -7,6 +7,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require tinymce-jquery
 
 function remove_fields(link) {
     $(link).prev("input[type=hidden]").val("1");
