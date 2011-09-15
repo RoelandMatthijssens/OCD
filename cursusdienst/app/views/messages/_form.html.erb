@@ -8,15 +8,7 @@
   </div>
 
 
-
-  <script type="text/javascript">
-    $(function() {
-      $('#message_content').tinymce({
-        theme: 'ocd'
-      });
-    });
-  </script>
-
+  <%= render :partial=>'shared/wysiwyg', :locals=>{:id=>'message_content'}%>
 
   <div class="actions">
     <%= f.submit @submit %>
