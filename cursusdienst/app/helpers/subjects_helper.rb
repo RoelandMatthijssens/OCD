@@ -12,6 +12,13 @@ module SubjectsHelper
     end
     link_to_function(name, "add_fields(this, '#{association}', '#{escape_javascript(fields)}')")
   end
+  
+  def get_types
+    [
+      t(:bachelor, :scope => "subject.types"), 
+      t(:master, :scope => "subject.types"),
+    ]
+  end
 
 
 end
