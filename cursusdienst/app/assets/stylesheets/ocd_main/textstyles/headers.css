@@ -1,0 +1,58 @@
+/* Headings
+-------------------------------------------------------------- */
+
+h1,h2,h3,h4,h5,h6 { font-weight: normal; color: #111; }
+
+/*
+h1{
+    color: rgb(49, 134,166 );
+    font-family: ;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 0 0 0 0;
+    margin-top: 10px;
+    position: relative;
+    text-shadow: 0 1px 0 #ECE6DA;
+}
+*/
+
+
+h1 { font: bolder 1.5em Verdana,Arial,sans-serif;
+     color:#4E443C;
+     letter-spacing: 1px;
+     margin-left:  0em; 
+     margin-bottom: 0px;
+     text-transform:uppercase;
+     line-height: 1;
+     background: #fff}
+
+h2 { 
+     margin-left: 2px;
+     font-size: 2em; 
+     color: rgb(49,134,166);
+     font: bolder 1.1em Verdana,Arial,sans-serif;
+     letter-spacing: 1px;
+     margin-bottom:10px; 
+     margin-top: 10px;
+     background-repeat: no-repeat;
+     background-position: left center;
+   }
+
+
+h3 { font-size: 1.5em; line-height: 1; margin-bottom: 1em; }
+h4 { font-size: 1.2em; line-height: 1.25; margin-bottom: 1.25em; }
+h5 { font-size: 1em; font-weight: bold; margin-bottom: 1.5em; }
+h6 { font-size: 1em; font-weight: bold; }
+
+h1 img, h2 img, h3 img,
+h4 img, h5 img, h6 img {
+  margin: 0;
+}
+
+h1 a,a:visited, h1 a:link { color:#4E443C;}
+h1 a:hover { color: #000}
+
+.h2_link:hover {
+	background-image:url('images/h2_bullet_hover.png');
+}
+

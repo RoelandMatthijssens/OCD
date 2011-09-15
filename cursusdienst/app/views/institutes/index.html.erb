@@ -1,14 +1,12 @@
 <h1><%= t(:all) %> <%= t(:institutes) %></h1>
-<%= link_to "Add a new institute", new_institute_path %>
+<p class="comment_text" ><%= link_to "Add a new institute", new_institute_path %></p>
 <%= will_paginate %>
 
 <div class="institutes">
   <% @institutes.each do |institute| %>
   <div class="item_content">
-    <fieldset class="simplefieldset1">
-      <legend> <%= link_to institute.name, institute %> </legend>
+     <h2> <%= link_to institute.name, institute %> </h2>
       <%= render :partial => "institute_body", :locals => {:institute => institute} %>
-    </fieldset>
   </div>
   <% end %>
 </div>

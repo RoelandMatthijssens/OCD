@@ -1,5 +1,5 @@
 <h1><%= @title %></h1>
-<% statuses = ['Posted','Payed','Ordered','Delivered','Ready','Done','Cancled'] %>
+<% statuses = ['Posted','Payed','Ordered','Delivered','Ready','Done','Canceled'] %>
 <% statuses.each do |status| %>
   <% if @orders[status] %>
     <h3><%= status %> <%= t(:orders, :scope => "globals" ) %></h3>
@@ -20,3 +20,5 @@
     </table>
   <% end %>
 <% end %>
+
+<%= render :partial => 'menu' %>
