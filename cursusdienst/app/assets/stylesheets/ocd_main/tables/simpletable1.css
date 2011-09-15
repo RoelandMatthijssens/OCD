@@ -16,4 +16,7 @@ table.simpletable1 col{
 	height: 8px;
 	width: 40px;
 }
+table.simpletable1 td{
+	font: bolder;
+}
 
