@@ -1,6 +1,35 @@
 div.item_content {
+	padding-top:  2px;
 	padding-left: 10px;
 	margin-bottom: 15px;
-	background: #DDD;
-	border: 1px solid #CCC;
+	padding-bottom: 2px;
+	border: 0;
+}
+
+div.item_content h2 a {
+     margin-left: 2px;
+     font-size: 2em;
+     color: rgb(49,134,166);
+     font: bolder 1.1em Verdana,Arial,sans-serif;
+     letter-spacing: 1px;
+     margin-bottom:10px;
+     margin-top: 10px;
+     background-repeat: no-repeat;
+     background-position: left center;
+
+
+}
+
+div.item_content h2 a:hover {
+
+
+}
+div.item_content h2 a:visited {
+
+
+}
+
+div.item_content h2 a:link {
+
+
 }
