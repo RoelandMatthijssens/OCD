@@ -18,6 +18,9 @@
   <div class='field'>
     <%= label_tag t(:content, :scope => 'globals') %> <br>
     <%= f.text_area :content %> <br>
+    
+      <%= render :partial=>'shared/wysiwyg', :locals=>{:id=>'info_string_content'}%>
+
   </div>
 	<div class='field'>
 		<%= f.submit @submit %>
