@@ -2,4 +2,25 @@
   <td><%= order.user.name %></td>
   <td><%= order.status %></td>
   <td><%= render :partial => 'orders_materials', :locals => { :items => order.material_orders } %></td>
+  <td>
+    <% case order.status %>
+      <% when "Posted"%>
+       <%= 'Mark as payed' %><br/>
+       <%= 'cancel' %>
+      <% when "Payed" %>
+        <%= 'mark as ordered && cancel' %>
+      <% when "Ordered" %>
+        <%=  'mark as delivered' %>
+      <% when "Delivered" %>
+        <%=  'mark as ready' %>
+      <% when "Ready" %>
+        <%=  'mark as done' %>
+      <% when "Done" %>
+        <%=  'nothing' %>
+      <% when "Canceled" %>
+        <%=  'nothing' %>
+      <% else %>
+        <%= "nothing" %>
+    <% end %>
+  </td>
 </tr>

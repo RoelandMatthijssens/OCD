@@ -30,11 +30,11 @@ class OrdersController < ApplicationController
     else
       institute = current_user.guilds.first.disciplines.first.faculty.institute
       @order = Order.new()
-      @order.status = "posted"
+      @order.status = "Posted"
       @order.payment_type = params[:payment]
       @order.institute = institute
       @order.user = current_user
-      @order.order_key = 'RANDOM STRING O_o'
+      @order.order_key = @order.get_random_string(7)
       if @order.save!
         flash[:success] = t(:new_order_success, :scope => "flash" )
       else
