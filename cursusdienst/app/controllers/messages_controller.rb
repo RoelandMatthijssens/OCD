@@ -28,7 +28,7 @@ class MessagesController < ApplicationController
 
   def edit
 		@message = Message.find(params[:id])
-    @submit = t(:update_message_success, :scope => "buttons" )
+    @submit = t(:update_message, :scope => "buttons" )
   end
 
   def update

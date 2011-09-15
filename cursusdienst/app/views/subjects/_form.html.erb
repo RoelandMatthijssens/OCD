@@ -9,10 +9,12 @@
     <%= f.label :year %> <br>
     <%= f.text_field :year %> <br>
     <%= f.label :year_type %> <br>
-    <%= f.text_field :year_type %> <br>
+    <%= select_tag "subject[year_type]", options_for_select(get_types,
+      @subject.year_type),
+      { :prompt => t(:select_type, :scope => 'subject.types')} %> <br />
   </div>
   <%= hidden_field_tag "counter", "0" %>
-  
+
   <div class='field'>
     <%= f.label :disciplines %> <br>
     <div class='fields'>
@@ -20,7 +22,7 @@
         <%=  render 'given_discipline_fields' , {:f => builder} unless @dis_fac_inst.empty?%>
       <% end %>
     </div>
-    
+
     <div class='fields'>
       <%= link_to_perform_javascript "add one (symbol)", [],[], [add_fields(f, :disciplines)] %>
     </div>

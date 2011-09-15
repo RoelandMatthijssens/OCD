@@ -256,7 +256,7 @@ nl:
     location: "Locatie"
     institute: "Instelling"
     faculty: "Faculteit"
-    year_type: "BA/MA"
+    year_type: "Jaar type"
     price: "Prijs"
     attachments: "Bijlage"
     options: "Opties"
@@ -353,6 +353,12 @@ nl:
     news:
       edit_message: "Edit bericht"
       new_message: "Nieuw bericht"
+      
+  subject:
+    types:
+      select_type: "Selecteer type"
+      bachelor: "Bachelor"
+      master: "Master"
 
   material:
     types:
