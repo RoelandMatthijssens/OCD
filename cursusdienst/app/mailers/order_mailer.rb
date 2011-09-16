@@ -1,5 +1,5 @@
 class OrderMailer < ActionMailer::Base
-  default from: "no-reply@cursusdienst.net"
+  default from: "rik@tyca.be"
   
   def payment_info(user)
     @user = user
