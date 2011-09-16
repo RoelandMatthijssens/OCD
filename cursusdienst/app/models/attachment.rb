@@ -2,6 +2,10 @@ class Attachment < ActiveRecord::Base
   mount_uploader :item, AttachmentUploader
   
   before_save :update_item_attributes
+  
+  def basename
+    File.basename(item_url)
+  end
 
   private
 

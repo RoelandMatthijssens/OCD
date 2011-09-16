@@ -279,6 +279,7 @@ nl:
     content: "Inhoud"
     action: "Actie"
     timestamp: "Tijdsaanduiding"
+    attachment: "Bijlage"
 
   shopping_cart:
     shopping_cart: "Winkelmandje"
