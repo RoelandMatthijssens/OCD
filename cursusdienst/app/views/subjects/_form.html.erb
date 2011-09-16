@@ -9,7 +9,7 @@
     <%= f.label :year %> <br>
     <%= f.text_field :year %> <br>
     <%= f.label :year_type %> <br>
-    <%= select_tag "subject[year_type]", options_for_select(get_types,
+    <%= select_tag "subject[year_type]", options_for_select(get_year_types,
       @subject.year_type),
       { :prompt => t(:select_type, :scope => 'subject.types')} %> <br />
   </div>
