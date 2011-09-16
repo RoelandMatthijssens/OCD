@@ -3,13 +3,21 @@ fieldset.simplefieldset2 {
   background: rgb(218, 237, 255);
   margin-right: 10px;
   border: 1px solid rgb(210, 210, 210);
+  -moz-border-radius:5px;  
+  border-radius: 5px;  
+  -webkit-border-radius: 5px;
+
 }
 fieldset.simplefieldset2 legend {
   font: 1.1em Verdana,Arial,sans-serif;
-  background: rgb(228, 228, 228);
+  background: rgb(208, 208, 208);
   border: 1px solid rgb(210, 210, 210);
   padding: 0 5px;
   color: #000;
+  -moz-border-radius:5px;  
+  border-radius: 5px;  
+  -webkit-border-radius: 5px;
+
 }
 fieldset.simplefieldset2 label {
   display: inline-block;
@@ -18,10 +26,17 @@ fieldset.simplefieldset2 label {
 }
 
 fieldset.simplefieldset2 a {
-  color: #000;
+  color: #444;
 }
 
-fieldset.simplefieldset2 tr td  {
-  color: #000;
-  font-size: 12px;
+fieldset.simplefieldset2 a:hover {
+  color: #595;
+}
+
+fieldset.simplefieldset2 ul {
+  color: #444;  
+}
+
+fieldset.simplefieldset2 table {
+  color: #444;  
 }

@@ -1,13 +1,26 @@
 <div>
-  <h1><%= link_to faculty.name, faculty %></h1>
-	<strong><%= t(:initials) %>:</strong> <%= faculty.initials %> <br/>
-	<strong><%= t(:institute) %>:</strong> <%= faculty.institute.name %> <br/>
-  <%= link_to "Edit(symbol)", edit_faculty_path(faculty) %>
-	<h3><%= t(:disciplines, :scope => "globals" ) %></h3>
-	<ul class="disciplines">
-		<% faculty.disciplines.each do |discipline| %>
-			<li><%= link_to discipline.name, discipline %></li>
-		<% end %>
-	</ul>
+  <h2><%= link_to faculty.name, faculty %></h2>
+  <fieldset class="simplefieldset2">
+    <table class="simpletable1">
+    <col/>
+    <tr>
+      <td><%= t(:initials) %>: </td>
+      <td><%= faculty.initials %> </td>
+    </tr>
+      <td><%= t(:institute) %>:</td>
+      <td><%= faculty.institute.name %> </td>
+  </table>
+  <p class="comment_text">
+    <%= link_to "Edit(symbol)", edit_faculty_path(faculty) %>
+  </p>
+  <h4><%= t(:disciplines, :scope => "globals" ) %></h4>
+  <ul class="disciplines">
+  <% faculty.disciplines.each do |discipline| %>
+  <li><%= link_to discipline.name, discipline %></li>
+  <% end %>
+  </ul>
+  </fieldset>
+	<p class="comment_text">
 	<%= link_to t(:add_discipline, :scope => "links" ), new_discipline_path %>
+	</p>
 </div>
