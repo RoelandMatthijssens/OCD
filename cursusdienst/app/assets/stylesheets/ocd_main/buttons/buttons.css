@@ -1,0 +1,66 @@
+/* -------------------- */
+/* BUTTON GENERAL CLASS */
+/* -------------------- */
+/*
+a.iconbutton{
+background:url(img/button.gif);
+display:block;
+color:#555555;
+font-weight:bold;
+height:30px;
+line-height:29px;
+margin-bottom:14px;
+text-decoration:none;
+width:191px;
+}
+
+a:hover.iconbutton {
+color:#0066CC;
+}
+*/
+
+.clear { /* generic container (i.e. div) for floating buttons */
+    overflow: hidden;
+    width: 100%;
+}
+
+p.iconbutton a{
+    background: transparent url('../images/bg_button_a.gif') no-repeat scroll top right;
+    color: #444;
+    display: block;
+    float: left;
+    font: normal 12px arial, sans-serif;
+    height: 24px;
+    margin-right: 6px;
+    padding-right: 18px; /* sliding doors padding */
+    text-decoration: none;
+}
+
+p.iconbutton a span {
+    background: transparent url('../images/bg_button_span.gif') no-repeat;
+    display: block;
+    line-height: 14px;
+    padding: 5px 0 5px 18px;
+} 
+
+/* -------------------- */
+/* ICON CLASSES         */
+/* -------------------- */
+
+/* The list of icon button classes */ 
+
+.edit{
+background:url(../images/icons/twotone/edit.gif) no-repeat 16px 16px;
+text-indent:30px;
+display:block;
+}
+.delete{
+background:url(img/delete.gif) no-repeat 10px 8px;
+text-indent:30px;
+display:block;
+}
+.user{
+background:url(img/user.gif) no-repeat 10px 8px;
+text-indent:30px;
+display:block;
+}
