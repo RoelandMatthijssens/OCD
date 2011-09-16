@@ -5,9 +5,7 @@
 <div class="institutes">
   <% @institutes.each do |institute| %>
      <h2> <%= link_to institute.name, institute %> </h2>
-  <div class="item_content">
       <%= render :partial => "institute_body", :locals => {:institute => institute} %>
-  </div>
   <% end %>
 </div>
 <%= will_paginate %>

@@ -7,20 +7,6 @@
 /* Default font settings.
    The font-size percentage is of 16px. (0.75 * 16px = 12px) */
 html { font-size:100.01%; }
-body {
-  margin-left: 10px;
-  font-size: 12px;
-  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-  color: #6E6D6D;
-}
-
-.indentbody {
-  margin-left: 4px;
-  font-size: 12px;
-  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-  color: #6E6D6D;
-}
-
 
 
 
@@ -38,20 +24,6 @@ del         { color:#666; }
 pre         { margin: 1.5em 0; white-space: pre; }
 pre,code,tt { font: 1em 'andale mono', 'lucida console', monospace; line-height: 1.5; }
 
-
-/* Lists
--------------------------------------------------------------- */
-
-li ul,
-li ol       { margin: 0; }
-ul, ol      { margin: 0 1.5em 1.5em 0; padding-left: 3.333em; }
-
-ul          { list-style-type: disc; }
-ol          { list-style-type: decimal; }
-
-dl          { margin: 0 0 1.5em 0; }
-dl dt       { font-weight: bold; }
-dd          { margin-left: 1.5em;}
 
 
 /* Tables

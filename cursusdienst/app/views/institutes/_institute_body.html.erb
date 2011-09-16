@@ -1,25 +1,26 @@
 <fieldset class="simplefieldset2">
-	<legend>
-		<%= t(:info, :scope => "message" ) %>  
-		<%= link_to t(:edit, :scope => "links" ), edit_institute_path(institute) %>
-	</legend>
-   <table class="simpletable1">
-		<col>
-		<tr> 
-			<td> <%= t(:initials) %>: </td>
-		  <td> <%= institute.initials %> </td> 
-		</tr> 
-  	<tr> 
-			<td><%= t(:location) %>:</td> 
-      <td> <%= institute.location %> </td>
-		</tr> 
-   </table>
+ <legend>
+  <%= t(:info, :scope => "message" ) %>  
+ </legend>
+ <table class="simpletable1">
+   <col/>
+   <tr> 
+     <td> <%= t(:initials) %>: </td>
+     <td> <%= institute.initials %> </td> 
+   </tr> 
+   <tr> 
+     <td><%= t(:location) %>:</td> 
+     <td> <%= institute.location %> </td>
+   </tr> 
+ </table>
 </fieldset>
 
+<p class= "comment_text">
+<%= link_to t(:edit, :scope => "links" ), edit_institute_path(institute) %>
+</p>
 <fieldset class="simplefieldset2">
   <legend><%= t(:faculties, :scope => "globals") %></legend>
   <div class="Faculties">
-		<%= link_to t(:add_faculty, :scope => "links" ), new_faculty_path %>
     <ul class="faculties">
       <% institute.faculties.each do |faculty| %>
         <li><%= faculty.name %></li>
@@ -27,3 +28,6 @@
     </ul>
   </div>
 </fieldset>
+<p class= "comment_text">
+<%= link_to t(:add_faculty, :scope => "links" ), new_faculty_path %>
+</p>

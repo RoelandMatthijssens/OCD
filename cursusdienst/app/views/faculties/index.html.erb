@@ -1,10 +1,10 @@
 <h1><%= t(:all_faculties, :scope => "titles" ) %></h1>
-<%= link_to t(:add_faculty, :scope => "links" ), new_faculty_path %>
+<p class="comment_text">
+	<%= link_to t(:add_faculty, :scope => "links" ), new_faculty_path %>
+</p>
 <%= will_paginate %>
-<ul class="faculties">
   <% @faculties.each do |faculty| %>
     <%= render faculty %>
   <% end %>
-</ul>
 <%= will_paginate %>
 
