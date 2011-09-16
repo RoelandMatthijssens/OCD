@@ -101,7 +101,7 @@ Factory.define :message do |message|
 end
 
 Factory.sequence(:option_id) { |n| n }
-Factory.define :option do |option|
+Factory.define :extra_option do |option|
   option.after_build do |o|
     id = Factory.next :option_id
     o.name = "option_name #{id}"
