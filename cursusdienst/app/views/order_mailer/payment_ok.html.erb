@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+  <center> <%= image_tag("email/cd_logo.gif", :width => "700", :height => "10", :alt => "Crususdienst.net") %> </center>
+    <h1><%= t :hello, :scope => "mailers.ordermailer" %> <%= @user.name %>,</h1>
+
+    <p>
+      <%= t :content, :scope => "mailers.ordermailer.paymentok"  %>
+    </p>
+    <p><%= t :bye_html, :scope => "mailers.ordermailer" %></p>
+  </body>
+</html>

@@ -84,10 +84,5 @@ module ApplicationHelper
     link_to_function(name, js)
   end
   
-  def wysiwyg id
-    
-  end
-
-
 
 end

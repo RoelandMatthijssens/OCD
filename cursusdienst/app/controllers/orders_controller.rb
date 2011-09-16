@@ -58,8 +58,11 @@ class OrdersController < ApplicationController
 
   def mark_as_payed
     @order = Order.find(params[:id])
+    #    unless @order.status == 'Payed'
     @order.status = 'Payed'
     @order.save!
+    OrderMailer.payment_ok(@order.user).deliver
+    #    end
     redirect_to orders_path
   end
 

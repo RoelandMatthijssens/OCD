@@ -542,3 +542,10 @@ nl:
     cash: "Cash info"
     transfer: "Overschrijvings info"
     general_payment: "Algemene info"
+    
+  mailers:
+    ordermailer:
+      hello: "Beste"
+      bye_html: "Met Vriendelijke Groeten, <br /> Het Cursusdient.net Team"
+      paymentok:
+       content: "Uw betaling is goed ontvangen"
