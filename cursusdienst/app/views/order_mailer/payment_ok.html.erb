@@ -4,7 +4,7 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-  <center> <%= image_tag("email/cd_logo.gif", :width => "700", :height => "10", :alt => "Crususdienst.net") %> </center>
+  <center> <%= image_tag attachments['cd_logo.gif'].url, :alt => "Crususdienst.net" -%> </center>
     <h1><%= t :hello, :scope => "mailers.ordermailer" %> <%= @user.name %>,</h1>
 
     <p>
