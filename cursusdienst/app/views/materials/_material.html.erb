@@ -2,18 +2,28 @@
   <h1><%= link_to material.name, material %></h1>
   <% subject = material.subject %>
   <strong>Subject:</strong>
-    <% if subject %>
-        <%= link_to(subject.name + " " + subject.year.to_s + " " + subject.year_type, subject) %><br/>
-    <% else %>
-      This material is not attached to a subject yet. <br/>
-    <% end %>
+  <% if subject %>
+    <%= link_to(subject.name + " " + subject.year.to_s + " " + subject.year_type, subject) %><br/>
+  <% else %>
+    This material is not attached to a subject yet. <br/>
+  <% end %>
   <strong><%= t(:price, :scope => "globals" ) %>:</strong> €<%= material.get_price %><br/>
+  <strong><%= t(:attachment, :scope => "globals" ) %>:</strong> <br />
+
+  <ul>
+  <% material.attachments.each do |attachment| %>
+    <li>
+    <%= link_to attachment.basename, attachment.item_url %> <br />
+    </li>
+  <% end %>
+  </ul>
+
   <strong><%= t(:info, :scope => "globals" ) %>:</strong> <%= material.info %><br/>
   <% if material.parent %>
     <strong>Parent:</strong> <%= link_to material.parent.name, material.parent %>
   <% end %>
   <%= link_to "Edit this material", edit_material_path(material) %><br/>
-        <%= link_to 'add new version', :controller => "materials", :action => "new", :parent => material.id %>
+  <%= link_to 'add new version', :controller => "materials", :action => "new", :parent => material.id %>
   <% if current_user.can?("sell_materials") %>
     <% if current_user.guilds.size == 0 %>
       <p>Join a guild to add materials for it.</p>
