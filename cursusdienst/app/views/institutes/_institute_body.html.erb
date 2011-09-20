@@ -1,29 +1,37 @@
 <fieldset class="simplefieldset2">
  <legend>
-  <%= t(:info, :scope => "message" ) %>  
- </legend>
+  <%= t(:info, :scope => "message" ) %>
+  <span class= "edit">
+  - <%= link_to t(:edit, :scope => "links" ), edit_institute_path(institute) %>
+  </span>
+</legend>
  <table class="simpletable1">
    <col/>
-   <tr> 
+   <tr>
      <td> <%= t(:initials) %>: </td>
-     <td> <%= institute.initials %> </td> 
-   </tr> 
-   <tr> 
-     <td><%= t(:location) %>:</td> 
+     <td> <%= institute.initials %> </td>
+   </tr>
+   <tr>
+     <td><%= t(:location) %>:</td>
      <td> <%= institute.location %> </td>
-   </tr> 
+   </tr>
  </table>
 </fieldset>
 
-<p class= "comment_text">
-<%= link_to t(:edit, :scope => "links" ), edit_institute_path(institute) %>
-</p>
+
+
+
 <fieldset class="simplefieldset2">
-  <legend><%= t(:faculties, :scope => "globals") %></legend>
+  <legend>
+    <%= t(:faculties, :scope => "globals") %>
+
+
+
+  </legend>
   <div class="Faculties">
     <ul class="faculties">
       <% institute.faculties.each do |faculty| %>
-        <li><%= faculty.name %></li>
+        <li><%= link_to faculty.name, faculty %></li>
       <% end %>
     </ul>
   </div>

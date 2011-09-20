@@ -1,15 +1,12 @@
 
 <%= "not selling any materials" if @subjects.empty?%>
 <% @subjects.each do |subject| %>
-  <div class="supply">
-    <table class="header">
-      <tr>
-        <td><h3><%= subject.name %></h3></td>
-        <td><%= link_to t(:edit_subject, :scope => 'links'), edit_subject_path(subject) %></td>
-      </tr>
-    </table>
-    <ul>
-      <table>
+<h3><%= subject.name %></h3>
+
+<span class="edit">
+<%= link_to t(:edit_subject, :scope => 'links'), edit_subject_path(subject) %>
+</span>
+      <table class="supply">
         <th class='col1width'> <%= t(:item, :scope => "guild.supply") %> </th>
         <th> <%= t(:price, :scope => "guild.supply") %> </th>
         <th> <%= t(:to_cart, :scope => "guild.supply") %> </th>
@@ -28,7 +25,5 @@
           <% i+=1 %>
         <% end %>
       </table>
-    </ul>
-  </div>
 <% end %>
 

@@ -354,7 +354,7 @@ nl:
     news:
       edit_message: "Edit bericht"
       new_message: "Nieuw bericht"
-      
+
   subject:
     types:
       select_type: "Selecteer type"
@@ -432,9 +432,13 @@ nl:
     delivered_printjob: "Afgeleverde Afdruktaak"
     new_option: "Een nieuwe Optie aanmaken"
     edit_permission: "Recht bewerken"
-    edit_info: "Info aanpassen"
+    edit_info: "Info bewerken"
     all_action_logs: "Logs"
     my_orders: "Mijn bestellingen"
+    all_printers: "Alle drukkers"
+    new_printer: "Een nieuwe drukker aanmaken"
+    edit_printer: "Drukker bewerken"
+
 
   buttons:
     new_institute: "creëer instelling"
@@ -459,6 +463,7 @@ nl:
     update_subject: "Pas vak aan"
     update_user_permissions: "Pas rechten aan"
     new_action_log: "Log nieuwe actie"
+    new_printer: "Een nieuwe drukker aanmaken"
 
   flash:
     new_institute_success: "instelling succesvol aangemaakt"
@@ -534,6 +539,8 @@ nl:
     add_discipline: "Nieuwe richting aanmaken"
     add_faculty: "Nieuwe faculteit aanmaken"
     add_guild: "Nieuwe kring aanmaken"
+    add_price_set: "Nieuwe prijzen set aanmaken"
+    new_printer: "Een nieuwe drukker aanmaken"
     join_guild: "Wordt lid"
     set_cash_info: "Plaats informatie over cash-betaling"
     set_cash_info: "Plaats informatie over overschrijving-betaling"
@@ -543,7 +550,7 @@ nl:
     cash: "Cash info"
     transfer: "Overschrijvings info"
     general_payment: "Algemene info"
-    
+
   mailers:
     ordermailer:
       hello: "Beste"

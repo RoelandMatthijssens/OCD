@@ -17,8 +17,13 @@ fieldset.simplefieldset2 legend {
   -moz-border-radius:5px;  
   border-radius: 5px;  
   -webkit-border-radius: 5px;
-
 }
+fieldset.simplefieldset2 legend span a{
+  margin-left: 2px;
+  color: #555;
+  text-align: right;
+}
+
 fieldset.simplefieldset2 label {
   display: inline-block;
   line-height: 1.8;

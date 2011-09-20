@@ -1,0 +1,7 @@
+<h1><%= @title %></h1>
+<p class="comment_text" ><%= link_to t(:new_printer, :scope => "links" ), new_printer_path %></p>
+<div class="printers">
+  <% @printers.each do |printer| %>
+    <%= render printer %>
+  <% end %>
+</div>
