@@ -5,10 +5,15 @@
       <fieldset class="simplefieldset3">
       <table class="supply">
 	  <legend> 
-          <%= subject.name %>
-	  <span class="edit">
-	  <%= link_to t(:edit_subject, :scope => 'links'), edit_subject_path(subject) %>
-	  </span>
+             <%= subject.name %> 
+             &nbsp <!-- Whitespaces -->
+	     <span class="comment_text"> 
+               <%= link_to t(:edit_subject, :scope => 'links'), 
+                  edit_subject_path(subject) %>
+	     <%= link_to image_tag("icons/twotone/beige/edit.gif", 
+               :alt=>t(:edit_subject, :scope => 'links')), 
+               edit_subject_path(subject) %>
+             </span>
           </legend> 
         </tr>
 	<tr>
@@ -25,7 +30,7 @@
             <td <%= "class='alt'" if i.odd? %> >€<%= material.price %></td>
             <td <%= "class='alt'" if i.odd? %> ><%= link_to_function "add to cart(symbol)", "add_to_cart( #{ material.id }, #{@guild.id} )" %></td>
             <% if current_user && current_user.can?("edit_materials") %>
-              <td <%= "class='alt'" if i.odd? %> > <%= link_to "Edit this material(symbol)", edit_material_path(material) %> </td>
+              <td <%= "class='alt'" if i.odd? %> > <%= link_to image_tag("icons/twotone/beige/edit.gif", :alt=>t("Edit this material(symbol)"), edit_material_path(material) %> </td>
             <% end %>
           </tr>
           <% i+=1 %>

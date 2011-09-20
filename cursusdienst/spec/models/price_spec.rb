@@ -6,9 +6,9 @@ describe Price do
     ::ActiveSupport::Deprecation.silenced = true
   end
   it { should belong_to(:price_set) }
-  it { should belong_to(:extra_option) }
+  it { should belong_to(:option) }
 
-  it { should validate_presence_of(:extra_option) }
+  it { should validate_presence_of(:option) }
   it { should validate_presence_of(:price_set) }
 
   after do

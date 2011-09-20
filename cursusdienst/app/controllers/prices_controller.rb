@@ -12,8 +12,8 @@ class PricesController < ApplicationController
   def create
     @price = Price.new(params[:price])
     @price_set = PriceSet.find(params[:price_set])
-    @extra_option = ExtraOption.find(params[:extra_option])
-    @price.extra_option = @extra_option
+    @extra_option = Option.find(params[:option])
+    @price.option = @option
     @price_set.prices << @price
     if @price.save
       if @price_set.prices << @price

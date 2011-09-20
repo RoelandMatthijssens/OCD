@@ -15,12 +15,12 @@ class Material < ActiveRecord::Base
   has_many :users, :through => :sales
   has_many :print_job_items
   has_many :print_jobs, :through => :print_job_items
-  has_and_belongs_to_many :extra_options
+  has_and_belongs_to_many :options
   has_many :material_orders
   has_many :orders, :through => :material_orders
   default_scope :order => "materials.name ASC"
 
-  accepts_nested_attributes_for :extra_options
+  accepts_nested_attributes_for :options
 
   def discipline_id
     subject && subject.disciplines && subject.disciplines.first.id
