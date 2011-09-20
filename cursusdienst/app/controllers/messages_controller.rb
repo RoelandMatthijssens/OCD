@@ -19,7 +19,7 @@ class MessagesController < ApplicationController
 		@message.guild = @guild
     if @message.save
       flash[:succes] = t(:new_message_success, :scope => "flash" )
-      redirect_to @guild
+      redirect_to root_url(:subdomain => @guild.initials)
     else
 			flash[:notice] = t(:new_message_fail, :scope => "flash" )
       render 'new'
@@ -35,7 +35,7 @@ class MessagesController < ApplicationController
 		@message = Message.find(params[:id])
     if @message.update_attributes(params[:message])
       flash[:succes] = t(:update_message_success, :scope => "flash" )
-      redirect_to @message.guild
+      redirect_to root_url(:subdomain => @message.guild.initials)
     else
       render 'edit'
     end

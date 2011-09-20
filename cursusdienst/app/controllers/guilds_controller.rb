@@ -5,18 +5,19 @@ class GuildsController < ApplicationController
   end
   
   def show
-    @guild = Guild.find(params[:id])
+#    @guild = Guild.find(params[:id])
+    @guild = Guild.find_by_initials!(request.subdomain) 
     @subjects = @guild.subjects
     @selected_discipline = ""
     @selected_year_type = ""
   end
   
   def news
-    @guild = Guild.find(params[:id])
+    @guild = Guild.find_by_initials!(request.subdomain)
   end
   
   def update_filter
-    @guild = Guild.find(params[:id]) 
+    @guild = Guild.find_by_initials!(request.subdomain)
     @subjects = get_materials params[:filter][:discipline_id], params[:filter][:year_type]
     @selected_discipline = params[:filter][:discipline_id]
     @selected_year_type = params[:filter][:year_type]
@@ -39,7 +40,7 @@ class GuildsController < ApplicationController
     @guild.disciplines= get_disciplines_from_guild(params[:guild])
     if @guild.save
       flash[:notice] = t(:new_guild_success, :scope => "flash")
-      redirect_to @guild
+      redirect_to root_url(:subdomain => @guild.initials)
     else
       @dis_fac_inst = get_dis_fac_inst_from_par(params[:guild])
       flash[:notice] = t(:new_guild_fail, :scope => "flash")
@@ -50,7 +51,7 @@ class GuildsController < ApplicationController
   def edit
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('edit_guilds')
-    @guild = Guild.find(params[:id])
+    @guild = Guild.find_by_initials!(request.subdomain)
     @dis_fac_inst = get_dis_fac_inst_from_guild(@guild)
     @submit = t(:update_guild, :scope => "buttons")
   end
@@ -58,11 +59,11 @@ class GuildsController < ApplicationController
   def update
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('edit_guilds')
-    @guild = Guild.find(params[:id])
+    @guild = Guild.find_by_initials!(request.subdomain)
     @guild.disciplines= get_disciplines_from_guild(params[:guild])
     if @guild.update_attributes(params[:guild])
       flash[:notice] = t(:update_guild_success, :scope => "flash")
-      redirect_to @guild
+      redirect_to root_url(:subdomain => @guild.initials)
     else
       @dis_fac_inst = get_dis_fac_inst_from_par(params[:guild])
       render :action => 'edit'
@@ -74,10 +75,10 @@ class GuildsController < ApplicationController
 
   def join
 		deny_access and return unless signed_in?
-		@guild = Guild.find(params[:id])
+		@guild = Guild.find_by_initials!(request.subdomain)
 		current_user.guilds << @guild unless current_user.guilds.include? @guild
 		flash[:notice] = t(:join_guild_success, :scope => "flash")
-		redirect_to @guild
+		redirect_to root_url(:subdomain => @guild.initials)
   end
 
   private

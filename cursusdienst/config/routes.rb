@@ -1,3 +1,5 @@
+require 'subdomain'
+
 Cursusdienst::Application.routes.draw do
 
   get "test/index"
@@ -49,11 +51,17 @@ Cursusdienst::Application.routes.draw do
 
   resources :subjects
 
+  constraints(Subdomain) do  
+    match '/' => 'guilds#show'    
+  end  
+  
   resources :guilds do
     put :join, :on => :member
     put :update_filter, :on => :member
     get :news, :on => :member
   end
+  
+  
 
   resources :options
 

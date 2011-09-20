@@ -99,7 +99,7 @@ class MaterialsController < ApplicationController
 	def add_to_cart
 		deny_access and return unless signed_in?
 		@material = Material.find(params[:id])
-		@guild = Guild.find(params[:guild_id])
+    @guild = Guild.find_by_initials!(request.subdomain)
 		items = []
 		item = ShoppingCartItem.find(:first,  :conditions => ['user_id = ? and material_id = ? and guild_id = ?',current_user.id , @material.id, @guild.id])
 		if item

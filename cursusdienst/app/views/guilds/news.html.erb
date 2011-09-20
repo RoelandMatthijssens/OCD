@@ -13,7 +13,7 @@
   <div class="topline"></div>
   <div id="sidemenu">
     <ul>
-      <li> <%= link_to t(:supply, :scope => "side_menu"), guild_path(@guild), :class=>"sidemenu link1" %> </li>
+      <li> <%= link_to t(:supply, :scope => "side_menu"), root_url(:subdomain => @guild.initials), :class=>"sidemenu link1" %> </li>
       <li> <%= link_to t(:news, :scope => "side_menu"), news_guild_path(@guild), :class=>"sidemenu link1" %> </li>
       <li> <%= link_to t(:manual, :scope => "side_menu"), manual_path, :class=>"sidemenu link1" %> </li>
     </ul>

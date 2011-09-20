@@ -10,7 +10,7 @@
 	<tbody>
 		<% @per_guild.each do |guild, items| %>
 		<tr>
-			<td><%= link_to guild.name, guild %></td>
+			<td><%= link_to guild.name, root_url(:subdomain => guild.initials) %></td>
 			<td><%= items.inject(0.0) { |sum, el| sum + el.price } / items.size %></td>
 			<td></td>
 		</tr>

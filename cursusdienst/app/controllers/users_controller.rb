@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 #    TODO Add user to guild on signup
     @user = User.new(params[:user])
     guild_id = params[:guild]
-    if guild_id.nil?
+    unless guild_id.nil?
 	    @guild = Guild.find(guild_id)
 	  end
     if @user.save
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
       if @user.guilds.empty?
         redirect_to @user
       else
-        redirect_to @user.guilds.first
+        redirect_to root_url(:subdomain => @user.guilds.first.initials)
       end
     else
       flash[:succes] = t(:new_user_fail, :scope => "flash" )

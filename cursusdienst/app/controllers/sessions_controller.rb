@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
 				clear_location
 				redirect_to x
 			elsif user.guilds.any?
-				redirect_to user.guilds.first
+				redirect_to root_url(:subdomain => user.guilds.first.initials)
 			else
 				redirect_to user
 			end

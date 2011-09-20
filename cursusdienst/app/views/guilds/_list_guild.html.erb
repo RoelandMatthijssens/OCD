@@ -1,5 +1,5 @@
 <div>
-  <h1><%= link_to guild.name, guild %></h1>
+  <h1><%= link_to guild.name, root_url(:subdomain => guild.initials) %></h1>
   
 	<% if current_user && not(current_user.guilds.include?(guild) )%>
 		<%= link_to t(:join_guild, :scope => "links" ), join_guild_path(guild), :method => :put %>

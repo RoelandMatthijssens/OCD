@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def home
 		if signed_in? && current_user.guilds.any?
-			redirect_to current_user.guilds[0]
+			redirect_to root_url(:subdomain => current_user.guilds[0].initials)
 		end
 		@title = t(:home, :scope => "titles" )
   end

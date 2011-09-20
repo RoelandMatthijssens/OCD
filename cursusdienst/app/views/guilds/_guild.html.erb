@@ -1,11 +1,11 @@
 <div>
-  <h1><%= link_to guild.name, guild %>  <%= t(:supplies, :scope => "guild") %> </h1>
+  <h1><%= link_to guild.name, root_url(:subdomain => guild.initials) %>  <%= t(:supplies, :scope => "guild") %> </h1>
 
   <div class="supplies" id="supplies">
     <div id="filter">
       <fieldset>
         <legend><%= t(:filter, :scope => "guild.supply") %></legend>
-        <%= form_tag update_filter_guild_path, :method => :put do %>
+        <%= form_tag update_filter_guild_path(guild), :method => :put do %>
           <div style="display:none;">
             <%= label_tag "institute" %>
             <%= render :partial => "filters/select_box", :locals => {
@@ -61,7 +61,7 @@
     <div class="topline"></div>
     <div id="sidemenu">
       <ul>
-        <li> <%= link_to t(:supply, :scope => "side_menu"), guild_path(guild), :class=>"sidemenu link2" %> </li>
+        <li> <%= link_to t(:supply, :scope => "side_menu"), root_url(:subdomain => guild.initials), :class=>"sidemenu link2" %> </li>
         <li> <%= link_to t(:news, :scope => "side_menu"), news_guild_path(guild), :class=>"sidemenu link2" %> </li>
         <li> <%= link_to t(:manual, :scope => "side_menu"), manual_path, :class=>"sidemenu link2" %> </li>
       </ul>
