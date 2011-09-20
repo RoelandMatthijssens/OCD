@@ -4,24 +4,24 @@
 <% @subjects.each do |subject| %>
       <fieldset class="simplefieldset3">
       <table class="supply">
-	  <legend> 
-             <%= subject.name %> 
+    <legend>
+             <%= subject.name %>
              &nbsp <!-- Whitespaces -->
-	     <span class="comment_text"> 
-               <%= link_to t(:edit_subject, :scope => 'links'), 
+       <span class="comment_text">
+               <%= link_to t(:edit_subject, :scope => 'links'),
                   edit_subject_path(subject) %>
-	     <%= link_to image_tag("icons/twotone/beige/edit.gif", 
-               :alt=>t(:edit_subject, :scope => 'links')), 
+       <%= link_to image_tag("icons/twotone/beige/edit.gif",
+               :alt=>t(:edit_subject, :scope => 'links')),
                edit_subject_path(subject) %>
              </span>
-          </legend> 
+          </legend>
         </tr>
-	<tr>
+  <tr>
           <th class='col1width'> <%= t(:item, :scope => "guild.supply") %> </th>
           <th class='col2width'> <%= t(:price, :scope => "guild.supply") %> </th>
           <th class='col3width'> <%= t(:to_cart, :scope => "guild.supply") %> </th>
           <th class='col4width'> <%= t(:edit, :scope => "guild.supply") %> </th>
-	</tr>
+  </tr>
         <% i = 1 %> <!-- dirty ruby fix to get the alternating alt class -->
         <% subject.materials.each do |material| %>
           <tr>
@@ -30,7 +30,8 @@
             <td <%= "class='alt'" if i.odd? %> >€<%= material.price %></td>
             <td <%= "class='alt'" if i.odd? %> ><%= link_to_function "add to cart(symbol)", "add_to_cart( #{ material.id }, #{@guild.id} )" %></td>
             <% if current_user && current_user.can?("edit_materials") %>
-              <td <%= "class='alt'" if i.odd? %> > <%= link_to image_tag("icons/twotone/beige/edit.gif", :alt=>t("Edit this material(symbol)"), edit_material_path(material) %> </td>
+              <td <%= "class='alt'" if i.odd? %> >
+  <%= link_to image_tag("icons/twotone/beige/edit.gif", :alt=>t("edit", :scope => 'links')), edit_material_path(material) %> </td>
             <% end %>
           </tr>
           <% i+=1 %>
@@ -39,4 +40,3 @@
       </fieldset>
 <% end %>
 </div>
-
