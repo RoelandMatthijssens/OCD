@@ -12,10 +12,10 @@ class PrintersController < ApplicationController
   def create
     @printer = Printer.new(params[:printer])
     if @printer.save
-      flash[:notice] = t(:new_printer_success, :scope => "flash")
+      flash[:success] = t(:new_printer_success, :scope => "flash")
       redirect_to @printer
     else
-      flash[:notice] = t(:new_printer_fail, :scope => "flash")
+      flash[:error] = t(:new_printer_fail, :scope => "flash")
       render :action => 'new'
     end
   end
@@ -33,7 +33,7 @@ class PrintersController < ApplicationController
   def update
     @printer = Printer.find(params[:id])
     if @printer.update_attributes(params[:printer])
-      flash[:notice] = t(:update_printer_success, :scope => "flash")
+      flash[:success] = t(:update_printer_success, :scope => "flash")
       redirect_to @printer
     else
       render :action => 'edit'

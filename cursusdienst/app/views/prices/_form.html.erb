@@ -1,0 +1,21 @@
+<%= form_for(@price) do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+  <div class='field'>
+    <%= f.label :amount %> <br>
+    <%= f.text_field :amount %> <br>
+  </div>
+  <div class="field">
+  <%= select_tag :extra_option, options_from_collection_for_select(ExtraOption.find(:all, :conditions => ['typee = ?', 'printer']),
+    :id, :name, params[:extra_option] ? params[:extra_option] : "") ,
+    { :prompt => t(:select_option, :scope => 'price.create')} %>
+
+  <%= select_tag :price_set, options_from_collection_for_select(PriceSet.find(:all),
+    :id, :name, params[:price_set] ? params[:price_set] : "") ,
+    { :prompt => t(:select_option, :scope => 'price.create')} %>
+
+  </div>
+
+  <div class="actions">
+    <%= f.submit @submit %>
+  </div>
+<% end %>

@@ -7,6 +7,7 @@ describe PriceSet do
   end
   it { should belong_to(:printer) }
   it { should have_many(:prices) }
+  it { should validate_presence_of(:printer) }
 
   after do
     ::ActiveSupport::Deprecation.silenced = @old_silence_config

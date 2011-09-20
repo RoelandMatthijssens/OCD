@@ -31,6 +31,8 @@ Cursusdienst::Application.routes.draw do
 
   resources :price_sets
 
+  resources :prices
+
   resources :info_strings
 
   resources :orders do

@@ -1,0 +1,7 @@
+<h1><%= @title %></h1>
+<p class="comment_text" ><%= link_to t(:new_price_set, :scope => "links" ), new_price_set_path %></p>
+<div class="price_sets">
+  <% @price_sets.each do |price_set| %>
+    <%= render price_set %>
+  <% end %>
+</div>
