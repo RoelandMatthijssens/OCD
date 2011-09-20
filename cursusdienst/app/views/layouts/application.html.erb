@@ -29,12 +29,19 @@
     <div id="headerbg"> </div>
     <div id="maincontainer">
       <div id="headercontainer">
-        <div id="headerlogo">
-          <%= image_tag "banners/cd_logo.gif", :alt=>"Header Logo" %>
-        </div>
-        <div id="headerbanner"> 
-          <%= image_tag "banners/headerbanner.png", :alt=>"Header Banner" %>
-        </div>
+        <% if request.subdomain == "" || request.subdomain == 'www'  %>
+          <div id="headerlogo">
+            <%= image_tag "banners/cd_logo.gif", :alt=>"Header Logo" %>
+          </div>
+          <div id="headerbanner"> 
+            <%= image_tag "banners/headerbanner.png", :alt=>"Header Banner" %>
+          </div>
+        <% else %>
+          <div id="headerbanner"> 
+            <%= image_tag "guilds/" + request.subdomain + "/headerbanner.png", :alt=>"Header Banner" %>
+          </div>
+        <% end %>
+
         <div id="headerloginarea"> 
           <!-- Loginmenu div voor het login menu rechts bovenaan--> 
           <!-- icons kan je aanpassen in de CSS file -->
@@ -95,11 +102,16 @@
           </div>
           <div id="footer2">
             <div id="footerbannerdiv">
-              <%= image_tag "banners/footerbanner.gif", :alt=>"Footer Banner" %>
-          </div>
-          <div id="footertext">
-            <%= render :partial => "layouts/footer" %>
-          </div>
+
+              <% if request.subdomain == "" || request.subdomain == 'www'  %>
+                <%= image_tag "banners/footerbanner.png", :alt=>"Footer Banner" %>
+              <% else %>
+                <%= image_tag "guilds/" + request.subdomain + "/footerbanner.png", :alt=>"Header Banner" %>
+              <% end %>
+            </div>
+            <div id="footertext">
+              <%= render :partial => "layouts/footer" %>
+            </div>
           </div>
 
           <div id="footer3">
