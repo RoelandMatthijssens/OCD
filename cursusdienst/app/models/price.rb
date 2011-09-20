@@ -1,7 +1,7 @@
 class Price < ActiveRecord::Base
   belongs_to :price_set
-  belongs_to :extra_option
+  belongs_to :option
 
   validates :price_set, :presence => true
-  validates :extra_option, :presence => true
+  validates :option, :presence => true
 end

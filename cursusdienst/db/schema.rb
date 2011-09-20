@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110916162341) do
+ActiveRecord::Schema.define(:version => 20110920124836) do
 
   create_table "action_logs", :force => true do |t|
     t.integer  "user_id"
@@ -44,20 +44,6 @@ ActiveRecord::Schema.define(:version => 20110916162341) do
   create_table "disciplines_users", :id => false, :force => true do |t|
     t.integer "user_id"
     t.integer "discipline_id"
-  end
-
-  create_table "extra_options", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "name"
-    t.string   "typee"
-  end
-
-  create_table "extra_options_materials", :id => false, :force => true do |t|
-    t.integer  "material_id"
-    t.integer  "option_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "faculties", :force => true do |t|
@@ -119,11 +105,25 @@ ActiveRecord::Schema.define(:version => 20110916162341) do
     t.string   "info"
   end
 
+  create_table "materials_options", :id => false, :force => true do |t|
+    t.integer  "material_id"
+    t.integer  "option_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "messages", :force => true do |t|
     t.integer  "guild_id"
     t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "options", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+    t.string   "typee"
   end
 
   create_table "orders", :force => true do |t|
@@ -160,10 +160,10 @@ ActiveRecord::Schema.define(:version => 20110916162341) do
 
   create_table "prices", :force => true do |t|
     t.integer  "price_set_id"
-    t.integer  "extra_option_id"
     t.float    "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "option_id"
   end
 
   create_table "print_job_items", :force => true do |t|
