@@ -335,6 +335,14 @@ nl:
       register: "Registreer"
       first_name: "Voornaam"
 
+  price_set:
+    create:
+      select_printer: "Selecteer een drukker"
+
+  price:
+    create:
+      select_option: "Selecteer een optie"
+
   errors:
     error: "Fout!"
     probibited: "voorkomen om "
@@ -396,12 +404,6 @@ nl:
   location: "locatie"
 
   titles:
-    new_institute: "Een nieuwe instelling aanmaken"
-    new_discipline: "Een nieuwe richting aanmaken"
-    new_subject: "Een nieuw vak aanmaken"
-    new_guild: "Een nieuwe kring aanmaken"
-    new_faculty: "Een nieuwe faculteit aanmaken"
-    all_disciplines: "Alle vakken"
     all_disciplines: "Alle richtingen"
     all_guilds: "Alle kringen"
     all_institutes: "Alle instellingen"
@@ -410,34 +412,48 @@ nl:
     all_orders: "Alle bestellingen"
     all_faculties: "Alle faculteiten"
     all_info_strings: "Alle info berichten"
+    all_price_sets: "Alle prijzensets"
+    all_subjects: "Alle onderwerpen"
+    all_users: "Alle gebruikers"
+    all_permission_groups: "Alle rechten"
+    all_action_logs: "Alle logs"
+    all_printers: "Alle drukkers"
+    all_prices: "Alle prijzen"
+
+    new_institute: "Een nieuwe instelling aanmaken"
+    new_discipline: "Een nieuwe richting aanmaken"
+    new_subject: "Een nieuw vak aanmaken"
+    new_guild: "Een nieuwe kring aanmaken"
+    new_faculty: "Een nieuwe faculteit aanmaken"
+    new_price_set: "Een nieuwe prijzenset aanmaken"
+    new_option: "Een nieuwe Optie aanmaken"
+    new_printer: "Een nieuwe drukker aanmaken"
+    new_price: "Een nieuwe prijs aanmaken"
+
+    edit_subject: "Vak bewerken"
+    edit_faculty: "Faculteit bewerken"
+    edit_guild: "Kring bewerken"
+    edit_permission: "Recht bewerken"
+    edit_info: "Info bewerken"
+    edit_user: "Gebruiker bewerken"
+    edit_stock: "Stock bewerken"
+    edit_printer: "Drukker bewerken"
+    edit_price_set: "Prijzenset bewerken"
+    edit_price: "Prijs bewerken"
+
     home: "Home"
     about: "Over ons"
     access_denied: "Toegang geweigerd"
     control_panel: "Beheeraneel"
     results: "Resultaten"
-    all_permission_groups: "Alle rechten"
     stock: "Stock"
-    all_subjects: "Alle onderwerpen"
-    all_users: "Alle gebruikers"
-    edit_subject: "Pas dit vak aan"
-    edit_faculty: "Pas deze faculteit aan"
-    edit_guild: "Pas deze kring aan"
     permissions_of: "Rechten van %{user}"
-    edit_user: "Gebruiker bewerken"
-    edit_stock: "Stock bewerken"
     sign_in: "Inloggen"
     printed_printjob: "Afgewerkte Afdruktaak"
     pending_printjob: "Afdruktaak in wachtrij"
     ordered_printjob: "Bestelde Afdruktaak"
     delivered_printjob: "Afgeleverde Afdruktaak"
-    new_option: "Een nieuwe Optie aanmaken"
-    edit_permission: "Recht bewerken"
-    edit_info: "Info bewerken"
-    all_action_logs: "Logs"
     my_orders: "Mijn bestellingen"
-    all_printers: "Alle drukkers"
-    new_printer: "Een nieuwe drukker aanmaken"
-    edit_printer: "Drukker bewerken"
 
 
   buttons:
@@ -464,6 +480,8 @@ nl:
     update_user_permissions: "Pas rechten aan"
     new_action_log: "Log nieuwe actie"
     new_printer: "Een nieuwe drukker aanmaken"
+    update_price_set: "Pas prijzenset aan"
+    update_price: "Pas prijs aan"
 
   flash:
     new_institute_success: "instelling succesvol aangemaakt"
@@ -518,6 +536,15 @@ nl:
     new_info_string_success: "Info succesvol aangemaakt"
     new_info_string_fail: "Info  niet aangemaakt. Er is iets misgegaan"
     update_info_string_success: "Info succesvol aangepast"
+    new_price_set_success: "Prijzenset succesvol aangemaakt"
+    new_price_set_fail: "Prijzenset niet aangepast. Er is iets misgegaan"
+    update_price_set_success: "Prijzenset succesvol aangepast"
+    new_price_success: "Nieuwe prijs succesvol aangemaakt"
+    new_price_fail: "Nieuwe prijs niet aangemaakt. Er is iets misgegaan"
+    update_price_success: "Prijs succesvol aangepast"
+    new_printer_success: "Printer succesvol aangemaakt"
+    new_printer_fail: "Printer niet aangemaakt. Er is iets misgegaan"
+    update_printer_success: "Printer succesvol aangepast"
 
   links:
     edit: "Edit"
@@ -545,6 +572,7 @@ nl:
     set_cash_info: "Plaats informatie over cash-betaling"
     set_cash_info: "Plaats informatie over overschrijving-betaling"
     set_general_payment_info: "Plaats informatie over algemene-betaling"
+    new_price_set: "Nieuwe prijzenset aanmaken"
 
   info:
     cash: "Cash info"

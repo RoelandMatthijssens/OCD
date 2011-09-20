@@ -1,16 +1,22 @@
 
+<div class="filter_results">
 <%= "not selling any materials" if @subjects.empty?%>
 <% @subjects.each do |subject| %>
-<h3><%= subject.name %></h3>
-
-<span class="edit">
-<%= link_to t(:edit_subject, :scope => 'links'), edit_subject_path(subject) %>
-</span>
+      <fieldset class="simplefieldset3">
       <table class="supply">
-        <th class='col1width'> <%= t(:item, :scope => "guild.supply") %> </th>
-        <th> <%= t(:price, :scope => "guild.supply") %> </th>
-        <th> <%= t(:to_cart, :scope => "guild.supply") %> </th>
-        <th> <%= t(:edit, :scope => "guild.supply") %> </th>
+	  <legend> 
+          <%= subject.name %>
+	  <span class="edit">
+	  <%= link_to t(:edit_subject, :scope => 'links'), edit_subject_path(subject) %>
+	  </span>
+          </legend> 
+        </tr>
+	<tr>
+          <th class='col1width'> <%= t(:item, :scope => "guild.supply") %> </th>
+          <th class='col2width'> <%= t(:price, :scope => "guild.supply") %> </th>
+          <th class='col3width'> <%= t(:to_cart, :scope => "guild.supply") %> </th>
+          <th class='col4width'> <%= t(:edit, :scope => "guild.supply") %> </th>
+	</tr>
         <% i = 1 %> <!-- dirty ruby fix to get the alternating alt class -->
         <% subject.materials.each do |material| %>
           <tr>
@@ -25,5 +31,7 @@
           <% i+=1 %>
         <% end %>
       </table>
+      </fieldset>
 <% end %>
+</div>
 

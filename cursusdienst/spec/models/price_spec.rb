@@ -8,6 +8,9 @@ describe Price do
   it { should belong_to(:price_set) }
   it { should belong_to(:extra_option) }
 
+  it { should validate_presence_of(:extra_option) }
+  it { should validate_presence_of(:price_set) }
+
   after do
     ::ActiveSupport::Deprecation.silenced = @old_silence_config
   end

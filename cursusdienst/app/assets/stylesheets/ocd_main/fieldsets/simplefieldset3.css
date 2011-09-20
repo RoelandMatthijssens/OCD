@@ -1,44 +1,44 @@
-fieldset.simplefieldset2 {
+fieldset.simplefieldset3 {
   margin-bottom: 10px;
-  background: rgb(218, 237, 255);
-  border: 1px solid rgb(210, 210, 210);
+  background: rgb(225, 225, 225);
+  border: 1px solid rgb(180, 180, 180);
   border-radius: 5px;
 
 }
-fieldset.simplefieldset2 legend {
+fieldset.simplefieldset3 legend {
   font: 1.1em Verdana,Arial,sans-serif;
   background: rgb(208, 208, 208);
-  border: 1px solid rgb(190, 190, 190);
+  border: 1px solid rgb(170, 170, 170);
   padding: 0 5px;
   color: #000;
   -moz-border-radius:5px;  
   border-radius: 5px;  
   -webkit-border-radius: 5px;
 }
-fieldset.simplefieldset2 legend span a{
+fieldset.simplefieldset3 legend span a{
   margin-left: 2px;
   color: #555;
   text-align: right;
 }
 
-fieldset.simplefieldset2 label {
+fieldset.simplefieldset3 label {
   display: inline-block;
   line-height: 1.8;
   vertical-align: top;
 }
 
-fieldset.simplefieldset2 a {
+fieldset.simplefieldset3 a {
   color: #444;
 }
 
-fieldset.simplefieldset2 a:hover {
+fieldset.simplefieldset3 a:hover {
   color: #595;
 }
 
-fieldset.simplefieldset2 ul {
+fieldset.simplefieldset3 ul {
   color: #444;  
 }
 
-fieldset.simplefieldset2 table {
+fieldset.simplefieldset3 table {
   color: #444;  
 }
