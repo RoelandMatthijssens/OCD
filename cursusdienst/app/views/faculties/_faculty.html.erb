@@ -1,6 +1,13 @@
 <div>
   <h2><%= link_to faculty.name, faculty %></h2>
   <fieldset class="simplefieldset2">
+    <legend>
+     <%= t(:info, :scope => "message" ) %>
+     <span class="comment_text">
+     <%= link_to "Edit", edit_faculty_path(faculty) %>
+     </span>
+    </legend>
+
     <table class="simpletable1">
     <col/>
     <tr>
@@ -10,17 +17,18 @@
       <td><%= t(:institute) %>:</td>
       <td><%= faculty.institute.name %> </td>
   </table>
-  <p class="comment_text">
-    <%= link_to "Edit(symbol)", edit_faculty_path(faculty) %>
-  </p>
-  <h4><%= t(:disciplines, :scope => "globals" ) %></h4>
+  </fieldset>
+  <fieldset class="simplefieldset2">
+  <legend>
+  <%= t(:disciplines, :scope => "globals" ) %>
+  <span class="comment_text">
+    <%= link_to t(:add_discipline, :scope => "links" ), new_discipline_path %>
+  </span>
+  </legend>
   <ul class="disciplines">
   <% faculty.disciplines.each do |discipline| %>
   <li><%= link_to discipline.name, discipline %></li>
   <% end %>
   </ul>
   </fieldset>
-	<p class="comment_text">
-	<%= link_to t(:add_discipline, :scope => "links" ), new_discipline_path %>
-	</p>
 </div>
