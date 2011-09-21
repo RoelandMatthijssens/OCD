@@ -1,12 +1,12 @@
 <div>
-	<li>
-		<strong><%= t(:name, :scope => "shopping_cart" ) %>: </strong><%= link_to shopping_cart_item.material.name, shopping_cart_item.material %><br/>
-		<strong><%= t(:amount, :scope => "shopping_cart" ) %>: </strong><%= shopping_cart_item.amount %><br/>
-		<strong><%= t(:bought_at, :scope => "shopping_cart" ) %>:</strong> <%= link_to shopping_cart_item.guild.name, shopping_cart_item.guild %><br/>
-		<strong><%= t(:price, :scope => "shopping_cart" ) %>:</strong> €<%= shopping_cart_item.material.price %><br/>
-		<br/>
+  <li>
+    <strong><%= t(:name, :scope => "shopping_cart" ) %>: </strong><%= link_to shopping_cart_item.material.name, shopping_cart_item.material %><br/>
+    <strong><%= t(:amount, :scope => "shopping_cart" ) %>: </strong><%= shopping_cart_item.amount %><br/>
+    <strong><%= t(:bought_at, :scope => "shopping_cart" ) %>:</strong> <%= link_to shopping_cart_item.guild.name, shopping_cart_item.guild %><br/>
+    <strong><%= t(:price, :scope => "shopping_cart" ) %>:</strong> € TODO prijs op basis van relatie van guild waar gekocht<br/>
+    <br/>
     <%= link_to "+ (symbol)", add_shopping_cart_item_path(shopping_cart_item), :method => :put %>
-		<br/>
+    <br/>
     <%= link_to "- (symbol)", substract_shopping_cart_item_path(shopping_cart_item), :method => :put %>
-	</li><br/>
+  </li><br/>
 </div>

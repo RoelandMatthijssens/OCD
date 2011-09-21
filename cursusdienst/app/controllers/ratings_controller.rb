@@ -17,9 +17,9 @@ class RatingsController < ApplicationController
 		#@info_string.content = params[:content]
 		#@info_string.key = params[:key]
 		if @rating.save
-			flash[:success] = "blablabla COOOOOL"
+			flash[:success] = "Seccessfully rated"
     else
-      flash[:error] = "BLABLALBA Sad :("
+      flash[:error] = "Rating failed"
     end
     redirect_to (type.camelize.constantize).find(id)
 	end

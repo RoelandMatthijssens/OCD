@@ -25,16 +25,25 @@
         <% i = 1 %> <!-- dirty ruby fix to get the alternating alt class -->
         <% subject.materials.each do |material| %>
           <tr>
+<<<<<<< HEAD
             <td <%= "class='alt'" if i.odd? %> >
               <%= link_to "#{material.typee} #{material.name}", material %>
             </td>
+            <td <%= "class='alt'" if i.odd? %> >€<%= material.price %></td>
+=======
+            <td <%= "class='alt'" if i.odd? %> ><%= link_to material.name, material %></td>
             <td <%= "class='alt'" if i.odd? %> >€ TODO haal prijs uit relatie</td>
+>>>>>>> 702315cccfb35fc18023d907e7feecd4a17ab8ae
             <td <%= "class='alt'" if i.odd? %> >
               <%= link_to_function "add to cart(symbol)", "add_to_cart( #{ material.id }, #{@guild.id} )" %>
             </td>
             <% if current_user && current_user.can?("edit_materials") %>
               <td <%= "class='alt'" if i.odd? %> >
+<<<<<<< HEAD
+                <%= link_to image_tag("icons/twotone/" + icon_color + "/edit.gif", :alt=>t("edit", :scope => 'links')), edit_material_path(material) %> 
+=======
                  <%= link_to image_tag("icons/twotone/" + icon_color + "/edit.gif", :alt=>t("edit", :scope => 'links')), edit_material_path(material) %>
+>>>>>>> 702315cccfb35fc18023d907e7feecd4a17ab8ae
               </td>
             <% end %>
           </tr>

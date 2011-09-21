@@ -1,13 +1,18 @@
 <div class="material">
-  <h1><%= link_to material.name, material %></h1>
-  <% subject = material.subject %>
+  <h1>
+    <%= link_to material.name, material %> <%= material.rating_score %>
+  </h1>
+  <% (1..5).each do |i| %>
+    <%= radio_button "material", "rating_score", i, :class => "star {split:10}", :disabled => "disabled" %>
+  <% end %>
+  <br />
+  <% subject = material.subject %> 
   <strong>Subject:</strong>
   <% if subject %>
     <%= link_to(subject.name + " " + subject.year.to_s + " " + subject.year_type, subject) %><br/>
   <% else %>
     This material is not attached to a subject yet. <br/>
   <% end %>
-  <strong><%= t(:price, :scope => "globals" ) %>:</strong> €<%= material.get_price %><br/>
   <strong><%= t(:attachment, :scope => "globals" ) %>:</strong> <br />
 
   <ul>
@@ -56,7 +61,10 @@
 
       <div class='field'>
         <%= f.label :score %> <br>
-        <%= f.text_field :score %> <br>
+        <% (1..5).each do |i| %>
+          <%= f.radio_button :score, i, :class => "star" %>
+        <% end %>
+
       </div>
       <div class='field'>
         <%= f.label :message %> <br>

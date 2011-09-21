@@ -1,9 +1,9 @@
 <h1><%= t(:shopping_cart, :scope => "shopping_cart" ) %></h1>
 <ul class="shopping_cart_items">
-	<% total = 0 %>
-	<% @shopping_cart_items.each do |item| %>
+  <% total = 0 %>
+  <% @shopping_cart_items.each do |item| %>
     <%= render item %>
-		<% total += item.material.price %>
+    <% 'TODO bereken totaal prijs op basis van waar het item besteld is' %>
   <% end %>
 </ul>
 <strong><%= t(:total, :scope => "shopping_cart" ) %>:</strong>€<%= total %><br/>

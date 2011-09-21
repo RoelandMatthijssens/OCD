@@ -59,23 +59,24 @@ Cursusdienst::Application.routes.draw do
 
   resources :subjects
 
-  constraints(Subdomain) do  
-    match '/' => 'guilds#show'    
-  end  
-  
+  constraints(Subdomain) do
+    match '/' => 'guilds#show'
+  end
+
   resources :guilds do
     put :join, :on => :member
     put :update_filter, :on => :member
     get :news, :on => :member
   end
-  
-  
+
+
 
   resources :options
 
   resources :materials do
     put :sell, :on => :member
     get :add_to_cart, :on => :member
+    get :add_to_supply, :on => :member
   end
 
   resources :messages

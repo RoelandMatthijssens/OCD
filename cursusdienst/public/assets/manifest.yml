@@ -686,6 +686,8 @@ icons/twotiny/sent.gif: icons/twotiny/sent.gif
 icons/twotiny/book.gif: icons/twotiny/book.gif
 icons/twotiny/folder-lock.gif: icons/twotiny/folder-lock.gif
 icons/twotiny/phone.gif: icons/twotiny/phone.gif
+star.gif: star.gif
+delete.gif: delete.gif
 guilds/shared/footerbanner.gif: guilds/shared/footerbanner.gif
 guilds/shared/headerbanner.png: guilds/shared/headerbanner.png
 guilds/shared/background_for_customizing.png: guilds/shared/background_for_customizing.png
@@ -1214,6 +1216,7 @@ twotiny-plus-expansion/twotiny+expansion/sent.gif: twotiny-plus-expansion/twotin
 twotiny-plus-expansion/twotiny+expansion/book.gif: twotiny-plus-expansion/twotiny+expansion/book.gif
 twotiny-plus-expansion/twotiny+expansion/folder-lock.gif: twotiny-plus-expansion/twotiny+expansion/folder-lock.gif
 twotiny-plus-expansion/twotiny+expansion/phone.gif: twotiny-plus-expansion/twotiny+expansion/phone.gif
+jquery.rating.pack.js: jquery.rating.pack.js
 fonts/chancery.sty: fonts/chancery.sty
 fonts/urw_chancery_l_medium_italic.ttf: fonts/urw_chancery_l_medium_italic.ttf
 ocd_main/firebug-lite/skin/classic/sprite.png: ocd_main/firebug-lite/skin/classic/sprite.png
@@ -1756,6 +1759,7 @@ rvm/site_logo.jpg: rvm/site_logo.jpg
 rvm/blue.png: rvm/blue.png
 rvm/green_menu.png: rvm/green_menu.png
 rvm/site_logo copy.jpg: rvm/site_logo copy.jpg
+jquery.rating.css: jquery.rating.css
 jquery.min.js: jquery.min.js
 jquery-ui.min.js: jquery-ui.min.js
 application.js: application.js
