@@ -13,6 +13,8 @@ Cursusdienst::Application.routes.draw do
   get "pages/control_panel"
 
   get "pages/manual"
+  
+  get "attachments/download"
 
   resources :users do
     get :edit_permissions, :on => :member

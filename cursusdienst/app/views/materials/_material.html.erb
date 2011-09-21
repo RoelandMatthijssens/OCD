@@ -18,7 +18,7 @@
   <ul>
     <% material.attachments.each do |attachment| %>
       <li>
-        <%= link_to attachment.basename, attachment.item_url %> <br />
+        <%= link_to attachment.basename, :controller=>'attachments',:action=>'download',:attachment_id=>attachment.id %> <br />
       </li>
     <% end %>
   </ul>
