@@ -11,11 +11,11 @@
   <strong><%= t(:attachment, :scope => "globals" ) %>:</strong> <br />
 
   <ul>
-  <% material.attachments.each do |attachment| %>
-    <li>
-    <%= link_to attachment.basename, attachment.item_url %> <br />
-    </li>
-  <% end %>
+    <% material.attachments.each do |attachment| %>
+      <li>
+        <%= link_to attachment.basename, attachment.item_url %> <br />
+      </li>
+    <% end %>
   </ul>
 
   <strong><%= t(:info, :scope => "globals" ) %>:</strong> <%= material.info %><br/>
@@ -44,4 +44,27 @@
     <% end %>
 
   </ul>
+  <% if can_rate? (material) %>
+    <h2>Rate this material</h2>
+    <%= form_for(@rating) do |f| %>
+      <%= render 'shared/error_messages', :object => f.object %>
+
+      <%= f.hidden_field :rateable_id, :value => material.id %>
+      <%= f.hidden_field :rateable_type, :value => material.class %>
+      <%= f.hidden_field :user_id, :value => current_user.id %>
+
+
+      <div class='field'>
+        <%= f.label :score %> <br>
+        <%= f.text_field :score %> <br>
+      </div>
+      <div class='field'>
+        <%= f.label :message %> <br>
+        <%= f.text_field :message %> <br>
+      </div>
+      <div class="actions">
+        <%= f.submit @submit %>
+      </div>
+    <% end %>
+  <% end %>
 </div>

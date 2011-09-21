@@ -62,6 +62,7 @@ class User < ActiveRecord::Base
   has_many :orders
   has_many :shopping_cart_items
   has_many :action_logs
+  has_many :ratings
   
   default_scope :order => "users.last_name, users.name ASC"
   

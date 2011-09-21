@@ -11,6 +11,7 @@ class MaterialsController < ApplicationController
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('view_materials')
     @material = Material.find(params[:id])
+    @rating = @material.ratings.new 
   end
 
   def new

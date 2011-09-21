@@ -17,11 +17,16 @@ class Material < ActiveRecord::Base
   has_many :print_jobs, :through => :print_job_items
   has_and_belongs_to_many :options
   has_many :material_orders
+  has_many :ratings, :as => :rateable
   has_many :orders, :through => :material_orders
   default_scope :order => "materials.name ASC"
 
   accepts_nested_attributes_for :options
 
+  def rating_score
+    ratings.inject{|sum,x| sum + x }
+  end
+  
   def discipline_id
     subject && subject.disciplines && subject.disciplines.first.id
   end
