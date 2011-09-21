@@ -23,8 +23,9 @@ module MaterialsHelper
   
   def can_rate? material
     if current_user
-      qry = Order.joins(:material_orders).find(:all, :conditions => ['user_id=? and status=? and material_id=?', current_user.id, 'Payed', material.id ])
-      qry.any?
+      bought = Order.joins(:material_orders).find(:all, :conditions => ['user_id=? and status=? and material_id=?', current_user.id, 'Payed', material.id ])
+      rated = Rating.find(:all, :conditions => ['user_id=? and rateable_id=? and rateable_type=?', current_user.id, material.id, "Material"])
+      bought.any? && rated.empty?
     else
       false
     end
