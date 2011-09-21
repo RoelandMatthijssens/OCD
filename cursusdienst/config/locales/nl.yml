@@ -454,6 +454,7 @@ nl:
     ordered_printjob: "Bestelde Afdruktaak"
     delivered_printjob: "Afgeleverde Afdruktaak"
     my_orders: "Mijn bestellingen"
+    add_to_supply: "Een item aan het aanbod toevoegen"
 
 
   buttons:
@@ -482,6 +483,7 @@ nl:
     new_printer: "Een nieuwe drukker aanmaken"
     update_price_set: "Pas prijzenset aan"
     update_price: "Pas prijs aan"
+    add_to_supply: "Voeg toe"
 
   flash:
     new_institute_success: "instelling succesvol aangemaakt"
@@ -497,8 +499,9 @@ nl:
     new_material_success: "cursusmateriaal succesvol aangemaakt"
     update_material_success: "cursusmateriaal succesvol aangepast"
     new_material_fail: "cursusmateriaal niet aangemaakt. Er is iets misgegaan"
-    already_selling: "%{guild} verkoop het cursusmateriaal %{material} al"
+    already_selling: "%{guild} verkoopt het cursusmateriaal %{material} al"
     now_selling: "%{material} is toegevoegd aan het aanbod van %{guild} "
+    selling_fail: "%{material is niet toegevoegd aan het aanbod van %{guild}. Er is iets misgegaan}"
     to_many_guild: "U bent lid van meerdere kringen, we weten niet aan welke kring het cursusmateriaal toegevoegd moet worden"
     added_to_cart: "%{material} is aan het winkelmandje toegevoegd "
     new_message_success: "bericht succesvol aangemaakt"

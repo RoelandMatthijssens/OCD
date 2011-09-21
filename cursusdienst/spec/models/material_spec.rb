@@ -9,6 +9,7 @@ describe Material do
 
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:typee) }
+  it { should validate_presence_of(:printable) }
 
   it { should belong_to(:subject) }
   it { should belong_to(:parent) }

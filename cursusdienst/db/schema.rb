@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110920124836) do
+ActiveRecord::Schema.define(:version => 20110920134214) do
 
   create_table "action_logs", :force => true do |t|
     t.integer  "user_id"
@@ -100,9 +100,10 @@ ActiveRecord::Schema.define(:version => 20110920124836) do
     t.integer  "nr"
     t.integer  "parent_id"
     t.string   "path_name"
-    t.float    "price"
     t.string   "typee"
     t.string   "info"
+    t.integer  "page_count", :default => -1
+    t.boolean  "printable"
   end
 
   create_table "materials_options", :id => false, :force => true do |t|
@@ -230,6 +231,8 @@ ActiveRecord::Schema.define(:version => 20110920124836) do
     t.integer  "material_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "price_set_id"
+    t.float    "price"
   end
 
   create_table "teachings", :force => true do |t|
