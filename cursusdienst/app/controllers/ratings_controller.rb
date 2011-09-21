@@ -9,18 +9,19 @@ class RatingsController < ApplicationController
   
   def create
     @rating = Rating.new(params[:rating])
-    @rating.rateable_id = params[:rating][:rateable_id]
-    @rating.rateable_type = params[:rating][:rateable_type]
+    type = params[:rating][:rateable_type]
+    id = params[:rating][:rateable_id]
+    @rating.rateable_id = id
+    @rating.rateable_type = type
     @rating.user_id = params[:rating][:user_id]
 		#@info_string.content = params[:content]
 		#@info_string.key = params[:key]
 		if @rating.save
-			flash[:succes] = t(:new_info_string_success, :scope => "flash" )
+			flash[:success] = "blablabla COOOOOL"
     else
-      flash[:error] = t(:new_info_string_fail, :scope => "flash" )
-      render root_url
+      flash[:error] = "BLABLALBA Sad :("
     end
-    redirect_to root_url
+    redirect_to (type.camelize.constantize).find(id)
 	end
   
   def show
