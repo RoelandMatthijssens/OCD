@@ -32,17 +32,29 @@
       <%= link_to_add_fields "add one", f, :options %>
     </div>
   </div>
+  <% if params[:subject_id] %>
+    <div class='field'>
+      <%= f.hidden_field :subject_id, :value => params[:subject_id] %>
+      <%= hidden_field_tag "subject_id", params[:subject_id] %>
+    </div>
+  <% elsif params[:parent_id] %>
+    <div class='field'>
+      <%= f.hidden_field :parent_id, :value => params[:parent_id] %>
+      <%= hidden_field_tag "discipline_id", params[:parent_id] %>
+    </div>
+  <% else %>
+    <div class='field' id="subject_field">
+      <%= render "subject_field", :f => f if @material.subject_id%>
+      <div class='field' id="parent_field">
+        <%= render "parent_field", :f => f if @material.parent_id %>
+      </div>
+      <div class="field" id="add_subject_or_parent_link" <%= "style='display: none;'" if @material.subject_id || @material.parent_id%> >
+        <%= link_to_create_hide_items "add to subject", :subject, ["add_subject_or_parent_link"],f %> or
+        <%= link_to_create_hide_items "add to parent", :parent, ["add_subject_or_parent_link"],f %>
+      </div>
+    </div>
+  <% end %>
 
-  <div class='field' id="subject_field">
-    <%= render "subject_field", :f => f if @material.subject_id%>
-    <div class='field' id="parent_field">
-      <%= render "parent_field", :f => f if @material.parent_id %>
-    </div>
-    <div class="field" id="add_subject_or_parent_link" <%= "style='display: none;'" if @material.subject_id || @material.parent_id%> >
-      <%= link_to_create_hide_items "add to subject", :subject, ["add_subject_or_parent_link"],f %> or
-      <%= link_to_create_hide_items "add to parent", :parent, ["add_subject_or_parent_link"],f %>
-    </div>
-  </div>
 
 
 
