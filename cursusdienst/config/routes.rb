@@ -46,6 +46,7 @@ Cursusdienst::Application.routes.draw do
     get :logs, :on => :collection
     get :results, :on => :collection
     get :my_orders, :on => :collection
+    put :search, :on => :collection
   end
 
   resources :print_jobs do
