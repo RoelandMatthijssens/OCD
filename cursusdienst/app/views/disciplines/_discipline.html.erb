@@ -10,6 +10,6 @@
 		<li><%= link_to subject.name, subject %></li>
 	<% end %>
 	</ul>
-	<%= link_to t(:add_subject, :scope => "links" ), new_subject_path %>
+	<%= link_to t(:add_subject, :scope => "links" ), :controller => "subjects", :action => "new", :discipline_id => discipline.id %>
 </div>
 </div>

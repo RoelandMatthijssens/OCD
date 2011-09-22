@@ -13,21 +13,29 @@
       @subject.year_type),
       { :prompt => t(:select_type, :scope => 'subject.types')} %> <br />
   </div>
-  
+
   <%= hidden_field_tag "counter", "0" %>
 
   <div class='field'>
-    <%= f.label :disciplines %> <br>
-    <div class='fields'>
-      <%= f.fields_for :disciplines do |builder| %>
-        <%=  render 'given_discipline_fields' , {:f => builder} unless @dis_fac_inst.empty?%>
-      <% end %>
-    </div>
 
-    <div class='fields'>
-      <%= link_to_perform_javascript "add one (symbol)", [],[], [add_fields(f, :disciplines)] %>
-    </div>
+    <% if params[:discipline_id] %>
+      <%= f.hidden_field :discipline_id, :value => params[:discipline_id] %>
+      <%= hidden_field_tag "discipline_id", params[:discipline_id] %>
+    <% else %>
 
+      <%= f.label :disciplines %> <br>
+      <div class='fields'>
+        <%= f.fields_for :disciplines do |builder| %>
+          <%=  render 'given_discipline_fields' , {:f => builder} unless @dis_fac_inst.empty?%>
+        <% end %>
+
+
+      </div>
+
+      <div class='fields'>
+        <%= link_to_perform_javascript "add one (symbol)", [],[], [add_fields(f, :disciplines)] %>
+      </div>
+    <% end %>
   </div>
   <div class="actions">
     <%= f.submit @submit %>
