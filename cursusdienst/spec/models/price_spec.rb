@@ -7,9 +7,12 @@ describe Price do
   end
   it { should belong_to(:price_set) }
   it { should belong_to(:option) }
+  it { should have_many(:supplies) }
 
   it { should validate_presence_of(:option) }
   it { should validate_presence_of(:price_set) }
+  it { should validate_presence_of(:typee) }
+  it { should validate_presence_of(:amount) }
 
   after do
     ::ActiveSupport::Deprecation.silenced = @old_silence_config

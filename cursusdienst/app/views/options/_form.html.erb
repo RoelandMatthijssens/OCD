@@ -4,6 +4,8 @@
   <div class='field'>
     <%= f.label :name %> <br>
     <%= f.text_field :name %> <br>
+    <%= f.label :typee %><br/>
+    <%= f.select :typee, ['printer', 'user'] %>
   </div>
   <div class="actions">
     <%= f.submit @submit %>

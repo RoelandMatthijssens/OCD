@@ -11,10 +11,12 @@ class PricesController < ApplicationController
 
   def create
     @price = Price.new(params[:price])
-    @price_set = PriceSet.find(params[:price_set])
-    @extra_option = Option.find(params[:option])
+    @amount = params[:price][:amount]
+    @price_set = PriceSet.find(params[:price][:price_set_id])
+    @option = Option.find(params[:price][:option_id])
     @price.option = @option
-    @price_set.prices << @price
+    @price.amount = @amount
+    @price.price_set = @price_set
     if @price.save
       if @price_set.prices << @price
         flash[:success] = t(:new_price_success, :scope => "flash" )

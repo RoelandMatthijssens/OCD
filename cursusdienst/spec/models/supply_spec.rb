@@ -6,10 +6,11 @@ describe Supply do
     ::ActiveSupport::Deprecation.silenced = true
   end
   subject { Factory(:supply) }
-  
+
   it { should belong_to(:guild) }
   it { should belong_to(:material) }
-  
+  it { should belong_to(:price_set) }
+
   it "should create a relation starting from guild" do
     guild = Factory(:guild)
     material = Factory(:material)

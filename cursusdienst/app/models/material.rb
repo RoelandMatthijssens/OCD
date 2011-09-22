@@ -1,5 +1,5 @@
 class Material < ActiveRecord::Base
-  attr_accessible :name, :subject_id, :guilds, :material_options, :parent, :parent_id, :path_name, :attachments_attributes, :typee, :info, :printable
+  attr_accessible :name, :subject_id, :guilds, :material_options, :parent, :parent_id, :path_name, :attachments_attributes, :typee, :info, :printable, :page_count
 
   has_many :attachments
   accepts_nested_attributes_for :attachments
@@ -49,15 +49,14 @@ class Material < ActiveRecord::Base
     end
   end
 
-  def get_price
-    if price
-      return price
-    elsif parent
-      return parent.get_price
-    else
-      return nil
+  def printer_options
+    x = []
+    options.each do |option|
+      x << option if option.typee == 'printer'
     end
+    return x
   end
+
 end
 
 # == Schema Information

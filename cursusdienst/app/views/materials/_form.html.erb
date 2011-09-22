@@ -3,6 +3,9 @@
   <div class='field'>
     <%= f.label :name %> <br>
     <%= f.text_field :name %> <br>
+    <%= f.label :page_count %> <br>
+    TODO default is -1 leave at that for things that do not have a page count, or things that don't need to printed
+    <%= f.text_field :page_count %> <br>
     <%= f.label :type %> <br>
     <%= select_tag "material[typee]", options_for_select(get_types,
       @material.typee),

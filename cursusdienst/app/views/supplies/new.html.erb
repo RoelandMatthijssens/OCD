@@ -1,0 +1,21 @@
+<strong>material:</strong><%= @material.name %>
+
+
+<%= form_for(@supply) do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+  <div class='field'>
+    <%= f.hidden_field :material, :value => @material.id %>
+    <%= f.label :printer %> <br/>
+    TODO filter voor price_set <br/>
+    <%= f.label :price_set %> <br/>
+    <%= select(:supply, :price_set, @price_sets.collect {|p| [ p.name, p.id ] }, {:prompt => 'Select price set'}) %>
+    <%= f.label :guild %>
+    <%= select(:supply, :guild, @guilds.collect {|p| [ p.name, p.id ] }, {:prompt => 'Select guild'}) %>
+    <%= f.label :price %> <br/>
+    <%= f.text_field :price %>
+
+  </div>
+  <div class="actions">
+    <%= f.submit @submit %>
+  </div>
+<% end %>

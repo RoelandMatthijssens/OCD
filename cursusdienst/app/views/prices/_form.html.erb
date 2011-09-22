@@ -3,16 +3,12 @@
   <div class='field'>
     <%= f.label :amount %> <br>
     <%= f.text_field :amount %> <br>
-  </div>
-  <div class="field">
-  <%= select_tag :option, options_from_collection_for_select(Option.find(:all, :conditions => ['typee = ?', 'printer']),
-    :id, :name, params[:option] ? params[:option] : "") ,
-    { :prompt => t(:select_option, :scope => 'price.create')} %>
-
-  <%= select_tag :price_set, options_from_collection_for_select(PriceSet.find(:all),
-    :id, :name, params[:price_set] ? params[:price_set] : "") ,
-    { :prompt => t(:select_option, :scope => 'price.create')} %>
-
+    <%= f.label :option %><br/>
+    <%= select(:price, :option_id, Option.find(:all, :conditions => ['typee = ?', 'printer']).collect {|p| [ p.name, p.id ] }, {:prompt => 'Select option'}) %><br/>
+    <%= f.label :price_set %><br/>
+    <%= select(:price, :price_set_id, PriceSet.all.collect {|p| [ p.name, p.id ] }, {:prompt => 'Select price_set'}) %><br/>
+    <%= f.label :type %><br/>
+    <%= select(:price, :typee, ['per_page', 'once'], {:prompt => 'Select type'}) %><br/>
   </div>
 
   <div class="actions">

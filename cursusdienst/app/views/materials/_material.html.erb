@@ -31,16 +31,41 @@
     <% elsif current_user.guilds.first.materials.include?(material)%>
       <p>material already added to <%= current_user.guilds.first.name %></p>
     <% else %>
-      <%= link_to "Add this material to the guilds supply", sell_material_path(material), :method => :put %>
+      <%= link_to 'Add this material to the guilds supply', :controller => "supplies", :action => "new", :material => material %>
     <% end %>
   <% end %>
 
   <h2>guilds selling this material</h2>
+  <% options = material.printer_options %>
   <ul class="guilds">
-
-    <% material.guilds.each do |guild| %>
-      <li><%= link_to guild.name, root_url(:subdomain => guild.initials) %></li>
-    <% end %>
-
+    <table>
+      <thead>
+        <tr>
+          <th>guild</th>
+          <th>printer</th>
+          <th>price set</th>
+          <th>sell price</th>
+          <th>total buy price</th>
+          <% options.each do |option| %>
+            <th><%= option.name %></th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% material.guilds.each do |guild| %>
+          <% supply = material.supplies.find(:all, :conditions => ['guild_id=?', guild.id]).first %>
+          <tr>
+            <td><%= link_to guild.name, root_url(:subdomain => guild.initials) %></td>
+            <td><%= link_to supply.price_set.printer.name, supply.price_set.printer %></td>
+            <td><%= link_to supply.price_set.name, supply.price_set %></td>
+            <td><%= supply.price %></td>
+            <td><%= supply.buy_price %></td>
+            <% options.each do |option| %>
+              <td><%= option.prices.find(:all, :conditions => ['price_set_id=?', supply.price_set.id]).first.amount %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </ul>
 </div>

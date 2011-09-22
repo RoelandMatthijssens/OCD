@@ -5,7 +5,7 @@
       <fieldset class="simplefieldset3">
       <table class="supply">
     <legend>
-             <%= subject.name %>
+             <%= link_to subject.name, subject %>
              &nbsp <!-- Whitespaces -->
        <span class="comment_text">
                <%= link_to t(:edit_subject, :scope => 'links'),
@@ -23,16 +23,17 @@
           <th class='col4width'> <%= t(:edit, :scope => "guild.supply") %> </th>
   </tr>
         <% i = 1 %> <!-- dirty ruby fix to get the alternating alt class -->
-        <% subject.materials.each do |material| %>
+        <% l =  @supplies[subject] ? @supplies[subject] : [] %>
+        <% l.each do |supply| %>
           <tr>
-            <td <%= "class='alt'" if i.odd? %> ><%= link_to material.name, material %></td>
-            <td <%= "class='alt'" if i.odd? %> >€ TODO haal prijs uit relatie</td>
+            <td <%= "class='alt'" if i.odd? %> ><%= link_to supply.material.name, supply.material %></td>
+            <td <%= "class='alt'" if i.odd? %> >€ <%= supply.price %></td>
             <td <%= "class='alt'" if i.odd? %> >
-                <%= link_to_function "add to cart(symbol)", "add_to_cart( #{ material.id }, #{@guild.id} )" %>
+                <%= link_to_function "add to cart(symbol)", "add_to_cart( #{ supply.material.id }, #{@guild.id} )" %>
            </td>
            <% if current_user && current_user.can?("edit_materials") %>
               <td <%= "class='alt'" if i.odd? %> >
-                 <%= link_to image_tag("icons/twotone/" + icon_color + "/edit.gif", :alt=>t("edit", :scope => 'links')), edit_material_path(material) %>
+                 <%= link_to image_tag("icons/twotone/" + icon_color + "/edit.gif", :alt=>t("edit", :scope => 'links')), edit_material_path(supply.material) %>
               </td>
            <% end %>
           </tr>
