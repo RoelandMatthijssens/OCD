@@ -6,24 +6,30 @@
     <%= f.text_field :name %> <br>
   </div>
   <div class='field'>
-     
-		 <%= label_tag t(:institute, :scope => "globals" ) %>
-    <%= render :partial => "filters/select_box", :locals => {
-      :filter_key_ajax => "institute",
-      :id => "discipline[institute_id]",
-      :dataset => get_institutes, 
-      :selected_id => @selected_institute,
-      :parent_id => "discipline_institute_id",
-      :child_id => "discipline_faculty_id"} %> <br />
+    <% if params[:faculty_id] %>
+      <%= f.hidden_field :faculty_id, :value => params[:faculty_id] %>
+      <%= hidden_field_tag "faculty_id", params[:faculty_id] %>
+    <% else %>
+      <%= label_tag t(:institute, :scope => "globals" ) %>
+      <%= render :partial => "filters/select_box", :locals => {
+        :filter_key_ajax => "institute",
+        :id => "discipline[institute_id]",
+        :dataset => get_institutes, 
+        :selected_id => @selected_institute,
+        :parent_id => "discipline_institute_id",
+        :child_id => "discipline_faculty_id"} %> <br />
 
-		<%= label_tag t(:faculty, :scope => "globals" ) %>    
-    <%= render :partial => "filters/select_box", :locals => {
-      :filter_key_ajax => "faculty",
-      :id => "discipline[faculty_id]",
-      :dataset => get_faculties(@selected_institute), 
-      :selected_id => @selected_faculty,
-      :parent_id => "",
-      :child_id => ""} %> <br />
+      <%= label_tag t(:faculty, :scope => "globals" ) %>    
+      <%= render :partial => "filters/select_box", :locals => {
+        :filter_key_ajax => "faculty",
+        :id => "discipline[faculty_id]",
+        :dataset => get_faculties(@selected_institute), 
+        :selected_id => @selected_faculty,
+        :parent_id => "",
+        :child_id => ""} %> <br />
+
+
+    <% end %>
   </div>
   <div class="actions">
     <%= f.submit @submit %>

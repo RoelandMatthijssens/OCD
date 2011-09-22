@@ -17,7 +17,7 @@
       <% subject.materials.each do |material| %>
         <li><%= link_to material.name, material %></li>
       <% end %>
-			<%= link_to t(:add_material, :scope => "links" ), :controller => "materials", :action => "new", :subject => subject.id %>
+			<%= link_to t(:add_material, :scope => "links" ), :controller => "materials", :action => "new", :subject_id => subject.id %>
     </ul>
   </div>
 

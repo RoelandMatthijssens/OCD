@@ -17,6 +17,11 @@ class SubjectsController < ApplicationController
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('create_subjects')
     @subject = Subject.new
+    if params[:discipline_id]
+      @subject = Discipline.find(params[:discipline_id]).subjects.new
+    else
+      @discipline = Discipline.new
+    end
     @dis_fac_inst = []
 		@submit = t(:new_subject, :scope => "buttons" )
   end
