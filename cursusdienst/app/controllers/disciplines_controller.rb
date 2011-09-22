@@ -16,6 +16,11 @@ class DisciplinesController < ApplicationController
   def new
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?("create_disciplines")
+    if params[:faculty_id]
+      @discipline = Faculty.find(params[:faculty_id]).disciplines.new
+    else
+      @discipline = Discipline.new
+    end
     @discipline = Discipline.new
     @faculties = get_data_from_filter params[:discipline], :faculty_id, Faculty
     @selected_institute = ""

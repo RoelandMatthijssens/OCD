@@ -22,7 +22,8 @@
   <legend>
   <%= t(:disciplines, :scope => "globals" ) %>
   <span class="comment_text">
-    <%= link_to t(:add_discipline, :scope => "links" ), new_discipline_path %>
+    <%= link_to t(:add_discipline, :scope => "links" ), :controller => "disciplines", :action => "new", :faculty_id => faculty.id %>
+
   </span>
   </legend>
   <ul class="disciplines">
