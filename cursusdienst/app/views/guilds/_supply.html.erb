@@ -26,7 +26,7 @@
         <% l =  @supplies[subject] ? @supplies[subject] : [] %>
         <% l.each do |supply| %>
           <tr>
-            <td <%= "class='alt'" if i.odd? %> ><%= link_to "#{supply.material.typee} #{supply.material.name}", material %></td>
+            <td <%= "class='alt'" if i.odd? %> ><%= link_to "#{supply.material.typee} #{supply.material.name}", supply.material %></td>
             <td <%= "class='alt'" if i.odd? %> >€ <%= supply.price %></td>
             <td <%= "class='alt'" if i.odd? %> >
                 <%= link_to_function "add to cart(symbol)", "add_to_cart( #{ supply.material.id }, #{@guild.id} )" %>

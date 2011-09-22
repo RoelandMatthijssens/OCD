@@ -1,36 +1,33 @@
 <h1>verify the order</h1>
 
-	<% total = 0 %>
-	<table>
-		<thead>
-			<tr>
-				<th>Item</th>
-				<th>amount</th>
-				<th>price</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% current_user.shopping_cart_items.each do |item| %>
-				<tr>
-					<% total +=( item.material.price * item.amount ) %>
-					<td><%= item.material.name %></td>
-					<td><%= item.amount %></td>
-					<td>€<%= item.material.price %></td>
-				</tr>
-			<% end %>
-		</tbody>
-	</table>
+  <% total = 0 %>
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% current_user.shopping_cart_items.each do |item| %>
+        <tr>
+          <td><%= item.material.name %></td>
+          <td><%= item.amount %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-	<%= form_for(@order) do |f| %>
+  <%= form_for(@order) do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
-	<strong>Total:</strong>€<%= total %>
-	<div class="form_row">
-		<label for="payment">Payment: </label>
-		<%= 'cash' %><%= radio_button_tag 'payment', 'cash' %> 
-		<%= 'transfer' %><%= radio_button_tag 'payment', 'transfer' %>
-	</div>
-  
-	<div class='field'>
+  <strong>Total:</strong>€<%= total %>
+  <div class="form_row">
+    <label for="payment">Payment: </label>
+    <%= 'cash' %><%= radio_button_tag 'payment', 'cash' %>
+    <%= 'transfer' %><%= radio_button_tag 'payment', 'transfer' %>
+  </div>
+
+  <div class='field'>
     <%= f.submit @submit %>
   </div>
 <% end %>
