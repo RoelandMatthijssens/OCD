@@ -188,6 +188,16 @@ ActiveRecord::Schema.define(:version => 20110922004140) do
     t.datetime "updated_at"
   end
 
+  create_table "ratings", :force => true do |t|
+    t.integer  "score"
+    t.string   "message"
+    t.integer  "user_id"
+    t.integer  "rateable_id"
+    t.string   "rateable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "sales", :force => true do |t|
     t.integer  "user_id"
     t.integer  "material_id"

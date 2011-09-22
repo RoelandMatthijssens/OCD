@@ -1,3 +1,12 @@
+class Numeric
+  # same potential floating point problem as round_to
+  def truncate_to( decimals=0 )
+    factor = 10.0**decimals
+    (self*factor).floor / factor
+  end
+end
+
+
 class Material < ActiveRecord::Base
   attr_accessible :name, :subject_id, :guilds, :material_options, :parent, :parent_id, :path_name, :attachments_attributes, :typee, :info, :printable, :page_count
 
@@ -17,11 +26,20 @@ class Material < ActiveRecord::Base
   has_many :print_jobs, :through => :print_job_items
   has_and_belongs_to_many :options
   has_many :material_orders
+  has_many :ratings, :as => :rateable
   has_many :orders, :through => :material_orders
   default_scope :order => "materials.name ASC"
 
   accepts_nested_attributes_for :options
 
+  def rating_score
+    if ratings.any?
+      (ratings.inject(0.0){|sum,x| sum + x.score } / ratings.length).round
+    else
+      0.0
+    end
+  end
+  
   def discipline_id
     subject && subject.disciplines && subject.disciplines.first.id
   end

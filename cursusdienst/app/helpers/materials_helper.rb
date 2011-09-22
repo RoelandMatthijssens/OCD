@@ -20,6 +20,16 @@ module MaterialsHelper
       t(:misc, :scope => "material.types"),
     ]
   end
+  
+  def can_rate? material
+    if current_user
+      bought = Order.joins(:material_orders).find(:all, :conditions => ['user_id=? and status=? and material_id=?', current_user.id, 'Payed', material.id ])
+      rated = Rating.find(:all, :conditions => ['user_id=? and rateable_id=? and rateable_type=?', current_user.id, material.id, "Material"])
+      bought.any? && rated.empty?
+    else
+      false
+    end
+  end
 
    
 end

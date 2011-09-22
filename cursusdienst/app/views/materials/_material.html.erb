@@ -1,6 +1,12 @@
 <div class="material">
-  <h1><%= link_to material.name, material %></h1>
-  <% subject = material.subject %>
+  <h1>
+    <%= link_to material.name, material %> <%= material.rating_score %>
+  </h1>
+  <% (1..5).each do |i| %>
+    <%= radio_button "material", "rating_score", i, :class => "star {split:10}", :disabled => "disabled" %>
+  <% end %>
+  <br />
+  <% subject = material.subject %> 
   <strong>Subject:</strong>
   <% if subject %>
     <%= link_to(subject.name + " " + subject.year.to_s + " " + subject.year_type, subject) %><br/>
@@ -10,11 +16,11 @@
   <strong><%= t(:attachment, :scope => "globals" ) %>:</strong> <br />
 
   <ul>
-  <% material.attachments.each do |attachment| %>
-    <li>
-    <%= link_to attachment.basename, attachment.item_url %> <br />
-    </li>
-  <% end %>
+    <% material.attachments.each do |attachment| %>
+      <li>
+        <%= link_to attachment.basename, :controller=>'attachments',:action=>'download',:attachment_id=>attachment.id %> <br />
+      </li>
+    <% end %>
   </ul>
 
   <strong><%= t(:info, :scope => "globals" ) %>:</strong> <%= material.info %><br/>
@@ -68,4 +74,30 @@
       </tbody>
     </table>
   </ul>
+  <% if can_rate? material %>
+    <h2>Rate this material</h2>
+    <%= form_for(@rating) do |f| %>
+      <%= render 'shared/error_messages', :object => f.object %>
+
+      <%= f.hidden_field :rateable_id, :value => material.id %>
+      <%= f.hidden_field :rateable_type, :value => material.class %>
+      <%= f.hidden_field :user_id, :value => current_user.id %>
+
+
+      <div class='field'>
+        <%= f.label :score %> <br>
+        <% (1..5).each do |i| %>
+          <%= f.radio_button :score, i, :class => "star" %>
+        <% end %>
+
+      </div>
+      <div class='field'>
+        <%= f.label :message %> <br>
+        <%= f.text_field :message %> <br>
+      </div>
+      <div class="actions">
+        <%= f.submit @submit %>
+      </div>
+    <% end %>
+  <% end %>
 </div>

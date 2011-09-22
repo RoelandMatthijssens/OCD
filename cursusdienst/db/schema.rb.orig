@@ -12,9 +12,17 @@
 # It's strongly recommended to check this file into your version control system.
 
 <<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20110831134227) do
+ActiveRecord::Schema.define(:version => 20110920134212) do
 =======
-ActiveRecord::Schema.define(:version => 20110831161640) do
+ActiveRecord::Schema.define(:version => 20110920134214) do
+>>>>>>> 702315cccfb35fc18023d907e7feecd4a17ab8ae
+
+  create_table "action_logs", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "action"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "attachments", :force => true do |t|
     t.integer  "material_id"
@@ -24,7 +32,6 @@ ActiveRecord::Schema.define(:version => 20110831161640) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
->>>>>>> 851d05905103cc926c8963050c0727fff7386676
 
   create_table "disciplines", :force => true do |t|
     t.string   "name"
@@ -64,6 +71,14 @@ ActiveRecord::Schema.define(:version => 20110831161640) do
     t.integer "user_id"
   end
 
+  create_table "info_strings", :force => true do |t|
+    t.string   "key"
+    t.string   "content"
+    t.integer  "guild_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "institutes", :force => true do |t|
     t.string   "name"
     t.string   "initials"
@@ -89,6 +104,10 @@ ActiveRecord::Schema.define(:version => 20110831161640) do
     t.integer  "nr"
     t.integer  "parent_id"
     t.string   "path_name"
+    t.string   "typee"
+    t.string   "info"
+    t.integer  "page_count", :default => -1
+    t.boolean  "printable"
   end
 
   create_table "materials_options", :id => false, :force => true do |t|
@@ -109,6 +128,7 @@ ActiveRecord::Schema.define(:version => 20110831161640) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
+    t.string   "typee"
   end
 
   create_table "orders", :force => true do |t|
@@ -119,6 +139,7 @@ ActiveRecord::Schema.define(:version => 20110831161640) do
     t.datetime "updated_at"
     t.integer  "institute_id"
     t.string   "payment_type"
+    t.string   "label"
   end
 
   create_table "permission_groups", :force => true do |t|
@@ -131,6 +152,51 @@ ActiveRecord::Schema.define(:version => 20110831161640) do
   create_table "permission_groups_users", :id => false, :force => true do |t|
     t.integer  "permission_group_id"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "price_sets", :force => true do |t|
+    t.integer  "printer_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "prices", :force => true do |t|
+    t.integer  "price_set_id"
+    t.float    "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "option_id"
+  end
+
+  create_table "print_job_items", :force => true do |t|
+    t.integer  "print_job_id"
+    t.integer  "material_id"
+    t.integer  "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "print_jobs", :force => true do |t|
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "printers", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ratings", :force => true do |t|
+    t.integer  "score"
+    t.string   "message"
+    t.integer  "user_id"
+    t.integer  "rateable_id"
+    t.string   "rateable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -179,6 +245,8 @@ ActiveRecord::Schema.define(:version => 20110831161640) do
     t.integer  "material_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "price_set_id"
+    t.float    "price"
   end
 
   create_table "teachings", :force => true do |t|
