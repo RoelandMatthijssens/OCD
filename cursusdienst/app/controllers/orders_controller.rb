@@ -27,9 +27,9 @@ class OrdersController < ApplicationController
     else
       institute = current_user.guilds.first.disciplines.first.faculty.institute
       @guild = current_user.guilds.first
-      @own_orders = Order.find(:all, :conditions => ['institute_id = ? and user_id=? and status! LIKE ?' , institute.id, current_user.id, "%#{substr}%"])
+      @own_orders = Order.find(:all, :conditions => ['institute_id = ? and user_id=? and status!= ? and order_key LIKE ?' , institute.id, current_user.id, 'Ready', "%#{substr}%"])
       if current_user.can?('view_all_orders')
-        @orders = Order.find(:all, :conditions => ['institute_id = ? and user_id LIKE ? and status! LIKE ?', institute.id, "%#{substr}%", "%#{substr}%"])
+        @orders = Order.joins(:user).find(:all, :conditions => ['institute_id = ? and status!= ? and (user_name LIKE ? or email LIKE ? or rolno LIKE ? or order_key LIKE ?)', institute.id, 'Ready', "%#{substr}%", "%#{substr}%", "%#{substr}%", "%#{substr}%"])
       end
       render :action => 'index'
     end
