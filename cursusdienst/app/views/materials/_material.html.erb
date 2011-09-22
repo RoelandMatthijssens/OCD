@@ -1,10 +1,12 @@
 <div class="material">
   <h1>
     <%= link_to material.name, material %> <%= material.rating_score %>
-  </h1>
+  <div class="to_right">  
   <% (1..5).each do |i| %>
     <%= radio_button "material", "rating_score", i, :class => "star {split:10}", :disabled => "disabled" %>
   <% end %>
+  </div>
+  </h1>
   <br />
   <% subject = material.subject %> 
   <strong>Subject:</strong>

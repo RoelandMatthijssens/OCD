@@ -31,7 +31,7 @@
     <% elsif current_user.guilds.first.materials.include?(material)%>
       <p>material already added to <%= current_user.guilds.first.name %></p>
     <% else %>
-      <%= link_to "Add this material to the guilds supply", sell_material_path(material), :method => :put %>
+      <%= link_to 'Add this material to the guilds supply', :controller => "supplies", :action => "new", :material => material %>
     <% end %>
   <% end %>
 

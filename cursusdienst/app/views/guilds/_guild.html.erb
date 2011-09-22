@@ -1,6 +1,15 @@
 <div>
-  <h1><%= link_to guild.name, root_url(:subdomain => guild.initials) %>  <%= t(:supplies, :scope => "guild") %> </h1>
-
+  <h1>
+    <%= link_to guild.name, root_url(:subdomain => guild.initials) %>  <%= t(:supplies, :scope => "guild") %>
+  <% if current_user && current_user.guilds.include?(guild) %>
+    <div class="to_right"><span class="comment_text">You are a proud member of this guild</span></div>
+  <% else %>
+    <div class="to_right">
+      <span class="comment_text"><%= link_to "join", join_guild_path(guild), :method => :put %></span>
+      <%= link_to image_tag("icons/twotone/" + icon_color + "/arrow-down.gif", :alt=>t("edit", :scope => 'links')), join_guild_path(guild), :method => :put %>
+    </div>
+  <% end %>
+  </h1>
   <div class="supplies" id="supplies">
     <div id="filter">
      </br>
@@ -12,16 +21,16 @@
             <%= render :partial => "filters/select_box", :locals => {
               :filter_key_ajax => "institute",
               :id => "filter[institute_id]",
-              :dataset => get_institutes, 
+              :dataset => get_institutes,
               :selected_id => guild.disciplines.first.faculty.institute_id.to_s,
               :parent_id => "filter_institute_id",
               :child_id => "filter_faculty_id"} %> <br />
 
-            <%= label_tag "faculty" %>    
+            <%= label_tag "faculty" %>
             <%= render :partial => "filters/select_box", :locals => {
               :filter_key_ajax => "faculty",
               :id => "filter[faculty_id]",
-              :dataset => get_faculties(guild.disciplines.first.faculty.institute_id.to_s), 
+              :dataset => get_faculties(guild.disciplines.first.faculty.institute_id.to_s),
               :selected_id => guild.disciplines.first.faculty.id.to_s,
               :parent_id => "filter_faculty_id",
               :child_id => "filtert_discipline_id"} %> <br />
@@ -29,24 +38,24 @@
           <table>
             <tr>
               <td>
-                <%= label_tag t :disciplines, :scope =>'globals' %> 
+                <%= label_tag t :disciplines, :scope =>'globals' %>
               </td>
               <td>
                 <%= render :partial => "filters/select_box_html_options", :locals => {
                   :filter_key_ajax => "discipline",
                   :id => "filter[discipline_id]",
-                  :dataset => get_disciplines(guild.disciplines.first.faculty.id.to_s), 
+                  :dataset => get_disciplines(guild.disciplines.first.faculty.id.to_s),
                   :selected_id => @selected_discipline,
                   :html_options => {:onchange => '$(filter_year_type).val("");'}} %> <br />
               </td>
             </tr>
             <tr>
               <td>
-                <%= label_tag t :year, :scope => "datetime.prompts" %> 
+                <%= label_tag t :year, :scope => "datetime.prompts" %>
               </td>
               <td>
-                <%= select_tag "filter[year_type]", 
-                  options_for_select([["bachelor","bachelor"], ["master","master"]], @selected_year_type), 
+                <%= select_tag "filter[year_type]",
+                  options_for_select([["bachelor","bachelor"], ["master","master"], ["choice","choice"]], @selected_year_type),
                   {:prompt => t(:select, :scope =>'globals'), :onchange => "if (this.value !='') {this.form.submit();} "} %>
               </td>
             </tr>
@@ -66,6 +75,19 @@
         <li> <%= link_to t(:news, :scope => "side_menu"), news_guild_path(guild), :class=>"sidemenu link2" %> </li>
         <li> <%= link_to t(:manual, :scope => "side_menu"), manual_path, :class=>"sidemenu link2" %> </li>
       </ul>
-    </div> 
+    </div>
     <div class="topline"></div>
   <% end %>
+
+
+<% content_for :sideshop do  %>
+    <div class="topline"></div>
+    <div id="sidemenu">
+      <ul>
+        <li> <%= link_to t(:subjects, :scope => "links"), subjects_path, :class=>"sidemenu link2" %> </li>
+        <li> <%= link_to t(:materials, :scope => "links"), materials_path, :class=>"sidemenu link2" %> </li>
+        <li> <%= link_to t(:guild_supplies, :scope => "links"), guilds_path, :class=>"sidemenu link2" %> </li>
+      </ul>
+    </div>
+    <div class="topline"></div>
+<% end %>

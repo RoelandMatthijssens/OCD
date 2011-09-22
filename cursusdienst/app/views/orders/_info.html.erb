@@ -1,34 +1,34 @@
 <div class="info">
-	<% if guild.info "cash" %>
-		<fieldset>
-			<legend><%= t(:cash, :scope => "info" ) %></legend>
-			<% info = guild.info("cash") %>
-			<%= info.content %><br/>
-			<%= link_to t(:edit, :scope => "links" ), edit_info_string_path(info) %>
-		</fieldset>
-	<% else %>
-		<%= link_to t(:set_cash_info, :scope => "links" ), :controller => "info_strings", :action => 'new', :key => 'cash', :guild_id => guild.id %>
-	<% end %>
+  <% if guild.info "cash" %>
+    <fieldset>
+      <legend><%= t(:cash, :scope => "info" ) %></legend>
+      <% info = guild.info("cash") %>
+      <%= info.content %><br/>
+      <%= link_to t(:edit, :scope => "links" ), edit_info_string_path(info) %>
+    </fieldset>
+  <% else %>
+    <%= link_to t(:set_cash_info, :scope => "links" ), :controller => "info_strings", :action => 'new', :key => 'cash', :guild_id => guild.id %>
+  <% end %><br/>
 
-	<% if guild.info "transfer" %>
-		<fieldset>
-			<legend><%= t(:transfer, :scope => "info" ) %></legend>
-			<% info = guild.info("transfer") %>
-			<%= info.content %><br/>
-			<%= link_to t(:edit, :scope => "links" ), edit_info_string_path(info) %>
-		</fieldset>
-	<% else %>
-		<%= link_to t(:set_transfer_info, :scope => "links" ), :controller => "info_strings", :action => 'new', :key => 'transfer', :guild_id => guild.id %>
-	<% end %>
+  <% if guild.info "transfer" %>
+    <fieldset>
+      <legend><%= t(:transfer, :scope => "info" ) %></legend>
+      <% info = guild.info("transfer") %>
+      <%= info.content %><br/>
+      <%= link_to t(:edit, :scope => "links" ), edit_info_string_path(info) %>
+    </fieldset>
+  <% else %>
+    <%= link_to t(:set_transfer_info, :scope => "links" ), :controller => "info_strings", :action => 'new', :key => 'transfer', :guild_id => guild.id %>
+  <% end %><br/>
 
-	<% if guild.info "general_payment" %>
-		<fieldset>
-			<legend><%= t(:general_payment, :scope => "info" ) %></legend>
-			<% info = guild.info("general_payment") %>
-			<%= info.content %><br/>
-			<%= link_to t(:edit, :scope => "links" ), edit_info_string_path(info) %>
-		</fieldset>
-	<% else %>
-		<%= link_to t(:set_general_payment_info, :scope => "links" ), :controller => "info_strings", :action => 'new', :key => 'general_payment', :guild_id => guild.id %>
-	<% end %>
+  <% if guild.info "general_payment" %>
+    <fieldset>
+      <legend><%= t(:general_payment, :scope => "info" ) %></legend>
+      <% info = guild.info("general_payment") %>
+      <%= info.content %><br/>
+      <%= link_to t(:edit, :scope => "links" ), edit_info_string_path(info) %>
+    </fieldset>
+  <% else %>
+    <%= link_to t(:set_general_payment_info, :scope => "links" ), :controller => "info_strings", :action => 'new', :key => 'general_payment', :guild_id => guild.id %>
+  <% end %><br/>
 </div>

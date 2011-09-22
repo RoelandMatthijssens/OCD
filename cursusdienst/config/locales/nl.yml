@@ -368,6 +368,7 @@ nl:
       select_type: "Selecteer type"
       bachelor: "Bachelor"
       master: "Master"
+      choice: "Keuzevak"
 
   material:
     types:
@@ -576,6 +577,9 @@ nl:
     set_cash_info: "Plaats informatie over overschrijving-betaling"
     set_general_payment_info: "Plaats informatie over algemene-betaling"
     new_price_set: "Nieuwe prijzenset aanmaken"
+    subjects: "Cursussen"
+    materials: "Uitgaven"
+    guild_supplies: "Aanbod kringen"
 
   info:
     cash: "Cash info"

@@ -41,13 +41,13 @@ p.iconbutton a span {
     display: block;
     line-height: 14px;
     padding: 5px 0 5px 18px;
-} 
+}
 
 /* -------------------- */
 /* ICON CLASSES         */
 /* -------------------- */
 
-/* The list of icon button classes */ 
+/* The list of icon button classes */
 
 .edit{
 background:url(../images/icons/twotone/beige_changed/edit.gif) no-repeat 0px 0px;

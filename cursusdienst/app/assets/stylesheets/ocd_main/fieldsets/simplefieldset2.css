@@ -1,3 +1,4 @@
+
 fieldset.simplefieldset2 {
   margin-bottom: 10px;
   background: rgb(218, 237, 255);
@@ -10,15 +11,18 @@ fieldset.simplefieldset2 legend {
   background: rgb(208, 208, 208);
   border: 1px solid rgb(190, 190, 190);
   padding: 0 5px;
+  height: 18px;
   color: #000;
   -moz-border-radius:5px;  
   border-radius: 5px;  
   -webkit-border-radius: 5px;
 }
+
+
 fieldset.simplefieldset2 legend span a{
   margin-left: 2px;
   color: #555;
-  text-align: right;
+  text-align: right center;
 }
 
 fieldset.simplefieldset2 label {
@@ -41,4 +45,15 @@ fieldset.simplefieldset2 ul {
 
 fieldset.simplefieldset2 table {
   color: #444;  
+  border: 1px dotted rgb(200,220, 255);
+  background: rgb(218, 237, 255);
+}
+
+fieldset.simplefieldset2 table td{
+  background: rgb(226, 245, 255);
+  border: 1px dotted rgb(200,220, 255);
+}
+fieldset.simplefieldset2 table td.alt{
+  background: rgb(226, 245, 255);
+  border: 1px dotted rgb(200,220, 255);  
 }

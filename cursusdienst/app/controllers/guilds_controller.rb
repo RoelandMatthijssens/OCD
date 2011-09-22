@@ -5,7 +5,6 @@ class GuildsController < ApplicationController
   end
 
   def show
-#    @guild = Guild.find(params[:id])
     @guild = Guild.find_by_initials!(request.subdomain)
     @supplies = {}
     @guild.supplies.each do |supply|

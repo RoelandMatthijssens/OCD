@@ -1,11 +1,11 @@
 <% if errors.any? %>
   <div id="error_explanation">
     <% if errors.count == 1 %>
-			<h2><%= t(:error_prohibited_login, :scope => "flash" ) %></h2>
+      <h2><%= t(:error_prohibited_login, :scope => "flash" ) %></h2>
     <% else %>
-			<h2><%= t(:errors_prohibited_login, :scope => "flash" ) %></h2>
-		<% end %>
-		<p><%= t(:problems_with_following_fields, :scope => "flash" ) %></p>
+      <h2><%= t(:errors_prohibited_login, :scope => "flash" ) %></h2>
+    <% end %>
+    <p><%= t(:problems_with_following_fields, :scope => "flash" ) %></p>
     <ul>
       <% errors.each do |msg| %>
         <li><%= msg %></li>

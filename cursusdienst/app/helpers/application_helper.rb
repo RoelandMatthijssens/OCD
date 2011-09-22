@@ -19,7 +19,7 @@ module ApplicationHelper
     end
     link_to_function(name, "add_fields(this, '#{association}', '#{new_id}','#{escape_javascript(fields)}')")
   end
-  
+
 
   def add_fields(f, association, new_id = Time.now.to_i)
     new_object = f.object.class.reflect_on_association(association).klass.new
@@ -29,7 +29,7 @@ module ApplicationHelper
     end
     return "add_fields(this, '#{association}', '#{new_id}','#{escape_javascript(fields)}')"
   end
-  
+
   def link_to_add_field(name, f, association)
     field = render(association.to_s + "_field", :f => f)
     link_to_function(name, "add_field(this, '#{association}_id', '#{escape_javascript(field)}')")
@@ -48,42 +48,41 @@ module ApplicationHelper
     hide_js = "hide_fields(#{hide_ids});"
     link_to_function(name,show_js+hide_js)
   end
-  
+
   def link_to_create_hide_items(name, association, hide_ids, f)
     field = render(association.to_s + "_field", :f => f)
     show_js = "add_field(this, '#{association}_id', '#{escape_javascript(field)}');"
     hide_js = "hide_fields(#{hide_ids})"
     link_to_function(name,show_js+hide_js)
   end
-  
+
   def destroy_nearest_class_and_show_items(name, distroy_val, show_ids, f)
     show_js = "show_fields(#{show_ids});"
     hide_js = "remove_fields(this)"
     f.hidden_field(:_destroy) + link_to_function(name,show_js+hide_js)
   end
-  
+
   def remove_nearest_class_and_show_items(name, distroy_val, show_ids, f)
     show_js = "show_fields(#{show_ids});"
     hide_js = "delete_fields(this)"
     link_to_function(name,show_js+hide_js)
   end
-  
+
   def filter_select_on_change parent_id, child_id, data_key
     return "filter_select_on_change('#{parent_id}', '#{child_id}', '#{data_key}')"
   end
-  
+
   def link_to_perform_javascript name, functions, params, complete_functions = []
     js = ""
-    functions.size.times{ |i| 
+    functions.size.times{ |i|
       js += functions[i] + "("
       par = params[i]
       par.size-1.times{|j| js += "'#{par[j]}', "} if par.size > 1
-      
+
       js += "'#{par.last}');"
     }
     complete_functions.each { |f| js += f}
     link_to_function(name, js)
   end
-  
 
 end

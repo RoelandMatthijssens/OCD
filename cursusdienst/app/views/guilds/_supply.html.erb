@@ -23,7 +23,7 @@
           <th class='col4width'> <%= t(:edit, :scope => "guild.supply") %> </th>
         </tr>
         <% i = 1 %> <!-- dirty ruby fix to get the alternating alt class -->
-        <% l =  @supplies[subject] ? @supplies[subject] : [] %>
+        <% l =  (@supplies and @supplies[subject]) ? @supplies[subject] : [] %>
         <% l.each do |supply| %>
           <tr>
             <td <%= "class='alt'" if i.odd? %> ><%= link_to "#{supply.material.typee} #{supply.material.name}", supply.material %></td>
