@@ -16,6 +16,24 @@ class OrdersController < ApplicationController
       end
     end
   end
+  
+  def search
+    deny_access and return unless signed_in?
+    
+    substr = params[:search]
+    if current_user.guilds.empty? || current_user.guilds.first.disciplines.empty?
+      flash[:error] = t(:no_institute, :scope => "flash" )
+      redirect_to control_panel_path
+    else
+      institute = current_user.guilds.first.disciplines.first.faculty.institute
+      @guild = current_user.guilds.first
+      @own_orders = Order.find(:all, :conditions => ['institute_id = ? and user_id=? and status! LIKE ?' , institute.id, current_user.id, "%#{substr}%"])
+      if current_user.can?('view_all_orders')
+        @orders = Order.find(:all, :conditions => ['institute_id = ? and user_id LIKE ? and status! LIKE ?', institute.id, "%#{substr}%", "%#{substr}%"])
+      end
+      render :action => 'index'
+    end
+  end
 
   def new
     deny_access and return unless signed_in?
