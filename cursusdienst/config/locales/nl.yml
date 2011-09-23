@@ -274,7 +274,7 @@ nl:
     permissions: "Rechten"
     materials: "Cursusmateriaal"
     users: "Gebruikers"
-    subjects: "Vakken"
+    subjects: "Cursussen"
     amount: "Aantal"
     content: "Inhoud"
     action: "Actie"
@@ -397,7 +397,7 @@ nl:
   faculties: "Faculteiten"
   faculty: "Faculteit"
   disciplines: "Richtingen"
-  subjects: "Vakken"
+  subjects: "Cursussen"
   materials: "Cursusmateriaal"
   users: "Gebruikers"
   guilds: "Kringen"
@@ -406,7 +406,7 @@ nl:
   location: "locatie"
 
   titles:
-    all_disciplines: "Alle richtingen"
+    all_disciplines2: "Alle richtingen"
     all_guilds: "Alle kringen"
     all_institutes: "Alle instellingen"
     all_materials: "Alle cursusmateriaal"
@@ -415,7 +415,7 @@ nl:
     all_faculties: "Alle faculteiten"
     all_info_strings: "Alle info berichten"
     all_price_sets: "Alle prijzensets"
-    all_subjects: "Alle onderwerpen"
+    all_subjects: "Alle cursussen"
     all_users: "Alle gebruikers"
     all_permission_groups: "Alle rechten"
     all_action_logs: "Alle logs"
@@ -442,6 +442,8 @@ nl:
     edit_printer: "Drukker bewerken"
     edit_price_set: "Prijzenset bewerken"
     edit_price: "Prijs bewerken"
+    edit_discipline: "Richting bewerken"
+    edit_institute: "Instelling bewerken"
 
     home: "Home"
     about: "Over ons"
@@ -585,6 +587,7 @@ nl:
     add_to_cart: "Aan winkelmandje toevoegen"
     new_message: "Nieuw bericht"
     new_faculty: "Nieuwe faculteit"
+    new_discipline: "Nieuwe richting"
 
   info:
     cash: "Cash info"

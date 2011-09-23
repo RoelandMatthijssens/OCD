@@ -1,10 +1,15 @@
-<h1><%= t(:all_subjects, :scope => "titles" ) %></h1>
-<%= link_to t(:add_subject, :scope => "links" ), new_subject_path %>
+<h1>
+  <%= @title %>
+  <div class="to_right">
+    <span class="comment_text">
+      <%= link_to t(:new_subject, :scope => "links" ), new_subject_path %>
+    </span>
+    <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), new_subject_path %>
+  </div>
+</h1>
 <%= will_paginate %>
-<ul class="subjects">
+<ul class="disciplines">
   <% @subjects.each do |subject| %>
     <%= render subject %>
   <% end %>
 </ul>
-<%= will_paginate %>
-
