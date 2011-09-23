@@ -16,7 +16,11 @@ class FacultiesController < ApplicationController
   def new
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('create_faculties')
-    @faculty = Faculty.new
+    if params[:intitute_id]
+      @faculty = Institute.find(params[:intitute_id]).new
+    else
+      @faculty = Faculty.new
+    end
     @submit = t(:new_faculty, :scope => "buttons")
   end
 
@@ -26,6 +30,7 @@ class FacultiesController < ApplicationController
     @faculty = Faculty.new(params[:faculty])
     if @faculty.save
       flash[:succes] = t(:new_faculty_success, :scope => "flash")
+      log "Created faculty: #{@faculty.name}"
       redirect_to @faculty
     else
       @selected_institute = get_id params[:faculty], :institute_id
@@ -47,6 +52,7 @@ class FacultiesController < ApplicationController
     @faculty = Faculty.find(params[:id])
     if @faculty.update_attributes(params[:faculty])
       flash[:succes] = t(:update_faculty_success, :scope => "flash")
+      log "Edit faculty: #{@faculty.name}"
       redirect_to @faculty
     else
       @selected_institute = get_id params[:faculty], :institute_id

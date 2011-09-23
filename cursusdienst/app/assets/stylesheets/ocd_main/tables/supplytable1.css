@@ -8,11 +8,11 @@ table.supply th {
 }
 
 table.supply th.col1width {
-	width: 70%;
+	width: 60%;
         font-weight: bold;
 }
 table.supply th.col2width {
-	width: 20px;
+	width: 30px;
         font-weight: bold;
 }
 table.supply th.col3width {
@@ -26,13 +26,14 @@ table.supply th.col4width {
 
 table.supply td {
 	line-height: 10px;
-	padding: 6px 6px 6px 12px;
-	border-bottom: 1px solid #BBB;
-	border-top: 1px solid #BBB;
+	padding: 6px 6px 6px 6px;
+	border-bottom: 1px dotted #BBB;
+	border-top: 1px dotted #BBB;
 }
 table.supply td.alt{
-
-	color: #DDD;	
+	border-top: 1px dotted #BBB;
+	border-bottom: 1px dotted #BBB;
+        background: rgb(237,237,237);
 
 }
 

@@ -11,14 +11,19 @@
     <%= f.text_field :initials %> <br>
   </div>
   <div class='field'>
-		<%= label_tag t(:institute, :scope => "globals" ) %>
-    <%= render :partial => "filters/select_box", :locals => {
-      :filter_key_ajax => "institute",
-      :id => "faculty[institute_id]",
-      :dataset => get_institutes, 
-      :selected_id => @selected_institute,
-      :parent_id => "",
-      :child_id => ""} %> <br />
+    <% if params[:institute_id] %>
+      <%= f.hidden_field :institute_id, :value => params[:institute_id] %>
+      <%= hidden_field_tag "institute_id", params[:institute_id] %>
+    <% else %>
+      <%= label_tag t(:institute, :scope => "globals" ) %>
+      <%= render :partial => "filters/select_box", :locals => {
+        :filter_key_ajax => "institute",
+        :id => "faculty[institute_id]",
+        :dataset => get_institutes,
+        :selected_id => @selected_institute,
+        :parent_id => "",
+        :child_id => ""} %> <br />
+    <% end %>
   </div>
   <div class="actions">
     <%= f.submit @submit %>

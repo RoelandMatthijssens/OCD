@@ -18,15 +18,13 @@
  </table>
 </fieldset>
 
-
-
-
 <fieldset class="simplefieldset2">
   <legend>
     <%= t(:faculties, :scope => "globals") %>
-
-
-
+    <span class="comment_text">
+      - <%= link_to t(:add_one, :scope => "links" ), :controller => "faculties", :action => "new", :institute_id => institute.id %>
+      <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), new_institute_path %>
+    </span>
   </legend>
   <div class="Faculties">
     <ul class="faculties">
@@ -36,6 +34,3 @@
     </ul>
   </div>
 </fieldset>
-<p class= "comment_text">
-<%= link_to t(:add_faculty, :scope => "links" ), new_faculty_path %>
-</p>

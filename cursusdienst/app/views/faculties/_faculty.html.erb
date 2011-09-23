@@ -3,8 +3,8 @@
   <fieldset class="simplefieldset2">
     <legend>
      <%= t(:info, :scope => "message" ) %>
-     <span class="comment_text">
-     <%= link_to "Edit", edit_faculty_path(faculty) %>
+     <span class="edit">
+     - <%= link_to "Edit", edit_faculty_path(faculty) %>
      </span>
     </legend>
 
@@ -15,16 +15,16 @@
       <td><%= faculty.initials %> </td>
     </tr>
       <td><%= t(:institute) %>:</td>
-      <td><%= faculty.institute.name %> </td>
+      <td><%= link_to faculty.institute.name, faculty.institute %> </td>
   </table>
   </fieldset>
   <fieldset class="simplefieldset2">
   <legend>
-  <%= t(:disciplines, :scope => "globals" ) %>
-  <span class="comment_text">
-    <%= link_to t(:add_discipline, :scope => "links" ), :controller => "disciplines", :action => "new", :faculty_id => faculty.id %>
-
-  </span>
+    <%= t(:disciplines, :scope => "globals" ) %>
+    <span class="comment_text">
+      - <%= link_to t(:add_one, :scope => "links" ), :controller => "disciplines", :action => "new", :faculty_id => faculty.id %>
+      <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), new_discipline_path %>
+    </span>
   </legend>
   <ul class="disciplines">
   <% faculty.disciplines.each do |discipline| %>

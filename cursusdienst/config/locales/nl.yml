@@ -386,6 +386,7 @@ nl:
     q_new_user: "Nieuwe gebruiker?"
     not_a_member_of_guild: "Nog geen lid van deze kring"
     info: "Info"
+    member_of_guild: "Je bent lid van deze kring"
 
   permissions:
     all: "Alle"
@@ -551,6 +552,7 @@ nl:
     update_printer_success: "Printer succesvol aangepast"
 
   links:
+    add_one: "Nieuw"
     edit: "Edit"
     edit_subject: "Edit"
     add_subject: "Nieuw vak aanmaken"
@@ -580,6 +582,9 @@ nl:
     subjects: "Cursussen"
     materials: "Uitgaven"
     guild_supplies: "Aanbod kringen"
+    add_to_cart: "Aan winkelmandje toevoegen"
+    new_message: "Nieuw bericht"
+    new_faculty: "Nieuwe faculteit"
 
   info:
     cash: "Cash info"

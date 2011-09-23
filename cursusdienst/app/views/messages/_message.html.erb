@@ -1,7 +1,10 @@
-<div class="message">
-  <h1></h1>
-	<div class="content">
-		<%= raw message.content %>
-	</div>
-  <%= link_to t(:edit_message, :scope=>"message"), edit_message_path(message) %>
-</div>
+<fieldset class="simplefieldset3">
+  <legend>&nbsp <!-- Whitespaces -->
+    <span class="comment_text">
+      <%= message.created_at %>
+      <%= link_to t(:edit, :scope=>"links"), edit_message_path(message) %>
+      <%= link_to image_tag("icons/twotone/beige/edit.gif", :alt=>t(:edit, :scope => 'links')), edit_message_path(message) %>
+    </span>
+</legend>
+  <%= raw message.content %>
+</fieldset>

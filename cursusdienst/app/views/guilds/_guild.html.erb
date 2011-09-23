@@ -2,7 +2,7 @@
   <h1>
     <%= link_to guild.name, root_url(:subdomain => guild.initials) %>  <%= t(:supplies, :scope => "guild") %>
   <% if current_user && current_user.guilds.include?(guild) %>
-    <div class="to_right"><span class="comment_text">You are a proud member of this guild</span></div>
+    <div class="to_right"><span class="comment_text"><%= t(:member_of_guild, :scope => "message" ) %></span></div>
   <% else %>
     <div class="to_right">
       <span class="comment_text"><%= link_to "join", join_guild_path(guild), :method => :put %></span>
@@ -67,17 +67,7 @@
     <%= render :partial => "supply" %>
   </div>
 
-  <%= content_for :sidemenu do %>
-    <div class="topline"></div>
-    <div id="sidemenu">
-      <ul>
-        <li> <%= link_to t(:supply, :scope => "side_menu"), root_url(:subdomain => guild.initials), :class=>"sidemenu link2" %> </li>
-        <li> <%= link_to t(:news, :scope => "side_menu"), news_guild_path(guild), :class=>"sidemenu link2" %> </li>
-        <li> <%= link_to t(:manual, :scope => "side_menu"), manual_path, :class=>"sidemenu link2" %> </li>
-      </ul>
-    </div>
-    <div class="topline"></div>
-  <% end %>
+  <%= render :partial => 'sidemenu', :locals => {:guild => guild} %>
 
 
 <% content_for :sideshop do  %>
