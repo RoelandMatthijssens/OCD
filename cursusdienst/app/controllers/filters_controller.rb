@@ -27,6 +27,13 @@ class FiltersController < ApplicationController
         format.html{ flash[:notice] = "ok #{subject.id.to_s + " " + subject.name} <br /> #{@materials}" }
         format.json{ render :json => @materials }
       end
+    elsif params[:printer] && Printer.exists?(params[:printer])
+      printer = Printer.find(params[:printer])
+      @price_sets = printer.price_sets
+      respond_to do |format|
+        format.html{ flash[:notice] = "ok #{printer.id.to_s + " " + printer.name} <br /> #{@price_sets}" }
+        format.json{ render :json => @price_sets }
+      end
     end
   end
 

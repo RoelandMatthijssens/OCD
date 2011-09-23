@@ -81,7 +81,11 @@
         <div class="error_green" id="ajax_messages"></div>
 
         <% flash.each do |key, value| %>
-          <div class="error_green" id="flash <%= key %>"> <%= value %></div>
+          <% if (key == :error) %>
+            <div class="error_red" id="flash <%= key %>"> <%= value %> </div>
+          <% else %>
+            <div class="error_green" id="flash <%= key %>"> <%= value %> </div>
+          <% end %>
         <% end %>
 
         <div id="bodycenter">

@@ -502,7 +502,7 @@ nl:
     new_material_fail: "cursusmateriaal niet aangemaakt. Er is iets misgegaan"
     already_selling: "%{guild} verkoopt het cursusmateriaal %{material} al"
     now_selling: "%{material} is toegevoegd aan het aanbod van %{guild} voor %{price} "
-    selling_fail: "%{material} is niet toegevoegd aan het aanbod van %{guild}. Er is iets misgegaan}"
+    selling_fail: "Er is iets misgegaan, probeer het opnieuw"
     to_many_guild: "U bent lid van meerdere kringen, we weten niet aan welke kring het cursusmateriaal toegevoegd moet worden"
     added_to_cart: "%{material} is aan het winkelmandje toegevoegd "
     new_message_success: "bericht succesvol aangemaakt"
