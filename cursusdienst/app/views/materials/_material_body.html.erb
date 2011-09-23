@@ -11,13 +11,17 @@
 <fieldset class="simplefieldset2">
   <legend>
     <%= t(:info, :scope => "message" ) %>
+    <% if current_user.can? "edit_materials" %>
     <span class="edit">
       - <%= link_to "Edit", edit_material_path(material) %>
     </span>
+    <% end%>
+    <% if current_user.can? "create_materials" %>
     <span class="comment_text">
       - <%= link_to t(:add_one, :scope => "links" ), :controller => "materials", :action => "new", :parent_id => material.id, :material_id => material.id %>
       <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), :controller => "materials", :action => "new", :parent_id => material.id, :material_id => material.id %>
     </span>
+    <% end %>
   </legend>
 
   <table class="simpletable1">
@@ -91,7 +95,6 @@
           <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), :controller => "supplies", :action => "new", :material => material %>
         <% end %>
       <% end %>
-
     </span>
   </legend>
 

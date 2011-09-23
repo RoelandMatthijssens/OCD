@@ -1,11 +1,13 @@
 <h1>
   <%= @title %>
+  <% if current_user.can? "create_institutes" %>
   <div class="to_right">
     <span class="comment_text">
       <%= link_to t(:new_institute, :scope => "links" ), new_institute_path %>
     </span>
     <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), new_institute_path %>
   </div>
+  <% end %>
 </h1>
 
 <div class="institutes">

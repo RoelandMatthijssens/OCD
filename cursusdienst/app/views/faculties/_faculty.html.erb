@@ -2,35 +2,39 @@
   <h2><%= link_to faculty.name, faculty %></h2>
   <fieldset class="simplefieldset2">
     <legend>
-     <%= t(:info, :scope => "message" ) %>
-     <span class="edit">
-     - <%= link_to "Edit", edit_faculty_path(faculty) %>
-     </span>
+      <%= t(:info, :scope => "message" ) %>
+      <% if current_user.can? "edit_faculties" %>
+        <span class="edit">
+          - <%= link_to "Edit", edit_faculty_path(faculty) %>
+        </span>
+      <% end %>
     </legend>
 
     <table class="simpletable1">
-    <col/>
-    <tr>
-      <td><%= t(:initials) %>: </td>
-      <td><%= faculty.initials %> </td>
-    </tr>
+      <col/>
+      <tr>
+        <td><%= t(:initials) %>: </td>
+        <td><%= faculty.initials %> </td>
+      </tr>
       <td><%= t(:institute) %>:</td>
       <td><%= link_to faculty.institute.name, faculty.institute %> </td>
-  </table>
+    </table>
   </fieldset>
   <fieldset class="simplefieldset2">
-  <legend>
-    <%= t(:disciplines, :scope => "globals" ) %>
-    <span class="comment_text">
-      - <%= link_to t(:add_one, :scope => "links" ), :controller => "disciplines", :action => "new", :faculty_id => faculty.id %>
-      <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), new_discipline_path %>
-    </span>
-  </legend>
-  <ul class="disciplines">
-  <% faculty.disciplines.each do |discipline| %>
-  <li><%= link_to discipline.name, discipline %></li>
-  <% end %>
-  </ul>
+    <legend>
+      <%= t(:disciplines, :scope => "globals" ) %>
+      <% if current_user.can? "create_disciplines" %>
+        <span class="comment_text">
+          - <%= link_to t(:add_one, :scope => "links" ), :controller => "disciplines", :action => "new", :faculty_id => faculty.id %>
+          <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), new_discipline_path %>
+        </span>
+      <% end %>
+    </legend>
+    <ul class="disciplines">
+      <% faculty.disciplines.each do |discipline| %>
+        <li><%= link_to discipline.name, discipline %></li>
+      <% end %>
+    </ul>
   </fieldset>
 </div>
 

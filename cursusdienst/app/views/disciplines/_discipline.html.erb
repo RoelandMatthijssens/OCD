@@ -3,9 +3,11 @@
   <fieldset class="simplefieldset2">
     <legend>
      <%= t(:info, :scope => "message" ) %>
+     <% if current_user.can? "edit_disciplines" %>
      <span class="edit">
      - <%= link_to "Edit", edit_discipline_path(discipline) %>
      </span>
+     <% end %>
     </legend>
 
     <table class="simpletable1">
@@ -23,10 +25,12 @@
   <fieldset class="simplefieldset2">
   <legend>
     <%= t(:subjects, :scope => "globals" ) %>
+    <% if current_user.can? "create_subjects" %>
     <span class="comment_text">
       - <%= link_to t(:add_one, :scope => "links" ), :controller => "subjects", :action => "new", :discipline_id => discipline.id %>
       <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), new_subject_path %>
     </span>
+    <% end %>
   </legend>
     <ul class="subjects">
       <% discipline.subjects.each do |subject| %>
