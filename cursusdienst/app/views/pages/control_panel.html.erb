@@ -1,15 +1,35 @@
 <h1><%= @title %></h1>
 <ul class="administrator_links">
   <% if signed_in? %>
-    <li><%= link_to t(:institutes), institutes_path, :id => navigation_selected("Institutes") %> </li>
-    <li><%= link_to t(:faculties), faculties_path, :id => navigation_selected("Faculties") %> </li>
-    <li><%= link_to t(:disciplines), disciplines_path, :id => navigation_selected("Disciplines") %> </li>
-    <li><%= link_to t(:subjects, :scope => 'globals'), subjects_path, :id => navigation_selected("Subjects") %> </li>
-    <li><%= link_to t(:materials), materials_path, :id => navigation_selected("Materials") %> </li>
-    <li><%= link_to t(:users), users_path, :id => navigation_selected("Users") %> </li>
-    <li><%= link_to t(:guilds), guilds_path, :id => navigation_selected("Guilds") %></li>
-    <li><%= link_to t(:stock), stocks_path, :id => navigation_selected("Stock") %></li>
-    <li><%= link_to t(:printers), printers_path, :id => navigation_selected("Printers") %></li>
-    <li><%= link_to t(:options), options_path, :id => navigation_selected("Options") %></li>
+    <% if current_user.can? "edit_institutes" %>
+      <li><%= link_to t(:institutes), institutes_path, :id => navigation_selected("Institutes") %> </li> 
+    <% end %>
+    <% if current_user.can? "edit_faculties" %>
+      <li><%= link_to t(:faculties), faculties_path, :id => navigation_selected("Faculties") %> </li>
+    <% end %>
+    <% if current_user.can? "edit_disciplines" %>
+      <li><%= link_to t(:disciplines), disciplines_path, :id => navigation_selected("Disciplines") %> </li>
+    <% end %>
+    <% if current_user.can? "edit_subjects" %>
+      <li><%= link_to t(:subjects, :scope => 'globals'), subjects_path, :id => navigation_selected("Subjects") %> </li>
+    <% end %>
+    <% if current_user.can? "edit_materials" %>
+      <li><%= link_to t(:materials), materials_path, :id => navigation_selected("Materials") %> </li>
+    <% end %>
+    <% if current_user.can? "edit_users" %>
+      <li><%= link_to t(:users), users_path, :id => navigation_selected("Users") %> </li>
+    <% end %>
+    <% if current_user.can? "edit_guilds" %>
+      <li><%= link_to t(:guilds), guilds_path, :id => navigation_selected("Guilds") %></li>
+    <% end %>
+    <% if current_user.can? "edit_stock" %>
+      <li><%= link_to t(:stock), stocks_path, :id => navigation_selected("Stock") %></li>
+    <% end %>
+    <% if current_user.can? "edit_printers" %>
+      <li><%= link_to t(:printers), printers_path, :id => navigation_selected("Printers") %></li>
+    <% end %>
+    <% if current_user.can? "edit_options" %>
+      <li><%= link_to t(:options), options_path, :id => navigation_selected("Options") %></li>
+    <% end %>
   <% end %>
 </ul>
