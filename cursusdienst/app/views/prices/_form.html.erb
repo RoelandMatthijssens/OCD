@@ -4,9 +4,14 @@
     <%= f.label :amount %> <br>
     <%= f.text_field :amount %> <br>
     <%= f.label :option %><br/>
-    <%= select(:price, :option_id, Option.find(:all, :conditions => ['typee = ?', 'printer']).collect {|p| [ p.name, p.id ] }, {:prompt => 'Select option'}) %><br/>
-    <%= f.label :price_set %><br/>
-    <%= select(:price, :price_set_id, PriceSet.all.collect {|p| [ p.name, p.id ] }, {:prompt => 'Select price_set'}) %><br/>
+    <%= f.select(:option_id, Option.find(:all, :conditions => ['typee = ?', 'printer']).collect {|p| [ p.name, p.id ] }, {:prompt => 'Select option'}) %><br/>
+    <% if params[:price_set_id] %>  
+      <%= f.hidden_field :price_set_id, :value => params[:price_set_id] %>
+      <%= hidden_field_tag "price_set_id", params[:price_set_id] %>
+    <% else %>
+      <%= f.label :price_set %><br/>
+      <%= f.select(:price_set_id, PriceSet.all.collect {|p| [ p.name, p.id ] }, {:prompt => 'Select price_set'}) %><br/>
+    <% end %>
     <%= f.label :type %><br/>
     <%= select(:price, :typee, ['per_page', 'once'], {:prompt => 'Select type'}) %><br/>
   </div>

@@ -1,5 +1,5 @@
 class Supply < ActiveRecord::Base
-  attr_accessible :guild, :material, :price_set
+  attr_accessible :guild_id, :material_id, :price_set_id
   belongs_to :guild
   belongs_to :material
   belongs_to :price_set
@@ -7,6 +7,7 @@ class Supply < ActiveRecord::Base
   validates :guild, :presence => true
   validates :price_set, :presence => true
   validates :material, :presence => true
+  validates_uniqueness_of :guild_id, :scope => :material_id
 
   def buy_price
     options = material.options

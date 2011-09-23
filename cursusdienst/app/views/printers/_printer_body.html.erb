@@ -31,5 +31,5 @@
   </div>
 </fieldset>
 <p class= "comment_text">
-<%= link_to t(:add_price_set, :scope => "links" ), new_price_set_path %>
+<%= link_to t(:add_price_set, :scope => "links" ), :controller => "price_sets", :action => "new", :printer_id => printer.id %>
 </p>

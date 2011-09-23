@@ -1,18 +1,18 @@
 <fieldset class="simplefieldset2">
-   <legend>
+  <legend>
     <%= t(:info, :scope => "message" ) %>
     <span class= "edit">
-    - <%= link_to t(:edit, :scope => "links" ), edit_price_set_path(price_set) %>
+      - <%= link_to t(:edit, :scope => "links" ), edit_price_set_path(price_set) %>
     </span>
   </legend>
-   <table class="simpletable1">
-     <col/>
-     <tr>
-       <td> <%= t(:name) %>: </td>
-       <td> <%= price_set.name %> </td>
-     </tr>
-   </table>
-  </fieldset>
+  <table class="simpletable1">
+    <col/>
+    <tr>
+      <td> <%= t(:name) %>: </td>
+      <td> <%= price_set.name %> </td>
+    </tr>
+  </table>
+</fieldset>
 
 
 
@@ -22,12 +22,21 @@
   </legend>
   <div class="prices">
     <ul class="prices">
-      <% price_set.prices.each do |price| %>
-        <li>------ render price ------</li>
-      <% end %>
+      <table>
+        <th>Option name</th>
+        <th>Price</th>
+        <th>Edit</th>
+        <% price_set.prices.each do |price| %>
+          <tr>
+            <td><%= price.option.name %></td>
+            <td><%= price.amount %></td>
+            <td><%= link_to image_tag("icons/twotone/" + icon_color + "/edit.gif", :alt=>t("edit", :scope => 'links')), edit_price_path(price) %></td>
+          </tr>
+        <% end %>
+      </table>
     </ul>
   </div>
 </fieldset>
 <p class= "comment_text">
-  <%= link_to t(:add_price, :scope => "links" ), new_price_path %>
+  <%= link_to t(:add_price, :scope => "links" ), :controller => "prices", :action => "new", :price_set_id => price_set.id %>
 </p>

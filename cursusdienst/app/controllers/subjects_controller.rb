@@ -30,7 +30,7 @@ class SubjectsController < ApplicationController
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('create_subjects')
     @subject = Subject.new(params[:subject])
-    @subject.disciplines= get_disciplines_from_subject(params[:subject])
+    @subject.disciplines= get_disciplines_from_subject(params)
     if @subject.save
 			flash[:success] = t(:new_subject_success, :scope => "flash" )
       redirect_to @subject
@@ -54,7 +54,7 @@ class SubjectsController < ApplicationController
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('edit_subjects')
     @subject = Subject.find(params[:id])
-    @subject.disciplines= get_disciplines_from_subject(params[:subject])
+    @subject.disciplines= get_disciplines_from_subject(params)
     if @subject.update_attributes(params[:subject])
 			flash[:notice] = t(:update_subject_success, :scope => "flash"  )
       redirect_to @subject
@@ -71,12 +71,15 @@ class SubjectsController < ApplicationController
 
   def get_disciplines_from_subject par
     ds = []
-    par[:disciplines_attributes].each_value { |v|
+    if params[:discipline_id]
+      ds << Discipline.find(params[:discipline_id])
+    end
+    par[:subject][:disciplines_attributes].each_value { |v|
       unless v["id"].empty?
         d = Discipline.find(v["id"])
         ds << d if d.instance_of? Discipline and v["_destroy"] != "1"
       end
-    } unless par[:disciplines_attributes].nil?
+    } unless par[:subject][:disciplines_attributes].nil?
     return ds
   end
   

@@ -4,13 +4,28 @@
 <%= form_for(@supply) do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
   <div class='field'>
-    <%= f.hidden_field :material, :value => @material.id %>
-    <%= f.label :printer %> <br/>
-    TODO filter voor price_set <br/>
-    <%= f.label :price_set %> <br/>
-    <%= select(:supply, :price_set, @price_sets.collect {|p| [ p.name, p.id ] }, {:prompt => 'Select price set'}) %>
+    <%= f.hidden_field :material_id, :value => @material.id %>
+
+    <%= label_tag "printer" %>    <br />
+    <%= render :partial => "filters/select_box", :locals => {
+      :filter_key_ajax => "printer",
+      :id => "supply[printer_id]",
+      :dataset => Printer.all, 
+      :selected_id => "",
+      :parent_id => "supply_printer_id",
+      :child_id => "supply_price_set_id"} %> <br />
+
+    <%= label_tag "price_set" %>    <br />
+    <%= render :partial => "filters/select_box", :locals => {
+      :filter_key_ajax => "",
+      :id => "supply[price_set_id]",
+      :dataset => [], 
+      :selected_id => "",
+      :parent_id => "",
+      :child_id => ""} %> <br />
+
     <%= f.label :guild %>
-    <%= select(:supply, :guild, @guilds.collect {|p| [ p.name, p.id ] }, {:prompt => 'Select guild'}) %>
+    <%= f.select(:guild_id, @guilds.collect {|p| [ p.name, p.id ] }, {:prompt => 'Select guild'}) %><br />
     <%= f.label :price %> <br/>
     <%= f.text_field :price %>
 

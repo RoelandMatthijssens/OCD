@@ -1,5 +1,5 @@
 class Price < ActiveRecord::Base
-  attr_accessible :typee, :option, :price_set
+  attr_accessible :typee, :option, :price_set, :option_id, :price_set_id, :amount
   belongs_to :price_set
   belongs_to :option
 
@@ -7,4 +7,7 @@ class Price < ActiveRecord::Base
   validates :option, :presence => true
   validates :typee, :presence => true
   validates :amount, :presence => true
+  
+  validates_numericality_of :amount
+  validates_uniqueness_of :option_id, :scope => :price_set_id
 end

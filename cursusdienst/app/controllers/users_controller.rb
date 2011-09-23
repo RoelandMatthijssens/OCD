@@ -21,7 +21,6 @@ class UsersController < ApplicationController
   end
 
   def create
-#    TODO Add user to guild on signup
     @user = User.new(params[:user])
     guild_id = params[:guild]
     unless guild_id.nil?
