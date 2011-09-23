@@ -106,8 +106,10 @@ class MaterialsController < ApplicationController
   def get_options_from_material par
     os = []
     par[:options_attributes].each_value { |v|
-      o = Option.find(v["id"])
-      os << o if o.instance_of? Option and v["_destroy"] != "1"
+      unless v["id"] = "" 
+        o = Option.find(v["id"]) 
+        os << o if o.instance_of? Option and v["_destroy"] != "1"
+      end
     } unless par[:options_attributes].nil?
     return os
   end

@@ -40,7 +40,7 @@
   <% elsif params[:parent_id] %>
     <div class='field'>
       <%= f.hidden_field :parent_id, :value => params[:parent_id] %>
-      <%= hidden_field_tag "discipline_id", params[:parent_id] %>
+      <%= hidden_field_tag "parent_id", params[:parent_id] %>
     </div>
   <% else %>
     <div class='field' id="subject_field">

@@ -3,9 +3,9 @@ require 'development_mail_interceptor'
 ActionMailer::Base.smtp_settings = {
   :address              => "smtp.gmail.com",
   :port                 => 587,
-  :domain               => "tyca.be",
-  :user_name            => "rik@tyca.be",
-  :password             => "polmaria",
+  :domain               => "cursusdienst.net",
+  :user_name            => "noreply@cursusdienst.net",
+  :password             => "jyH>M5FH",
   :authentication       => "plain",
   :enable_starttls_auto => true
 }

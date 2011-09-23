@@ -6,25 +6,18 @@ class PricesController < ApplicationController
 
   def new
     @title = t(:new_price, :scope => "titles" )
-    @price = Price.new()
+    if params[:price_set_id]
+      @price = PriceSet.find(params[:price_set_id]).prices.new
+    else
+      @price = Price.new()
+    end
   end
 
   def create
     @price = Price.new(params[:price])
-    @amount = params[:price][:amount]
-    @price_set = PriceSet.find(params[:price][:price_set_id])
-    @option = Option.find(params[:price][:option_id])
-    @price.option = @option
-    @price.amount = @amount
-    @price.price_set = @price_set
     if @price.save
-      if @price_set.prices << @price
-        flash[:success] = t(:new_price_success, :scope => "flash" )
-        redirect_to @price
-      else
-        flash[:error] = t(:new_price_fail, :scope => "flash" )
-        render :action => 'new'
-      end
+      flash[:success] = t(:new_price_success, :scope => "flash" )
+      redirect_to @price
     else
       flash[:error] = t(:new_price_fail, :scope => "flash" )
       render :action => 'new'

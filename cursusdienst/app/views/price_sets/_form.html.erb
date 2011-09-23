@@ -5,10 +5,14 @@
     <%= f.text_field :name %> <br>
   </div>
   <div class="field">
-  <%= select_tag :printer, options_from_collection_for_select(Printer.find(:all),
-    :id, :name, params[:printer] ? params[:printer] : "") ,
-    { :prompt => t(:select_printer, :scope => 'price_set.create')} %>
-
+    <% if params[:printer_id] %>
+      <%= f.hidden_field :printer_id, :value => params[:printer_id] %>
+      <%= hidden_field_tag "printer_id", params[:printer_id] %>
+    <% else %>
+      <%= f.select :printer_id, options_from_collection_for_select(Printer.find(:all),
+        :id, :name, params[:printer] ? params[:printer] : "") ,
+        { :prompt => t(:select_printer, :scope => 'price_set.create')} %>
+    <% end %>
   </div>
 
   <div class="actions">

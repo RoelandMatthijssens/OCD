@@ -6,12 +6,16 @@ class PriceSetsController < ApplicationController
 
   def new
     @title = t(:new_price_set, :scope => "titles" )
-    @price_set = PriceSet.new()
+    if params[:printer_id]
+      @price_set = Printer.find(params[:printer_id]).price_sets.new
+    else
+      @price_set = PriceSet.new()
+    end
   end
 
   def create
     @price_set = PriceSet.new(params[:price_set])
-    @printer = Printer.find(params[:printer])
+    @printer = Printer.find(params[:printer_id])
     @printer.price_sets << @price_set
     if @price_set.save
       flash[:success] = t(:new_price_set_success, :scope => "flash" )
