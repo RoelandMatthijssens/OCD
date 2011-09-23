@@ -74,7 +74,7 @@ namespace :db do
     permissionNames = [
       #admin permissions
       "use_control_panel", "sell_materials", "sell_all_materials", 'create_all_messages', 'view_all_stock', 'view_all_orders',
-      "print",
+      "print", "download_materials", 
       #normal permissions
       "edit_users"              , "delete_users"              , "view_users"              ,
       "edit_permissions"        , "delete_permissions"        , "view_permissions"        , "create_permissions"        ,

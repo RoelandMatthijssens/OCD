@@ -599,6 +599,7 @@ nl:
     new_message: "Nieuw bericht"
     new_faculty: "Nieuwe faculteit"
     new_discipline: "Nieuwe richting"
+    set_footer_banner: "Plaats banner"
 
   info:
     cash: "Cash info"

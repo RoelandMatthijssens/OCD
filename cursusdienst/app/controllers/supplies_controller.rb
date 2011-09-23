@@ -1,6 +1,8 @@
 class SuppliesController < ApplicationController
 
   def new
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('create_supplies')
     @supply = Supply.new()
     @title = t(:add_to_supply, :scope => "title" )
     @material = Material.find(params[:material])
@@ -11,6 +13,8 @@ class SuppliesController < ApplicationController
   end
 
   def create
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('create_supplies')
     @supply = Supply.new(params[:supply])
     if @supply.save
       @guild = Guild.find(params[:supply][:guild_id])

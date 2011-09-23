@@ -83,7 +83,7 @@ class GuildsController < ApplicationController
 
   def join
     deny_access and return unless signed_in?
-    if request.subdomain == "" || request.subdomain = "www"
+    if request.subdomain == "" || request.subdomain == "www"
       @guild = Guild.find(params[:id])
     else
       @guild = Guild.find_by_initials!(request.subdomain)

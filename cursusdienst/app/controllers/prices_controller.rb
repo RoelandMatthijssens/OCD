@@ -1,10 +1,14 @@
 class PricesController < ApplicationController
   def index
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('view_prices')
     @title = t(:all_prices, :scope => "titles" )
     @prices = Price.all()
   end
 
   def new
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('create_prices')
     @title = t(:new_price, :scope => "titles" )
     if params[:price_set_id]
       @price = PriceSet.find(params[:price_set_id]).prices.new
@@ -14,6 +18,8 @@ class PricesController < ApplicationController
   end
 
   def create
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('create_prices')
     @price = Price.new(params[:price])
     if @price.save
       flash[:success] = t(:new_price_success, :scope => "flash" )
@@ -25,16 +31,22 @@ class PricesController < ApplicationController
   end
 
   def show
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('view_prices')
     @price = Price.find(params[:id])
   end
 
   def edit
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('edit_prices')
     @title = t(:edit_price, :scope => "titles" )
     @price = Price.find(params[:id])
     @submit = t(:update_price, :scope => "buttons" )
   end
 
   def update
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('edit_prices')
     @price = Price.find(params[:id])
     if @price.update_attributes(params[:price])
       flash[:success] = t(:update_price_success, :scope => "flash" )
@@ -45,6 +57,8 @@ class PricesController < ApplicationController
   end
 
   def destroy
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('delete_prices')
 
   end
 end

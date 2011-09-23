@@ -101,16 +101,26 @@
 
         <!--End main page example -->
 
-          <%= render 'layouts/sidechat' %>
+        <%= render 'layouts/sidechat' %>
 
-          <!-- End Example --> 
-        
+        <!-- End Example --> 
+
         <!-- Footer is a bit overly complicated but the only way I was 100% sure it would work from the first time --> 
         <div id="footer">
           <div id="footer1">
           </div>
           <div id="footer2">
             <div id="footerbannerdiv">
+              <% guild = Guild.find_by_initials(request.subdomain) %>
+              <% if guild.info "footer_banner" %>
+                  <% info = guild.info("footer_banner") %>
+                  <%= raw info.content %><br/>
+                  <% if signed_in? && current_user.can?("edit_info_strings") %>
+                  <%= link_to t(:edit, :scope => "links" ), edit_info_string_path(info) %>
+                  <% end %>
+              <% elsif signed_in? && current_user.can?("create_info_strings") %>
+                <%= link_to t(:set_footer_banner, :scope => "links" ), :controller => "info_strings", :action => 'new', :key => 'footer_banner', :guild_id => guild.id %>
+              <% end %><br/>
 
               <% if request.subdomain == "" || request.subdomain == 'www'  %>
                 <%= image_tag "banners/footerbanner.png", :alt=>"Footer Banner" %>

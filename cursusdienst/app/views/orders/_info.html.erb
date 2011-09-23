@@ -3,7 +3,7 @@
     <fieldset>
       <legend><%= t(:cash, :scope => "info" ) %></legend>
       <% info = guild.info("cash") %>
-      <%= info.content %><br/>
+      <%= raw info.content %><br/>
       <%= link_to t(:edit, :scope => "links" ), edit_info_string_path(info) %>
     </fieldset>
   <% else %>
@@ -14,7 +14,7 @@
     <fieldset>
       <legend><%= t(:transfer, :scope => "info" ) %></legend>
       <% info = guild.info("transfer") %>
-      <%= info.content %><br/>
+      <%= raw info.content %><br/>
       <%= link_to t(:edit, :scope => "links" ), edit_info_string_path(info) %>
     </fieldset>
   <% else %>
@@ -25,7 +25,7 @@
     <fieldset>
       <legend><%= t(:general_payment, :scope => "info" ) %></legend>
       <% info = guild.info("general_payment") %>
-      <%= info.content %><br/>
+      <%= raw info.content %><br/>
       <%= link_to t(:edit, :scope => "links" ), edit_info_string_path(info) %>
     </fieldset>
   <% else %>

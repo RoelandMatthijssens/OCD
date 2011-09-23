@@ -11,5 +11,6 @@ class AttachmentsController < ApplicationController
   
   def allowed
     deny_access unless signed_in?
+    deny_privileged_access and return unless current_user.can?('download_materials')
   end
 end
