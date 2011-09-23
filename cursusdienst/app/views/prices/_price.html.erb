@@ -1,3 +1,5 @@
 <div class="price_set">
   <%= render :partial => "price_body", :locals => {:price => price} %>
 </div>
+
+<%= render :partial => "shared/right_navigation", :locals => {:params_key => :price_set_id}%>

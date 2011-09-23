@@ -37,10 +37,12 @@
       <%= f.hidden_field :subject_id, :value => params[:subject_id] %>
       <%= hidden_field_tag "subject_id", params[:subject_id] %>
     </div>
+    <%= render :partial => "shared/right_navigation", :locals => {:params_key => :subject_id}%>
   <% elsif params[:parent_id] %>
     <div class='field'>
       <%= f.hidden_field :parent_id, :value => params[:parent_id] %>
       <%= hidden_field_tag "parent_id", params[:parent_id] %>
+      <%= render :partial => "shared/right_navigation", :locals => {:params_key => :parent_id}%>
     </div>
   <% else %>
     <div class='field' id="subject_field">

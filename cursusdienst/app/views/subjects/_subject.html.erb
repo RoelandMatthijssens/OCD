@@ -23,3 +23,5 @@
 
 	<%= link_to t(:edit_subject, :scope => "links" ), edit_subject_path(subject) %>
 </div>
+
+<%= render :partial => "shared/right_navigation", :locals => {:params_key => :discipline_id}%>

@@ -13,3 +13,5 @@
 	<%= link_to t(:add_subject, :scope => "links" ), :controller => "subjects", :action => "new", :discipline_id => discipline.id %>
 </div>
 </div>
+
+<%= render :partial => "shared/right_navigation", :locals => {:params_key => :faculty_id}%>
