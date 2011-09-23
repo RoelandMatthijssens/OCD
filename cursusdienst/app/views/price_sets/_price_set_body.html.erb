@@ -1,9 +1,11 @@
 <fieldset class="simplefieldset2">
   <legend>
     <%= t(:info, :scope => "message" ) %>
+    <% if current_user.can? "edit_price_sets" %>
     <span class= "edit">
       - <%= link_to t(:edit, :scope => "links" ), edit_price_set_path(price_set) %>
     </span>
+    <% end %>
   </legend>
   <table class="simpletable1">
     <col/>
@@ -14,8 +16,7 @@
   </table>
 </fieldset>
 
-
-
+<% if current_user.can? "view__prices" %>
 <fieldset class="simplefieldset2">
   <legend>
     <%= t(:prices, :scope => "globals") %>
@@ -30,13 +31,18 @@
           <tr>
             <td><%= price.option.name %></td>
             <td><%= price.amount %></td>
-            <td><%= link_to image_tag("icons/twotone/" + icon_color + "/edit.gif", :alt=>t("edit", :scope => 'links')), edit_price_path(price) %></td>
+            <% if current_user.can? "edit__price_sets" %>
+              <td><%= link_to image_tag("icons/twotone/" + icon_color + "/edit.gif", :alt=>t("edit", :scope => 'links')), edit_price_path(price) %></td>
+            <% end %>
           </tr>
         <% end %>
       </table>
     </ul>
   </div>
 </fieldset>
-<p class= "comment_text">
-  <%= link_to t(:add_price, :scope => "links" ), :controller => "prices", :action => "new", :price_set_id => price_set.id %>
-</p>
+  <% if current_user.can? "create_prices" %>
+    <p class= "comment_text">
+      <%= link_to t(:add_price, :scope => "links" ), :controller => "prices", :action => "new", :price_set_id => price_set.id %>
+    </p>
+  <% end %>
+<% end %>
