@@ -1,0 +1,11 @@
+<% content_for :sideshop do  %>
+    <div class="topline"></div>
+    <div id="sidemenu">
+      <ul>
+        <li> <%= link_to t(:subjects, :scope => "links"), subjects_path, :class=>"sidemenu link2" %> </li>
+        <li> <%= link_to t(:materials, :scope => "links"), materials_path, :class=>"sidemenu link2" %> </li>
+        <li> <%= link_to t(:guild_supplies, :scope => "links"), guilds_path, :class=>"sidemenu link2" %> </li>
+      </ul>
+    </div>
+    <div class="topline"></div>
+<% end %>

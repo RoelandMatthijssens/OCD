@@ -1,0 +1,6 @@
+<%= render @discipline %>
+<<<<<<< HEAD
+=======
+
+>>>>>>> f3dab7d610792148df6cc09e806b3ec250f103a9
+<%= render :partial => "shared/right_navigation", :locals => {:params_key => :faculty_id}%>

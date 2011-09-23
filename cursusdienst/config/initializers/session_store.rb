@@ -1,6 +1,6 @@
 # Be sure to restart your server when you modify this file.
 
-Cursusdienst::Application.config.session_store :cookie_store, :key => '_cursusdienst_session', :domain => ".badger.rave.org"
+Cursusdienst::Application.config.session_store :cookie_store, :key => '_cursusdienst_session', :domain => ".butter.rave.org"
 
 
 # Use the database for sessions instead of the cookie-based default,

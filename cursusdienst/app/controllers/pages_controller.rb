@@ -17,7 +17,7 @@ class PagesController < ApplicationController
   def control_panel
 		deny_access and return unless signed_in?
 		deny_privileged_access and return unless current_user.can?('use_control_panel')
-		@title = t(:control_panel, :scope => "titles" )
+		@title = t(:control_panel2, :scope => "titles" )
 	end
 
 end

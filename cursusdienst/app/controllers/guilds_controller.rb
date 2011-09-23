@@ -83,7 +83,11 @@ class GuildsController < ApplicationController
 
   def join
     deny_access and return unless signed_in?
-    @guild = Guild.find_by_initials!(request.subdomain)
+    if request.subdomain == "" || request.subdomain = "www"
+      @guild = Guild.find(params[:id])
+    else
+      @guild = Guild.find_by_initials!(request.subdomain)
+    end 
     current_user.guilds << @guild unless current_user.guilds.include? @guild
     flash[:notice] = t(:join_guild_success, :scope => "flash")
     redirect_to root_url(:subdomain => @guild.initials)
