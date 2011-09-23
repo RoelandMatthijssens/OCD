@@ -1,25 +1,37 @@
 <h1><%= t(:permissions_of,:scope => "titles",:user => @user.name + ' ' + @user.last_name) %></h1>
 
 <%= form_tag update_permissions_user_path, :method => :put do %>
-	<div class="field">
-		<%= check_box_tag "permission_ids[]", 0 %>
-		<%= t(:all,:scope => "permissions") %>
-	</div>
-	<div class="field">
-		<%= check_box_tag "permission_ids[]", -1 %>
-		<%= t(:none,:none => "permissions") %>
-	</div>
-	<h1></h1>
-	<% PermissionGroup.all.each do |permission| %>
-		<div class='field'>
-			<% if @user.permission_groups.include? permission %>
-				<%= check_box_tag "permission_ids[]", permission.id, true %>
-			<% else %>
-				<%= check_box_tag "permission_ids[]", permission.id %>
-			<% end %>
-			<%= permission.name.gsub("_", " ") %><br/>
-		</div>
-	<% end %>
+  <div class="field">
+    <%= check_box_tag "permission_ids[]", 0 %>
+    <%= t(:all,:scope => "permissions") %>
+  </div>
+
+  <div class="field">
+    <%= check_box_tag "permission_ids[]", -2 %>
+    <%= t(:senior_manager,:none => "permissions") %>
+  </div>
+
+  <div class="field">
+    <%= check_box_tag "permission_ids[]", -3 %>
+    <%= t(:junior_manager,:none => "permissions") %>
+  </div>
+
+  <div class="field">
+    <%= check_box_tag "permission_ids[]", -4 %>
+    <%= t(:user_manager,:none => "permissions") %>
+  </div>
+
+  <h1></h1>
+  <% PermissionGroup.all.each do |permission| %>
+    <div class='field'>
+      <% if @user.permission_groups.include? permission %>
+        <%= check_box_tag "permission_ids[]", permission.id, true %>
+      <% else %>
+        <%= check_box_tag "permission_ids[]", permission.id %>
+      <% end %>
+      <%= permission.name.gsub("_", " ") %><br/>
+    </div>
+  <% end %>
 
   <div class='field'>
     <%= submit_tag @submit %>

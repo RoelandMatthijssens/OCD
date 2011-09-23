@@ -450,6 +450,7 @@ nl:
     access_denied: "Toegang geweigerd"
     control_panel: "Beheeraneel"
     results: "Resultaten"
+    results_per_guild: "Resultaten per kring"
     stock: "Stock"
     permissions_of: "Rechten van %{user}"
     sign_in: "Inloggen"

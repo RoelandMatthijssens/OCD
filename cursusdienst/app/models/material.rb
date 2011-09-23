@@ -39,7 +39,7 @@ class Material < ActiveRecord::Base
       0.0
     end
   end
-  
+
   def discipline_id
     subject && subject.disciplines && subject.disciplines.first.id
   end
@@ -73,6 +73,10 @@ class Material < ActiveRecord::Base
       x << option if option.typee == 'printer'
     end
     return x
+  end
+
+  def supply guild
+    supply = guild.supplies.find(:all, :conditions => ["material_id=?", id]).first
   end
 
 end

@@ -1,0 +1,51 @@
+<h1>
+  <%= @title %>
+</h1>
+
+<% @results.each do |guild, material_orders| %>
+  <h2><%= guild.name %></h2>
+  <% materials = {} %>
+  <% material_orders.each do |material_order| %>
+    <% if materials[material_order.material] %>
+      <% materials[material_order.material] << materials_order %>
+    <% else %>
+      <% materials[material_order.material] = [material_order] %>
+    <% end %>
+  <% end %>
+  <table>
+    <thead>
+      <tr>
+        <th>material</th>
+        <th>total cost</th>
+        <th>total gain</th>
+        <th>total amount</th>
+        <th>total profit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% materials.each do |material, material_orders| %>
+        <% sell_price = material.supply(guild).price %>
+        <% buy_price = material.supply(guild).buy_price %>
+        <% total_buy_price = 0 %>
+        <% total_sell_price = 0 %>
+        <% total_amount = 0 %>
+        <% material_orders.each do |material_order| %>
+          <% total_buy_price += buy_price * material_order.amount %>
+          <% total_sell_price += sell_price * material_order.amount %>
+          <% total_amount += material_order.amount %>
+        <% end %>
+        <tr>
+          <td><%= link_to material.name, material %></td>
+          <td><%= total_buy_price %></td>
+          <td><%= total_sell_price %></td>
+          <td><%= total_amount %></td>
+          <td><%= total_sell_price - total_buy_price %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+
+
+<MaterialOrder id: 1, order_id: 1, material_id: 1, created_at: "2011-09-22 15:15:42", updated_at: "2011-09-22 15:15:42", guild_id: 1, amount: 1>

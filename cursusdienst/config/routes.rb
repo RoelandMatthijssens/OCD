@@ -37,6 +37,14 @@ Cursusdienst::Application.routes.draw do
 
   resources :ratings
 
+  resources :results do
+    get :per_guild, :on => :collection
+    get :per_isntitute, :on => :collection
+    get :per_discipline, :on => :collection
+    get :per_year, :on => :collection
+    get :per_subject, :on => :collection
+  end
+
   resources :info_strings
 
   resources :supplies, :only => [:new, :create]
