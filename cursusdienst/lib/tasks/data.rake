@@ -88,6 +88,16 @@ namespace :db do
       "edit_faculties"          , "delete_faculties"          , "view_faculties"          , "create_faculties"          ,
       "edit_messages"           , "delete_messages"                                       , "create_messages"           ,
       "edit_stock"              , "delete_stock"              , "view_stock"                                            ,
+      "edit_printers"           , "delete_printers"           , "view_printers"           , "create_printers"           ,
+      "edit_prices"             , "delete_prices"             , "view_prices"             , "create_prices"             ,
+      "edit_price_sets"         , "delete_price_sets"         , "view_price_sets"         , "create_price_sets"         ,
+      "edit_action_logs"        , "delete_action_logs"        , "view_action_logs"        , "create_action_logs"        ,
+      "edit_attachments"        , "delete_attachments"        , "view_attachments"        , "create_attachments"        ,
+      "edit_info_strings"       , "delete_info_strings"       , "view_info_strings"       , "create_info_strings"       ,
+      "edit_orders"             , "delete_orders"             , "view_orders"             , "create_orders"             ,
+      "edit_print_jobs"         , "delete_print_jobs"         , "view_print_jobs"         , "create_print_jobs"         ,
+      "edit_ratings"            , "delete_ratings"            , "view_ratings"            , "create_ratings"            ,
+      "edit_supplies"           , "delete_supplies"           , "view_supplies"           , "create_supplies"           ,
       ]
       #"edit_"            , "delete_"           , "view_"           , "create_"           ,
     permissionNames.each do |name|

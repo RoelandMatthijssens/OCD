@@ -80,9 +80,9 @@
     <span class="comment_text">
       <% if current_user.can?("sell_materials") %>
         <% if current_user.guilds.size == 0 %>
-          <p><%= t :join_to_add, :scope => "materials"%></p>
+          - <%= t :join_to_add, :scope => "material"%>
         <% elsif current_user.guilds.size > 1 %>
-          <p><%= t :to_may_guilds, :scope => "materials"%></p>
+          - <%= t :to_may_guilds, :scope => "material"%>
         <% elsif current_user.guilds.first.materials.include?(material)%>
           - <%= link_to t(:remove_supply, :scope => "message", :guild => current_user.guilds.first.initials ), "#" %>
           <%= link_to image_tag("icons/twotone/" + icon_color + "/x.gif", :alt=>t("new_message", :scope => 'links')), "#" %>
