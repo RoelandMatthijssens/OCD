@@ -3,9 +3,11 @@
 <fieldset class="simplefieldset2">
    <legend>
     <%= t(:info, :scope => "message" ) %>
-    <span class= "edit">
-    - <%= link_to t(:edit, :scope => "links" ), edit_printer_path(printer) %>
-    </span>
+    <% if current_user.can? "edit_printers" %>
+      <span class= "edit">
+      - <%= link_to t(:edit, :scope => "links" ), edit_printer_path(printer) %>
+      </span>
+    <% end %>
   </legend>
    <table class="simpletable1">
      <col/>
@@ -16,20 +18,22 @@
    </table>
   </fieldset>
 
-
-
-<fieldset class="simplefieldset2">
-  <legend>
-    <%= t(:price_sets, :scope => "globals") %>
-  </legend>
-  <div class="price_sets">
-    <ul class="price_sets">
-      <% printer.price_sets.each do |price_set| %>
-        <li><%= link_to price_set.name, price_set %></li>
-      <% end %>
-    </ul>
-  </div>
-</fieldset>
-<p class= "comment_text">
-<%= link_to t(:add_price_set, :scope => "links" ), :controller => "price_sets", :action => "new", :printer_id => printer.id %>
-</p>
+<% if current_user.can? "view_price_sets" %>
+  <fieldset class="simplefieldset2">
+    <legend>
+      <%= t(:price_sets, :scope => "globals") %>
+    </legend>
+    <div class="price_sets">
+      <ul class="price_sets">
+        <% printer.price_sets.each do |price_set| %>
+          <li><%= link_to price_set.name, price_set %></li>
+        <% end %>
+      </ul>
+    </div>
+  </fieldset>
+  <% if current_user.can? "create_price_sets" %>
+    <p class= "comment_text">
+      <%= link_to t(:add_price_set, :scope => "links" ), :controller => "price_sets", :action => "new", :printer_id => printer.id %>
+    </p>
+  <% end %>
+<% end %>
