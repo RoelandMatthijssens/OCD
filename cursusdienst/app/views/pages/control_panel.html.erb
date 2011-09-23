@@ -4,7 +4,7 @@
     <li><%= link_to t(:institutes), institutes_path, :id => navigation_selected("Institutes") %> </li>
     <li><%= link_to t(:faculties), faculties_path, :id => navigation_selected("Faculties") %> </li>
     <li><%= link_to t(:disciplines), disciplines_path, :id => navigation_selected("Disciplines") %> </li>
-    <li><%= link_to t(:subjects), subjects_path, :id => navigation_selected("Subjects") %> </li>
+    <li><%= link_to t(:subjects, :scope => 'globals'), subjects_path, :id => navigation_selected("Subjects") %> </li>
     <li><%= link_to t(:materials), materials_path, :id => navigation_selected("Materials") %> </li>
     <li><%= link_to t(:users), users_path, :id => navigation_selected("Users") %> </li>
     <li><%= link_to t(:guilds), guilds_path, :id => navigation_selected("Guilds") %></li>

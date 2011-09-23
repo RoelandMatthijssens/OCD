@@ -1,18 +1,18 @@
 <div>
   <h1>
     <%= link_to guild.name, root_url(:subdomain => guild.initials) %>  <%= t(:supplies, :scope => "guild") %>
-  <% if current_user && current_user.guilds.include?(guild) %>
-    <div class="to_right"><span class="comment_text"><%= t(:member_of_guild, :scope => "message" ) %></span></div>
-  <% else %>
-    <div class="to_right">
-      <span class="comment_text"><%= link_to "join", join_guild_path(guild), :method => :put %></span>
-      <%= link_to image_tag("icons/twotone/" + icon_color + "/arrow-down.gif", :alt=>t("edit", :scope => 'links')), join_guild_path(guild), :method => :put %>
-    </div>
-  <% end %>
+    <% if current_user && current_user.guilds.include?(guild) %>
+      <div class="to_right"><span class="comment_text"><%= t(:member_of_guild, :scope => "message" ) %></span></div>
+    <% else %>
+      <div class="to_right">
+        <span class="comment_text"><%= link_to "join", join_guild_path(guild), :method => :put %></span>
+        <%= link_to image_tag("icons/twotone/" + icon_color + "/arrow-down.gif", :alt=>t("edit", :scope => 'links')), join_guild_path(guild), :method => :put %>
+      </div>
+    <% end %>
   </h1>
   <div class="supplies" id="supplies">
     <div id="filter">
-     </br>
+      </br>
       <fieldset class="simplefieldset2">
         <legend><%= t(:filter, :scope => "guild.supply") %></legend>
         <%= form_tag update_filter_guild_path(guild), :method => :put do %>
@@ -66,18 +66,8 @@
 
     <%= render :partial => "supply" %>
   </div>
+</div>
 
-  <%= render :partial => 'sidemenu', :locals => {:guild => guild} %>
+<%= render :partial => 'sidemenu', :locals => {:guild => guild} %>
 
-
-<% content_for :sideshop do  %>
-    <div class="topline"></div>
-    <div id="sidemenu">
-      <ul>
-        <li> <%= link_to t(:subjects, :scope => "links"), subjects_path, :class=>"sidemenu link2" %> </li>
-        <li> <%= link_to t(:materials, :scope => "links"), materials_path, :class=>"sidemenu link2" %> </li>
-        <li> <%= link_to t(:guild_supplies, :scope => "links"), guilds_path, :class=>"sidemenu link2" %> </li>
-      </ul>
-    </div>
-    <div class="topline"></div>
-<% end %>
+<%= render :partial => 'shared/side_supply' %>

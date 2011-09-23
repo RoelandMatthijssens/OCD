@@ -1,10 +1,19 @@
-<h1>All Materials</h1>
-<%= link_to "Add a new material", new_material_path %>
+<h1>
+  <%= @title %>
+  <div class="to_right">
+    <span class="comment_text">
+      <%= link_to t(:new_material, :scope => "links" ), new_material_path %>
+    </span>
+    <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), new_material_path %>
+  </div>
+</h1>
 <%= will_paginate %>
-<ul class="materials">
+<div class="materials">
   <% @materials.each do |material| %>
     <%= render :partial => "list_material", :locals => {:material => material} %>
   <% end %>
-</ul>
-<%= will_paginate %>
+</div>
 
+
+
+<%= render :partial => 'shared/side_supply' %>

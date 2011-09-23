@@ -1,0 +1,133 @@
+<h2><%= link_to material.name, material %>
+
+</h2> 
+
+<% (1..5).each do |i| %>
+  <%= radio_button "material", "rating_score", i, :class => "star", :disabled => "disabled" %>
+<% end %>
+
+<br />
+
+<fieldset class="simplefieldset2">
+  <legend>
+    <%= t(:info, :scope => "message" ) %>
+    <span class="edit">
+      - <%= link_to "Edit", edit_material_path(material) %>
+    </span>
+    <span class="comment_text">
+      - <%= link_to t(:add_one, :scope => "links" ), :controller => "materials", :action => "new", :parent_id => material.id %>
+      <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), new_material_path %>
+    </span>
+  </legend>
+
+  <table class="simpletable1">
+    <col/>
+    <% subject = material.subject %>
+    <% disciplines = subject.disciplines %>
+    <table class="simpletable1">
+      <tr>
+        <td><%= t(:prof, :scope => "globals" ) %></td>
+        <td><%= subject.prof %></td>
+      </tr>
+      <tr>
+        <% if subject %>
+          <td><%= t(:subject, :scope => "globals" ) %></td>
+          <td><%= link_to(subject.name, subject) %></td>
+        <% else %>
+          <td><%= t(:no_subject, :scope => "subject" ) %></td>
+        <% end %>
+      </tr>
+      <% [[disciplines, t(:disciplines, :scope => "globals" )]].each do |l| %>
+        <tr>
+          <td><%= l[1] %></td>
+          <td>
+            <% l[0].each do |x| %>
+              <div><%= link_to x.name, x %></div>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td><%= t(:info, :scope => "globals" ) %></td>
+        <td><%= material.info %></td>
+      </tr>
+    </table>
+  </table>
+</fieldset>
+
+<fieldset class="simplefieldset2">
+  <legend>
+    <%= t(:attachment, :scope => "message" ) %>
+  </legend>
+
+  <table class="simpletable1">
+    <col/>
+    <table class="simpletable1">
+      <ul>
+        <% material.attachments.each do |attachment| %>
+          <li>
+            <%= link_to attachment.basename, :controller=>'attachments',:action=>'download',:attachment_id=>attachment.id %> <br />
+          </li>
+        <% end %>
+      </ul>
+    </table>
+  </table>
+</fieldset>
+
+<fieldset class="simplefieldset2">
+  <legend>
+    <%= t(:guilds, :scope => "message" ) %>
+    <span class="comment_text">
+      <% if current_user.can?("sell_materials") %>
+        <% if current_user.guilds.size == 0 %>
+          <p><%= t :join_to_add, :scope => "materials"%></p>
+        <% elsif current_user.guilds.size > 1 %>
+          <p><%= t :to_may_guilds, :scope => "materials"%></p>
+        <% elsif current_user.guilds.first.materials.include?(material)%>
+          - <%= link_to t(:remove_supply, :scope => "message", :guild => current_user.guilds.first.initials ), "#" %>
+          <%= link_to image_tag("icons/twotone/" + icon_color + "/x.gif", :alt=>t("new_message", :scope => 'links')), "#" %>
+        <% else %>
+          - <%= link_to t(:add_supply, :scope => "message" ), :controller => "supplies", :action => "new", :material => material %>
+          <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), :controller => "supplies", :action => "new", :material => material %>
+        <% end %>
+      <% end %>
+
+    </span>
+  </legend>
+
+  <table class="simpletable1">
+    <col/>
+    <table class="simpletable1">
+      <% options = material.printer_options %>
+      <table>
+        <thead>
+          <tr>
+            <th>guild</th>
+            <th>printer</th>
+            <th>price set</th>
+            <th>sell price</th>
+            <th>total buy price</th>
+            <% options.each do |option| %>
+              <th><%= option.name %></th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% material.guilds.each do |guild| %>
+            <% supply = material.supplies.find(:all, :conditions => ['guild_id=?', guild.id]).first %>
+            <tr>
+              <td><%= link_to guild.name, root_url(:subdomain => guild.initials) %></td>
+              <td><%= link_to supply.price_set.printer.name, supply.price_set.printer %></td>
+              <td><%= link_to supply.price_set.name, supply.price_set %></td>
+              <td><%= supply.price %></td>
+              <td><%= supply.buy_price %></td>
+              <% options.each do |option| %>
+                <td><%= option.prices.find(:all, :conditions => ['price_set_id=?', supply.price_set.id]).first.amount %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </table>
+  </table>
+</fieldset>
