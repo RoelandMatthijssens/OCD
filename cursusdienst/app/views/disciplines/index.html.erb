@@ -1,10 +1,16 @@
-<h1><%= t(:all_disciplines, :scope => "titles" ) %></h1>
+<h1>
+  <%= @title %>
+  <div class="to_right">
+    <span class="comment_text">
+      <%= link_to t(:new_discipline, :scope => "links" ), new_discipline_path %>
+    </span>
+    <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), new_discipline_path %>
+  </div>
+</h1>
 <%= will_paginate %>
-<%= link_to t(:add_discipline, :scope => "links" ), new_discipline_path %>
 <ul class="disciplines">
   <% @disciplines.each do |discipline| %>
     <%= render discipline %>
   <% end %>
 </ul>
 <%= will_paginate %>
-

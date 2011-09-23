@@ -1,21 +1,21 @@
 class SubjectsController < ApplicationController
 
   def index
-		deny_access and return unless signed_in?
-		deny_privileged_access and return unless current_user.can?('view_subjects')
-		@title = t(:all_subjects, :scope => "titles" )
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('view_subjects')
+    @title = t(:all_subjects, :scope => "titles" )
     @subjects = Subject.paginate(:page => params[:page], :per_page => 10)
   end
 
   def show
-		#deny_access and return unless signed_in?
-		#deny_privileged_access and return unless current_user.can?('view_subjects')
+    #deny_access and return unless signed_in?
+    #deny_privileged_access and return unless current_user.can?('view_subjects')
     @subject = Subject.find(params[:id])
   end
 
   def new
-		deny_access and return unless signed_in?
-		deny_privileged_access and return unless current_user.can?('create_subjects')
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('create_subjects')
     @subject = Subject.new
     if params[:discipline_id]
       @subject = Discipline.find(params[:discipline_id]).subjects.new
@@ -23,40 +23,40 @@ class SubjectsController < ApplicationController
       @discipline = Discipline.new
     end
     @dis_fac_inst = []
-		@submit = t(:new_subject, :scope => "buttons" )
+    @submit = t(:new_subject, :scope => "buttons" )
   end
 
   def create
-		deny_access and return unless signed_in?
-		deny_privileged_access and return unless current_user.can?('create_subjects')
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('create_subjects')
     @subject = Subject.new(params[:subject])
     @subject.disciplines= get_disciplines_from_subject(params)
     if @subject.save
-			flash[:success] = t(:new_subject_success, :scope => "flash" )
+      flash[:success] = t(:new_subject_success, :scope => "flash" )
       redirect_to @subject
     else
       @dis_fac_inst = get_dis_fac_inst_from_par(params[:subject])
-			flash[:error] = t(:new_subject_fail, :scope => "flash", :subject => params[:subject])
+      flash[:error] = t(:new_subject_fail, :scope => "flash", :subject => params[:subject])
       render :action => 'new'
     end
   end
 
   def edit
-		deny_access and return unless signed_in?
-		deny_privileged_access and return unless current_user.can?('edit_subjects')
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('edit_subjects')
     @title = t(:edit_subject, :scope => "titles")
     @subject = Subject.find(params[:id])
     @dis_fac_inst = get_dis_fac_inst_from_subject(@subject)
-		@submit = t(:update_subject, :scope => "buttons" )
+    @submit = t(:update_subject, :scope => "buttons" )
   end
 
   def update
-		deny_access and return unless signed_in?
-		deny_privileged_access and return unless current_user.can?('edit_subjects')
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('edit_subjects')
     @subject = Subject.find(params[:id])
-    @subject.disciplines= get_disciplines_from_subject(params)
-    if @subject.update_attributes(params[:subject])
-			flash[:notice] = t(:update_subject_success, :scope => "flash"  )
+    #TODO fix this plz, on update wordt de teaching opnieuw aangemaakt lijkt me, en das invalid
+    if @subject.update_attributes!(params[:subject])
+      flash[:notice] = t(:update_subject_success, :scope => "flash"  )
       redirect_to @subject
     else
       @dis_fac_inst = get_dis_fac_inst_from_par(params[:subject])
@@ -82,21 +82,21 @@ class SubjectsController < ApplicationController
     } unless par[:subject][:disciplines_attributes].nil?
     return ds
   end
-  
+
   def get_dis_fac_inst_from_par par
     ds = []
     fac = []
     inst = []
     par[:disciplines_attributes].each_value { |v|
       if v["id"]
-        ds << v["id"] 
+        ds << v["id"]
         fac << v["faculty_id"]
         inst << v["institute_id"]
       end
     } unless par[:disciplines_attributes].nil?
     return [inst, fac, ds]
   end
-  
+
   def get_dis_fac_inst_from_subject subject
     ds = []
     fac = []

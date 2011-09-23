@@ -1,27 +1,50 @@
 <div>
-  <h1><%= link_to subject.name, subject %></h1>
-  <ul class="info">
-		<li><strong><%= t(:year, :scope => "attributes" ) %>: </strong><%= subject.year.to_s + ' ' + subject.year_type %></li>
-  </ul>
-	<strong><%= t(:disciplines, :scope => "globals" ) %>:</strong><br>
-  <% subject.disciplines.each { |discipline| %>
-    <strong><%= discipline.name %></strong><br/>
-    <ul>
-			<li><strong><%= t(:faculty, :scope => "globals" ) %>:</strong><%= link_to discipline.faculty.name, discipline.faculty %> <br/></li>
-			<li><strong><%= t(:institute, :scope => "globals" ) %>:</strong><%= link_to discipline.faculty.institute.name, discipline.faculty.institute %> <br/></li>
-    </ul>
-  <% } %>
-  <div class="materials">
-		<h3><%= t(:materials, :scope => "globals" ) %></h3>
+  <h2><%= link_to subject.name, subject %></h2>
+  <fieldset class="simplefieldset2">
+    <legend>
+     <%= t(:info, :scope => "message" ) %>
+     <span class="edit">
+     - <%= link_to "Edit", edit_subject_path(subject) %>
+     </span>
+    </legend>
+
+    <table class="simpletable1">
+    <col/>
+    <% disciplines = subject.disciplines %>
+    <% faculties =  disciplines.map{|a| a.faculty}.flatten%>
+    <% institutes = faculties.map{|a| a.institute} %>
+    <table class="simpletable1">
+      <tr>
+        <td><%= t(:prof, :scope => "globals" ) %></td>
+        <td><%= subject.prof %></td>
+      </tr>
+      <% [[institutes, t(:institutes, :scope => "globals" )], [faculties, t(:faculties, :scope => "globals" )], [disciplines, t(:disciplines, :scope => "globals" )]].each do |l| %>
+        <tr>
+          <td><%= l[1] %></td>
+          <td>
+            <% l[0].each do |x| %>
+                <div><%= link_to x.name, x %></div>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </table>
+  </fieldset>
+  <fieldset class="simplefieldset2">
+  <legend>
+    <%= t(:materials, :scope => "globals" ) %>
+    <span class="comment_text">
+      - <%= link_to t(:add_one, :scope => "links" ), :controller => "materials", :action => "new", :subject_id => subject.id %>
+      <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), new_material_path %>
+    </span>
+  </legend>
     <ul class="materials">
       <% subject.materials.each do |material| %>
         <li><%= link_to material.name, material %></li>
       <% end %>
-			<%= link_to t(:add_material, :scope => "links" ), :controller => "materials", :action => "new", :subject_id => subject.id %>
     </ul>
-  </div>
-
-	<%= link_to t(:edit_subject, :scope => "links" ), edit_subject_path(subject) %>
+  </fieldset>
 </div>
 
 <%= render :partial => "shared/right_navigation", :locals => {:params_key => :discipline_id}%>

@@ -1,6 +1,7 @@
 class Subject < ActiveRecord::Base
-  attr_accessible :name, :materials, :year, :year_type
+  attr_accessible :name, :materials, :year, :year_type, :prof
   validates :name, :presence => true
+  validates :prof, :presence => true
   validates :year, :presence => true
   validates :year_type, :presence => true
   has_many :teachings
@@ -11,13 +12,13 @@ class Subject < ActiveRecord::Base
   validate :unique_name_per_institute
 
   accepts_nested_attributes_for :disciplines
-  
+
   def subjects(i)
     result = []
     i.faculties.each { |x| x.disciplines.each{ |x| x.subjects.each { |x| result << x }}}
     return result
   end
-  
+
   def unique_name_per_institute
     disciplines.each do |discipline|
       institute = discipline.faculty.institute
@@ -28,7 +29,7 @@ class Subject < ActiveRecord::Base
       end
     end
   end
-  
+
 end
 
 # == Schema Information
@@ -40,4 +41,3 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #
-
