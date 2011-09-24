@@ -1,11 +1,13 @@
 <h1>
   <%= @title %>
+  <% if current_user.can? "create_subjects" %>
   <div class="to_right">
     <span class="comment_text">
       <%= link_to t(:new_subject, :scope => "links" ), new_subject_path %>
     </span>
     <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), new_subject_path %>
   </div>
+  <% end %>
 </h1>
 <%= will_paginate %>
 <ul class="disciplines">

@@ -1,30 +1,34 @@
 <fieldset class="simplefieldset2">
- <legend>
-  <%= t(:info, :scope => "message" ) %>
-  <span class= "edit">
-  - <%= link_to t(:edit, :scope => "links" ), edit_institute_path(institute) %>
-  </span>
-</legend>
- <table class="simpletable1">
-   <col/>
-   <tr>
-     <td> <%= t(:initials) %>: </td>
-     <td> <%= institute.initials %> </td>
-   </tr>
-   <tr>
-     <td><%= t(:location) %>:</td>
-     <td> <%= institute.location %> </td>
-   </tr>
- </table>
+  <legend>
+    <%= t(:info, :scope => "message" ) %>
+    <% if current_user.can? "edit_institutes" %>
+      <span class= "edit">
+        - <%= link_to t(:edit, :scope => "links" ), edit_institute_path(institute) %>
+      </span>
+    <% end %>
+  </legend>
+  <table class="simpletable1">
+    <col/>
+    <tr>
+      <td> <%= t(:initials) %>: </td>
+      <td> <%= institute.initials %> </td>
+    </tr>
+    <tr>
+      <td><%= t(:location) %>:</td>
+      <td> <%= institute.location %> </td>
+    </tr>
+  </table>
 </fieldset>
 
 <fieldset class="simplefieldset2">
   <legend>
     <%= t(:faculties, :scope => "globals") %>
-    <span class="comment_text">
-      - <%= link_to t(:add_one, :scope => "links" ), :controller => "faculties", :action => "new", :institute_id => institute.id %>
-      <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), new_institute_path %>
-    </span>
+    <% if current_user.can? "create_faculties" %>
+      <span class="comment_text">
+        - <%= link_to t(:add_one, :scope => "links" ), :controller => "faculties", :action => "new", :institute_id => institute.id %>
+        <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), new_institute_path %>
+      </span>
+    <% end %>
   </legend>
   <div class="Faculties">
     <ul class="faculties">

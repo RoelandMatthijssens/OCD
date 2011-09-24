@@ -2,7 +2,6 @@ class OrdersController < ApplicationController
 
   def index
     deny_access and return unless signed_in?
-
     @title = t(:all_orders, :scope => "titles" )
     if current_user.guilds.empty? || current_user.guilds.first.disciplines.empty?
       flash[:error] = t(:no_institute, :scope => "flash" )

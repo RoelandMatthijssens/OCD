@@ -2,43 +2,47 @@
   <h2><%= link_to subject.name, subject %></h2>
   <fieldset class="simplefieldset2">
     <legend>
-     <%= t(:info, :scope => "message" ) %>
-     <span class="edit">
-     - <%= link_to "Edit", edit_subject_path(subject) %>
-     </span>
+      <%= t(:info, :scope => "message" ) %>
+      <% if current_user.can? "edit_subjects" %>
+        <span class="edit">
+          - <%= link_to "Edit", edit_subject_path(subject) %>
+        </span>
+      <% end %>
     </legend>
 
     <table class="simpletable1">
-    <col/>
-    <% disciplines = subject.disciplines %>
-    <% faculties =  disciplines.map{|a| a.faculty}.flatten%>
-    <% institutes = faculties.map{|a| a.institute} %>
-    <table class="simpletable1">
-      <tr>
-        <td><%= t(:prof, :scope => "globals" ) %></td>
-        <td><%= subject.prof %></td>
-      </tr>
-      <% [[institutes, t(:institutes, :scope => "globals" )], [faculties, t(:faculties, :scope => "globals" )], [disciplines, t(:disciplines, :scope => "globals" )]].each do |l| %>
+      <col/>
+      <% disciplines = subject.disciplines %>
+      <% faculties =  disciplines.map{|a| a.faculty}.flatten%>
+      <% institutes = faculties.map{|a| a.institute} %>
+      <table class="simpletable1">
         <tr>
-          <td><%= l[1] %></td>
-          <td>
-            <% l[0].each do |x| %>
-                <div><%= link_to x.name, x %></div>
-            <% end %>
-          </td>
+          <td><%= t(:prof, :scope => "globals" ) %></td>
+          <td><%= subject.prof %></td>
         </tr>
-      <% end %>
+        <% [[institutes, t(:institutes, :scope => "globals" )], [faculties, t(:faculties, :scope => "globals" )], [disciplines, t(:disciplines, :scope => "globals" )]].each do |l| %>
+          <tr>
+            <td><%= l[1] %></td>
+            <td>
+              <% l[0].each do |x| %>
+                <div><%= link_to x.name, x %></div>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
     </table>
-  </table>
   </fieldset>
   <fieldset class="simplefieldset2">
-  <legend>
-    <%= t(:materials, :scope => "globals" ) %>
-    <span class="comment_text">
-      - <%= link_to t(:add_one, :scope => "links" ), :controller => "materials", :action => "new", :subject_id => subject.id %>
-      <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), new_material_path %>
-    </span>
-  </legend>
+    <legend>
+      <%= t(:materials, :scope => "globals" ) %>
+      <% if current_user.can? "create_materials" %>
+        <span class="comment_text">
+          - <%= link_to t(:add_one, :scope => "links" ), :controller => "materials", :action => "new", :subject_id => subject.id %>
+          <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), new_material_path %>
+        </span>
+      <% end %>
+    </legend>
     <ul class="materials">
       <% subject.materials.each do |material| %>
         <li><%= link_to material.name, material %></li>
