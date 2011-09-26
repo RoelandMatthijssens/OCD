@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     guild_id = params[:guild]
-    unless guild_id.nil?
+    unless guild_id.empty?
       @guild = Guild.find(guild_id)
     end
     if @user.save

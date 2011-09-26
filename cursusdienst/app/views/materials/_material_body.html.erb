@@ -1,6 +1,6 @@
 <h2><%= link_to material.name, material %>
 
-</h2> 
+</h2>
 
 <% (1..5).each do |i| %>
   <%= radio_button "material", "rating_score", i, :class => "star", :disabled => "disabled" %>

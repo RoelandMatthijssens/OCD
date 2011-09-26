@@ -15,6 +15,7 @@ class Material < ActiveRecord::Base
 
   validates :name, :presence => true
   validates :typee, :presence => true
+  validates :subject, :presence => true
   validates :printable, :inclusion => {:in => [true, false]}
   belongs_to :subject
   belongs_to :parent, :class_name => 'Material', :foreign_key => 'parent_id'
