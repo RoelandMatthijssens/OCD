@@ -67,6 +67,16 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('delete_users')
+    @user = User.find(params[:id])
+    @user.deleted = true
+    if @user.save!
+      flash[:succes] = t(:delete_user_success, :scope => "flash" )
+    else
+      flash[:error] = t(:delete_user_fail, :scope => "flash" )
+    end
+    redirect_to users_path
   end
 
   def edit_permissions

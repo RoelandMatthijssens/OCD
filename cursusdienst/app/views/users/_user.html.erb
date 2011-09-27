@@ -10,16 +10,19 @@
       <li><strong><%= t(:institute,:scope => "attributes") %>:</strong><%= discipline.faculty.institute.name %></li>
     </ul>
   <% end %>
-	<br/>
-	<% if current_user && ( current_user == user || current_user.can?("edit_users" ) ) %>
-		<% if current_user.can?("edit_permissions")|| user == current_user%>
-			<%= render :partial => 'user_permissions', :locals => {:user => user} %>
-		<% end %>
-		<%= link_to t(:edit_user,:scope => "links"), edit_user_path(user) %>
-	<% end %>
-	
-	<div class="TEST">
-		
-	</div>
-	
+  <br/>
+  <% if current_user && ( current_user == user || current_user.can?("edit_users" ) ) %>
+    <% if current_user.can?("edit_permissions")|| user == current_user%>
+      <%= render :partial => 'user_permissions', :locals => {:user => user} %>
+    <% end %>
+    <%= link_to t(:edit_user,:scope => "links"), edit_user_path(user) %>
+  <% end %>
+
+  <% if current_user.can? "delete_users" %>
+    <%= link_to image_tag("icons/twotone/" + icon_color + "/against.gif", :alt=>t("delete_user", :scope => 'links')), { :action => "destroy", :id => user.id }, :method => :delete %>
+  <% end %>
+  <div class="TEST">
+
+  </div>
+
 </div>
