@@ -4,7 +4,7 @@ require 'curl'
 class InstitutePasswordCheck < ActiveModel::Validator
 
   def login_curl uname, pw
-    c	= Curl::Easy.new
+    c = Curl::Easy.new
     c.header_in_body = false
     c.ssl_verify_host = false
     c.follow_location = false
@@ -18,7 +18,7 @@ class InstitutePasswordCheck < ActiveModel::Validator
     c.body_str.index('success') ? true : false
     #   c.body_str.index('success') && true
   end
-  
+
   def validate(record)
     unless login_curl(record.user_name, record.password)
       record.errors[:password] << "Your Password is not correct"
@@ -38,7 +38,7 @@ end
 class User < ActiveRecord::Base
   attr_accessible :last_name, :name, :user_name, :email, :password, :password_confirmation, :permission_group, :salt
   attr_accessor :password
-  
+
   validates :user_name, :presence => true,
     :length => { :within => 3..20 }
   validates :last_name, :presence => true
@@ -51,31 +51,31 @@ class User < ActiveRecord::Base
   validates_with InstitutePasswordCheck
   validates_with FailAllTheThings
   validates :name, :presence => true
-  
+
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, :presence => true, 
-    :format => {:with => email_regex}, 
+  validates :email, :presence => true,
+    :format => {:with => email_regex},
     :uniqueness => {:case_sensitive => false}
-  
+
   #  validates :permission_group, :presence => true
-  
+
   validates_uniqueness_of :user_name
-  
+
   #  belongs_to :discipline
   has_and_belongs_to_many :permission_groups
-  
+
   has_and_belongs_to_many :guilds
   has_and_belongs_to_many :disciplines
   has_many :orders
   has_many :shopping_cart_items
   has_many :action_logs
   has_many :ratings
-  
+
   default_scope :order => "users.last_name, users.name ASC"
-  
+
   #before_save :encrypt_password
   before_create :encrypt_password
-  
+
   def full_name
     "#{last_name} #{name}"
   end
@@ -92,10 +92,10 @@ class User < ActiveRecord::Base
     user = User.find_by_id(id)
     (user && user.salt == cookie_salt) ? user : nil
   end
-	
-	def can?(permission)
-		permission_groups.map{|x| x.name}.include?(permission)
-	end
+
+  def can?(permission)
+    permission_groups.map{|x| x.name}.include?(permission)
+  end
   private
   def encrypt_password
     self.salt = make_salt if new_record?
@@ -133,4 +133,3 @@ end
 #  password            :string(255)
 #  encrypted_password  :string(255)
 #
-

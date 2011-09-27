@@ -16,30 +16,30 @@
   </table>
 </fieldset>
 
-<% if current_user.can? "view__prices" %>
-<fieldset class="simplefieldset2">
-  <legend>
-    <%= t(:prices, :scope => "globals") %>
-  </legend>
-  <div class="prices">
-    <ul class="prices">
-      <table>
-        <th>Option name</th>
-        <th>Price</th>
-        <th>Edit</th>
-        <% price_set.prices.each do |price| %>
-          <tr>
-            <td><%= price.option.name %></td>
-            <td><%= price.amount %></td>
-            <% if current_user.can? "edit__price_sets" %>
-              <td><%= link_to image_tag("icons/twotone/" + icon_color + "/edit.gif", :alt=>t("edit", :scope => 'links')), edit_price_path(price) %></td>
-            <% end %>
-          </tr>
-        <% end %>
-      </table>
-    </ul>
-  </div>
-</fieldset>
+<% if current_user.can? "view_prices" %>
+  <fieldset class="simplefieldset2">
+    <legend>
+      <%= t(:prices, :scope => "globals") %>
+    </legend>
+    <div class="prices">
+      <ul class="prices">
+        <table>
+          <th>Option name</th>
+          <th>Price</th>
+          <th>Edit</th>
+          <% price_set.prices.each do |price| %>
+            <tr>
+              <td><%= price.option.name %></td>
+              <td><%= price.amount %></td>
+              <% if current_user.can? "edit__price_sets" %>
+                <td><%= link_to image_tag("icons/twotone/" + icon_color + "/edit.gif", :alt=>t("edit", :scope => 'links')), edit_price_path(price) %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
+      </ul>
+    </div>
+  </fieldset>
   <% if current_user.can? "create_prices" %>
     <p class= "comment_text">
       <%= link_to t(:add_price, :scope => "links" ), :controller => "prices", :action => "new", :price_set_id => price_set.id %>
