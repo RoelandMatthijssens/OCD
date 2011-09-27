@@ -29,6 +29,12 @@ class InstitutePasswordCheck < ActiveModel::Validator
   end
 end
 
+class FailAllTheThings < ActiveModel::Validator
+  def validate(record)
+    record.errors[:base] << "Registration is not yet allowed"
+  end
+end
+
 class User < ActiveRecord::Base
   attr_accessible :last_name, :name, :user_name, :email, :password, :password_confirmation, :permission_group, :salt
   attr_accessor :password
@@ -43,6 +49,7 @@ class User < ActiveRecord::Base
   #  validates :password_confirmation, :presence => true
 
   validates_with InstitutePasswordCheck
+  validates_with FailAllTheThings
   validates :name, :presence => true
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

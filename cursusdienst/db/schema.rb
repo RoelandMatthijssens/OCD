@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(:version => 20110927113641) do
     t.string   "action"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "deleted",    :default => false
   end
 
   create_table "attachments", :force => true do |t|

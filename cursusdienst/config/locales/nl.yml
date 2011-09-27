@@ -187,6 +187,7 @@ nl:
 
   errors:
     format: "%{attribute} %{message}"
+    register_not_allowed: "regestratie is nog niet toegelaten"
 
     messages: &errors_messages
       inclusion: "is niet in de lijst opgenomen"
