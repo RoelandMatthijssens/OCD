@@ -1,10 +1,40 @@
 <h1><%= t(:shopping_cart, :scope => "shopping_cart" ) %></h1>
-<ul class="shopping_cart_items">
-  <% total = 0 %>
-  <% @shopping_cart_items.each do |item| %>
-    <%= render item %>
-    <% 'TODO bereken totaal prijs op basis van waar het item besteld is' %>
-  <% end %>
-</ul>
-<strong><%= t(:total, :scope => "shopping_cart" ) %>:</strong>€<%= total %><br/>
+
+<fieldset class="simplefieldset2">
+  <legend>
+    <%= t(:ordered_items, :scope => "shopping_cart" ) %>
+  </legend>
+
+  <table class="simpletable1">
+    <th><%= t :name, :scope => "attributes" %></th>
+    <th><%= t :type, :scope => "material" %></th>
+    <th><%= t :amount, :scope => "shopping_cart" %></th>
+    <th><%= t :price, :scope => "attributes" %></th>
+    <tr>
+      <% total = 0 %>
+      <% @shopping_cart_items.each do |item| %>
+        <% g = item.guild %>
+        <% m = item.material %>
+        <% s = Supply.find(:all, :conditions => ['material_id = ? and guild_id = ? ', m.id, g.id]) %>
+        <% total += s.first.price * item.amount %>
+        <td><%= item.material.name %></td>
+        <td><%= item.material.typee %></td>
+        <td>
+          <%= item.amount %> 
+          <%= link_to image_tag("icons/twotone/" + icon_color + "/minus.gif", :alt=>"-"), substract_shopping_cart_item_path(item), :method => :put %>
+          <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>"+"), add_shopping_cart_item_path(item), :method => :put %>
+        </td>
+        <td><%= number_to_currency s.first.price %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <td  colspan="3">Total</td>
+      <td><%= number_to_currency total %></td>
+    </tr>
+
+  </table>
+</fieldset>
+
 <%= link_to t(:proceed_to_order, :scope => "links" ), new_order_path %>
+
+<%= render :partial => "guilds/sidemenu", :locals => {:guild => Guild.find_by_initials(request.subdomain)} %>

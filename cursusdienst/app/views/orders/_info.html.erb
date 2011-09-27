@@ -1,6 +1,6 @@
 <div class="info">
   <% if guild.info "cash" %>
-    <fieldset>
+    <fieldset class="simplefieldset2">
       <legend><%= t(:cash, :scope => "info" ) %></legend>
       <% info = guild.info("cash") %>
       <%= raw info.content %><br/>
@@ -11,7 +11,7 @@
   <% end %><br/>
 
   <% if guild.info "transfer" %>
-    <fieldset>
+    <fieldset class="simplefieldset2">
       <legend><%= t(:transfer, :scope => "info" ) %></legend>
       <% info = guild.info("transfer") %>
       <%= raw info.content %><br/>
@@ -22,8 +22,11 @@
   <% end %><br/>
 
   <% if guild.info "general_payment" %>
-    <fieldset>
-      <legend><%= t(:general_payment, :scope => "info" ) %></legend>
+    <fieldset class="simplefieldset2">
+      <legend>
+        <%= t(:general_payment, :scope => "info" ) %>
+        <%= link_to t(:edit, :scope => "links" ), 'THE FUCK'%>
+      </legend>
       <% info = guild.info("general_payment") %>
       <%= raw info.content %><br/>
       <%= link_to t(:edit, :scope => "links" ), edit_info_string_path(info) %>

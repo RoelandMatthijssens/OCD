@@ -27,4 +27,32 @@ class SuppliesController < ApplicationController
     end
     #    end
   end
+  
+  
+  def edit
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('edit_institutes')
+    @supply = Supply.find(params[:id])
+    @title = t(:add_to_supply, :scope => "title" )
+    @material = @supply.material
+    @guilds = current_user.guilds
+    @printers = Printer.all
+    @price_sets = PriceSet.all
+    @price_set = @supply.price_set
+    @printer = @price_set.printer
+    @submit = t(:update_supply, :scope => "buttons")
+  end
+
+  def update
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('edit_institutes')
+    @supply = Supply.find(params[:id])
+    if @supply.update_attributes(params[:supply])
+      flash[:succes] = t(:update_supply_success, :scope => "flash")
+      log("Edit supply #{@supply.id}")
+      redirect_to root_url(:subdomain => @supply.guild.initials)
+    else
+      render 'edit'
+    end
+  end
 end

@@ -274,6 +274,7 @@ nl:
     subject: "Cursus"
     subjects: "Cursussen"
     permissions: "Rechten"
+    material: "Uitgifte"
     materials: "Uitgaven"
     users: "Gebruikers"
     subjects: "Cursussen"
@@ -375,6 +376,7 @@ nl:
   material:
     no_subject: "his material is not attached to a subject yet."
     join_to_add: "Join een kring om aanbod toe te voegen"
+    type: "Type"
     types:
       select_type: "Selecteer type"
       book: "Boek"
@@ -500,6 +502,7 @@ nl:
     update_price_set: "Pas prijzenset aan"
     update_price: "Pas prijs aan"
     add_to_supply: "Voeg toe"
+    update_supply: "Pas aan"
 
   flash:
     new_institute_success: "instelling succesvol aangemaakt"

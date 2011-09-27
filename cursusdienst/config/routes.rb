@@ -47,7 +47,7 @@ Cursusdienst::Application.routes.draw do
 
   resources :info_strings
 
-  resources :supplies, :only => [:new, :create]
+  resources :supplies, :only => [:new, :create, :edit, :update, :destroy]
 
   resources :orders do
     put :mark_as_payed, :on => :member

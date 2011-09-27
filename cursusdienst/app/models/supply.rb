@@ -1,5 +1,5 @@
 class Supply < ActiveRecord::Base
-  attr_accessible :guild_id, :material_id, :price_set_id
+  attr_accessible :guild_id, :material_id, :price_set_id, :price
   belongs_to :guild
   belongs_to :material
   belongs_to :price_set

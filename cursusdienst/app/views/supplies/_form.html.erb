@@ -1,0 +1,33 @@
+<%= form_for(@supply) do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+  <div class='field'>
+    <%= f.hidden_field :material_id, :value => @material.id %>
+
+    <%= label_tag "printer" %>    <br />
+    <%= render :partial => "filters/select_box", :locals => {
+      :filter_key_ajax => "printer",
+      :id => "supply[printer_id]",
+      :dataset => Printer.all, 
+      :selected_id => @printer ? @printer.id.to_s : "",
+      :parent_id => "supply_printer_id",
+      :child_id => "supply_price_set_id"} %> <br />
+
+    <%= label_tag "price_set" %>    <br />
+    <%= render :partial => "filters/select_box", :locals => {
+      :filter_key_ajax => "",
+      :id => "supply[price_set_id]",
+      :dataset => @printer && @printer.price_sets.any? ? @printer.price_sets : [], 
+      :selected_id => (@price_set ? @price_set.id.to_s : ""),
+      :parent_id => nil,
+      :child_id => nil} %> <br />
+
+    <%= f.label :guild %> <br />
+    <%= f.select(:guild_id, @guilds.collect {|p| [ p.name, p.id ] }, {:prompt => 'Select guild'}) %><br />
+    <%= f.label :price %> <br/>
+    <%= f.text_field :price %>
+
+  </div>
+  <div class="actions">
+    <%= f.submit @submit %>
+  </div>
+<% end %>
