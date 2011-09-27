@@ -1,6 +1,8 @@
-class ActiveModel::Base
-  alias_method :unchecked_find, :find
-  def find *p
+class ActiveRecord::Base
+  class << self
+    alias_method :unchecked_find, :find
+  end
+  def self.find *p
     conditions = nil
     p.each do |e|
       if e.instance_of? Hash and conditions.nil?
@@ -12,6 +14,6 @@ class ActiveModel::Base
     else
       p << {:conditions => ["deleted = 0"]}
     end
-    unchecked_find *p
+    self.unchecked_find *p
   end
 end

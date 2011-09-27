@@ -13,12 +13,11 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module Cursusdienst
   class Application < Rails::Application
-
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
-    
-    
+
+
     #TODO: change to 1 for env = production. also change lib/subdomain to 1
     config.action_dispatch.tld_length = 2
 
@@ -38,7 +37,7 @@ module Cursusdienst
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}').to_s]
-    
+
     config.i18n.default_locale = :nl
     config.i18n.reload!
 
@@ -50,12 +49,12 @@ module Cursusdienst
 
     # Enable the asset pipeline
     config.assets.enabled = true
-    
+
     if Rails.env.test?
-			initializer :after => :initialize_dependency_mechanism do
-				# Work around initializer in railties/lib/rails/application/bootstrap.rb
-				ActiveSupport::Dependencies.mechanism = :load
-			end
-		end
+      initializer :after => :initialize_dependency_mechanism do
+        # Work around initializer in railties/lib/rails/application/bootstrap.rb
+        ActiveSupport::Dependencies.mechanism = :load
+      end
+    end
   end
 end

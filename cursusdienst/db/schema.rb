@@ -11,13 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110923121507) do
+ActiveRecord::Schema.define(:version => 20110927113641) do
 
   create_table "action_logs", :force => true do |t|
     t.integer  "user_id"
     t.string   "action"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "deleted",    :default => false
   end
 
   create_table "attachments", :force => true do |t|
@@ -27,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20110923121507) do
     t.integer  "file_size"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "deleted",      :default => false
   end
 
   create_table "disciplines", :force => true do |t|
@@ -34,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20110923121507) do
     t.integer  "faculty_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "deleted",    :default => false
   end
 
   create_table "disciplines_guilds", :id => false, :force => true do |t|
@@ -52,14 +55,23 @@ ActiveRecord::Schema.define(:version => 20110923121507) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "initials"
+    t.boolean  "deleted",      :default => false
   end
 
   add_index "faculties", ["institute_id"], :name => "index_faculties_on_institute_id"
+
+  create_table "foobars", :force => true do |t|
+    t.boolean  "deleted"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "guilds", :force => true do |t|
     t.string  "name"
     t.string  "initials"
     t.integer "discipline_id"
+    t.boolean "deleted",       :default => false
   end
 
   create_table "guilds_users", :id => false, :force => true do |t|
@@ -73,6 +85,7 @@ ActiveRecord::Schema.define(:version => 20110923121507) do
     t.integer  "guild_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "deleted",    :default => false
   end
 
   create_table "institutes", :force => true do |t|
@@ -81,6 +94,7 @@ ActiveRecord::Schema.define(:version => 20110923121507) do
     t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "deleted",    :default => false
   end
 
   create_table "material_orders", :force => true do |t|
@@ -90,6 +104,7 @@ ActiveRecord::Schema.define(:version => 20110923121507) do
     t.datetime "updated_at"
     t.integer  "guild_id"
     t.integer  "amount"
+    t.boolean  "deleted",     :default => false
   end
 
   create_table "materials", :force => true do |t|
@@ -104,6 +119,7 @@ ActiveRecord::Schema.define(:version => 20110923121507) do
     t.string   "info"
     t.integer  "page_count", :default => -1
     t.boolean  "printable"
+    t.boolean  "deleted",    :default => false
   end
 
   create_table "materials_options", :id => false, :force => true do |t|
@@ -118,6 +134,7 @@ ActiveRecord::Schema.define(:version => 20110923121507) do
     t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "deleted",    :default => false
   end
 
   create_table "options", :force => true do |t|
@@ -125,6 +142,7 @@ ActiveRecord::Schema.define(:version => 20110923121507) do
     t.datetime "updated_at"
     t.string   "name"
     t.string   "typee"
+    t.boolean  "deleted",    :default => false
   end
 
   create_table "orders", :force => true do |t|
@@ -136,6 +154,7 @@ ActiveRecord::Schema.define(:version => 20110923121507) do
     t.integer  "institute_id"
     t.string   "payment_type"
     t.string   "label"
+    t.boolean  "deleted",      :default => false
   end
 
   create_table "permission_groups", :force => true do |t|
@@ -143,6 +162,7 @@ ActiveRecord::Schema.define(:version => 20110923121507) do
     t.integer  "level"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "deleted",    :default => false
   end
 
   create_table "permission_groups_users", :id => false, :force => true do |t|
@@ -157,6 +177,7 @@ ActiveRecord::Schema.define(:version => 20110923121507) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "deleted",    :default => false
   end
 
   create_table "prices", :force => true do |t|
@@ -166,6 +187,7 @@ ActiveRecord::Schema.define(:version => 20110923121507) do
     t.datetime "updated_at"
     t.integer  "option_id"
     t.string   "typee"
+    t.boolean  "deleted",      :default => false
   end
 
   create_table "print_job_items", :force => true do |t|
@@ -174,18 +196,21 @@ ActiveRecord::Schema.define(:version => 20110923121507) do
     t.integer  "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "deleted",      :default => false
   end
 
   create_table "print_jobs", :force => true do |t|
     t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "deleted",    :default => false
   end
 
   create_table "printers", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "deleted",    :default => false
   end
 
   create_table "ratings", :force => true do |t|
@@ -196,6 +221,7 @@ ActiveRecord::Schema.define(:version => 20110923121507) do
     t.string   "rateable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "deleted",       :default => false
   end
 
   create_table "sales", :force => true do |t|
@@ -205,6 +231,7 @@ ActiveRecord::Schema.define(:version => 20110923121507) do
     t.integer  "reference_key"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "deleted",       :default => false
   end
 
   create_table "shopping_cart_items", :force => true do |t|
@@ -214,6 +241,7 @@ ActiveRecord::Schema.define(:version => 20110923121507) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "guild_id"
+    t.boolean  "deleted",     :default => false
   end
 
   create_table "stocks", :force => true do |t|
@@ -227,6 +255,7 @@ ActiveRecord::Schema.define(:version => 20110923121507) do
     t.integer  "floating_period"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "deleted",         :default => false
   end
 
   create_table "subjects", :force => true do |t|
@@ -236,6 +265,7 @@ ActiveRecord::Schema.define(:version => 20110923121507) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "prof"
+    t.boolean  "deleted",    :default => false
   end
 
   create_table "supplies", :force => true do |t|
@@ -245,6 +275,7 @@ ActiveRecord::Schema.define(:version => 20110923121507) do
     t.datetime "updated_at"
     t.integer  "price_set_id"
     t.float    "price"
+    t.boolean  "deleted",      :default => false
   end
 
   create_table "teachings", :force => true do |t|
@@ -252,6 +283,7 @@ ActiveRecord::Schema.define(:version => 20110923121507) do
     t.integer  "subject_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "deleted",       :default => false
   end
 
   create_table "users", :force => true do |t|
@@ -266,6 +298,7 @@ ActiveRecord::Schema.define(:version => 20110923121507) do
     t.string   "password"
     t.string   "encrypted_password"
     t.string   "salt"
+    t.boolean  "deleted",             :default => false
   end
 
 end
