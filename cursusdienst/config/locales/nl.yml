@@ -561,9 +561,11 @@ nl:
     new_price_success: "Nieuwe prijs succesvol aangemaakt"
     new_price_fail: "Nieuwe prijs niet aangemaakt. Er is iets misgegaan"
     update_price_success: "Prijs succesvol aangepast"
-    new_printer_success: "Printer succesvol aangemaakt"
-    new_printer_fail: "Printer niet aangemaakt. Er is iets misgegaan"
-    update_printer_success: "Printer succesvol aangepast"
+    new_printer_success: "Drukker succesvol aangemaakt"
+    new_printer_fail: "Drukker niet aangemaakt. Er is iets misgegaan"
+    update_printer_success: "Drukker succesvol aangepast"
+    delete_user_success: "Gebruiker succesvol verwijderd"
+    delete_user_fail: "Gebruiker niet verwijderd. Er is iets misgegaan"
 
   links:
     add_one: "Nieuw"
@@ -601,6 +603,7 @@ nl:
     new_faculty: "Nieuwe faculteit"
     new_discipline: "Nieuwe richting"
     set_footer_banner: "Plaats banner"
+    delete_user: "Verwijder gebruiker"
 
   info:
     cash: "Cash info"
