@@ -26,8 +26,8 @@
     :selected_id => @parent_params_discipline[1],
     :parent_id => "parent_discipline_id",
     :child_id => "parent_subject_id"} %> <br />
-    
-    <%= label_tag "subject" %>    
+
+  <%= label_tag "subject" %>    
   <%= render :partial => "filters/select_box", :locals => {
     :filter_key_ajax => "subject",
     :id => "parent[subject_id]",
@@ -45,6 +45,9 @@
     :parent_id => "",
     :child_id => ""} %> <br />
 
+  <%= label_tag :delete_previous%>
+  <%= hidden_field_tag "delete_previous" %>
+  <%= check_box_tag "delete_previous" %><br/>
 
   <%= remove_nearest_class_and_show_items "remove", "_destroy_material", ["add_subject_or_parent_link"], f %>
 

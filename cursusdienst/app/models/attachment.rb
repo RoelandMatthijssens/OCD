@@ -1,10 +1,12 @@
 class Attachment < ActiveRecord::Base
   mount_uploader :item, AttachmentUploader
   
+  validates_presence_of :item
+  
   before_save :update_item_attributes
   
   def basename
-    item_url
+    File.basename(item_url)
   end
 
   private

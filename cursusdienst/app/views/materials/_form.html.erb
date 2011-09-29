@@ -13,6 +13,15 @@
     <%= f.label :printable %>
     <%= f.hidden_field "printable", :value => 0 %>
     <%= f.check_box "printable" %><br/>
+
+    <% if params[:parent_id] %>
+
+      <%= label_tag :delete_previous%>
+      <%= hidden_field_tag "delete_previous" %>
+      <%= check_box_tag "delete_previous" %><br/>
+      
+    <% end %>
+
     <%= f.label :info %> <br/>
     <%= f.text_area :info, :cols => 60, :rows => 7  %> <br/>
   </div>

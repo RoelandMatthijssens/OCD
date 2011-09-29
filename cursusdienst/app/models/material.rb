@@ -6,6 +6,13 @@ class Numeric
   end
 end
 
+class ExclusivePresence < ActiveModel::Validator
+  def validate(record)
+    unless (record.parent_id ) || (record.subject_id)
+      record.errors[:base] << "Either parent or subject have to be given"
+    end
+  end
+end
 
 class Material < ActiveRecord::Base
   attr_accessible :name, :subject_id, :guilds, :material_options, :parent, :parent_id, :path_name, :attachments_attributes, :typee, :info, :printable, :page_count
@@ -15,7 +22,9 @@ class Material < ActiveRecord::Base
 
   validates :name, :presence => true
   validates :typee, :presence => true
-  validates :subject, :presence => true
+  
+  validates_with ExclusivePresence
+  
   validates :printable, :inclusion => {:in => [true, false]}
   belongs_to :subject
   belongs_to :parent, :class_name => 'Material', :foreign_key => 'parent_id'
@@ -58,7 +67,7 @@ class Material < ActiveRecord::Base
     if self.subject
       return subject
     elsif self.parent
-      if ring_check.contains self.parent
+      if ring_check.index self.parent
         raise "ring detected"
       else
         return self.parent.get_subject(ring_check)

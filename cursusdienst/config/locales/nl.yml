@@ -377,6 +377,7 @@ nl:
     no_subject: "his material is not attached to a subject yet."
     join_to_add: "Join een kring om aanbod toe te voegen"
     type: "Type"
+    parent: "Vorige versie"
     types:
       select_type: "Selecteer type"
       book: "Boek"

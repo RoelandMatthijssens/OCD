@@ -26,7 +26,7 @@
 
   <table class="simpletable1">
     <col/>
-    <% subject = material.subject %>
+    <% subject = material.get_subject %>
     <% disciplines = subject.disciplines %>
     <table class="simpletable1">
       <tr>
@@ -55,6 +55,12 @@
         <td><%= t(:info, :scope => "globals" ) %></td>
         <td><%= material.info %></td>
       </tr>
+      <% if material.parent_id %>
+        <tr>
+          <td><%= t :parent, :scope => "material" %></td>
+          <td><%= link_to "#{t material.parent.typee.downcase.to_sym, :scope => "material.types" } #{material.parent.name}", material.parent %></td>
+        </tr>
+      <%  end %>
     </table>
   </table>
 </fieldset>
