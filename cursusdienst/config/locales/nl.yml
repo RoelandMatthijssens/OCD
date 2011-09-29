@@ -551,6 +551,7 @@ nl:
     update_subject_success: "Cursus succesvol aangepast"
     new_user_success: "Gebruiker succesvol aangemaakt"
     new_user_fail: "Gebruiker niet aangemaakt. Er is iets misgegaan"
+    new_user_no_guild_fail: "Gebruiker niet aangemaakt. Selecteer een Kring A.U.B. "
     update_user_success: "Gebruiker succesvol aangepast"
     update_user_permissions_success: "Rechten van %{user} succesvol aangepast"
     error_prohibited_login: "Een fout verhinderde het inloggen:"
