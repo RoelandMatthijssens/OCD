@@ -4,7 +4,7 @@ class Attachment < ActiveRecord::Base
   before_save :update_item_attributes
   
   def basename
-    File.basename(item_url)
+    item_url
   end
 
   private
