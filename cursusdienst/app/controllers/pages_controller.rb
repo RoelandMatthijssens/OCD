@@ -6,8 +6,12 @@ class PagesController < ApplicationController
 		@title = t(:home, :scope => "titles" )
   end
 
-  def about
-		@title = t(:about, :scope => "titles" )
+  def guide
+		@title = t(:guide, :scope => "titles" )
+  end
+  
+  def info
+		@title = t(:info, :scope => "titles" )
   end
 
   def access_denied

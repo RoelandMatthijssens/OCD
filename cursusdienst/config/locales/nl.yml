@@ -321,6 +321,7 @@ nl:
       welcome_message_join_us: "Hoewel deze site zijn roots heeft binnen de ESP-faculteit van de VUB (meer bepaald bij Promeco en KEPS) werd het van dag 1 zo ontwikkeld dat andere (VUB-)kringen eenvoudig zouden kunnen instappen.<br />Is jouw kring op zoek naar een goedkoop online systeem voor de cursusdienst? Neem dan zeker contact op via info@tyca.be."
 
   side_menu:
+    guide: "handleiding"
     introduction: "Inleiding"
     status: "Status"
     contact: "Contact"
@@ -459,6 +460,8 @@ nl:
     edit_institute: "Instelling bewerken"
 
     home: "Home"
+    guide: "Handleiding"
+    info: "Info"
     about: "Over ons"
     access_denied: "Toegang geweigerd"
     control_panel: "Beheerpaneel"
