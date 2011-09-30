@@ -10,7 +10,7 @@ class MaterialsController < ApplicationController
   def show
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('view_materials')
-    @material = Material.find(params[:id])
+    @material = Material.unchecked_find(params[:id])
     @rating = Rating.new 
   end
 
@@ -34,8 +34,19 @@ class MaterialsController < ApplicationController
     @material = Material.new(params[:material])
     @material.printable = params[:material][:printable]
     @material.options= get_options_from_material(params[:material])
-    if @material.save
+
+    if @material.save 
       flash[:succes] = t(:new_material_success, :scope => "flash")
+      if params[:delete_previous] && params[:delete_previous] ==  '1'
+        temp = Material.find(params[:parent_id])
+        temp.deleted = true
+        unless temp.save
+          filter = params[:material]
+          flash[:notice] = t(:new_material_fail, :scope => "flash")
+          set_dataset_from_params params
+          render 'new'
+        end
+      end
       redirect_to @material
     else
       filter = params[:material]
@@ -48,7 +59,7 @@ class MaterialsController < ApplicationController
   def edit
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('edit_materials')
-    @material = Material.find(params[:id])
+    @material = Material.unchecked_find(params[:id])
     @parents = @material.subject ? @material.subject.materials : nil
     set_given_subject @material
     set_given_parent @material
@@ -58,7 +69,7 @@ class MaterialsController < ApplicationController
   def update
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('edit_materials')
-    @material = Material.find(params[:id])
+    @material = Material.unchecked_find(params[:id])
     @material.subject = nil unless subject_given?(params[:material])
     @material.options = get_options_from_material(params[:material])
     #    @material.subject_id = nil if !params[:material][:subject_id]

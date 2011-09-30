@@ -15,7 +15,12 @@ Cursusdienst::Application.routes.draw do
   get "pages/manual"
 
   get "attachments/download"
+  
+  get "pages/guide"
 
+  get "pages/info"
+  
+  
   resources :users do
     get :edit_permissions, :on => :member
     put :update_permissions, :on => :member

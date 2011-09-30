@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     unless guild_id.empty?
       @guild = Guild.find(guild_id)
     end
-    if @user.save
+    if ! guild_id.empty? && @user.save
       sign_in @user
       @guild.users << @user if @guild
       flash[:succes] = t(:new_user_success, :scope => "flash" )
@@ -36,8 +36,11 @@ class UsersController < ApplicationController
       else
         redirect_to root_url(:subdomain => @user.guilds.first.initials)
       end
+    elsif guild_id.empty?
+      flash[:error] = t(:new_user_no_guild_fail, :scope => "flash" )
+      render 'new'
     else
-      flash[:succes] = t(:new_user_fail, :scope => "flash" )
+      flash[:error] = t(:new_user_fail, :scope => "flash" )
       render 'new'
     end
   end
