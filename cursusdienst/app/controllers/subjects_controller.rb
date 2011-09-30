@@ -54,7 +54,8 @@ class SubjectsController < ApplicationController
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('edit_subjects')
     @subject = Subject.find(params[:id])
-    #TODO fix this plz, on update wordt de teaching opnieuw aangemaakt lijkt me, en das invalid
+    @subject.disciplines= get_disciplines_from_subject(params) #lalala dirtyness!!!
+    params[:subject].delete :disciplines_attributes
     if @subject.update_attributes!(params[:subject])
       flash[:notice] = t(:update_subject_success, :scope => "flash"  )
       redirect_to @subject
@@ -68,6 +69,16 @@ class SubjectsController < ApplicationController
   end
 
   private
+  
+  def set_disciplines_attributes disciplines_attributes
+    @subject.disciplines = []
+    disciplines_attributes.each_value { |da|
+      unless v["id"].empty?
+        d = Discipline.find(v["id"])
+        @subject.disciplines << d if d.instance_of? Discipline and v["_destroy"] != "1"
+      end
+    } 
+  end
 
   def get_disciplines_from_subject par
     ds = []
