@@ -578,6 +578,8 @@ nl:
     delete_user_success: "Gebruiker succesvol verwijderd"
     delete_user_fail: "Gebruiker niet verwijderd. Er is iets misgegaan"
     update_stock_success: "Stock succesvol aangepast"
+    out_of_stock: "%{material} is niet meer in stock, en kan niet verkocht worden. Winkelmandje werd niet gepost"
+    not_enough_stock: "%{material} is slechts %{available} keer in stock. U bestelde er %{ordered}."
 
   links:
     add_one: "Nieuw"
