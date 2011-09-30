@@ -21,10 +21,15 @@ Cursusdienst::Application.routes.draw do
   get "pages/guide"
 
   get "pages/info"
+<<<<<<< HEAD
   
   get "pages/eula"
   
   
+=======
+
+
+>>>>>>> 91f1080ede192d7be46399ab0d570d399c2f9d43
   resources :users do
     get :edit_permissions, :on => :member
     put :update_permissions, :on => :member
