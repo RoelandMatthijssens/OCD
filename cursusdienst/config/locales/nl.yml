@@ -265,6 +265,7 @@ nl:
   example: "t(:cool, :scope => 'models.guild')"
 
   globals:
+    none_found: "Geen resultaten gevonden"
     select: "Selecteer"
     disciplines: "Richtingen"
     discipline: "richting"
@@ -601,6 +602,7 @@ nl:
     overview: "Overzicht"
     process: "Proces"
     logs: "Logs"
+    users: "Gebruikers"
     add_permission: "Nieuw recht aanmaken"
     edit_permission: "Recht bewerken"
     edit_permissions: "Rechten bewerken "

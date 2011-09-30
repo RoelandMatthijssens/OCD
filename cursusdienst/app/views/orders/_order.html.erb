@@ -1,5 +1,6 @@
 <tr>
-  <td><%= order.user.name %></td>
+  <td><%= order.user.name %> <%= order.user.last_name %> (<%= order.user.user_name %>)</td>
+  <td><%= order.order_key %></td>
   <td><%= order.status %></td>
   <td><%= render :partial => 'orders_materials', :locals => { :items => order.material_orders } %></td>
   <td>

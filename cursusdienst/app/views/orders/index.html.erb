@@ -1,10 +1,11 @@
 <h1><%= @title %></h1>
 <%= render :partial => 'filters' %>
 
-<%= render :partial => 'info', :locals => {:guild => @guild} %>
 
 <% if @orders && @orders.any?%>
-<%= render :partial => 'active_orders' %>
+  <%= render :partial => 'active_orders' %>
+<% else %>
+  <%= t(:none_found, :scope => "globals")  %>
 <% end %>
 
 <%= render :partial => 'menu' %>

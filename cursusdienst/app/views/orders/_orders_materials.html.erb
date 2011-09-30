@@ -4,15 +4,24 @@
       <th>item name</th>
       <th>bought at</th>
       <th>amount</th>
+      <th>price</th>
+      
     </tr>
   </thead>
   <tbody>
+    <% total_price = 0 %>
     <% items.each do |items| %>
+      <% total_price += items.price %>
     <tr>
       <td><%= items.material.name %></td>
       <td><%= items.guild.name %></td>
       <td><%= items.amount %></td>
+      <td><%= number_to_currency items.price %></td>
     </tr>
     <% end %>
+    <tr>
+      <td colspan="3">total</td>
+      <td><%= number_to_currency total_price %></td>
+    </tr>
   </tbody>
 </table>

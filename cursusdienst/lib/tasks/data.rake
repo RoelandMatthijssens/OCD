@@ -4,11 +4,11 @@ namespace :db do
   task :populate => :environment do
     Rake::Task['db:reset'].invoke
 
-    #Institute.create!(
-        #:name => "Vrije Universiteit Brussel",
-        #:initials => "VUB",
-        #:location => "Pleinlaan 2"
-      #)
+    Institute.create!(
+        :name => "Vrije Universiteit Brussel",
+        :initials => "VUB",
+        :location => "Pleinlaan 2"
+      )
     #suffix = [ "Elementary", "Middel school", "College", "University", "High school" ]
     #prefix = [ "Fort" ]
     #2.times do |n|
@@ -28,6 +28,11 @@ namespace :db do
       #)
     #end
 
+    Faculty.create!(
+        :name => "Wetenschappen en Bio-ingenieurswetenschappen",
+        :initials => "WE",
+        :institute_id => Institute.first.id
+      )
     #facultyNames = ["Recht en Criminologie", "Psychologie en Educatiewetenschappen",
       #"Wetenschappen en Bio-ingenieurswetenschappen"]
     #Institute.all.each do |institute|
@@ -55,6 +60,11 @@ namespace :db do
       #end
     #end
 
+    Discipline.create!(
+        :name => "Computerwetenschappen",
+        :initials => "WE",
+        :faculty_id => Faculty.first.id
+      )
     #Discipline.all.each do |discipline|
       #id = 0
       #3.times do
@@ -73,7 +83,7 @@ namespace :db do
          #sell_all_materials => the user can mark materials as sellable for any guild.. even if he is not a member of it.
     permissionNames = [
       #admin permissions
-      "use_control_panel", "sell_materials", "sell_all_materials", 'create_all_messages', 'view_all_stock', 'create_all_stock' 'view_all_orders',
+      "use_control_panel", "sell_materials", "sell_all_materials", 'create_all_messages', 'view_all_stock', 'create_all_stock', 'view_all_orders',
       "print", "download_materials",
       #normal permissions
       "edit_users"              , "delete_users"              , "view_users"              ,
@@ -132,6 +142,11 @@ namespace :db do
       #end
     #end
 
+    Option.create!(
+      :name => "duplex",
+      :typee => "printer"
+    )
+    
     enermis = User.create!(
       :name => "Roeland",
       :last_name => "Matthijssens",
@@ -178,11 +193,11 @@ namespace :db do
       #u.save if u.valid?
     #end
 
-    #infogroep = Guild.create!(
-      #:name => "InfoGroep",
-      #:initials => "IG",
-      #:disciplines => [Institute.first.faculties.first.disciplines.first]
-    #)
+    infogroep = Guild.create!(
+      :name => "InfoGroep",
+      :initials => "IG",
+      :disciplines => [Institute.first.faculties.first.disciplines.first]
+    )
 
     #User.all.each { |u| u.guilds <<  infogroep}
 

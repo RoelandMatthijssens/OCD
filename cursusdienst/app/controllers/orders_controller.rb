@@ -19,16 +19,31 @@ class OrdersController < ApplicationController
   def search
     deny_access and return unless signed_in?
 
-    substr = params[:search]
+    str = params[:search]
+    substrs = str.split(' ')
+    substrs << ''  if substrs.empty?
     if current_user.guilds.empty? || current_user.guilds.first.disciplines.empty?
       flash[:error] = t(:no_institute, :scope => "flash" )
       redirect_to control_panel_path
     else
       institute = current_user.guilds.first.disciplines.first.faculty.institute
       @guild = current_user.guilds.first
-      @own_orders = Order.find(:all, :conditions => ['institute_id = ? and user_id=? and status!= ? and order_key LIKE ?' , institute.id, current_user.id, 'Ready', "%#{substr}%"])
+      @own_orders = []
+      substrs.each { |substr|
+        @own_orders =  @own_orders | Order.find(:all, :conditions => ['institute_id = ? and user_id=? and status!= ? and order_key LIKE ?' , institute.id, current_user.id, 'Ready', "%#{substr}%"])
+      }
+      @orders
+      @res = []
       if current_user.can?('view_all_orders')
-        @orders = Order.joins(:user).find(:all, :conditions => ['institute_id = ? and status!= ? and (user_name LIKE ? or email LIKE ? or rolno LIKE ? or order_key LIKE ?)', institute.id, 'Ready', "%#{substr}%", "%#{substr}%", "%#{substr}%", "%#{substr}%"])
+        substrs.each { |substr|
+          x = Order.joins(:user).find(:all, :conditions => ['institute_id = ? and status!= ? and (user_name LIKE ? or email LIKE ? or rolno LIKE ? or order_key LIKE ? or name LIKE ? or last_name LIKE ?)', institute.id, 'Ready', "%#{substr}%", "%#{substr}%", "%#{substr}%", "%#{substr}%", "%#{substr}%", "%#{substr}%"])
+          @res << x
+          @res.any? ? @res & x : x
+        }
+        
+        @res.each { |g|
+          @orders = @orders.nil? ? g : @orders & g
+        }
       end
       render :action => 'index'
     end
@@ -92,6 +107,11 @@ class OrdersController < ApplicationController
         x.guild = item.guild
         x.material = item.material
         x.amount = item.amount
+        supplyqry = Supply.find(:all, :conditions => ["guild_id = ? and material_id = ?", item.guild.id, item.material.id])
+        if supplyqry.any?
+          supply = supplyqry.first
+          x.price = supply.price * item.amount
+        end
         unless x.save!
           #something weird went wrong, so delete the order, and delete the last material_order.
           #TODO we should have a way to update the stock back to before the order was submitted
@@ -106,6 +126,15 @@ class OrdersController < ApplicationController
     redirect_to orders_path
   end
 
+  def mark_as
+    @order = Order.find(params[:id])
+    status = params[:status_to]
+    @order.status = status
+    @order.save!
+    #OrderMailer.payment_ok(@order.user).deliver
+    redirect_to orders_path
+  end
+  
   def mark_as_payed
     @order = Order.find(params[:id])
     @order.status = 'Payed'
@@ -152,6 +181,7 @@ class OrdersController < ApplicationController
   def my_orders
     @title = t(:my_orders, :scope => "titles" )
     @orders = {}
+    @guild = Guild.find_by_initials(request.subdomain)
     orders = Order.find(:all, :conditions => ['user_id=?', current_user.id])
     orders.each do |order|
       if @orders[order.status]

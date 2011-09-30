@@ -1,15 +1,17 @@
-©2008-2011 | <a href="mailto:rik.vanmechelen@r-vm.be;fulgens.ailurus@gmail.com?subject=Via r-vm.be: ">Mailto</a>
+©2008-2011 
+| 
+Tyca: <%= link_to "Website", "http://tyca.be" %> 
+-
+<%= mail_to "info@tyca.be", "Mail", :encode => "hex" %>
 |
-<a href=<%= root_path %>>Cursusdienst.net</a>
+<%= mail_to "bderooms@vub.ac.be", "Design", :encode => "hex" %>
 |
-<a href="BRECHTJE: ">Design</a>
+<%= link_to "Host", "http://visit.eu" %>
 |
-<a href="visit.eu: ">Host</a>
-|
-<a href="PAGES#EULA: ">EULA</a>
+<%= link_to "EULA", pages_eula_path %>
 |
 Code: 
-<a href="r-vm.com: ">Rik</a>
+<%= mail_to "rik.vanmechelen@gmail.com", "Rik", :encode => "hex"  %>
 &amp;
-<a href="http://www.google.be/imgres?q=failwhale&um=1&hl=nl&safe=off&client=ubuntu&sa=N&channel=cs&biw=1016&bih=1020&tbm=isch&tbnid=7RWdvqXwIkn2EM:&imgrefurl=http://www.whatisfailwhale.info/&docid=0hV0ChYaZ03WSM&w=800&h=432&ei=i1xfTsX5Bsbz-ga0kpT-AQ&zoom=1&iact=rc&dur=118&page=1&tbnh=114&tbnw=211&start=0&ndsp=20&ved=1t:429,r:1,s:0&tx=86&ty=47: ">Roeland</a>
+<%= mail_to "fulgens.ailurus@gmail.com", "Roeland", :encode => "hex"  %>
 |
