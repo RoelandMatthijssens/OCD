@@ -17,7 +17,7 @@ class SuppliesController < ApplicationController
     deny_privileged_access and return unless current_user.can?('create_supplies')
     @supply = Supply.new(params[:supply])
     if @supply.save!
-      if params[:book_cost][:book_cost]
+      if params[:book_cost] && params[:book_cost][:book_cost]
         x = BookCost.new()
         x.amount = params[:book_cost][:book_cost].to_f
         x.supply = @supply

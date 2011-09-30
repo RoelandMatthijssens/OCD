@@ -20,7 +20,7 @@ class MaterialsController < ApplicationController
     if params[:subject_id]
       @material = Subject.find(params[:subject_id]).materials.new
     elsif params[:parent_id]
-      @material = Material.new :parent => Material.find(params[:parent_id])
+      @material = Material.new :parent_id => Material.unchecked_find(params[:parent_id])
     else
       @material = Material.new
     end

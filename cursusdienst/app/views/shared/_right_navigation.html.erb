@@ -6,7 +6,7 @@
   <div id="sidenav">
     <ul>
       <% if params[params_key] && !params[params_key].empty? %>
-        <% obj = (params_key.to_s[0..-4].camelize.constantize).find(params[params_key]) %>
+        <% obj = (params_key.to_s[0..-4].camelize.constantize).unchecked_find(params[params_key]) %>
         <li><%= link_to  obj.name, obj %></li>
       <% else %>
 

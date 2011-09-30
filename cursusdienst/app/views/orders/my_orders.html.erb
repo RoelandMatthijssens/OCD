@@ -1,4 +1,7 @@
 <h1><%= @title %></h1>
+
+<%= render :partial => 'info', :locals => {:guild => @guild} %>
+
 <% statuses = ['Posted','Payed','Ordered','Delivered','Ready','Done','Canceled'] %>
 <% statuses.each do |status| %>
   <% if @orders[status] %>
