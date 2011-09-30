@@ -16,7 +16,13 @@ class SuppliesController < ApplicationController
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('create_supplies')
     @supply = Supply.new(params[:supply])
-    if @supply.save
+    if @supply.save!
+      if params[:book_cost][:book_cost]
+        x = BookCost.new()
+        x.amount = params[:book_cost][:book_cost].to_f
+        x.supply = @supply
+        x.save
+      end
       @guild = Guild.find(params[:supply][:guild_id])
       @material = Material.find(params[:supply][:material_id])
       flash[:success] = t(:now_selling, :scope => "flash", :guild => @guild.name, :material => @material.name, :price => @price)
@@ -27,8 +33,8 @@ class SuppliesController < ApplicationController
     end
     #    end
   end
-  
-  
+
+
   def edit
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('edit_institutes')

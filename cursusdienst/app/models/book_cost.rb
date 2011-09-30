@@ -1,7 +1,10 @@
 class BookCost < ActiveRecord::Base
+  attr_accessible :supply_id, :amount
 
-  validates :material, :presence => true
+  validates :supply, :presence => true
   validates :amount, :presence => true
 
-  default_scope :order => "book_costs.created_at DSC"
+  belongs_to :supply
+
+  default_scope :order => "book_costs.created_at DESC"
 end

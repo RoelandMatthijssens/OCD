@@ -32,7 +32,8 @@ ActiveRecord::Schema.define(:version => 20110930100530) do
 
   create_table "book_costs", :force => true do |t|
     t.float    "amount"
-    t.integer  "material_id"
+    t.integer  "supply_id"
+    t.boolean  "deleted"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

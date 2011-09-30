@@ -126,8 +126,8 @@
             <% supply = material.supplies.find(:all, :conditions => ['guild_id=?', guild.id]).first %>
             <tr>
               <td><%= link_to guild.name, root_url(:subdomain => guild.initials) %></td>
-              <td><%= link_to supply.price_set.printer.name, supply.price_set.printer %></td>
-              <td><%= link_to supply.price_set.name, supply.price_set %></td>
+              <td><%= supply.material.printable ? (link_to supply.price_set.printer.name, supply.price_set.printer) : 'N/A' %></td>
+              <td><%= supply.material.printable ? (link_to supply.price_set.name, supply.price_set) : 'N/A' %></td>
               <td><%= supply.price %></td>
               <td><%= supply.buy_price %></td>
               <td><%= link_to image_tag("icons/twotone/" + icon_color + "/edit.gif", :alt=>t("edit", :scope => 'links')), edit_supply_path(supply) %></td>

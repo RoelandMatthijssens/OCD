@@ -6,7 +6,7 @@ class Supply < ActiveRecord::Base
   has_many :book_costs
 
   validates :guild, :presence => true
-  validates :price_set, :presence => true
+  #validates :price_set, :presence => true
   validates :material, :presence => true
   validates_uniqueness_of :guild_id, :scope => :material_id
 
@@ -27,10 +27,10 @@ class Supply < ActiveRecord::Base
       end
       return total
     else
-      if material.book_costs.empty?
+      if book_costs.empty?
         nil
       else
-        return material.book_costs.first
+        return book_costs.first
       end
     end
   end
