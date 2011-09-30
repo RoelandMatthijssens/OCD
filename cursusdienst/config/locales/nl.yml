@@ -582,6 +582,7 @@ nl:
     not_enough_stock: "%{material} is slechts %{available} keer in stock. U bestelde er %{ordered}."
 
   links:
+    new_verion: "Nieuwe versie"
     add_one: "Nieuw"
     edit: "Edit"
     edit_subject: "Edit"
