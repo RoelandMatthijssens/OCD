@@ -6,6 +6,8 @@ Cursusdienst::Application.routes.draw do
 
   get "pages/home"
 
+  get "pages/search_results"
+
   get "pages/about"
 
   get "pages/access_denied"
@@ -15,12 +17,12 @@ Cursusdienst::Application.routes.draw do
   get "pages/manual"
 
   get "attachments/download"
-  
+
   get "pages/guide"
 
   get "pages/info"
-  
-  
+
+
   resources :users do
     get :edit_permissions, :on => :member
     put :update_permissions, :on => :member
@@ -112,6 +114,7 @@ Cursusdienst::Application.routes.draw do
   match '/about', :to => 'pages#about'
   match '/access_denied', :to => 'pages#access_denied'
   match '/control_panel', :to => 'pages#control_panel'
+  match '/search', :to => 'pages#search_results'
   match '/signup', :to => 'users#new'
   match '/register', :to => 'users#new'
   match '/signin', :to => 'sessions#new'
