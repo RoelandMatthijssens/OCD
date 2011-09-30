@@ -1,53 +1,60 @@
 <style type="text/css">
-.clickthrough
-{
- text-align:center;
-}
-.clickthrough td
-{
- width:32%;
-}
+  .clickthrough
+  {
+    text-align:center;
+  }
+  .clickthrough td
+  {
+    width:32%;
+  }
+  .clickthrough a
+  {
+    display:block;
+    padding:25px 0;
+  }
 </style>
 <h1>Jouw cursusdienst</h1>
 <h2>OSD: Overkoepelende StudentenDienst VUB</h2>
 <table class="clickthrough">
-<tr><td><img src="http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-es.png"></td><td><h3><a href="http://esp.cursusdienst.net">ESP<br /><small>(KEPS-Promeco)</small></a></h3></td><td><h3><a href="http://solvay.cursusdienst.net">Solvaykring</a></h3></td></tr>
-<tr><td><img src="http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-ir.png"></td><td><h3><a href="http://pk.cursusdienst.net">PK</a></h3></td><td></td></tr>
-<tr><td><img src="http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-lk.png"></td><td><h3><a href="http://mesacosa.cursusdienst.net">Mesacosa</a></h3></td><td></td></tr>
-<tr><td><img src="http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-lw.png"></td><td><h3><a href="http://lwk.cursusdienst.net">LWK</a></h3></td><td><h3><a href="http://pers.cursusdienst.net">PERSkring</a></h3></td></tr>
-<tr><td><img src="http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-pe.png"></td><td><h3><a href="http://ppk.cursusdienst.net">PPK</a></h3></td><td></td></tr>
-<tr><td><img src="http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-rc.png"></td><td><h3><a href="http://vrg.cursusdienst.net">VRG</a></h3></td><td></td></tr>
-<tr><td><img src="http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-we.png"></td><td><h3><a href="http://infogroep.cursusdienst.net">Infogroep</a></h3></td><td><h3><a href="http://wk.cursusdienst.net">WK</a></h3></td></tr>
+  <tr><td><img src="http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-es.png"></td><td><h3><a href="http://esp.cursusdienst.net">ESP<br /><small>(KEPS-Promeco)</small></a></h3></td><td><h3><a href="http://solvay.cursusdienst.net">Solvaykring</a></h3></td></tr>
+  <tr><td><img src="http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-ir.png"></td><td><h3><a href="http://pk.cursusdienst.net">PK</a></h3></td><td></td></tr>
+  <tr><td><img src="http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-lk.png"></td><td><h3><a href="http://mesacosa.cursusdienst.net">Mesacosa</a></h3></td><td></td></tr>
+  <tr><td><img src="http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-lw.png"></td><td><h3><a href="http://lwk.cursusdienst.net">LWK</a></h3></td><td><h3><a href="http://pers.cursusdienst.net">PERSkring</a></h3></td></tr>
+  <tr><td><img src="http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-pe.png"></td><td><h3><a href="http://ppk.cursusdienst.net">PPK</a></h3></td><td></td></tr>
+  <tr><td><img src="http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-rc.png"></td><td><h3><a href="http://vrg.cursusdienst.net">VRG</a></h3></td><td></td></tr>
+  <tr><td><img src="http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-we.png"></td><td><h3><a href="http://infogroep.cursusdienst.net">Infogroep</a></h3></td><td><h3><a href="http://wk.cursusdienst.net">WK</a></h3></td></tr>
 </table>
 <h1>Meer info</h1>
 <p>Dit platform werd ontwikkeld door Tyca en is nu in haar derde versie sinds de lancering in 2008. Meer info over het platform en Tyca vzw op <a href="http://tyca.be">http://tyca.be</a></p>
 
-<%= render :partial => "home_side_menu" %>
+<% if false %>
+  <%= render :partial => "home_side_menu" %>
 
-<% if !current_user %>
-  <% content_for :sideshop do  %>
-    <div class="topline"></div>
-    <div id="sidelogin">
-      <%= form_for(:session, :url => sessions_path) do |f| %><br/>
-        <div class='field'>
-          <%= f.label t(:user_name, :scope => "attributes" ) %> <br>
-          <%= f.text_field :user_name %> <br>
-        </div>
-        <div class='field'>
-          <%= f.label t(:password, :scope => "attributes" ) %> <br>
-          <%= f.password_field :password %> <br>
-        </div>
-        <div class="actions">
-          <%= f.submit t(:sign_in, :scope => "buttons" ) %>
-        </div>
-        <div>
-        <center>
-          <%= link_to t(:sign_up_now, :scope => "links" ), signup_path %>
-        </center>
-        </div>
-      <% end %>
+  <% if !current_user %>
+    <% content_for :sideshop do  %>
+      <div class="topline"></div>
+      <div id="sidelogin">
+        <%= form_for(:session, :url => sessions_path) do |f| %><br/>
+          <div class='field'>
+            <%= f.label t(:user_name, :scope => "attributes" ) %> <br>
+            <%= f.text_field :user_name %> <br>
+          </div>
+          <div class='field'>
+            <%= f.label t(:password, :scope => "attributes" ) %> <br>
+            <%= f.password_field :password %> <br>
+          </div>
+          <div class="actions">
+            <%= f.submit t(:sign_in, :scope => "buttons" ) %>
+          </div>
+          <div>
+            <center>
+              <%= link_to t(:sign_up_now, :scope => "links" ), signup_path %>
+            </center>
+          </div>
+        <% end %>
 
-    </div>
-    <div class="topline"></div>
+      </div>
+      <div class="topline"></div>
+    <% end %>
   <% end %>
 <% end %>
