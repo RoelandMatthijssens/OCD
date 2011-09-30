@@ -2,7 +2,7 @@
   <ul>
     <% if signed_in? %>
 
-      <li><%= link_to t(:logout, :scope => "links" ) + "#{current_user.name}", signout_path, :class=>"loginmenu lockicon", :onclick=>"this.blur();" %> </li>
+      <li><%= link_to t(:logout, :scope => "links" ) + " #{current_user.name}", signout_path, :class=>"loginmenu lockicon", :onclick=>"this.blur();" %> </li>
       <li><%= link_to t(:profile, :scope => "links" ), current_user, :class=>"loginmenu usericon", :onclick=>"this.blur();" %></li>
       <li><%= link_to t(:shopping_cart, :scope => "links" ), shopping_cart_items_path, :class=>"loginmenu shopicon", :onclick=>"this.blur();" %></li>
 

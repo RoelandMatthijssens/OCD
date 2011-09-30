@@ -1,9 +1,7 @@
 <div>
   <h1>
     <%= link_to guild.name, root_url(:subdomain => guild.initials) %>  <%= t(:supplies, :scope => "guild") %>
-    <% if current_user && current_user.guilds.include?(guild) %>
-      <div class="to_right"><span class="comment_text"><%= t(:member_of_guild, :scope => "message" ) %></span></div>
-    <% else %>
+    <% unless current_user && current_user.guilds.include?(guild) %>
       <div class="to_right">
         <span class="comment_text"><%= link_to "join", join_guild_path(guild), :method => :put %></span>
         <%= link_to image_tag("icons/twotone/" + icon_color + "/arrow-down.gif", :alt=>t("edit", :scope => 'links')), join_guild_path(guild), :method => :put %>

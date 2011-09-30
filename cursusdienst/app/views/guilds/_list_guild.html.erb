@@ -1,19 +1,17 @@
 <div>
   <h1><%= link_to guild.name, root_url(:subdomain => guild.initials) %></h1>
-  
-	<% if current_user && not(current_user.guilds.include?(guild) )%>
-		<%= link_to t(:join_guild, :scope => "links" ), join_guild_path(guild), :method => :put %>
-	<% else %>
-		<p><%= t(:not_a_member_of_guild, :scope => "message" ) %></p>
-	<% end %>
-	
-	<strong><%= t(:disciplines, :scope => "globals" ) %></strong><br>
+
+  <% if current_user && not(current_user.guilds.include?(guild) )%>
+    <%= link_to t(:join_guild, :scope => "links" ), join_guild_path(guild), :method => :put %><br/>
+  <% end %>
+
+  <strong><%= t(:disciplines, :scope => "globals" ) %></strong><br>
   <% guild.disciplines.each { |discipline| %>
     <strong><%= discipline.name %></strong><br/>
     <ul>
-			<li><strong><%= t(:faculty, :scope => "globals" ) %>:</strong><%= link_to discipline.faculty.name, discipline.faculty %> <br/></li>
-			<li><strong><%= t(:institute, :scope => "globals" ) %>:</strong><%= link_to discipline.faculty.institute.name, discipline.faculty.institute %> <br/></li>
+      <li><strong><%= t(:faculty, :scope => "globals" ) %>:</strong><%= link_to discipline.faculty.name, discipline.faculty %> <br/></li>
+      <li><strong><%= t(:institute, :scope => "globals" ) %>:</strong><%= link_to discipline.faculty.institute.name, discipline.faculty.institute %> <br/></li>
     </ul>
   <% } %>
-	<%= link_to t(:edit, :scope => "links" ), edit_guild_path(guild) %>
+  <%= link_to t(:edit, :scope => "links" ), edit_guild_path(guild) %>
 </div>
