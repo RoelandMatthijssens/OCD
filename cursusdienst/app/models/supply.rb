@@ -3,6 +3,7 @@ class Supply < ActiveRecord::Base
   belongs_to :guild
   belongs_to :material
   belongs_to :price_set
+  has_many :book_costs
 
   validates :guild, :presence => true
   validates :price_set, :presence => true
@@ -10,19 +11,27 @@ class Supply < ActiveRecord::Base
   validates_uniqueness_of :guild_id, :scope => :material_id
 
   def buy_price
-    options = material.options
-    pages = material.page_count
-    total = 0
-    options.each do |option|
-      option_price = price_set.prices.find(:all, :conditions => ['option_id=?', option.id]).first
-      price = option_price.amount
-      type = option_price.typee
-      if type == 'per_page'
-        total += price * pages
+    if material.printable
+      options = material.options
+      pages = material.page_count
+      total = 0
+      options.each do |option|
+        option_price = price_set.prices.find(:all, :conditions => ['option_id=?', option.id]).first
+        price = option_price.amount
+        type = option_price.typee
+        if type == 'per_page'
+          total += price * pages
+        else
+          total += price
+        end
+      end
+      return total
+    else
+      if material.book_costs.empty?
+        nil
       else
-        total += price
+        return material.book_costs.first
       end
     end
-    return total
   end
 end

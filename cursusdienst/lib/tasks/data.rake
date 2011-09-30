@@ -73,8 +73,8 @@ namespace :db do
          #sell_all_materials => the user can mark materials as sellable for any guild.. even if he is not a member of it.
     permissionNames = [
       #admin permissions
-      "use_control_panel", "sell_materials", "sell_all_materials", 'create_all_messages', 'view_all_stock', 'view_all_orders',
-      "print", "download_materials", 
+      "use_control_panel", "sell_materials", "sell_all_materials", 'create_all_messages', 'view_all_stock', 'create_all_stock' 'view_all_orders',
+      "print", "download_materials",
       #normal permissions
       "edit_users"              , "delete_users"              , "view_users"              ,
       "edit_permissions"        , "delete_permissions"        , "view_permissions"        , "create_permissions"        ,
@@ -87,7 +87,7 @@ namespace :db do
       "edit_materials"          , "delete_materials"          , "view_materials"          , "create_materials"          ,
       "edit_faculties"          , "delete_faculties"          , "view_faculties"          , "create_faculties"          ,
       "edit_messages"           , "delete_messages"                                       , "create_messages"           ,
-      "edit_stock"              , "delete_stock"              , "view_stock"                                            ,
+      "edit_stock"              , "delete_stock"              , "view_stock"              , "create_stock"              ,
       "edit_printers"           , "delete_printers"           , "view_printers"           , "create_printers"           ,
       "edit_prices"             , "delete_prices"             , "view_prices"             , "create_prices"             ,
       "edit_price_sets"         , "delete_price_sets"         , "view_price_sets"         , "create_price_sets"         ,

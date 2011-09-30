@@ -19,7 +19,7 @@
     <% if current_user.can? "create_materials" %>
       <span class="comment_text">
         - <%= link_to t(:add_one, :scope => "links" ), :controller => "materials", :action => "new", :parent_id => material.id, :material_id => material.id %>
-        <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), :controller => "materials", :action => "new", :parent_id => material.id, :material_id => material.id %>
+        <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_verion", :scope => 'links')), :controller => "materials", :action => "new", :parent_id => material.id, :material_id => material.id %>
       </span>
     <% end %>
   </legend>
@@ -111,6 +111,7 @@
             <th>sell price</th>
             <th>total buy price</th>
             <th>edit</th>
+            <th>stock</th>
             <% options.each do |option| %>
               <th><%= option.name %></th>
             <% end %>
@@ -126,6 +127,15 @@
               <td><%= supply.price %></td>
               <td><%= supply.buy_price %></td>
               <td><%= link_to image_tag("icons/twotone/" + icon_color + "/edit.gif", :alt=>t("edit", :scope => 'links')), edit_supply_path(supply) %></td>
+              <td>
+                <% s = Stock.find(:all, :conditions => ["material_id = ? AND guild_id = ?", material.id, guild.id]) %>
+                <% if s.any? %>
+                  <% s = s.first %>
+                  <%= link_to image_tag("icons/twotone/" + icon_color + "/edit.gif", :alt=>t("edit", :scope => 'links')), { :controller => "stocks", :action => "edit", :id => s.id, :guild_id => guild.id, :material_id => material.id } %>
+                <% else %>
+                  <%= link_to image_tag("icons/twotone/" + icon_color + "/edit.gif", :alt=>t("edit", :scope => 'links')), { :controller => "stocks", :action => "new", :guild_id => guild.id, :material_id => material.id } %>
+                <% end %>
+              </td>
               <% options.each do |option| %>
                 <td><%= option.prices.find(:all, :conditions => ['price_set_id=?', supply.price_set.id]).first.amount %></td>
               <% end %>

@@ -1,5 +1,12 @@
 <h1><%= @title %></h1>
-<% @guilds.each do |guild| %>
-	<%= render :partial => "guild_stock", :locals => { :guild => guild } %>
+
+<% if current_user.can? "view_all_stock" %>
+  <% Guild.all.each do |guild| %>
+    <%= render :partial => "guild_stock", :locals => { :guild => guild } %>
+  <% end %>
+<% else %>
+  <% @guilds.each do |guild| %>
+    <%= render :partial => "guild_stock", :locals => { :guild => guild } %>
+  <% end %>
 <% end %>
 </ul>

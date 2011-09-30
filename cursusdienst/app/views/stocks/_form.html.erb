@@ -1,0 +1,31 @@
+<%= form_for(@stock) do |f| %>
+
+  <%= render 'shared/error_messages', :object => f.object %>
+  <div class='field'>
+    <% if params[:material_id] %>
+      <%= f.hidden_field :material_id, :value => params[:material_id] %>
+      <%= hidden_field_tag "material_id", params[:material_id] %>
+    <% else %>
+      <%= label_tag t(:material, :scope => "globals" ) %>
+      <%= f.select(:material_id, Material.all.collect {|p| [ p.name, p.id ] }, {:prompt => 'Select material'}) %><br />
+    <% end %>
+    <% if params[:guild_id] %>
+      <%= f.hidden_field :guild_id, :value => params[:guild_id] %>
+      <%= hidden_field_tag "guild_id", params[:guild_id] %>
+    <% else %>
+    <% if current_user.can? "create_all_stock" %>
+        <%= f.select(:guild_id, Guild.all.collect {|p| [ p.name, p.id ] }, {:prompt => 'Select guild'}) %><br />
+      <% else %>
+        <%= f.select(:guild_id,current_user.guilds.collect {|p| [ p.name, p.id ] }, {:prompt => 'Select guild'}) %><br />
+      <% end %>
+    <% end %>
+    <%= f.label :amount %> <br>
+    <%= f.text_field :amount %> <br>
+  </div>
+  <div class="actions">
+    <%= f.submit @submit %>
+  </div>
+<% end %>
+
+
+<%= render :partial => "shared/right_navigation", :locals => {:params_key => :institute_id}%>

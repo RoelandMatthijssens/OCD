@@ -1,22 +1,23 @@
 <% guild_stock_items = Stock.find(:all,  :conditions => ['guild_id = ?', guild.id]) %>
+<h2><%= guild.name %></h2>
 <table>
-	<thead>
-		<tr>
-			<th><%= t(:name, :scope => "stock" ) %></th>
-			<th><%= t(:amount, :scope => "stock" ) %></th>
-			<th><%= t(:floating, :scope => "stock" ) %></th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		<% guild_stock_items.each do |item| %>
-			<tr>
-				<td><%= item.material.name %></td>
-				<td><%= item.amount %></td>
-				<td><%= item.floating %></td>
-				<td><%= link_to 'edit (symbol)', edit_stock_path(item) %></td>
-			</tr>
-		<% end %>
-	</tbody>
+  <thead>
+    <tr>
+      <th><%= t(:name, :scope => "stock" ) %></th>
+      <th><%= t(:amount, :scope => "stock" ) %></th>
+      <th><%= t(:floating, :scope => "stock" ) %></th>
+      <th><%= t(:actions, :scope => "globals" ) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% guild_stock_items.each do |item| %>
+      <tr>
+        <td><%= item.material.name %></td>
+        <td><%= item.amount %></td>
+        <td><%= item.floating %></td>
+        <td><%= link_to 'edit (symbol)', edit_stock_path(item) %></td>
+        <td>TODO: add, substract</td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
-

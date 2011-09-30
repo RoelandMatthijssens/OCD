@@ -15,10 +15,10 @@ class OrdersController < ApplicationController
       end
     end
   end
-  
+
   def search
     deny_access and return unless signed_in?
-    
+
     substr = params[:search]
     if current_user.guilds.empty? || current_user.guilds.first.disciplines.empty?
       flash[:error] = t(:no_institute, :scope => "flash" )
@@ -75,11 +75,9 @@ class OrdersController < ApplicationController
 
   def mark_as_payed
     @order = Order.find(params[:id])
-    #    unless @order.status == 'Payed'
     @order.status = 'Payed'
     @order.save!
     OrderMailer.payment_ok(@order.user).deliver
-    #    end
     redirect_to orders_path
   end
 

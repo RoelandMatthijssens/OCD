@@ -281,6 +281,7 @@ nl:
     amount: "Aantal"
     content: "Inhoud"
     action: "Actie"
+    actions: "Acties"
     timestamp: "Tijdsaanduiding"
     attachment: "Bijlage"
 
@@ -443,6 +444,7 @@ nl:
     new_option: "Een nieuwe Optie aanmaken"
     new_printer: "Een nieuwe drukker aanmaken"
     new_price: "Een nieuwe prijs aanmaken"
+    new_stock: "Een nieuwe stock aanmaken"
 
     edit_subject: "Cursus bewerken"
     edit_faculty: "Faculteit bewerken"
@@ -503,6 +505,7 @@ nl:
     update_price: "Pas prijs aan"
     add_to_supply: "Voeg toe"
     update_supply: "Pas aan"
+    new_stock: "Voeg toe"
 
   flash:
     new_institute_success: "instelling succesvol aangemaakt"
@@ -569,6 +572,7 @@ nl:
     update_printer_success: "Drukker succesvol aangepast"
     delete_user_success: "Gebruiker succesvol verwijderd"
     delete_user_fail: "Gebruiker niet verwijderd. Er is iets misgegaan"
+    update_stock_success: "Stock succesvol aangepast"
 
   links:
     add_one: "Nieuw"
