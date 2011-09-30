@@ -246,7 +246,7 @@ nl:
         format: "%{attribute} %{message}"
 
   attributes:
-    user_name: "VUB Netid/gebruikers naam"
+    user_name: "VUB Netid"
     name: "Naam"
     last_name: "Naam"
     email: "email"
@@ -329,6 +329,8 @@ nl:
     news: "Nieuws"
     manual: "Handleiding"
     supply: "Aanbod"
+    user_name: "VUB "
+    password:
 
   sponsor:
     thanks: 'Met dank aan'
@@ -510,6 +512,7 @@ nl:
     add_to_supply: "Voeg toe"
     update_supply: "Pas aan"
     new_stock: "Voeg toe"
+    sign_in: "Inloggen"
 
   flash:
     new_institute_success: "instelling succesvol aangemaakt"
@@ -619,6 +622,10 @@ nl:
     new_discipline: "Nieuwe richting"
     set_footer_banner: "Plaats banner"
     delete_user: "Verwijder gebruiker"
+    profile: "Profiel"
+    logout: "Uitloggen"
+    login: "Inloggen"
+    shopping_cart: "Winkelwagen"
 
   info:
     cash: "Cash info"

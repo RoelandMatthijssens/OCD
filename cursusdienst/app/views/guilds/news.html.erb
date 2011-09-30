@@ -1,9 +1,11 @@
 <h1><%= t(:news, :scope => "side_menu") %>
   <div class="to_right">
-    <span class="comment_text">
-      <%= link_to t(:new_message, :scope => "links" ), new_message_path(:guild_id => @guild.id) %>
-    </span>
-    <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), new_message_path(:guild_id => @guild.id) %>
+    <% if signed_in? && ( (current_user.can? "create_message" && current_user.guilds.include?(@guilds) ) || current_user.can?("create_all_messages") ) %>
+      <span class="comment_text">
+        <%= link_to t(:new_message, :scope => "links" ), new_message_path(:guild_id => @guild.id) %>
+      </span>
+      <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), new_message_path(:guild_id => @guild.id) %>
+    <% end %>
   </div>
 </h1>
 <div class="messages", id="messages">

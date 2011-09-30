@@ -60,7 +60,7 @@ class OrdersController < ApplicationController
             redirect_to orders_path
             return
           end
-        else stock.first.amount < item.amount && not item.material.printable
+        elsif stock.first.amount < item.amount && ! item.material.printable
           flash[:error] = t(:not_enough_stock, :scope => "flash", :material => item.material, :available => stock.first.amount, :ordered => item.amount )
           redirect_to orders_path
           return
@@ -78,7 +78,6 @@ class OrdersController < ApplicationController
       end
       #all stock amounts are edited to be floating for the amount ordered by the user
       #so we create an order to store the order items in. ( we error if something goes wrong)
-      end
       if @order.save!
         flash[:success] = t(:new_order_success, :scope => "flash" )
       else
@@ -101,11 +100,10 @@ class OrdersController < ApplicationController
           flash[:error] = t(:material_added_to_order_fail, :scope => "flash", :material => item.material.name)
         end
       end
-      #all items are tossed from the shopping cart to the order, so we can delete all items in the cart,
-
-                item.delete
-      redirect_to orders_path
     end
+    #all items are tossed from the shopping cart to the order, so we can delete all items in the cart,
+    #item.delete
+    redirect_to orders_path
   end
 
   def mark_as_payed
