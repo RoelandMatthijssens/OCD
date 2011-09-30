@@ -1,8 +1,9 @@
 <h1><%= @title %></h1>
+<%= render :partial => 'filters' %>
 <ul class="administrator_links">
   <% if signed_in? %>
     <% if current_user.can? "edit_institutes" %>
-      <li><%= link_to t(:institutes), institutes_path, :id => navigation_selected("Institutes") %> </li> 
+      <li><%= link_to t(:institutes), institutes_path, :id => navigation_selected("Institutes") %> </li>
     <% end %>
     <% if current_user.can? "edit_faculties" %>
       <li><%= link_to t(:faculties), faculties_path, :id => navigation_selected("Faculties") %> </li>

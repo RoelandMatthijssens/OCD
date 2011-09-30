@@ -28,14 +28,18 @@ class PagesController < ApplicationController
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('use_control_panel')
     @title = t(:search_results, :scope => "titles" )
-  #end
-
-  #def search
     deny_access and return unless signed_in?
 
     substr = params[:search]
-    #each element is [tablename, [columnnames]]
-    search_environments = [[User, ['name', 'last_name', 'user_name']],[Institute, ['name', 'initials', 'location']],[Faculty, ['name', 'initials']],[Discipline, ['name']],[Subject, ['name', 'prof', 'year_type']],[Material, ['name']],[Guild, ['name', 'initials']],[Printer, ['name']]]
+    #each element is [tablename, [columnnames], attribute_to_display]
+    search_environments = [[User, ['name', 'last_name', 'user_name']],
+      [Institute, ['name', 'initials', 'location']],
+      [Faculty, ['name', 'initials']],
+      [Discipline, ['name']],
+      [Subject, ['name', 'prof', 'year_type']],
+      [Material, ['name']],
+      [Guild, ['name', 'initials']],
+      [Printer, ['name']]]
     @search_results = {}
     search_environments.each do |table, columns|
       conditions = [[]]
