@@ -52,23 +52,58 @@ class OrdersController < ApplicationController
       @order.institute = institute
       @order.user = current_user
       @order.order_key = @order.get_random_string(7)
+      current_user.shopping_cart_items.each do |item|
+        stock = Stock.find(:all, :conditions => ['guild_id=? AND material_id=?', item.guild.id, item.material.id])
+        if stock.empty?
+          if not item.material.printable?
+            flash[:error] = t(:out_of_stock, :scope => "flash", :material => item.material.name )
+            redirect_to orders_path
+            return
+          end
+        else stock.first.amount < item.amount && not item.material.printable
+          flash[:error] = t(:not_enough_stock, :scope => "flash", :material => item.material, :available => stock.first.amount, :ordered => item.amount )
+          redirect_to orders_path
+          return
+        end
+      end
+      #if we end up here, all items in the shoppingcart are available in stock (at least the right amount)
+      #all others are printable, so this means we can alter the stock, so that the stock is floating
+      current_user.shopping_cart_items.each do |item|
+        stock = Stock.find(:all, :conditions => ['guild_id=? AND material_id=?', item.guild.id, item.material.id])
+        if stock.any? && stock.first.amount >= item.amount
+          stock = stock.first
+          stock.amount -= item.amount
+          stock.floating += item.amount
+        end
+      end
+      #all stock amounts are edited to be floating for the amount ordered by the user
+      #so we create an order to store the order items in. ( we error if something goes wrong)
+      end
       if @order.save!
         flash[:success] = t(:new_order_success, :scope => "flash" )
       else
         flash[:error] = t(:new_order_fail, :scope => "flash" )
+        redirect_to orders_path
+        return
       end
+      #we loop over the shoppingcart to get all items, and put them in the order.
       current_user.shopping_cart_items.each do |item|
         x = MaterialOrder.new()
         x.order = @order
         x.guild = item.guild
         x.material = item.material
         x.amount = item.amount
-        if x.save!
-          item.delete
-        else
+        unless x.save!
+          #something weird went wrong, so delete the order, and delete the last material_order.
+          #TODO we should have a way to update the stock back to before the order was submitted
+          x.delete
+          @order.delete
           flash[:error] = t(:material_added_to_order_fail, :scope => "flash", :material => item.material.name)
         end
       end
+      #all items are tossed from the shopping cart to the order, so we can delete all items in the cart,
+
+                item.delete
       redirect_to orders_path
     end
   end
