@@ -7,7 +7,7 @@
     <td>
       <% case order.status %>
         <% when "Posted"%>
-         <%= 'Mark as payed' %><br/>
+         <%= 'MAKE DROPDOWN mark as payed' %><br/>
          <%= 'cancel' %>
         <% when "Payed" %>
           <%= 'mark as ordered' %>
@@ -22,6 +22,17 @@
           <%=  'nothing' %>
         <% when "Canceled" %>
           <%=  'nothing' %>
+        <% else %>
+          <%= "nothing" %>
+      <% end %>
+    </td>
+  <% else %>
+    <td>
+      <% case order.status %>
+        <% when "Posted"%>
+         <%= 'cancel' %>
+        <% when "Payed" %>
+          <%= 'cancel' %>
         <% else %>
           <%= "nothing" %>
       <% end %>
