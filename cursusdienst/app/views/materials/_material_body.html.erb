@@ -2,7 +2,7 @@
 <div class="to_right">
   <% (1..5).each do |i| %>
     <% check = material.rating_score > i - 1 && material.rating_score <= i ? "checked" : false  %>
-  <%= radio_button_tag "#{material.id}", i, check, { :class => "star", :disabled => "disabled"} %>
+    <%= radio_button_tag "#{material.id}", i, check, { :class => "star", :disabled => "disabled"} %>
   <% end %>
 
 </div>
@@ -12,12 +12,12 @@
 <fieldset class="simplefieldset2">
   <legend>
     <%= t(:info, :scope => "message" ) %>
-    <% if current_user.can? "edit_materials" %>
+    <% if signed_in? && current_user.can?("edit_materials") %>
       <span class="edit">
         - <%= link_to "Edit", edit_material_path(material) %>
       </span>
     <% end%>
-    <% if current_user.can? "create_materials" %>
+    <% if signed_in? && current_user.can?("create_materials") %>
       <span class="comment_text">
         - <%= link_to t(:add_one, :scope => "links" ), :controller => "materials", :action => "new", :parent_id => material.id, :material_id => material.id %>
         <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_verion", :scope => 'links')), :controller => "materials", :action => "new", :parent_id => material.id, :material_id => material.id %>
@@ -66,35 +66,38 @@
   </table>
 </fieldset>
 
-<fieldset class="simplefieldset2">
-  <legend>
-    <%= t(:attachment, :scope => "message" ) %>
-  </legend>
+<% if signed_in? && current_user.can?("download_materials") %>
+  <fieldset class="simplefieldset2">
+    <legend>
+      <%= t(:attachment, :scope => "message" ) %>
+    </legend>
 
-  <table class="simpletable1">
-    <col/>
     <table class="simpletable1">
-      <% if material.attachments.any?  %>
-        <ul>
-          <% material.attachments.each do |attachment| %>
-            <li>
-              <%= link_to attachment.basename, :controller=>'attachments',:action=>'download',:attachment_id=>attachment.id %> <br />
-            </li>
-          <% end %>
-        </ul>
-      <% end %>
+      <col/>
+      <table class="simpletable1">
+        <% if material.attachments.any?  %>
+          <ul>
+            <% material.attachments.each do |attachment| %>
+              <li>
+                <%= link_to attachment.basename, :controller=>'attachments',:action=>'download',:attachment_id=>attachment.id %> <br />
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      </table>
     </table>
-  </table>
-</fieldset>
+  </fieldset>
+<% end %>
 
+<% if signed_in? && current_user.can?("view_supplies") %>
 <fieldset class="simplefieldset2">
   <legend>
     <%= t(:guilds, :scope => "message" ) %>
     <span class="comment_text">
-      <% if current_user.can?("sell_materials") %>
-        <% if current_user.guilds.size == 0 %>
+      <% if signed_in? && current_user.can?("sell_materials") %>
+        <% if signed_in? && current_user.guilds.size == 0 %>
           - <%= t :join_to_add, :scope => "material"%>
-        <% elsif current_user.guilds.first.materials.include?(material)%>
+        <% elsif signed_in? && current_user.guilds.first.materials.include?(material)%>
           - <%= link_to t(:remove_supply, :scope => "message", :guild => current_user.guilds.first.initials ), "#" %>
           <%= link_to image_tag("icons/twotone/" + icon_color + "/x.gif", :alt=>t("new_message", :scope => 'links')), "#" %>
         <% else %>
@@ -153,3 +156,4 @@
     </table>
   </table>
 </fieldset>
+<% end %>

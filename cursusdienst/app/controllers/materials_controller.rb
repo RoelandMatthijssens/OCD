@@ -18,8 +18,8 @@ class MaterialsController < ApplicationController
   end
 
   def show
-    deny_access and return unless signed_in?
-    deny_privileged_access and return unless current_user.can?('view_materials')
+    #deny_access and return unless signed_in?
+    #deny_privileged_access and return unless current_user.can?('view_materials')
     @material = Material.unchecked_find(params[:id])
     @rating = Rating.new
   end

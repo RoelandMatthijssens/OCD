@@ -90,17 +90,14 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if signed_in?
       deny_privileged_access unless current_user.can?("edit_permissions")
-    @submit = t(:update_user_permissions, :scope => "buttons" )
+      @submit = t(:update_user_permissions, :scope => "buttons" )
     else
       deny_access
     end
   end
 
   def update_permissions
-    tyca = []
-    senior = ["create_all_messages"]
-    junior = ["create_messages"]
-    user = []
+
     tyca_profile = []; senior_profile = []; junior_profile = []; user_profile = []
     [[tyca, tyca_profile], [senior, senior_profile], [junior, junior_profile], [user, user_profile]].each do |profile, result_list|
       profile.each do |permission_name|
@@ -137,7 +134,7 @@ class UsersController < ApplicationController
     redirect_to edit_permissions_user_path
   end
 
- private
+  private
 
   def authenticate
     deny_access unless signed_in?
@@ -146,6 +143,19 @@ class UsersController < ApplicationController
   def correct_user
     @user = User.find(params[:id])
     redirect_to(root_path) unless current_user?(@user)
+  end
+  
+  def tyca 
+    return []
+  end
+  def senior 
+    return ["use_control_panel","sell_materials","sell_all_materials","create_all_messages","view_all_stock","view_all_orders","print","download_materials","edit_users","view_users","delete_users","view_permissions","edit_disciplines","delete_disciplines","view_disciplines","create_disciplines","edit_subjects","delete_subjects","view_subjects","create_subjects","view_institutes","edit_guilds","delete_guilds","view_guilds","create_guilds","edit_materials","delete_materials","view_materials","create_materials","edit_faculties","delete_faculties","view_faculties","create_faculties","edit_messages","delete_messages","create_messages","edit_stock","delete_stock","view_stock","edit_printers","delete_printers","view_printers","create_printers","edit_prices","delete_prices","view_prices","create_prices","edit_price_sets","delete_price_sets","view_price_sets","create_price_sets","edit_attachments","delete_attachments","view_attachments","create_attachments","edit_info_strings","delete_info_strings","view_info_strings","create_info_strings","edit_orders","delete_orders","view_orders","create_orders","edit_print_jobs","delete_print_jobs","view_print_jobs","create_print_jobs","edit_ratings","delete_ratings","view_ratings","create_ratings","edit_supplies","delete_supplies","create_supplies","view_supplies","set_order_status","view_side_supply","view_all_guilds","join_guilds","view_permission_groups","edit_options","delete_options","view_options","create_options"]
+  end
+  def junior 
+    return ["use_control_panel","sell_materials","sell_all_materials","print","download_materials","edit_users","view_users","delete_users","edit_disciplines","delete_disciplines","view_disciplines","create_disciplines","edit_subjects","delete_subjects","view_subjects","create_subjects","view_institutes","edit_guilds","delete_guilds","view_guilds","edit_materials","delete_materials","view_materials","create_materials","view_faculties","edit_messages","delete_messages","create_messages","edit_stock","delete_stock","view_stock","view_printers","edit_prices","delete_prices","view_prices","create_prices","edit_price_sets","delete_price_sets","view_price_sets","edit_attachments","delete_attachments","view_attachments","create_attachments","edit_info_strings","delete_info_strings","view_info_strings","create_info_strings","edit_orders","delete_orders","view_orders","create_orders","view_print_jobs","edit_ratings","delete_ratings","view_ratings","create_ratings","edit_supplies","delete_supplies","create_supplies","view_supplies","set_order_status","view_side_supply","join_guilds",]
+  end
+  def user 
+    return []
   end
 
 end
