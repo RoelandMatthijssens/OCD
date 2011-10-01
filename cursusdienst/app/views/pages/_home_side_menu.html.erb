@@ -1,11 +1,13 @@
-<% content_for :sidemenu do  %>
-  <div class="topline"></div>
-  <div id="sidemenu">
-    <ul>
-      <li> <%= link_to t(:home, :scope => 'side_menu'), pages_home_path %> </li>
-      <li> <%= link_to t(:guide, :scope => 'side_menu'), pages_guide_path %> </li>
-      <li> <%= link_to t(:info, :scope => 'side_menu'), pages_info_path %> </li>
-    </ul>
-  </div>
-  <div class="topline"></div>
+<% unless request.subdomain == "www" || request.subdomain == "" %>
+  <% content_for :sidemenu do  %>
+    <div class="topline"></div>
+    <div id="sidemenu">
+      <ul>
+        <li> <%= link_to t(:news, :scope => 'side_menu'), news_guild_path(Guild.find_by_initials!(request.subdomain)) %> </li>
+        <li> <%= link_to t(:guide, :scope => 'side_menu'), pages_guide_path %> </li>
+        <li> <%= link_to t(:info, :scope => 'side_menu'), pages_info_path %> </li>
+      </ul>
+    </div>
+    <div class="topline"></div>
+  <% end %>
 <% end %>

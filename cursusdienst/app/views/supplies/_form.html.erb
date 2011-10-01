@@ -23,15 +23,13 @@
         :parent_id => nil,
         :child_id => nil} %> <br />
     <% else %>
-
-
-      <%= text_field "book_cost", "book_cost" %>
-
+      <%= label_tag t(:buy_price, :scope => "globals" ) %><br/>
+      <%= text_field "book_cost", "book_cost" %><br/>
     <% end %>
 
     <%= f.label :guild %> <br />
     <%= f.select(:guild_id, @guilds.collect {|p| [ p.name, p.id ] }, {:prompt => 'Select guild'}) %><br />
-    <%= f.label :price %> <br/>
+    <%= label_tag t(:sale_price, :scope => "globals" ) %> <br/>
     <%= f.text_field :price %>
 
   </div>

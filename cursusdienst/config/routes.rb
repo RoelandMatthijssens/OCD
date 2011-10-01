@@ -21,10 +21,10 @@ Cursusdienst::Application.routes.draw do
   get "pages/guide"
 
   get "pages/info"
-  
+
   get "pages/eula"
-  
-  
+
+
   resources :users do
     get :edit_permissions, :on => :member
     put :update_permissions, :on => :member
@@ -86,7 +86,7 @@ Cursusdienst::Application.routes.draw do
   end
 
   constraints(Subdomain) do
-    match '/' => 'guilds#show'
+    match '/' => 'guilds#news'
   end
 
   resources :guilds do

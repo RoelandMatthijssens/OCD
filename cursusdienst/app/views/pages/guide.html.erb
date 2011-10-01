@@ -1,27 +1,32 @@
 <h1><%= @title %></h1>
 
-<h2>I am a Guide!</h2>
-
 <%= render :partial => "home_side_menu" %>
 
-<% if !current_user %>
-  <% content_for :sideshop do  %>
-    <div class="topline"></div>
-    <div id="sidelogin">
-      <%= form_for(:session, :url => sessions_path) do |f| %><br/>
-        <div class='field'>
-          <%= f.label :user_name %> <br>
-          <%= f.text_field :user_name %> <br>
-        </div>
-        <div class='field'>
-          <%= f.label :password %> <br>
-          <%= f.password_field :password %> <br>
-        </div>
-        <div class="actions">
-          <%= f.submit 'Sign in' %>
-        </div>
-      <% end %>
-    </div>
-    <div class="topline"></div>
-  <% end %>
-<% end %>
+
+<h1>Een bestelling plaatsen</h1>
+<h2>Stap 1: je winkelwagen vullen</h2>
+<p>Om items aan je winkelwagen toe te voegen dien je volgende stappen te volgen:</p>
+<ol>
+  <li>Ga naar de <a href="/">"Bestel"-tab</a> (bovenste menu)</li>
+  <li>Selecteer de juiste filter (combinatie van je richting en je jaar (bachelor of master)
+    <ul><li><b>Tip:</b> staat je richting niet in de lijst, dan zal je waarschijnlijk bij een andere cursusdienst moeten inloggen; <a href="http://www.cursusdienst.net">bekijk het overzicht</a></li></ul>
+  </li>
+  <li>Voeg de items toe aan je winkelwagen door op het <img src="/assets/icons/twotone/beige/cart.gif" />-icoontje te klikken</li>
+  <li>Wanneer je alle items hebt toegevoegd: klik op "Winkelwagen" in het menu en verifieer je bestelling</li>
+</ol>
+<h2>Stap 2: je bestelling afronden</h2>
+<ol>
+  <li>Klik onder de lijst bestelde items op "Bestelling afronden"</li>
+  <li>Verifieer een laaste keer en "Ga verder"</li>
+  <li>Kies een betalingsmethode en volg de instructies op het scherm</li>
+</ol>
+<h2>Hulp nodig bij het bestellen?</h2>
+<p>De medewerkers in het cursusdienstlokaal kunnen je steeds begeleiden om succesvol een bestelling te plaatsen!</p>
+<h1>Een bestelling afhalen</h1>
+<h2>Belangrijk: eerst betalen, daarna afhalen!</h2>
+<p>Je bestelling wordt pas verwerkt (en geprint) nadat je betaling werd ontvangen door de cursusdienst. Je kan het status van je bestelling opvolgen via de pagina <a href="/orders/my_orders">"Mijn bestellingen"</a> onder de "Bestel"-tab.</p>
+<h2>Is je bestelling klaar?</h2>
+<p>Vanaf dat je bestelling klaar is, zal je een e-mail ontvangen. Je kan vervolgens je bestelling afhalen in het cursusdienstlokaal.</p>
+<h3>Het OSD-lokaal</h3>
+<p>Het OSD-lokaal bevindt zich achter gebouw E, in het lokaal van het BSG (Brussels Studentengenootschap).</p>
+<p><img src="http://img.j-dm.net/locatie_osd-lokaal.jpg" title="Locatie OSD-lokaal" alt=""  width="100%" /></p>

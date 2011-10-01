@@ -2,9 +2,7 @@
   <div class="topline"></div>
   <div id="sidemenu">
     <ul>
-      <li> <%= link_to t(:news, :scope => "side_menu"), news_guild_path(guild), :class=>"sidemenu link2" %> </li>
       <li> <%= link_to t(:supply, :scope => "side_menu"), root_url(:subdomain => guild.initials), :class=>"sidemenu link2" %> </li>
-      <li> <%= link_to t(:manual, :scope => "side_menu"), manual_path, :class=>"sidemenu link2" %> </li>
       <li> <%= link_to t(:shopping_cart, :scope => "shopping_cart"), shopping_cart_items_path, :class=>"sidemenu link2" %> </li>
       <li> <%= link_to t(:my_orders, :scope => "titles"), my_orders_orders_path, :class=>"sidemenu link2" %> </li>
     </ul>
