@@ -11,7 +11,7 @@
 </h1>
 <%= form_tag update_filter_disciplines_path, :method => :put do %>
   <% if current_user.can? "view_institutes" %>
-    <%= label_tag t(:institute, :scope => "globals" ) %>
+    <%= label_tag t(:institute, :scope => "globals" ) %> <br />
     <%= render :partial => "filters/select_box", :locals => {
       :filter_key_ajax => "institute",
       :id => "institute_id",
@@ -21,7 +21,7 @@
       :child_id => "faculty_id"} %> <br />
   <% end %>
 
-  <%= label_tag t(:faculty, :scope => "globals" ) %>   
+  <%= label_tag t(:faculty, :scope => "globals" ) %>   <br />
   <%= render :partial => "filters/select_box_html_options", :locals => {
     :filter_key_ajax => "faculty",
     :id => "faculty_id",
