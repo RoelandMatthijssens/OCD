@@ -9,15 +9,18 @@
     </div>
   <% end %>
 </h1>
-<%= form_tag update_filter_subjects_path, :method => :put do %>
-  <%= label_tag t(:institute, :scope => "globals" ) %>
-  <%= render :partial => "filters/select_box", :locals => {
-    :filter_key_ajax => "institute",
-    :id => "institute_id",
-    :dataset => Institute.all, 
-    :selected_id => "#{@dis_fac_inst[0]}",
-    :parent_id => "institute_id",
-    :child_id => "faculty_id"} %> <br />
+
+<% if current_user.can? "view_institutes" %>
+  <%= form_tag update_filter_subjects_path, :method => :put do %>
+    <%= label_tag t(:institute, :scope => "globals" ) %>
+    <%= render :partial => "filters/select_box", :locals => {
+      :filter_key_ajax => "institute",
+      :id => "institute_id",
+      :dataset => Institute.all, 
+      :selected_id => "#{@dis_fac_inst[0]}",
+      :parent_id => "institute_id",
+      :child_id => "faculty_id"} %> <br />
+  <% end %>
 
   <%= label_tag t(:faculty, :scope => "globals" ) %>    
   <%= render :partial => "filters/select_box", :locals => {
