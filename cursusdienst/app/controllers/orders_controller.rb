@@ -85,6 +85,7 @@ class OrdersController < ApplicationController
         stock = stock.first
         stock.amount -= item.amount
         stock.floating += item.amount
+        stock.save!
       end
     end
     #all stock amounts are edited to be floating for the amount ordered by the user
