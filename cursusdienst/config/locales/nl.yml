@@ -630,7 +630,11 @@ nl:
     logout: "Uitloggen"
     login: "Inloggen"
     shopping_cart: "Winkelwagen"
-    
+    control_panel: "Beheerpaneel"
+    print_jobs: "Drukker bestellingen"
+    supply: "Aanbod"
+    home: "Home"
+
   orders:
     cash: "contant"
     transer: "overschrijving"
