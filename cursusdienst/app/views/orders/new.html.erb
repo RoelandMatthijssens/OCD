@@ -11,9 +11,14 @@
 <%= form_for(@order) do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
 
+  <%= render :partial => 'info_string', :locals => {:guild => Guild.find_by_initials(request.subdomain), :info_name => "confirmation_warning"} %>
+
   <div class='field'>
     <%= f.submit @submit %>
   </div>
 <% end %>
+<div class='field'>
+  <%= button_to @back, shopping_cart_items_path, :method => 'get' %>
+</div>
 
 <%= render :partial => "guilds/sidemenu", :locals => {:guild => Guild.find_by_initials(request.subdomain)} %>

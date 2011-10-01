@@ -53,11 +53,12 @@ class OrdersController < ApplicationController
     deny_access and return unless signed_in?
     @order = Order.new()
     @submit = t(:proceed, :scope => "buttons" )
+    @back = t(:back, :scope => "buttons")
     @title = t(:verify_order, :scope => "titles")
   end
 
   def create
-    institute = current_user.guilds.first.disciplines.first.faculty.institute
+    institute = Guild.find_by_initials(request.subdomain).disciplines.first.faculty.institute
     @order = Order.new()
     @order.status = "Posted"
     @order.institute = institute
@@ -85,6 +86,7 @@ class OrdersController < ApplicationController
         stock = stock.first
         stock.amount -= item.amount
         stock.floating += item.amount
+        stock.save!
       end
     end
     #all stock amounts are edited to be floating for the amount ordered by the user

@@ -6,19 +6,23 @@
         <legend>
           <%= link_to subject.name, subject %>
           &nbsp <!-- Whitespaces -->
-          <span class="comment_text">
-            <%= link_to t(:edit_subject, :scope => 'links'),
-              edit_subject_path(subject) %>
-            <%= link_to image_tag("icons/twotone/beige/edit.gif",
-              :alt=>t(:edit_subject, :scope => 'links')),
-              edit_subject_path(subject) %>
-          </span>
+          <% if signed_in? && current_user.can?("edit_subjects") %>
+            <span class="comment_text">
+              <%= link_to t(:edit_subject, :scope => 'links'),
+                edit_subject_path(subject) %>
+              <%= link_to image_tag("icons/twotone/beige/edit.gif",
+                :alt=>t(:edit_subject, :scope => 'links')),
+                edit_subject_path(subject) %>
+            </span>
+          <% end %>
         </legend>
         <tr>
           <th class='col1width'> <%= t(:item, :scope => "guild.supply") %> </th>
           <th class='col2width'> <%= t(:price, :scope => "guild.supply") %> </th>
           <th class='col3width'> <%= t(:to_cart, :scope => "guild.supply") %> </th>
-          <th class='col4width'> <%= t(:edit, :scope => "guild.supply") %> </th>
+          <% if signed_in? && current_user.can?("edit_materials") %>
+            <th class='col4width'> <%= t(:edit, :scope => "guild.supply") %> </th>
+          <% end %>
         </tr>
         <% i = 1 %> <!-- dirty ruby fix to get the alternating alt class -->
         <% supplies.each do |supply| %>
