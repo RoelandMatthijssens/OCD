@@ -30,7 +30,11 @@
             <td <%= "class='alt'" if i.odd? %> ><%= link_to "#{supply.material.typee} #{supply.material.name}", supply.material %></td>
             <td <%= "class='alt'" if i.odd? %> >€ <%= supply.price %></td>
             <td <%= "class='alt'" if i.odd? %> >
-              <%= link_to_function image_tag("icons/twotone/" + icon_color + "/cart.gif", :alt=>t("add_to_cart", :scope => 'links')), "add_to_cart( #{ supply.material.id }, #{@guild.id} )" %>
+              <% if signed_in? %>
+                <%= link_to_function image_tag("icons/twotone/" + icon_color + "/cart.gif", :alt=>t("add_to_cart", :scope => 'links')), "add_to_cart( #{ supply.material.id }, #{@guild.id} )" %>
+              <% else %>
+                <%= link_to_function image_tag("icons/twotone/" + icon_color + "/cart.gif", :alt=>t("add_to_cart", :scope => 'links'), :mouseover => "icons/twotone/" + icon_color + "/lock.gif"), "add_to_cart( #{ supply.material.id }, #{@guild.id} )" %>
+              <% end %>
             </td>
             <% if current_user && current_user.can?("edit_materials") %>
               <td <%= "class='alt'" if i.odd? %> >

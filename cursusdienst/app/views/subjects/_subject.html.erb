@@ -3,7 +3,7 @@
   <fieldset class="simplefieldset2">
     <legend>
       <%= t(:info, :scope => "message" ) %>
-      <% if current_user.can? "edit_subjects" %>
+      <% if current_user.can?("edit_subjects") %>
         <span class="edit">
           - <%= link_to "Edit", edit_subject_path(subject) %>
         </span>
@@ -36,7 +36,7 @@
   <fieldset class="simplefieldset2">
     <legend>
       <%= t(:materials, :scope => "globals" ) %>
-      <% if current_user.can? "create_materials" %>
+      <% if current_user.can?("create_materials")%>
         <span class="comment_text">
           - <%= link_to t(:add_one, :scope => "links" ), :controller => "materials", :action => "new", :subject_id => subject.id %>
           <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), new_material_path %>
@@ -50,4 +50,3 @@
     </ul>
   </fieldset>
 </div>
-

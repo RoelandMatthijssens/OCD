@@ -1,7 +1,7 @@
-<%= select_tag id, 
-  options_from_collection_for_select(dataset, :id, :name, selected_item(selected_id)), 
+<%= select_tag id,
+  options_from_collection_for_select(dataset, :id, :name, selected_item(selected_id)),
   if parent_id && child_id && parent_id.empty? && child_id.empty?
-    {:prompt => " "}
+    {:prompt => t(:select, :scope => "globals" )}
   else
-    {:prompt => " ", :onchange=>filter_select_on_change(parent_id, child_id, filter_key_ajax)}
+    {:prompt => t(:select, :scope => "globals" ), :onchange=>filter_select_on_change(parent_id, child_id, filter_key_ajax)}
   end %>

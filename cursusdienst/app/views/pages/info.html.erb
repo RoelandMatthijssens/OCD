@@ -1,3 +1,6 @@
+<%= render :partial => 'info_strings/info_string', :locals => {:guild => Guild.find_by_initials(request.subdomain), :info_name => 'about_CD'} %>
+
+
 <h1><%= @title %></h1>
 <% if current_user %>
   <%= current_user.guilds.first && current_user.guilds.first.name %>

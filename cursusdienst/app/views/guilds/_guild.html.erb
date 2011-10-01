@@ -55,7 +55,7 @@
               </td>
               <td>
                 <%= select_tag "filter[year_type]",
-                  options_for_select([["bachelor","bachelor"], ["master","master"], ["choice","choice"]], @selected_year_type),
+                  options_for_select([[t(:bachelor, :scope => "subject.types" ),"bachelor"], [t(:master, :scope => "subject.types" ),"master"], [t(:choice, :scope => "subject.types" ),"choice"]], @selected_year_type),
                   {:onchange => "if (this.value !='') {this.form.submit();} "} %>
               </td>
             </tr>

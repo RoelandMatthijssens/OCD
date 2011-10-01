@@ -288,6 +288,7 @@ nl:
     buy_price: "Aankoopprijs"
     sale_price: "Verkoopprijs"
     current: "huidige"
+    select: "Selecteer"
 
   shopping_cart:
     shopping_cart: "Winkelwagen"
@@ -591,6 +592,7 @@ nl:
     update_stock_success: "Stock succesvol aangepast"
     out_of_stock: "%{material} is niet meer in stock, en kan niet verkocht worden. Winkelwagen werd niet gepost"
     not_enough_stock: "%{material} is slechts %{available} keer in stock. U bestelde er %{ordered}."
+    login_to_buy: "Je moet ingelogd zijn om een item te kopen"
 
   links:
     new_verion: "Nieuwe versie"
