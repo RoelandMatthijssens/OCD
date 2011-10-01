@@ -1,27 +1,26 @@
 <% if !current_user %>
-    <% content_for :sideshop do  %>
-      <div class="topline"></div>
-      <div id="sidelogin">
-        <%= form_for(:session, :url => sessions_path) do |f| %><br/>
-          <div class='field'>
-            <%= f.label t(:user_name, :scope => "attributes" ) %> <br>
-            <%= f.text_field :user_name %> <br>
-          </div>
-          <div class='field'>
-            <%= f.label t(:password, :scope => "attributes" ) %> <br>
-            <%= f.password_field :password %> <br>
-          </div>
-          <div class="actions">
-            <%= f.submit t(:sign_in, :scope => "buttons" ) %>
-          </div>
-          <div>
-            <center>
-              <%= link_to t(:sign_up_now, :scope => "links" ), signup_path %>
-            </center>
-          </div>
-        <% end %>
-
-      </div>
-      <div class="topline"></div>
-    <% end %>
+  <% content_for :sideshop do  %>
+    <div class="topline"></div>
+    <div id="sidelogin">
+      <%= form_for(:session, :url => sessions_path) do |f| %><br/>
+        <div class='field'>
+          <%= f.label t(:user_name, :scope => "attributes" ) %> <br>
+          <%= f.text_field :user_name %> <br>
+        </div>
+        <div class='field'>
+          <%= f.label t(:password, :scope => "attributes" ) %> <br>
+          <%= f.password_field :password %> <br>
+        </div>
+        <div class="actions">
+          <%= f.submit t(:sign_in, :scope => "buttons" ) %>
+        </div>
+        <div>
+          <center>
+            <%= link_to t(:sign_up_now, :scope => "links" ), signup_path %>
+          </center>
+        </div>
+      <% end %>
+    </div>
+    <div class="topline"></div>
   <% end %>
+<% end %>

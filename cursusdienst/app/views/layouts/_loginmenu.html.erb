@@ -1,17 +1,18 @@
 <div id="loginmenu">
   <ul>
-    <% if signed_in? %>
+    <% unless request.subdomain == "www" || request.subdomain == "" %>
+      <% if signed_in? %>
 
-      <li><%= link_to t(:logout, :scope => "links" ) + " #{current_user.name}", signout_path, :class=>"loginmenu lockicon", :onclick=>"this.blur();" %> </li>
-      <li><%= link_to t(:profile, :scope => "links" ), current_user, :class=>"loginmenu usericon", :onclick=>"this.blur();" %></li>
-      <li><%= link_to t(:shopping_cart, :scope => "links" ), shopping_cart_items_path, :class=>"loginmenu shopicon", :onclick=>"this.blur();" %></li>
+        <li><%= link_to t(:logout, :scope => "links" ) + " #{current_user.name}", signout_path, :class=>"loginmenu lockicon", :onclick=>"this.blur();" %> </li>
+        <li><%= link_to t(:profile, :scope => "links" ), current_user, :class=>"loginmenu usericon", :onclick=>"this.blur();" %></li>
+        <li><%= link_to t(:shopping_cart, :scope => "links" ), shopping_cart_items_path, :class=>"loginmenu shopicon", :onclick=>"this.blur();" %></li>
 
-    <% else %>
-      <li><%= link_to t(:login, :scope => "links" ), signin_path, :class=>"loginmenu lockicon", :onclick=>"this.blur();" %> </li>
-      <li><%= link_to t(:profile, :scope => "links" ), signin_path, :class=>"loginmenu lockicon", :onclick=>"this.blur();" %> </li>
-      <li><%= link_to t(:shopping_cart, :scope => "links" ), shopping_cart_items_path, :class=>"loginmenu lockicon", :onclick=>"this.blur();" %> </li>
+      <% else %>
+        <li><%= link_to t(:login, :scope => "links" ), signin_path, :class=>"loginmenu lockicon", :onclick=>"this.blur();" %> </li>
+        <li><%= link_to t(:profile, :scope => "links" ), signin_path, :class=>"loginmenu lockicon", :onclick=>"this.blur();" %> </li>
+        <li><%= link_to t(:shopping_cart, :scope => "links" ), shopping_cart_items_path, :class=>"loginmenu lockicon", :onclick=>"this.blur();" %> </li>
+      <% end %>
     <% end %>
-
     <!--
     <li> <a class="loginmenu usericon" href="#" onclick="this.blur();">Account</a> </li>
       <li> <a class="loginmenu shopicon" href="#" onclick="this.blur();">Winkelwagen</a> </li>
