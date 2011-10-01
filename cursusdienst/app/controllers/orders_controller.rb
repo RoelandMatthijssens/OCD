@@ -40,7 +40,7 @@ class OrdersController < ApplicationController
           @res << x
           @res.any? ? @res & x : x
         }
-        
+
         @res.each { |g|
           @orders = @orders.nil? ? g : @orders & g
         }
@@ -114,10 +114,11 @@ class OrdersController < ApplicationController
         x.delete
         @order.delete
         flash[:error] = t(:material_added_to_order_fail, :scope => "flash", :material => item.material.name)
+        return
       end
+      #all items are tossed from the shopping cart to the order, so we can delete all items in the cart,
+      item.delete
     end
-    #all items are tossed from the shopping cart to the order, so we can delete all items in the cart,
-    #item.delete
     redirect_to my_orders_orders_path
   end
 
@@ -129,7 +130,7 @@ class OrdersController < ApplicationController
     #OrderMailer.payment_ok(@order.user).deliver
     redirect_to orders_path
   end
-  
+
   def mark_as_payed
     @order = Order.find(params[:id])
     @order.status = 'Payed'
