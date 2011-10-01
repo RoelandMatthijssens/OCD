@@ -296,7 +296,7 @@ nl:
     status: "Status"
     order_content: "Bestelling"
     items: "Items"
-    price: "Prijs"
+    price: "Prijs/st"
     total: "Totaal"
 
   shopping_cart:

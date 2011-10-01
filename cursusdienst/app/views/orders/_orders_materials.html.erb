@@ -20,7 +20,7 @@
         <td><%= item.guild.initials %></td>
       <% end %>
       <td class="fixed"><%= item.amount %></td>
-      <td class="fixed"><%= number_to_currency item.price %></td>
+      <td class="fixed"><%= number_to_currency item.price/item.amount %></td>
     </tr>
     <% end %>
     <tr>
