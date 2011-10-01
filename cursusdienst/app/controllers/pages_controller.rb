@@ -17,6 +17,10 @@ class PagesController < ApplicationController
   def access_denied
     @title = t(:access_denied, :scope => "titles" )
   end
+  
+  def manual
+    @title = t(:guide, :scope => "titles" )
+  end
 
   def control_panel
     deny_access and return unless signed_in?
