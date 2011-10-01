@@ -17,6 +17,7 @@ class GuildsController < ApplicationController
         @supplies[subject] = [supply]
       end
     end
+    @display_year_type_box = false
     @subjects = @guild.subjects
     @selected_discipline = ""
     @selected_year_type = ""
@@ -27,20 +28,23 @@ class GuildsController < ApplicationController
   end
 
   def update_filter
-    deny_access and return unless signed_in?
+    #deny_access and return unless signed_in?
     @guild = Guild.find_by_initials!(request.subdomain)
-    @subjects = get_materials params[:filter][:discipline_id], params[:filter][:year_type]
+    #@subjects = get_materials params[:filter][:discipline_id], params[:filter][:year_type]
     @supplies = {}
     @guild.supplies.each do |supply|
       subject = supply.material.subject
-      if @supplies[subject]
-        @supplies[subject] << supply
-      else
-        @supplies[subject] = [supply]
+      if (params[:filter][:discipline_id].empty? || subject.disciplines.include?(Discipline.find(params[:filter][:discipline_id])) ) && (subject.year_type == params[:filter][:year_type] || params[:filter][:year_type].empty?)
+        if @supplies[subject]
+          @supplies[subject] << supply
+        else
+          @supplies[subject] = [supply]
+        end
       end
     end
     @selected_discipline = params[:filter][:discipline_id]
     @selected_year_type = params[:filter][:year_type]
+    @display_year_type_box = true
     render :action => 'show'
   end
 
@@ -156,7 +160,16 @@ class GuildsController < ApplicationController
   end
 
   def get_materials discipline_id, year_type
-    subjects = Subject.includes(:teachings).where("teachings.discipline_id = #{discipline_id} and subjects.year_type='#{year_type}'")
-    return subjects
+    flash[:success] = "year_type = true" if year_type
+    flash[:success2] = "year_type = nil" if year_type.empty?
+
+    flash[:success3] = "discipline_id = true" if discipline_id
+    flash[:success4] = "discipline_id = nil" if discipline_id.empty?
+
+    flash[:success5] = "discipline_id = #{discipline_id}, year_type = #{year_type}"
+
+    #subjects = Subject.includes(:teachings).where("teachings.discipline_id = #{discipline_id} and subjects.year_type='#{year_type}'")
+    #return subjects
+    return []
   end
 end

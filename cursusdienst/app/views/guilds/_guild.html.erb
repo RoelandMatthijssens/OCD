@@ -49,13 +49,13 @@
                   :html_options => {:onchange => '$(filter_year_type).val("");this.form.submit()'}} %> <br />
               </td>
             </tr>
-            <tr>
+            <tr <%= "style='display: none;'" unless @display_year_type_box %>>
               <td>
                 <%= label_tag t :year, :scope => "datetime.prompts" %>
               </td>
               <td>
                 <%= select_tag "filter[year_type]",
-                  options_for_select([[t(:bachelor, :scope => "subject.types" ),"bachelor"], [t(:master, :scope => "subject.types" ),"master"], [t(:choice, :scope => "subject.types" ),"choice"]], @selected_year_type),
+                  options_for_select([[t(:bachelor, :scope => "subject.types" ),"Bachelor"], [t(:master, :scope => "subject.types" ),"Master"], [t(:choice, :scope => "subject.types" ),"Choice"]], @selected_year_type),
                   {:onchange => "if (this.value !='') {this.form.submit();} "} %>
               </td>
             </tr>
