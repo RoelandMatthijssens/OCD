@@ -28,12 +28,18 @@ class PagesController < ApplicationController
     @title = t(:control_panel2, :scope => "titles" )
   end
 
-  def search_results
+  def search
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('use_control_panel')
     @title = t(:search_results, :scope => "titles" )
     deny_access and return unless signed_in?
 
+    if params[:path]
+      @ret = params[:path]
+    else
+      @ret = request.referer
+    end
+        
     substr = params[:search]
     #each element is [tablename, [columnnames], attribute_to_display]
     search_environments = [[User, ['name', 'last_name', 'user_name']],
@@ -56,6 +62,14 @@ class PagesController < ApplicationController
       conditions[0] = conditions[0].join(" or ")
       @search_results[table] = table.find(:all, :conditions => conditions)
     end
-    #render :action => 'search_results'
+    render :action => 'search_results'
+  end
+  
+  def search_results
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('use_control_panel')
+    @title = t(:search_results, :scope => "titles" )
+    deny_access and return unless signed_in?
+
   end
 end

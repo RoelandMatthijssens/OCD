@@ -265,6 +265,7 @@ nl:
   example: "t(:cool, :scope => 'models.guild')"
 
   globals:
+    back: "Terug"
     none_found: "Geen resultaten gevonden"
     select: "Selecteer"
     disciplines: "Richtingen"

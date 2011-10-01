@@ -1,4 +1,9 @@
-<%= form_tag pages_search_results_path, :method => :get do%>
-    <%= text_field_tag "search" %>
+<%= form_tag pages_search_path, :method => :put do%>
+  <%= text_field_tag "search" %>
+  <% if params[:path] %>
+    <%= hidden_field_tag "path", params[:path] %>
+  <% elsif  params[:controller] == 'pages' && params[:action] == 'search' %>
+    <%= hidden_field_tag "path", request.referer %>
+  <% end %>
   <%= submit_tag "Search" %>
 <% end %>

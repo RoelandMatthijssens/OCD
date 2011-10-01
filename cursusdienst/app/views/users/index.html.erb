@@ -1,6 +1,6 @@
 <h1><%= t(:all_users,:scope => "titles") %></h1>
 <%= link_to t(:add_user,:scope => "links"), new_user_path %><br/>
-<%= link_to t(:me,:scope => "links"), current_user %>
+<%= render :partial => 'pages/filters' %>
 <%= will_paginate %>
 <ul class="users">
   <% @users.each do |user| %>
