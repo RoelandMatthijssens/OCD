@@ -7,6 +7,8 @@ Cursusdienst::Application.routes.draw do
   get "pages/home"
 
   get "pages/search_results"
+  
+  put "pages/search"
 
   get "pages/about"
 

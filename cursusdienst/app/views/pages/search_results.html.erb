@@ -1,6 +1,6 @@
 <h1><%= @title %></h1>
 <%= render :partial => 'filters' %>
-
+<%= button_to t(:back, :scope => "globals"), @ret, :method => 'get' %>
 <% @search_results.each do |table, results| %>
   <% unless results.empty? %>
     <fieldset class="simplefieldset2">
@@ -10,7 +10,11 @@
       <div>
         <ul>
           <% results.each do |result| %>
-            <li><%= link_to result.name, result %></li>
+            <% if result.class == User %>
+              <li><%= link_to "#{result.name} #{result.last_name} (#{result.user_name})", result %></li>
+            <% else %>
+              <li><%= link_to result.name, result %></li>
+            <% end %>
           <% end %>
         </ul>
       </div>
