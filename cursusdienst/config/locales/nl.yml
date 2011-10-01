@@ -287,7 +287,7 @@ nl:
     attachment: "Bijlage"
 
   shopping_cart:
-    shopping_cart: "Winkelmandje"
+    shopping_cart: "winkelwagen"
     total: "Totaal"
     name: "Naam"
     amount: "Aantal"
@@ -535,7 +535,7 @@ nl:
     now_selling: "%{material} is toegevoegd aan het aanbod van %{guild} voor %{price} "
     selling_fail: "Er is iets misgegaan, probeer het opnieuw"
     to_many_guild: "U bent lid van meerdere kringen, we weten niet aan welke kring het cursusmateriaal toegevoegd moet worden"
-    added_to_cart: "%{material} is aan het winkelmandje toegevoegd "
+    added_to_cart: "%{material} is aan de winkelwagen toegevoegd "
     new_message_success: "bericht succesvol aangemaakt"
     new_message_fail: "bericht niet aangemaakt. Er is iets misgegaan"
     update_message_success: "bericht succesvol aangepast"
@@ -544,7 +544,7 @@ nl:
     update_option_success: "optie succesvol aangepast"
     no_institute: "Gebruiker kon niet met een instelling geassocieerd worden"
     no_payment_option: "Geen betalings-optie meegegeven"
-    new_order_success: "Bestelling is verstuurd, en winkelmandje is geledigd"
+    new_order_success: "Bestelling is verstuurd, en winkelwagen is geledigd"
     new_order_fail: "Er is iets fout gegaan bij het versturen van de bestelling"
     material_added_to_order_fail: "er is iets misgegaan, %{material} werd niet aan de bestelling toegevoegd"
     new_permission_group_success: "Rechten succesvol aangemaakt"
@@ -555,7 +555,7 @@ nl:
     signed_out: "Succesvol uitgelogd"
     signed_in: "Succesvol ingelogd"
     password_mismatch: "Passwoord Username combinatie is foutief"
-    add_to_shopping_cart_fail: "item niet aan winkelmandje toegevoegd. Er is iets misgegaan"
+    add_to_shopping_cart_fail: "item niet aan winkelwagen toegevoegd. Er is iets misgegaan"
     shopping_cart_item_not_found: "Opgegeven item werd niet gevonden (ID mismatch)"
     shopping_cart_amount_change_fail: "Aantal niet veranderd. Er is iets misgegaan"
     new_subject_success: "Cursus succesvol aangemaakt"
@@ -584,7 +584,7 @@ nl:
     delete_user_success: "Gebruiker succesvol verwijderd"
     delete_user_fail: "Gebruiker niet verwijderd. Er is iets misgegaan"
     update_stock_success: "Stock succesvol aangepast"
-    out_of_stock: "%{material} is niet meer in stock, en kan niet verkocht worden. Winkelmandje werd niet gepost"
+    out_of_stock: "%{material} is niet meer in stock, en kan niet verkocht worden. Winkelwagen werd niet gepost"
     not_enough_stock: "%{material} is slechts %{available} keer in stock. U bestelde er %{ordered}."
 
   links:
@@ -620,7 +620,7 @@ nl:
     subjects: "Cursussen"
     materials: "Uitgaven"
     guild_supplies: "Aanbod kringen"
-    add_to_cart: "Aan winkelmandje toevoegen"
+    add_to_cart: "Aan winkelwagen toevoegen"
     new_message: "Nieuw bericht"
     new_faculty: "Nieuwe faculteit"
     new_discipline: "Nieuwe richting"
