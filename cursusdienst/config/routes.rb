@@ -77,7 +77,9 @@ Cursusdienst::Application.routes.draw do
 
   resources :faculties
 
-  resources :disciplines
+  resources :disciplines do
+    put :update_filter, :on => :collection
+  end
 
   resources :subjects do
     put :update_filter, :on => :collection

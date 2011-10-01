@@ -14,9 +14,7 @@ class SubjectsController < ApplicationController
     deny_privileged_access and return unless current_user.can?('view_subjects')
     @dis_fac_inst = [params[:institute_id],params[:faculty_id],params[:discipline_id]]
     @title = t(:all_subjects, :scope => "titles" )
-
     @subjects = Subject.joins(:disciplines).find(:all, :conditions => ["discipline_id = ?", params[:discipline_id]]).paginate(:page => params[:page], :per_page => 10)
-
     render :action => 'index'
   end
 
