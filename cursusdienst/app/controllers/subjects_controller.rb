@@ -5,6 +5,18 @@ class SubjectsController < ApplicationController
     deny_privileged_access and return unless current_user.can?('view_subjects')
     @title = t(:all_subjects, :scope => "titles" )
     @subjects = Subject.paginate(:page => params[:page], :per_page => 10)
+    @dis_fac_inst = []
+  end
+  
+  def update_filter
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('view_subjects')
+    @dis_fac_inst = []
+    @title = t(:all_subjects, :scope => "titles" )
+
+    @subjects = Subject.joins(:disciplines).find(:all, :conditions => ["discipline_id = ?", params[:discipline_id]]).paginate(:page => params[:page], :per_page => 10)
+
+    render :action => 'index'
   end
 
   def show
@@ -22,7 +34,7 @@ class SubjectsController < ApplicationController
     else
       @discipline = Discipline.new
     end
-    @dis_fac_inst = []
+    @dis_fac_inst = [[][][]]
     @submit = t(:new_subject, :scope => "buttons" )
   end
 

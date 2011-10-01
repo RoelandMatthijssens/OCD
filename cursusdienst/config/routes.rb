@@ -79,7 +79,9 @@ Cursusdienst::Application.routes.draw do
 
   resources :disciplines
 
-  resources :subjects
+  resources :subjects do
+    put :update_filter, :on => :collection
+  end
 
   constraints(Subdomain) do
     match '/' => 'guilds#show'
