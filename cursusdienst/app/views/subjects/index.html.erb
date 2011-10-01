@@ -41,6 +41,8 @@
     :html_options => {:onchange => "if (this.value !='') {this.form.submit();} "}} %> <br />
 <% end %>
 
+<%= link_to @title, subjects_path %>
+
 <%= will_paginate %>
 <ul class="disciplines">
   <%= t(:none_found, :scope => "globals") if @subjects.empty? %>
