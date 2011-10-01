@@ -472,6 +472,7 @@ icons/twotone/beige/bookmark.gif: icons/twotone/beige/bookmark.gif
 icons/twotone/beige/clock.gif: icons/twotone/beige/clock.gif
 icons/twotone/beige/clipboard.gif: icons/twotone/beige/clipboard.gif
 icons/twotone/beige/arrow-down.gif: icons/twotone/beige/arrow-down.gif
+icons/twotone/beige/minus.gif: icons/twotone/beige/minus.gif
 icons/twotone/beige/eject.gif: icons/twotone/beige/eject.gif
 icons/twotone/beige/skull.gif: icons/twotone/beige/skull.gif
 icons/twotone/beige/favourite.gif: icons/twotone/beige/favourite.gif
@@ -688,6 +689,13 @@ icons/twotiny/folder-lock.gif: icons/twotiny/folder-lock.gif
 icons/twotiny/phone.gif: icons/twotiny/phone.gif
 star.gif: star.gif
 delete.gif: delete.gif
+guilds/solvay/headerbanner.png: guilds/solvay/headerbanner.png
+guilds/solvay/footerbanner.png: guilds/solvay/footerbanner.png
+guilds/ppk/footerbanner2.png: guilds/ppk/footerbanner2.png
+guilds/ppk/headerbanner.png: guilds/ppk/headerbanner.png
+guilds/ppk/headerbanner3.png: guilds/ppk/headerbanner3.png
+guilds/ppk/footerbanner.png: guilds/ppk/footerbanner.png
+guilds/lwk/headerbanner.png: guilds/lwk/headerbanner.png
 guilds/shared/footerbanner.gif: guilds/shared/footerbanner.gif
 guilds/shared/headerbanner.png: guilds/shared/headerbanner.png
 guilds/shared/background_for_customizing.png: guilds/shared/background_for_customizing.png
@@ -697,9 +705,12 @@ guilds/ig/headerbanner2.png: guilds/ig/headerbanner2.png
 guilds/ig/footerbanner.gif: guilds/ig/footerbanner.gif
 guilds/ig/headerbanner.png: guilds/ig/headerbanner.png
 guilds/ig/background_for_customizing.png: guilds/ig/background_for_customizing.png
+guilds/ig/headerbanner5.png: guilds/ig/headerbanner5.png
 guilds/ig/headerbanner3.png: guilds/ig/headerbanner3.png
 guilds/ig/footerbanner.png: guilds/ig/footerbanner.png
+guilds/wk/headerbanner.png: guilds/wk/headerbanner.png
 twotone.gif: twotone.gif
+favicon.ico: favicon.ico
 banners/cd_logo.gif: banners/cd_logo.gif
 banners/footerbanner.gif: banners/footerbanner.gif
 banners/headerbanner.png: banners/headerbanner.png

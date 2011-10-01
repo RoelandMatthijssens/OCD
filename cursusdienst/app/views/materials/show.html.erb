@@ -1,4 +1,11 @@
 <%= render @material %>
 
-<%= render :partial => "shared/right_navigation", :locals => {:params_key => :subject_id}%>
-<%= render :partial => 'shared/side_supply' %>
+<% if signed_in? && current_user.can?("view_materials") %>
+  <%= render :partial => "shared/right_navigation", :locals => {:params_key => :subject_id}%>
+<% end %>
+
+<%= render :partial => 'guilds/sidemenu', :locals => {:guild => Guild.find_by_initials(request.subdomain)} %>
+
+<% if signed_in? && current_user.can?("view_side_supply") %>
+  <%= render :partial => 'shared/side_supply' %>
+<% end %>
