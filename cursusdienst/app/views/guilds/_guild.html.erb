@@ -1,6 +1,6 @@
 <div>
   <h1>
-    <%= link_to guild.name, root_url(:subdomain => guild.initials) %>  <%= t(:supplies, :scope => "guild") %>
+    <%= link_to @guild.name, root_url(:subdomain => guild.initials) %>  <%= @title %>
     <% unless current_user && current_user.guilds.include?(guild) %>
       <% if signed_in? && current_user.can?("join_guilds") %>
         <div class="to_right">

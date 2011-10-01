@@ -1,4 +1,4 @@
-<h1><%= t(:news, :scope => "side_menu") %>
+<h1><%= @in_page_title %>
   <div class="to_right">
     <% if signed_in? && ( (current_user.can? "create_message" && current_user.guilds.include?(@guilds) ) || current_user.can?("create_all_messages") ) %>
       <span class="comment_text">
