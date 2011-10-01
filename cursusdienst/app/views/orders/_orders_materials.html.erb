@@ -1,27 +1,31 @@
 <table>
   <thead>
     <tr>
-      <th>item name</th>
-      <th>bought at</th>
-      <th>amount</th>
-      <th>price</th>
-      
+      <th><%= t(:items, :scope => "globals" ) %></th>
+      <% unless params[:action] == "my_orders" %>
+        <th>bought at</th>
+      <% end %>
+      <th class="fixed"><%= t(:amount, :scope => "globals" ) %></th>
+      <th class="fixed"><%= t(:price, :scope => "globals" ) %></th>
+
     </tr>
   </thead>
   <tbody>
     <% total_price = 0 %>
-    <% items.each do |items| %>
-      <% total_price += items.price %>
+    <% items.each do |item| %>
+      <% total_price += item.price %>
     <tr>
-      <td><%= items.material.name %></td>
-      <td><%= items.guild.name %></td>
-      <td><%= items.amount %></td>
-      <td><%= number_to_currency items.price %></td>
+      <td><%= item.material.subject.name %>: <%= item.material.typee %> <%= item.material.name %></td>
+      <% unless params[:action] == "my_orders" %>
+        <td><%= item.guild.initials %></td>
+      <% end %>
+      <td class="fixed"><%= item.amount %></td>
+      <td class="fixed"><%= number_to_currency item.price %></td>
     </tr>
     <% end %>
     <tr>
-      <td colspan="3">total</td>
-      <td><%= number_to_currency total_price %></td>
+      <td><strong><%= t(:total, :scope => "globals" ) %></strong></td>
+      <td colspan=<%= params[:action] == "my_orders" ? "2" : "3" %>><strong><%= number_to_currency total_price %></strong></td>
     </tr>
   </tbody>
 </table>

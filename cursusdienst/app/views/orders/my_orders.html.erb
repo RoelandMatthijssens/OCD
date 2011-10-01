@@ -1,19 +1,17 @@
 <h1><%= @title %></h1>
 
-<%= render :partial => 'info_string', :locals => {:guild => @guild, :info_name => "cash"} %>
-<%= render :partial => 'info_string', :locals => {:guild => @guild, :info_name => "transfer"} %>
-<%= render :partial => 'info_string', :locals => {:guild => @guild, :info_name => "general_payment"} %>
+<%= render :partial => 'info_strings/info_string', :locals => {:guild => @guild, :info_name => "cash"} %>
+<%= render :partial => 'info_strings/info_string', :locals => {:guild => @guild, :info_name => "transfer"} %>
+<%= render :partial => 'info_strings/info_string', :locals => {:guild => @guild, :info_name => "general_payment"} %>
 <% statuses = ['Posted','Payed','Ordered','Delivered','Ready','Done','Canceled'] %>
 <% statuses.each do |status| %>
   <% if @orders[status] %>
-    <h3><%= status %> <%= t(:orders, :scope => "globals" ) %></h3>
+    <h3><%= t(status, :scope => "order.status" ) %></h3>
     <table>
       <thead>
         <tr>
-          <th><%= t(:user_name , :scope => "globals" ) %></th>
-          <th><%= t(:oder_key, :scope => "globals" ) %></th>
-          <th><%= t(:status , :scope => "globals" ) %></th>
-          <th><%= t(:items , :scope => "globals" ) %></th>
+          <th><%= t(:order_key, :scope => "globals" ) %></th>
+          <th><%= t(:order_content , :scope => "globals" ) %></th>
           <th><%= t(:actions , :scope => "globals" ) %></th>
         </tr>
       </thead>

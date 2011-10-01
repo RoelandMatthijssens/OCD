@@ -1,24 +1,24 @@
-table { 
-	width:100%; 
-	border-collapse: collapse;
-	border-spacing: 0;
-	border: 1px solid #DDD;
+table {
+  width:100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #DDD;
 }
 
 th          { font-weight: bold; }
-thead th    { 
-	background: rgb(218, 237, 255); 
-	border-bottom: 1px solid #AAA;
+thead th    {
+  background: rgb(218, 237, 255);
+  border-bottom: 1px solid #AAA;
 }
 
 
-th,td,caption { 
+th,td,caption {
   background: rgb(230,230,230);
   border: dotted 1px #CCC;
   text-align: center;
 }
 
-tr.even td  { 
+tr.even td  {
  background: rgb(240, 240, 240);
  text-align: center;
 }
@@ -44,6 +44,9 @@ td th {
   font-weight: bold;
 }
 
+th.fixed, td.fixed{
+  width: 45px;
+}
 
 
 
