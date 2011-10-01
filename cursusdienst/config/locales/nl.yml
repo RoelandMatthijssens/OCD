@@ -246,11 +246,11 @@ nl:
         format: "%{attribute} %{message}"
 
   attributes:
-    user_name: "VUB Netid"
+    user_name: "VUB NetID (PointCarré)"
     name: "Naam"
     last_name: "Naam"
     email: "email"
-    password: "Paswoord"
+    password: "Paswoord (VUB NetID)"
     password_confirmation: "Bevestiging paswoord"
     initials: "Initialen"
     year: "Jaar"
@@ -287,14 +287,16 @@ nl:
     attachment: "Bijlage"
     buy_price: "Aankoopprijs"
     sale_price: "Verkoopprijs"
+    current: "huidige"
 
   shopping_cart:
-    shopping_cart: "winkelwagen"
+    shopping_cart: "Winkelwagen"
     total: "Totaal"
     name: "Naam"
     amount: "Aantal"
     bought_at: "Bought at"
     price: "Price"
+    ordered_items: "Geselecteerde items"
 
   print_jobs:
     item: "Item"
@@ -503,7 +505,8 @@ nl:
     update_message: "pas bericht aan"
     new_option: "creëer optie"
     update_option: "pas optie aan"
-    proceed: "ga verder"
+    proceed: "Bevestig bestelling"
+    back: "Ga terug"
     new_permission_group: "creëer nieuw recht"
     update_permission_group: "update recht"
     edit_stock: "Stock aanpassen"
@@ -600,7 +603,7 @@ nl:
     add_user: "Nieuwe gebruiker aanmaken"
     me: "Ik"
     add_material: "Nieuw cursusmateriaal aanmaken"
-    proceed_to_order: "Doorgaan naar bestelling"
+    proceed_to_order: "Bestelling afronden"
     sign_up_now: "Registreer nu!"
     overview: "Overzicht"
     process: "Proces"
@@ -615,6 +618,7 @@ nl:
     add_price_set: "Nieuwe prijzen set aanmaken"
     new_printer: "Een nieuwe drukker aanmaken"
     join_guild: "Wordt lid"
+    set_confirmation_warning_info: "Opgelet"
     set_cash_info: "Plaats informatie over cash-betaling"
     set_cash_info: "Plaats informatie over overschrijving-betaling"
     set_general_payment_info: "Plaats informatie over algemene-betaling"
@@ -635,7 +639,10 @@ nl:
     control_panel: "Beheerpaneel"
     print_jobs: "Drukker bestellingen"
     supply: "Bestel"
+    supply_tab: "Bestel-tab"
     home: "Home"
+    back_to_root: "Wijzig cursusdienst"
+    current_CD: "Huidige cursusdienst"
 
   orders:
     cash: "contant"
@@ -645,6 +652,7 @@ nl:
     cash: "Cash info"
     transfer: "Overschrijvings info"
     general_payment: "Algemene info"
+    confirmation_warning: "Opgelet"
 
   mailers:
     ordermailer:

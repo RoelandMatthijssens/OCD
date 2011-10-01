@@ -1,22 +1,20 @@
 <div id="menubuttonarea"> <!-- Example of a buttommenu, see the menutop_template file for explanation -->
   <% @button_style = "button style1" %>
-
-  <% if signed_in? %>
+  <% unless request.subdomain == "www" || request.subdomain == "" %>
     <%= link_to content_tag(:span, t(:home, :scope => "links" )), news_guild_path(Guild.find_by_initials!(request.subdomain)), :class=>@button_style %>
-    <% if current_user.can? "view_supplies" %>
-      <%= link_to content_tag(:span, t(:supply, :scope => "links" )), Guild.find_by_initials!(request.subdomain), :class=>@button_style %>
-    <% end %>
-    <% if current_user.can?("use_control_panel") %>
-      <%= link_to content_tag(:span, t(:control_panel, :scope => "links" )), control_panel_path, :class=>@button_style %>
-    <% end %>
-    <% if current_user.can? "view_orders" %>
-      <%= link_to content_tag(:span, (t :users, :scope => "links")), orders_path, :class=>@button_style %>
-    <% end %>
-    <% if current_user.can? "view_print_jobs" %>
-      <%= link_to content_tag(:span, t(:print_jobs, :scope => "links" )), print_jobs_path, :class=>@button_style %>
+    <%= link_to content_tag(:span, t(:supply, :scope => "links" )), Guild.find_by_initials!(request.subdomain), :class=>@button_style %>
+    <% if signed_in? %>
+      <% if current_user.can?("use_control_panel") %>
+        <%= link_to content_tag(:span, t(:control_panel, :scope => "links" )), control_panel_path, :class=>@button_style %>
+      <% end %>
+      <% if current_user.can? "view_orders" %>
+        <%= link_to content_tag(:span, (t :users, :scope => "links")), orders_path, :class=>@button_style %>
+      <% end %>
+      <% if current_user.can? "view_print_jobs" %>
+        <%= link_to content_tag(:span, t(:print_jobs, :scope => "links" )), print_jobs_path, :class=>@button_style %>
+      <% end %>
     <% end %>
   <% end %>
-
   <!-- <a class="button style1" href="#" onclick="this.blur();"><span>HOME </span></a>
   <a class="button style2" href="#" onclick="this.blur();"><span>EXAMPLE2</span></a>
   <a class="button style3" href="#" onclick="this.blur();"><span>EXA</span></a>

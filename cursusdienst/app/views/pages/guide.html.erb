@@ -7,7 +7,7 @@
 <h2>Stap 1: je winkelwagen vullen</h2>
 <p>Om items aan je winkelwagen toe te voegen dien je volgende stappen te volgen:</p>
 <ol>
-  <li>Ga naar de <a href="/">"Bestel"-tab</a> (bovenste menu)</li>
+  <li>Ga naar de <%= link_to t(:supply_tab, :scope => "links" ), Guild.find_by_initials(request.subdomain) %> (bovenste menu)</li>
   <li>Selecteer de juiste filter (combinatie van je richting en je jaar (bachelor of master)
     <ul><li><b>Tip:</b> staat je richting niet in de lijst, dan zal je waarschijnlijk bij een andere cursusdienst moeten inloggen; <a href="http://www.cursusdienst.net">bekijk het overzicht</a></li></ul>
   </li>

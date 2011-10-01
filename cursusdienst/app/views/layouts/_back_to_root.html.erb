@@ -1,0 +1,17 @@
+<% unless request.subdomain == "www" || request.subdomain == ""  %>
+  <% if !current_user %>
+    <% content_for :sidechat do  %>
+    <div id="bodyright">
+              <p class="whitespace"> </p>
+      <div class="chattopline"></div>
+      <div class="topline"></div>
+      <div id="sidenav">
+        <ul>
+          <li> <%= link_to "#{t(:back_to_root, :scope => 'links')} (#{t(:current, :scope => 'globals' )}: #{Guild.find_by_initials(request.subdomain).name})", root_url(:subdomain => "www") %> </li>
+        </ul>
+      </div>
+      <div class="topline"></div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

@@ -18,8 +18,8 @@ class SessionsController < ApplicationController
         x = session[:return_to]
         clear_location
         redirect_to x
-      elsif user.guilds.any?
-        redirect_to root_url(:subdomain => user.guilds.first.initials)
+      elsif request.subdomain != "" && request.subdomain != "www"
+        redirect_to Guild.find_by_initials(request.subdomain)
       else
         redirect_to user
       end
@@ -29,6 +29,6 @@ class SessionsController < ApplicationController
   def destroy
     flash[:succes] =  t(:signed_out, :scope => "flash")
     sign_out
-    redirect_to root_url(:subdomain => "www")
+    redirect_to root_url()
   end
 end
