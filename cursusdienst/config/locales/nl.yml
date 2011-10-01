@@ -290,6 +290,14 @@ nl:
     sale_price: "Verkoopprijs"
     current: "huidige"
     select: "Selecteer"
+    please_log_in: "Gelieve in te loggen"
+    user_name: "Gebruikersnaam"
+    order_key: "Ref. nr."
+    status: "Status"
+    order_content: "Bestelling"
+    items: "Items"
+    price: "Prijs"
+    total: "Totaal"
 
   shopping_cart:
     shopping_cart: "Winkelwagen"
@@ -410,6 +418,16 @@ nl:
     add_supply: "Verkoop"
     remove_supply: "Verwijder uit aanbod van %{guild}"
     to_may_guilds: "Je bent lid van te veel kringen"
+
+  order:
+    status:
+      Posted: "Besteld, te betalen"
+      Payed: "Betaald"
+      Ordered: "Besteld bij drukker"
+      Delivered: "Geleverd, te verwerken"
+      Ready: "Verwerkt, af te halen"
+      Done: "Afgehaald"
+      Canceled: "Geannuleerd"
 
   permissions:
     all: "Alle"
@@ -542,7 +560,7 @@ nl:
     now_selling: "%{material} is toegevoegd aan het aanbod van %{guild} voor %{price} "
     selling_fail: "Er is iets misgegaan, probeer het opnieuw"
     to_many_guild: "U bent lid van meerdere kringen, we weten niet aan welke kring het cursusmateriaal toegevoegd moet worden"
-    added_to_cart: "%{material} is aan de winkelwagen toegevoegd "
+    added_to_cart: "%{subject}: %{type} %{material} is aan de winkelwagen toegevoegd"
     new_message_success: "bericht succesvol aangemaakt"
     new_message_fail: "bericht niet aangemaakt. Er is iets misgegaan"
     update_message_success: "bericht succesvol aangepast"

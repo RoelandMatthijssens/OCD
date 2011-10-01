@@ -115,7 +115,7 @@ class MaterialsController < ApplicationController
       respond_to do |format|
         format.html{  flash[:success] = "#{@material}" }
         #format.json { render :json => [t(:added_to_cart, :scope => "flash", :materials => @material.name )] }
-        format.json { render :json => [t(:added_to_cart, :scope => "flash", :material => @material.name)] }
+        format.json { render :json => [t(:added_to_cart, :scope => "flash", :material => @material.name, :subject => @material.subject.name, :type => @material.typee)] }
       end
     else
       respond_to do |format|
