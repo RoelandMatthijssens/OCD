@@ -68,4 +68,8 @@
 
 <%= render :partial => 'sidemenu', :locals => {:guild => guild} %>
 
-<%= render :partial => 'shared/side_supply' %>
+<% if current_user.can? "can_view_side_supply" %>
+
+  <%= render :partial => 'shared/side_supply' %>
+
+<% end %>
