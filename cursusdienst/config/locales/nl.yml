@@ -481,6 +481,7 @@ nl:
     ordered_printjob: "Bestelde Afdruktaak"
     delivered_printjob: "Afgeleverde Afdruktaak"
     my_orders: "Mijn bestellingen"
+    verify_order: "Bevestig bestelling"
     add_to_supply: "Een item aan het aanbod toevoegen"
     search_results: "Zoek resultaten"
 

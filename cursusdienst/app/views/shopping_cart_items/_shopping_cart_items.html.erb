@@ -1,0 +1,29 @@
+<table class="simpletable1">
+  <th><%= t :name, :scope => "attributes" %></th>
+  <th><%= t :amount, :scope => "shopping_cart" %></th>
+  <th><%= t :price, :scope => "attributes" %></th>
+  <% total = 0 %>
+  <% items.each do |item| %>
+    <tr>
+      <% g = item.guild %>
+      <% m = item.material %>
+      <% s = Supply.find(:all, :conditions => ['material_id = ? and guild_id = ? ', m.id, g.id]) %>
+      <% total += s.first.price * item.amount %>
+      <td><%= item.material.typee %> (<%= item.material.name %>)</td>
+      <td>
+        <%= item.amount %> 
+        <% unless params[:controller] == "orders" %>
+          <%= link_to image_tag("icons/twotone/" + icon_color + "/minus.gif", :alt=>"-"), substract_shopping_cart_item_path(item), :method => :put %>
+          <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>"+"), add_shopping_cart_item_path(item), :method => :put %>
+        <% end %>
+      </td>
+      <td><%= number_to_currency s.first.price %></td>
+    </tr>
+  <% end %>
+
+  <tr>
+    <td  colspan="2">Total</td>
+    <td><%= number_to_currency total %></td>
+  </tr>
+
+</table>

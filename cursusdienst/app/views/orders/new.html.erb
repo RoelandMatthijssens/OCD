@@ -1,45 +1,15 @@
-<h1>verify the order</h1>
+<h1><%= @title %></h1>
 
-<% total = 0 %>
-<table>
-  <thead>
-    <tr>
-      <th><%= t :name, :scope => "attributes" %></th>
-      <th><%= t :type, :scope => "material" %></th>
-      <th><%= t :amount, :scope => "shopping_cart" %></th>
-      <th><%= t :price, :scope => "attributes" %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% current_user.shopping_cart_items.each do |item| %>
-      <% g = item.guild %>
-      <% m = item.material %>
-      <% s = Supply.find(:all, :conditions => ['material_id = ? and guild_id = ? ', m.id, g.id]) %>
-      <% total += s.first.price * item.amount %>
-    <td><%= item.material.name %></td>
-    <td><%= item.material.typee %></td>
-    <td>
-      <%= item.amount %> 
-      <%= link_to image_tag("icons/twotone/" + icon_color + "/minus.gif", :alt=>"-"), substract_shopping_cart_item_path(item), :method => :put %>
-      <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>"+"), add_shopping_cart_item_path(item), :method => :put %>
-    </td>
-    <td><%= number_to_currency s.first.price %></td>
-  <% end %>
-    <tr>
-      <td  colspan="3">Total</td>
-      <td><%= number_to_currency total %></td>
-    </tr>
-</tbody>
-</table>
+<fieldset class="simplefieldset2">
+  <legend>
+    <%= t(:ordered_items, :scope => "shopping_cart" ) %>
+  </legend>
+  <%= render :partial => "shopping_cart_items/shopping_cart_items", :locals => { :items => current_user.shopping_cart_items } %>
+</fieldset>
+
 
 <%= form_for(@order) do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
-
-  <div class="form_row">
-    <label for="payment">Payment: </label>
-    <%= 'cash' %><%= radio_button_tag 'payment', 'cash' %>
-    <%= 'transfer' %><%= radio_button_tag 'payment', 'transfer' %>
-  </div>
 
   <div class='field'>
     <%= f.submit @submit %>

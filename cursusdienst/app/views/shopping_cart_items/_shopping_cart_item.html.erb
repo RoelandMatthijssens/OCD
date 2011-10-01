@@ -1,12 +1,14 @@
-<div>
-  <li>
-    <strong><%= t(:name, :scope => "shopping_cart" ) %>: </strong><%= link_to shopping_cart_item.material.name, shopping_cart_item.material %><br/>
-    <strong><%= t(:amount, :scope => "shopping_cart" ) %>: </strong><%= shopping_cart_item.amount %><br/>
-    <strong><%= t(:bought_at, :scope => "shopping_cart" ) %>:</strong> <%= link_to shopping_cart_item.guild.name, shopping_cart_item.guild %><br/>
-    <strong><%= t(:price, :scope => "shopping_cart" ) %>:</strong> € TODO prijs op basis van relatie van guild waar gekocht<br/>
-    <br/>
-    <%= link_to "+ (symbol)", add_shopping_cart_item_path(shopping_cart_item), :method => :put %>
-    <br/>
-    <%= link_to "- (symbol)", substract_shopping_cart_item_path(shopping_cart_item), :method => :put %>
-  </li><br/>
-</div>
+<tr>
+  <% g = item.guild %>
+  <% m = item.material %>
+  <% s = Supply.find(:all, :conditions => ['material_id = ? and guild_id = ? ', m.id, g.id]) %>
+  <% total += s.first.price * item.amount %>
+  <td><%= item.material.name %></td>
+  <td><%= item.material.typee %></td>
+  <td>
+    <%= item.amount %> 
+    <%= link_to image_tag("icons/twotone/" + icon_color + "/minus.gif", :alt=>"-"), substract_shopping_cart_item_path(item), :method => :put %>
+    <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>"+"), add_shopping_cart_item_path(item), :method => :put %>
+  </td>
+  <td><%= number_to_currency s.first.price %></td>
+</tr>
