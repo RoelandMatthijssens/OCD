@@ -39,7 +39,8 @@ class PagesController < ApplicationController
       [Subject, ['name', 'prof', 'year_type']],
       [Material, ['name']],
       [Guild, ['name', 'initials']],
-      [Printer, ['name']]]
+      [Printer, ['name']],
+      [Order, ['order_key']]]
     @search_results = {}
     search_environments.each do |table, columns|
       conditions = [[]]

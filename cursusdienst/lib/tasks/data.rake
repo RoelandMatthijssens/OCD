@@ -84,7 +84,7 @@ namespace :db do
     permissionNames = [
       #admin permissions
       "use_control_panel", "sell_materials", "sell_all_materials", 'create_all_messages', 'view_all_stock', 'create_all_stock', 'view_all_orders',
-      "print", "download_materials", "mark_order_as_payed", "can_view_side_supply",
+      "print", "download_materials", "mark_order_as_payed", "can_view_side_supply", 'view_all_guilds'
       #normal permissions
       "edit_users"              , "delete_users"              , "view_users"              ,
       "edit_permissions"        , "delete_permissions"        , "view_permissions"        , "create_permissions"        ,
@@ -93,7 +93,7 @@ namespace :db do
       "edit_permission_groups"  , "delete_permission_groups"  , "view_permission_groups"  , "create_permission_groups"  ,
       "edit_options"            , "delete_options"            , "view_options"            , "create_options"            ,
       "edit_institutes"         , "delete_institutes"         , "view_institutes"         , "create_institutes"         ,
-      "edit_guilds"             , "delete_guilds"             , "view_guilds"             , "create_guilds"             ,
+      "edit_guilds"             , "delete_guilds"             , "view_guilds"             , "create_guilds"             , "join_guilds",
       "edit_materials"          , "delete_materials"          , "view_materials"          , "create_materials"          ,
       "edit_faculties"          , "delete_faculties"          , "view_faculties"          , "create_faculties"          ,
       "edit_messages"           , "delete_messages"                                       , "create_messages"           ,
@@ -146,7 +146,7 @@ namespace :db do
       :name => "duplex",
       :typee => "printer"
     )
-    
+
     enermis = User.create!(
       :name => "Roeland",
       :last_name => "Matthijssens",
