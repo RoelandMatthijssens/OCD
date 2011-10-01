@@ -285,6 +285,8 @@ nl:
     actions: "Acties"
     timestamp: "Tijdsaanduiding"
     attachment: "Bijlage"
+    buy_price: "Aankoopprijs"
+    sale_price: "Verkoopprijs"
 
   shopping_cart:
     shopping_cart: "winkelwagen"
@@ -323,7 +325,7 @@ nl:
       welcome_message_join_us: "Hoewel deze site zijn roots heeft binnen de ESP-faculteit van de VUB (meer bepaald bij Promeco en KEPS) werd het van dag 1 zo ontwikkeld dat andere (VUB-)kringen eenvoudig zouden kunnen instappen.<br />Is jouw kring op zoek naar een goedkoop online systeem voor de cursusdienst? Neem dan zeker contact op via info@tyca.be."
 
   side_menu:
-    guide: "handleiding"
+    guide: "Handleiding"
     introduction: "Inleiding"
     status: "Status"
     contact: "Contact"
@@ -331,7 +333,7 @@ nl:
     manual: "Handleiding"
     supply: "Aanbod"
     user_name: "VUB "
-    password:
+    password: "paswoord"
 
   sponsor:
     thanks: 'Met dank aan'
@@ -632,7 +634,7 @@ nl:
     shopping_cart: "Winkelwagen"
     control_panel: "Beheerpaneel"
     print_jobs: "Drukker bestellingen"
-    supply: "Aanbod"
+    supply: "Bestel"
     home: "Home"
 
   orders:

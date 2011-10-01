@@ -1,7 +1,6 @@
-
 <div class="filter_results">
   <%= "not selling any materials" if @subjects.empty?%>
-  <% @subjects.each do |subject| %>
+  <% @supplies.each do |subject, supplies| %>
     <fieldset class="simplefieldset3">
       <table class="supply">
         <legend>
@@ -22,8 +21,7 @@
           <th class='col4width'> <%= t(:edit, :scope => "guild.supply") %> </th>
         </tr>
         <% i = 1 %> <!-- dirty ruby fix to get the alternating alt class -->
-        <% l =  (@supplies and @supplies[subject]) ? @supplies[subject] : [] %>
-        <% l.each do |supply| %>
+        <% supplies.each do |supply| %>
           <tr>
             <td <%= "class='alt'" if i.odd? %> ><%= link_to "#{supply.material.typee} #{supply.material.name}", supply.material %></td>
             <td <%= "class='alt'" if i.odd? %> >€ <%= supply.price %></td>
