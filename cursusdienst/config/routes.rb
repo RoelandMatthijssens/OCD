@@ -103,6 +103,7 @@ Cursusdienst::Application.routes.draw do
     put :sell, :on => :member
     get :add_to_cart, :on => :member
     get :add_to_supply, :on => :member
+    put :update_filter, :on => :collection
   end
 
   resources :messages

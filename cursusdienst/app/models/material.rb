@@ -22,8 +22,9 @@ class Material < ActiveRecord::Base
 
   validates :name, :presence => true
   validates :typee, :presence => true
+  validates :subject_id, :presence => true
   
-  validates_with ExclusivePresence
+  #validates_with ExclusivePresence
   
   validates :printable, :inclusion => {:in => [true, false]}
   belongs_to :subject
@@ -61,7 +62,7 @@ class Material < ActiveRecord::Base
   def institute_id
     subject && subject.disciplines && subject.disciplines.first.faculty.institute.id
   end
-
+  
   def get_subject(ring_check = [])
     ring_check << self
     if self.subject
