@@ -2,8 +2,10 @@
   <legend>&nbsp <!-- Whitespaces -->
     <span class="comment_text">
       <%= message.created_at %>
-      <%= link_to t(:edit, :scope=>"links"), edit_message_path(message) %>
-      <%= link_to image_tag("icons/twotone/beige/edit.gif", :alt=>t(:edit, :scope => 'links')), edit_message_path(message) %>
+      <% if signed_in? && current_user.can?("edit_messages") %>
+        <%= link_to t(:edit, :scope=>"links"), edit_message_path(message) %>
+        <%= link_to image_tag("icons/twotone/beige/edit.gif", :alt=>t(:edit, :scope => 'links')), edit_message_path(message) %>
+      <% end %>
     </span>
 </legend>
   <%= raw message.content %>

@@ -22,8 +22,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    if params[:user_name]
-      @user.email = "#{params[:user_name]}@vub.ac.be"
+    if params[:user][:user_name]
+      @user.email = "#{params[:user][:user_name]}@vub.ac.be"
     end
     guild_id = params[:guild]
     unless guild_id.empty?

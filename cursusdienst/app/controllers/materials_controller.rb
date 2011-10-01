@@ -7,7 +7,7 @@ class MaterialsController < ApplicationController
     @materials = Material.paginate(:page => params[:page], :per_page => 10)
     @select_boxes = []
   end
-  
+
   def update_filter
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('view_materials')
@@ -21,7 +21,7 @@ class MaterialsController < ApplicationController
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('view_materials')
     @material = Material.unchecked_find(params[:id])
-    @rating = Rating.new 
+    @rating = Rating.new
   end
 
   def new
@@ -49,7 +49,7 @@ class MaterialsController < ApplicationController
       @material.subject_id = @parent.subject_id
     end
 
-    if @material.save 
+    if @material.save
       flash[:succes] = t(:new_material_success, :scope => "flash")
       if params[:delete_previous] && params[:delete_previous] ==  '1'
         temp = Material.find(params[:parent_id])
@@ -98,24 +98,31 @@ class MaterialsController < ApplicationController
   end
 
   def add_to_cart
-    deny_access and return unless signed_in?
-    @material = Material.find(params[:id])
-    @guild = Guild.find_by_initials!(request.subdomain)
-    items = []
-    item = ShoppingCartItem.find(:first,  :conditions => ['user_id = ? and material_id = ? and guild_id = ?',current_user.id , @material.id, @guild.id])
-    if item
-      item.amount += 1
+    if signed_in?
+      @material = Material.find(params[:id])
+      @guild = Guild.find_by_initials!(request.subdomain)
+      items = []
+      item = ShoppingCartItem.find(:first,  :conditions => ['user_id = ? and material_id = ? and guild_id = ?',current_user.id , @material.id, @guild.id])
+      if item
+        item.amount += 1
+      else
+        item = ShoppingCartItem.new(:amount => 1)
+        item.user = current_user
+        item.material = @material
+        item.guild = @guild
+      end
+      item.save!
+      respond_to do |format|
+        format.html{  flash[:success] = "#{@material}" }
+        #format.json { render :json => [t(:added_to_cart, :scope => "flash", :materials => @material.name )] }
+        format.json { render :json => [t(:added_to_cart, :scope => "flash", :material => @material.name)] }
+      end
     else
-      item = ShoppingCartItem.new(:amount => 1)
-      item.user = current_user
-      item.material = @material
-      item.guild = @guild
-    end
-    item.save!
-    respond_to do |format|
-      format.html{  flash[:success] = "#{@material}" }
-      #format.json { render :json => [t(:added_to_cart, :scope => "flash", :materials => @material.name )] }
-      format.json { render :json => [t(:added_to_cart, :scope => "flash", :material => @material.name)] }
+      respond_to do |format|
+        format.html{  flash[:error] = t(:login_to_buy, :scope => "flash" ) }
+        #format.json { render :json => [t(:added_to_cart, :scope => "flash", :materials => @material.name )] }
+        format.json { render :json => [t(:login_to_buy, :scope => "flash")] }
+      end
     end
   end
 
@@ -131,8 +138,8 @@ class MaterialsController < ApplicationController
   def get_options_from_material par
     os = []
     par[:options_attributes].each_value { |v|
-      unless v["id"] = "" 
-        o = Option.find(v["id"]) 
+      unless v["id"] = ""
+        o = Option.find(v["id"])
         os << o if o.instance_of? Option and v["_destroy"] != "1"
       end
     } unless par[:options_attributes].nil?

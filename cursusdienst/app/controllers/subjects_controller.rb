@@ -8,7 +8,7 @@ class SubjectsController < ApplicationController
     inst = Guild.find_by_initials(request.subdomain).disciplines.first.faculty.institute_id
     @dis_fac_inst = [inst]
   end
-  
+
   def update_filter
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('view_subjects')
@@ -19,8 +19,8 @@ class SubjectsController < ApplicationController
   end
 
   def show
-    #deny_access and return unless signed_in?
-    #deny_privileged_access and return unless current_user.can?('view_subjects')
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('view_subjects')
     @subject = Subject.find(params[:id])
   end
 
@@ -80,7 +80,7 @@ class SubjectsController < ApplicationController
   end
 
   private
-  
+
   def set_disciplines_attributes disciplines_attributes
     @subject.disciplines = []
     disciplines_attributes.each_value { |v|
@@ -88,7 +88,7 @@ class SubjectsController < ApplicationController
         d = Discipline.find(v["id"])
         @subject.disciplines << d if d.instance_of? Discipline and v["_destroy"] != "1"
       end
-    } 
+    }
   end
 
   def get_disciplines_from_subject par
