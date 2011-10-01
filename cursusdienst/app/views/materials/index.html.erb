@@ -48,8 +48,8 @@
     :selected_id => "#{@select_boxes[3]}",
     :html_options => {:onchange => "if (this.value !='') {this.form.submit();} "}} %> <br />
 <% end %>
-    
-    <%= link_to @title, materials_path %>
+
+<%= button_to @title, materials_path, :method => "get" %>
 
 <%= will_paginate %>
 <div class="materials">

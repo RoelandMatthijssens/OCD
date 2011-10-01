@@ -41,7 +41,7 @@
     :html_options => {:onchange => "if (this.value !='') {this.form.submit();} "}} %> <br />
 <% end %>
 
-<%= link_to @title, subjects_path %>
+<%= button_to @title, subjects_path, :method => "get" %>
 
 <%= will_paginate %>
 <ul class="disciplines">
