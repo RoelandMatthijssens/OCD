@@ -30,6 +30,15 @@ class GuildsController < ApplicationController
     deny_access and return unless signed_in?
     @guild = Guild.find_by_initials!(request.subdomain)
     @subjects = get_materials params[:filter][:discipline_id], params[:filter][:year_type]
+    @supplies = {}
+    @guild.supplies.each do |supply|
+      subject = supply.material.subject
+      if @supplies[subject]
+        @supplies[subject] << supply
+      else
+        @supplies[subject] = [supply]
+      end
+    end
     @selected_discipline = params[:filter][:discipline_id]
     @selected_year_type = params[:filter][:year_type]
     render :action => 'show'

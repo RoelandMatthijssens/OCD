@@ -46,7 +46,7 @@
                   :id => "filter[discipline_id]",
                   :dataset => get_disciplines(guild.disciplines.first.faculty.id.to_s),
                   :selected_id => @selected_discipline,
-                  :html_options => {:onchange => '$(filter_year_type).val("");'}} %> <br />
+                  :html_options => {:onchange => '$(filter_year_type).val("");this.form.submit()'}} %> <br />
               </td>
             </tr>
             <tr>
@@ -56,7 +56,7 @@
               <td>
                 <%= select_tag "filter[year_type]",
                   options_for_select([["bachelor","bachelor"], ["master","master"], ["choice","choice"]], @selected_year_type),
-                  {:prompt => t(:select, :scope =>'globals'), :onchange => "if (this.value !='') {this.form.submit();} "} %>
+                  {:onchange => "if (this.value !='') {this.form.submit();} "} %>
               </td>
             </tr>
           </table>

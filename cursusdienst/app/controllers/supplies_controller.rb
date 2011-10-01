@@ -16,7 +16,7 @@ class SuppliesController < ApplicationController
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('create_supplies')
     @supply = Supply.new(params[:supply])
-    if @supply.save!
+    if @supply.save
       if params[:book_cost] && params[:book_cost][:book_cost]
         x = BookCost.new()
         x.amount = params[:book_cost][:book_cost].to_f
@@ -29,7 +29,14 @@ class SuppliesController < ApplicationController
       redirect_to materials_path
     else
       flash[:error] = t(:selling_fail, :scope => "flash")
-      redirect_to materials_path
+      #      redirect_to materials_path
+      @title = t(:add_to_supply, :scope => "title" )
+      @material = Material.find(params[:supply][:material_id])
+      @guilds = current_user.guilds
+      @printers = Printer.all
+      @price_sets = PriceSet.all
+      @submit = t(:add_to_supply, :scope => "buttons" )
+      render 'new'
     end
     #    end
   end
@@ -54,7 +61,7 @@ class SuppliesController < ApplicationController
     deny_privileged_access and return unless current_user.can?('edit_institutes')
     @supply = Supply.find(params[:id])
     if @supply.update_attributes(params[:supply])
-      if params[:book_cost][:book_cost]
+      if params[:book_cost] && params[:book_cost][:book_cost]
         x = BookCost.new()
         x.amount = params[:book_cost][:book_cost].to_f
         x.supply = @supply
@@ -64,6 +71,12 @@ class SuppliesController < ApplicationController
       log("Edit supply #{@supply.id}")
       redirect_to root_url(:subdomain => @supply.guild.initials)
     else
+      @title = t(:add_to_supply, :scope => "title" )
+      @material = @supply.material
+      @guilds = current_user.guilds
+      @printers = Printer.all
+      @price_sets = PriceSet.all
+      @submit = t(:add_to_supply, :scope => "buttons" )
       render 'edit'
     end
   end
