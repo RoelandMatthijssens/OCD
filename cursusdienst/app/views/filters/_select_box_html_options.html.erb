@@ -1,7 +1,7 @@
 <%= select_tag id, 
   options_from_collection_for_select(dataset, :id, :name, selected_item(selected_id)), 
   if html_options && html_options.empty?
-    {}
+    {:prompt => " "}
   else
-    html_options
+    {:prompt => " "}.merge html_options
   end %>

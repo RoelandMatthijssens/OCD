@@ -9,8 +9,31 @@
   </div>
   <% end %>
 </h1>
+<%= form_tag update_filter_disciplines_path, :method => :put do %>
+  <% if current_user.can? "view_institutes" %>
+    <%= label_tag t(:institute, :scope => "globals" ) %>
+    <%= render :partial => "filters/select_box", :locals => {
+      :filter_key_ajax => "institute",
+      :id => "institute_id",
+      :dataset => Institute.all, 
+      :selected_id => "#{@select_boxes[0]}",
+      :parent_id => "institute_id",
+      :child_id => "faculty_id"} %> <br />
+  <% end %>
+
+  <%= label_tag t(:faculty, :scope => "globals" ) %>   
+      <%= render :partial => "filters/select_box_html_options", :locals => {
+    :filter_key_ajax => "faculty",
+    :id => "faculty_id",
+    :dataset => Faculty.find_all_by_institute_id(@select_boxes[0]), 
+    :selected_id => "#{@select_boxes[1]}",
+    :html_options => {:onchange => "if (this.value !='') {this.form.submit();} "}} %> <br />
+    
+<% end %>
+
 <%= will_paginate %>
 <ul class="disciplines">
+  <%= t(:none_found, :scope => "globals") if @disciplines.empty? %>
   <% @disciplines.each do |discipline| %>
     <%= render discipline %>
   <% end %>
