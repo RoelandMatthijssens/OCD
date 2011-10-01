@@ -17,7 +17,7 @@ class PagesController < ApplicationController
   def access_denied
     @title = t(:access_denied, :scope => "titles" )
   end
-  
+
   def manual
     @title = t(:guide, :scope => "titles" )
   end
@@ -44,7 +44,8 @@ class PagesController < ApplicationController
       [Material, ['name']],
       [Guild, ['name', 'initials']],
       [Printer, ['name']],
-      [Order, ['order_key']]]
+      [Order, ['order_key']],
+      [PermissionGroup, ['name']]]
     @search_results = {}
     search_environments.each do |table, columns|
       conditions = [[]]
