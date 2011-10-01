@@ -7,7 +7,16 @@ module ApplicationHelper
       return ""
     end
   end
-
+     
+  def title
+    base_title = request.subdomain == '' || request.subdomain == 'wwww' ? "Cursusdienst.net" : Guild.find_by_initials(request.subdomain).name + " cursusdienst"
+    if @title.nil?
+      base_title
+    else
+      "#{base_title} :: #{@title}"
+    end
+  end
+  
   def link_to_remove_fields(name, f)
     f.hidden_field(:_destroy) + link_to_function(name, "remove_fields(this)")
   end
@@ -25,7 +34,7 @@ module ApplicationHelper
     new_object = f.object.class.reflect_on_association(association).klass.new
     fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
       render(association.to_s.singularize + "_fields", :f => builder, :lol => "kaka")
-#      render(:partial => association.to_s.singularize + "_fields", :locals => {:f => f, :tag => new_id})
+      #      render(:partial => association.to_s.singularize + "_fields", :locals => {:f => f, :tag => new_id})
     end
     return "add_fields(this, '#{association}', '#{new_id}','#{escape_javascript(fields)}')"
   end

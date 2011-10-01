@@ -8,6 +8,7 @@ class GuildsController < ApplicationController
 
   def show
     @guild = Guild.find_by_initials!(request.subdomain)
+    @title = t(:supplies, :scope => "guild") 
     @supplies = {}
     @guild.supplies.each do |supply|
       subject = supply.material.subject
@@ -25,11 +26,13 @@ class GuildsController < ApplicationController
 
   def news
     @guild = Guild.find_by_initials!(request.subdomain)
+    @title = t(:news, :scope => "side_menu")
   end
 
   def update_filter
     #deny_access and return unless signed_in?
     @guild = Guild.find_by_initials!(request.subdomain)
+    @title = t(:supplies, :scope => "guild") 
     #@subjects = get_materials params[:filter][:discipline_id], params[:filter][:year_type]
     @supplies = {}
     @guild.supplies.each do |supply|
