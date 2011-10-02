@@ -43,7 +43,7 @@ class MaterialsController < ApplicationController
     deny_privileged_access and return unless current_user.can?('create_materials')
     @material = Material.new(params[:material])
     @material.printable = params[:material][:printable]
-    @material.options= get_options_from_material(params[:material])
+    set_options_attributes params[:material][:options_attributes]
     if params[:parent_id] && ! params[:parent_id].empty?
       @parent = Material.find(params[:parent_id])
       @material.subject_id = @parent.subject_id

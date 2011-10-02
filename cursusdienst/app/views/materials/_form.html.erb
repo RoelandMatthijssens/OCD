@@ -27,6 +27,17 @@
   </div>
   <div class='field'>
     <%= f.label :attachments %> <br>
+    <table class="simpletable1">
+        <% if @material.attachments.any?  %>
+          <ul>
+            <% @material.attachments.each do |attachment| %>
+              <li>
+                <%= link_to attachment.basename, :controller=>'attachments',:action=>'download',:attachment_id=>attachment.id %> <br />
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      </table>
     <div class='fields'>
 
       <%= link_to_add_fields "add one", f, :attachments %>

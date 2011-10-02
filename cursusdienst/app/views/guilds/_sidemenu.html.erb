@@ -5,6 +5,7 @@
       <li> <%= link_to t(:supply, :scope => "side_menu"), Guild.find_by_initials(request.subdomain), :class=>"sidemenu link2" %> </li>
       <li> <%= link_to t(:shopping_cart, :scope => "shopping_cart"), shopping_cart_items_path, :class=>"sidemenu link2" %> </li>
       <li> <%= link_to t(:my_orders, :scope => "titles"), my_orders_orders_path, :class=>"sidemenu link2" %> </li>
+      <li> <%= link_to t(:guide, :scope => 'side_menu'), pages_guide_path %> </li>
     </ul>
   </div>
   <div class="topline"></div>

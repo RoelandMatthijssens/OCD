@@ -1,4 +1,4 @@
-<h2><%= link_to "#{material.typee} #{material.name}", material %></h2>
+<h2><%= link_to "#{material.get_subject.name} #{material.typee} #{material.name}", material %></h2>
 <div class="to_right">
   <% (1..5).each do |i| %>
     <% check = material.rating_score > i - 1 && material.rating_score <= i ? "checked" : false  %>
@@ -93,70 +93,69 @@
 <% end %>
 
 <% if signed_in? && current_user.can?("view_supplies") %>
-<fieldset class="simplefieldset2">
-  <legend>
-    <%= t(:guilds, :scope => "message" ) %>
-    <span class="comment_text">
-      <% if signed_in? && current_user.can?("sell_materials") %>
-        <% if signed_in? && current_user.guilds.size == 0 %>
-          - <%= t :join_to_add, :scope => "material"%>
-        <% elsif signed_in? && current_user.guilds.first.materials.include?(material)%>
-          - <%= link_to t(:remove_supply, :scope => "message", :guild => current_user.guilds.first.initials ), "#" %>
-          <%= link_to image_tag("icons/twotone/" + icon_color + "/x.gif", :alt=>t("new_message", :scope => 'links')), "#" %>
-        <% else %>
-          - <%= link_to t(:add_supply, :scope => "message" ), :controller => "supplies", :action => "new", :material => material %>
-          <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), :controller => "supplies", :action => "new", :material => material %>
-        <% end %>
-      <% end %>
-    </span>
-  </legend>
-
-  <table class="simpletable1">
-    <col/>
-    <table class="simpletable1">
-      <% options = material.printer_options %>
-      <table>
-        <thead>
-          <tr>
-            <th>guild</th>
-            <th>printer</th>
-            <th>price set</th>
-            <th>sell price</th>
-            <th>total buy price</th>
-            <th>edit</th>
-            <th>stock</th>
-            <% options.each do |option| %>
-              <th><%= option.name %></th>
-            <% end %>
-          </tr>
-        </thead>
-        <tbody>
-          <% material.guilds.each do |guild| %>
-            <% supply = material.supplies.find(:all, :conditions => ['guild_id=?', guild.id]).first %>
-            <tr>
-              <td><%= link_to guild.name, root_url(:subdomain => guild.initials) %></td>
-              <td><%= supply.material.printable ? (link_to supply.price_set.printer.name, supply.price_set.printer) : 'N/A' %></td>
-              <td><%= supply.material.printable ? (link_to supply.price_set.name, supply.price_set) : 'N/A' %></td>
-              <td><%= supply.price %></td>
-              <td><%= supply.buy_price %></td>
-              <td><%= link_to image_tag("icons/twotone/" + icon_color + "/edit.gif", :alt=>t("edit", :scope => 'links')), edit_supply_path(supply) %></td>
-              <td>
-                <% s = Stock.find(:all, :conditions => ["material_id = ? AND guild_id = ?", material.id, guild.id]) %>
-                <% if s.any? %>
-                  <% s = s.first %>
-                  <%= link_to image_tag("icons/twotone/" + icon_color + "/edit.gif", :alt=>t("edit", :scope => 'links')), { :controller => "stocks", :action => "edit", :id => s.id, :guild_id => guild.id, :material_id => material.id } %>
-                <% else %>
-                  <%= link_to image_tag("icons/twotone/" + icon_color + "/edit.gif", :alt=>t("edit", :scope => 'links')), { :controller => "stocks", :action => "new", :guild_id => guild.id, :material_id => material.id } %>
-                <% end %>
-              </td>
-              <% options.each do |option| %>
-                <td><%= option.prices.find(:all, :conditions => ['price_set_id=?', supply.price_set.id]).first.amount %></td>
-              <% end %>
-            </tr>
+  <% my_first_guild_selling_supply = Supply.find(:all, :conditions => ['material_id = ? and guild_id = ? ', material.id, current_user.guilds.first.id]) if signed_in? %>
+  <fieldset class="simplefieldset2">
+    <legend>
+      <%= t(:guilds, :scope => "message" ) %>
+      <span class="comment_text">
+        <% if signed_in? && current_user.can?("sell_materials") %>
+          <% if signed_in? && current_user.guilds.size == 0 %>
+            - <%= t :join_to_add, :scope => "material"%>
+          <% elsif signed_in? && my_first_guild_selling_supply.any? %>
+            - <%= link_to t(:remove_supply, :scope => "message", :guild => current_user.guilds.first.initials ), {:controller => "supplies", :action => "destroy", :id =>  my_first_guild_selling_supply}, :method => :delete %>
+            <%= link_to image_tag("icons/twotone/" + icon_color + "/x.gif", :alt=>"X"), {:controller => "supplies", :action => "destroy", :id =>  my_first_guild_selling_supply}, :method => :delete %>
+          <% else %>
+            - <%= link_to t(:add_supply, :scope => "message" ), :controller => "supplies", :action => "new", :material => material, :guild => current_user.guilds.first %>
+            <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), :controller => "supplies", :action => "new", :material => material %>
           <% end %>
-        </tbody>
+        <% end %>
+      </span>
+    </legend>
+
+    <table class="simpletable1">
+      <col/>
+      <table class="simpletable1">
+        <% options = material.printer_options %>
+        <table>
+          <thead>
+            <tr>
+              <th>guild</th>
+              <th>printer</th>
+              <th>price set</th>
+              <th>sell price</th>
+              <th>total buy price</th>
+              <th>edit</th>
+              <th>stock</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <% material.guilds.each do |guild| %>
+              <% supply_lookup = Supply.find(:all, :conditions => ['material_id = ? and guild_id = ? ', material.id, guild.id]) %>
+              <% if supply_lookup.length == 1 %>
+                <% supply =  supply_lookup.first %>
+                <tr>
+                  <td><%= link_to guild.name, root_url(:subdomain => guild.initials) %></td>
+                  <td><%= supply.material.printable ? (link_to supply.price_set.printer.name, supply.price_set.printer) : 'N/A' %></td>
+                  <td><%= supply.material.printable ? (link_to supply.price_set.name, supply.price_set) : 'N/A' %></td>
+                  <td><%= supply.price %></td>
+                  <td><%= supply.buy_price %></td>
+                  <td><%= link_to image_tag("icons/twotone/" + icon_color + "/edit.gif", :alt=>t("edit", :scope => 'links')), edit_supply_path(supply) %></td>
+                  <td>
+                    <% s = Stock.find(:all, :conditions => ["material_id = ? AND guild_id = ?", material.id, guild.id]) %>
+                    <% if s.any? %>
+                      <% s = s.first %>
+                      <%= link_to image_tag("icons/twotone/" + icon_color + "/edit.gif", :alt=>t("edit", :scope => 'links')), { :controller => "stocks", :action => "edit", :id => s.id, :guild_id => guild.id, :material_id => material.id } %>
+                    <% else %>
+                      <%= link_to image_tag("icons/twotone/" + icon_color + "/edit.gif", :alt=>t("edit", :scope => 'links')), { :controller => "stocks", :action => "new", :guild_id => guild.id, :material_id => material.id } %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
       </table>
     </table>
-  </table>
-</fieldset>
+  </fieldset>
 <% end %>

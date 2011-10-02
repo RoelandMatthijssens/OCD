@@ -11,11 +11,13 @@ class GuildsController < ApplicationController
     @title = t(:supplies, :scope => "guild") 
     @supplies = {}
     @guild.supplies.each do |supply|
-      subject = supply.material.subject
-      if @supplies[subject]
-        @supplies[subject] << supply
-      else
-        @supplies[subject] = [supply]
+      unless supply.deleted
+        subject = supply.material.subject
+        if @supplies[subject]
+          @supplies[subject] << supply
+        else
+          @supplies[subject] = [supply]
+        end
       end
     end
     @display_year_type_box = false
@@ -36,12 +38,14 @@ class GuildsController < ApplicationController
     #@subjects = get_materials params[:filter][:discipline_id], params[:filter][:year_type]
     @supplies = {}
     @guild.supplies.each do |supply|
-      subject = supply.material.subject
-      if (params[:filter][:discipline_id].empty? || subject.disciplines.include?(Discipline.find(params[:filter][:discipline_id])) ) && (subject.year_type == params[:filter][:year_type] || params[:filter][:year_type].empty?)
-        if @supplies[subject]
-          @supplies[subject] << supply
-        else
-          @supplies[subject] = [supply]
+      unless supply.deleted
+        subject = supply.material.subject
+        if (params[:filter][:discipline_id].empty? || subject.disciplines.include?(Discipline.find(params[:filter][:discipline_id])) ) && (subject.year_type == params[:filter][:year_type] || params[:filter][:year_type].empty?)
+          if @supplies[subject]
+            @supplies[subject] << supply
+          else
+            @supplies[subject] = [supply]
+          end
         end
       end
     end
