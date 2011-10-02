@@ -2,7 +2,6 @@
 <% @payed_materials.each do |guild, types| %>
   <h2><%= guild.name %></h2>
   <% types.each do |type, materials| %>
-    <%= materials.first.first.id %>
     <table>
       <tbody>
         <tr>
@@ -25,15 +24,16 @@
             <% amount += i.amount %>
           <% end %>
           <% if signed_in? && current_user.can?("download_materials") %>
-            <% if material.attachments.any?  %>
-              <table>
-                <thead>
-                  <tr>
-                    <th><%= "#{material.subject.name} #{material.typee} (#{material.name})" %></th>
-                    <th><%= amount %> <%= t(:times, :scope => "globals" ) %></th>
-                  </tr>
-                </thead>
-                <tbody>
+
+            <table>
+              <thead>
+                <tr>
+                  <th><%= "#{material.subject.name} #{material.typee} (#{material.name})" %></th>
+                  <th><%= amount %> <%= t(:times, :scope => "globals" ) %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if material.attachments.any?  %>
                   <% material.attachments.each do |attachment| %>
                     <tr>
                       <td colspan=2>
@@ -41,9 +41,9 @@
                       </td>
                     </tr>
                   <% end %>
-                </tbody>
-              </table>
-            <% end %>
+                <% end %>
+              </tbody>
+            </table>
           <% end %>
         <% end %>
       </fieldset>
