@@ -9,11 +9,23 @@ class OrdersController < ApplicationController
     else
       institute = current_user.guilds.first.disciplines.first.faculty.institute
       @guild = current_user.guilds.first
-      @own_orders = Order.find(:all, :conditions => ['institute_id = ? and user_id=? and status!=?' , institute.id, current_user.id, 'Ready'])
       if current_user.can?('view_all_orders')
-        @orders = Order.find(:all, :conditions => ['institute_id = ?', institute.id])
+        @orders = {}
+        orders = Order.find(:all, :conditions => ['institute_id = ?', institute.id])
+        orders.each do |order|
+          if @orders[order.status]
+            @orders[order.status] << order
+          else
+            @orders[order.status] = [order]
+          end
+        end
       end
     end
+  end
+
+  def show
+    @title = t(:order_content, :scope => "globals" )
+    @order = Order.find(params[:id])
   end
 
   def search

@@ -1,0 +1,9 @@
+<tr>
+  <td><%= material_order.material.subject.name %>: <%= material_order.material.typee %> <%= material_order.material.name %></td>
+  <% unless params[:action] == "my_orders" %>
+    <td><%= material_order.guild.initials %></td>
+  <% end %>
+  <td class="fixed"><%= material_order.amount %></td>
+  <td class="fixed"><%= number_to_currency material_order.price/material_order.amount %></td>
+  <td><%= material_order.status %></td>
+</tr>

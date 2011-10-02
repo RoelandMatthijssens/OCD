@@ -1,0 +1,21 @@
+<h1><%= @title %></h1>
+ <table>
+    <thead>
+      <tr>
+        <th><%= t(:items, :scope => "globals" ) %></th>
+        <% unless params[:action] == "my_orders" %>
+          <th>bought at</th>
+        <% end %>
+        <th class="fixed"><%= t(:amount, :scope => "globals" ) %></th>
+        <th class="fixed"><%= t(:price, :scope => "globals" ) %></th>
+        <th><%= t(:status, :scope => "globals" ) %></th>
+      </tr>
+    </thead>
+  <tbody>
+  <%= render @material_order %>
+  </tbody>
+</table>
+
+<% unless true %>
+  <%= render :partial => "shared/right_navigation", :locals => {:params_key => @material_order.order_id}%>
+<% end %>

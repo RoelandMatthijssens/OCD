@@ -15,7 +15,7 @@
     <% items.each do |order_material| %>
       <% total_price += order_material.price %>
       <tr>
-        <td><%= link_to "#{order_material.material.subject.name}: #{order_material.material.typee}, #{order_material.material.name}" , order_material %></td>
+        <td><%= order_material.material.subject.name %>: <%= order_material.material.typee %> <%= order_material.material.name %></td>
         <% unless params[:action] == "my_orders" %>
           <td><%= order_material.guild.initials %></td>
         <% end %>

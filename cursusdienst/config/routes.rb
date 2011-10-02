@@ -7,7 +7,7 @@ Cursusdienst::Application.routes.draw do
   get "pages/home"
 
   get "pages/search_results"
-  
+
   put "pages/search"
 
   get "pages/about"
@@ -35,6 +35,10 @@ Cursusdienst::Application.routes.draw do
   resources :sessions, :only => [:new, :create, :destroy]
 
   resources :institutes
+
+  resources :material_orders, :only => [:show, :mark_as] do
+    put :mark_as, :on => :member
+  end
 
   resources :action_logs, :only => [:index]
 
