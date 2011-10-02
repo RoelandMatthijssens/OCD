@@ -39,7 +39,10 @@ class Supply < ActiveRecord::Base
           build_total << price
         end
       end
-      total = build_total[1] + build_total[2]
+      total = 0
+      if build_total[1] && build_total[2]
+        total = build_total[1] + build_total[2]
+      end
       return total
     else
       if book_costs.empty?
