@@ -67,7 +67,7 @@ class SubjectsController < ApplicationController
     @subject = Subject.find(params[:id])
     set_disciplines_attributes params[:subject][:disciplines_attributes]
     params[:subject].delete :disciplines_attributes
-    if @subject.update_attributes!(params[:subject])
+    if @subject.update_attributes(params[:subject])
       flash[:notice] = t(:update_subject_success, :scope => "flash"  )
       redirect_to @subject
     else
