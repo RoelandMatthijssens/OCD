@@ -513,6 +513,7 @@ nl:
 
 
   buttons:
+    send_print_job: "Verstuur print job"
     new_institute: "creëer instelling"
     update_institute: "pas instelling aan"
     new_discipline: "creëer richting"
@@ -545,6 +546,8 @@ nl:
     sign_in: "Inloggen"
 
   flash:
+    print_job_send: "Print job succesvol verzonden"
+    print_job_not_send: "Print job niet verzonden"
     new_institute_success: "instelling succesvol aangemaakt"
     update_institute_success: "instelling succesvol aangepast"
     new_discipline_success: "richting succesvol aangemaakt"
