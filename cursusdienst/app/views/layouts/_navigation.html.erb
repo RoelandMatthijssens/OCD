@@ -11,7 +11,7 @@
         <%= link_to content_tag(:span, (t :users, :scope => "links")), orders_path, :class=>@button_style %>
       <% end %>
       <% if current_user.can? "view_print_jobs" %>
-        <%= link_to content_tag(:span, t(:print_jobs, :scope => "links" )), print_jobs_path, :class=>@button_style %>
+        <%= link_to content_tag(:span, t(:print_jobs, :scope => "links" )), new_print_job_path, :class=>@button_style %>
       <% end %>
     <% end %>
   <% end %>

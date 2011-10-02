@@ -66,9 +66,11 @@ Cursusdienst::Application.routes.draw do
 
   resources :orders do
     put :mark_as_payed, :on => :member
+    get :mark_as, :on => :member
     get :logs, :on => :collection
     get :results, :on => :collection
     get :my_orders, :on => :collection
+    get :process_orders, :on => :collection
     put :search, :on => :collection
   end
 

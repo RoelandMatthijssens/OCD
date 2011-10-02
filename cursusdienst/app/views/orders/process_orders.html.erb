@@ -1,0 +1,18 @@
+<h1><%= @title %></h1>
+<%= Order.get_label %>
+<table>
+  <thead>
+    <tr>
+      <th><%= t(:status, :scope => "globals" ) %></th>
+      <th><%= t(:order_content , :scope => "globals" ) %></th>
+      <th><%= t(:actions , :scope => "globals" ) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order|%>
+      <%= render order %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= render :partial => 'guilds/sidemenu', :locals => {:guild =>  @guild} %>

@@ -299,6 +299,7 @@ nl:
     price: "Prijs/st"
     total: "Totaal"
     times: "Maal"
+    mark_as_ready: "Verwerkt"
 
   shopping_cart:
     shopping_cart: "Winkelwagen"
