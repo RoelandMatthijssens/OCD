@@ -1,0 +1,11 @@
+<% content_for :sideshop do  %>
+    <div class="topline"></div>
+    <div id="sidemenu">
+      <ul>
+        <li> <%= link_to t(:new_print_job, :scope => "titles" ), new_print_job_path, :class=>"sidemenu link2" %> </li>
+        <li> <%= link_to t(:process, :scope => "titles" ), orders_print_jobs_path, :class=>"sidemenu link2" %> </li>
+        <li> <%= link_to t(:process_orders, :scope => "titles" ), process_orders_orders_path, :class=>"sidemenu link2" %> </li>
+      </ul>
+    </div>
+    <div class="topline"></div>
+<% end %>

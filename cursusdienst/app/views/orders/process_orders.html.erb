@@ -1,5 +1,5 @@
 <h1><%= @title %></h1>
-<%= Order.get_label %>
+<h2>Label: <%= @label %> </h2>
 <table>
   <thead>
     <tr>
@@ -15,4 +15,4 @@
   </tbody>
 </table>
 
-<%= render :partial => 'guilds/sidemenu', :locals => {:guild =>  @guild} %>
+<%= render :partial => "shared/side_order_processing" %>

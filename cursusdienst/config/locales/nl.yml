@@ -300,7 +300,10 @@ nl:
     total: "Totaal"
     times: "Maal"
     mark_as_ready: "Verwerkt"
-
+    cancel: "Annuleer"
+    go_and_ordered: "Bestel bij drukker"
+    deliver: "Accepteer Levering"
+    
   shopping_cart:
     shopping_cart: "Winkelwagen"
     total: "Totaal"
@@ -477,7 +480,7 @@ nl:
     new_printer: "Een nieuwe drukker aanmaken"
     new_price: "Een nieuwe prijs aanmaken"
     new_stock: "Een nieuwe stock aanmaken"
-    new_print_job: "Nieuwe bestelling naar drukker sturen"
+    new_print_job: "Orders versturen"
 
     edit_subject: "Cursus bewerken"
     edit_faculty: "Faculteit bewerken"
@@ -492,7 +495,7 @@ nl:
     edit_discipline: "Richting bewerken"
     edit_institute: "Instelling bewerken"
 
-    process: "Verwerk / Ontvang"
+    process: "Orders ontvangen"
     home: "Home"
     guide: "Handleiding"
     info: "Info"
@@ -512,6 +515,7 @@ nl:
     my_orders: "Mijn bestellingen"
     verify_order: "Bevestig bestelling"
     add_to_supply: "Een item aan het aanbod toevoegen"
+    process_orders: "Orders verwerken"
     search_results: "Zoek resultaten"
 
 
@@ -669,7 +673,7 @@ nl:
     login: "Inloggen"
     shopping_cart: "Winkelwagen"
     control_panel: "Beheerpaneel"
-    print_jobs: "Drukker bestellingen"
+    print_jobs: "Orderverwerking"
     supply: "Bestel"
     supply_tab: "Bestel-tab"
     home: "Home"

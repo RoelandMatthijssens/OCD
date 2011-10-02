@@ -206,6 +206,7 @@ class OrdersController < ApplicationController
 
   def process_orders
     @title = t(:process_orders, :scope => "titles" )
+    @label = Order.get_label
     @orders = []
     orders = Order.find(:all)
     orders.each do |order|

@@ -16,14 +16,15 @@
          <%= 'MAKE DROPDOWN mark as payed' %><br/>
          <%= 'cancel' %>
         <% when "Payed" %>
-          <%= 'mark as ordered' %>
+          <%= link_to t(:go_and_ordered, :scope => "globals" ), new_print_job_path %>
           <%= 'cancel' %>
         <% when "Ordered" %>
-          <%=  'mark as delivered' %>
+          <%= link_to t(:deliver, :scope => "globals" ), orders_print_jobs_path %>
         <% when "Delivered" %>
+          <%= @label %>
           <%=  link_to t(:mark_as_ready, :scope => "globals" ), :controller=>'orders', :action=>'mark_as', :id=>order.id, :status_to=>"Ready", :method => :put %>
         <% when "Ready" %>
-          <%=  'mark as done' %>
+          <%=  link_to t(:mark_as_done, :scope => "globals" ), :controller=>'orders', :action=>'mark_as', :id=>order.id, :status_to=>"Done", :method => :put %>
         <% when "Done" %>
           <%=  'nothing' %>
         <% when "Canceled" %>
