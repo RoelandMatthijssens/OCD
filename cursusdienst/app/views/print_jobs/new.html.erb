@@ -15,43 +15,46 @@
       </tbody>
     </table>
     <ul>
-    <fieldset class="simplefieldset2">
-      <legend>
-        <%= t(:attachment, :scope => "message" ) %>
-      </legend>
-    <% materials.each do |material, material_orders| %>
-      <% amount = 0 %>
-      <% material_orders.each do |i| %>
-        <% amount += i.amount %>
-      <% end %>
-      <% if signed_in? && current_user.can?("download_materials") %>
-        <% if material.attachments.any?  %>
-          <table>
-            <thead>
-              <tr>
-                <th><%= "#{material.subject.name} #{material.typee} (#{material.name})" %></th>
-                <th><%= amount %> <%= t(:times, :scope => "globals" ) %></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-              <% material.attachments.each do |attachment| %>
-                <td colspan=2>
-                  <%= link_to attachment.basename, :controller=>'attachments',:action=>'download',:attachment_id=>attachment.id %> <br />
-                </td>
-              <% end %>
-              </tr>
-            </tbody>
-          </table>
+      <fieldset class="simplefieldset2">
+        <legend>
+          <%= t(:attachment, :scope => "message" ) %>
+        </legend>
+        <% materials.each do |material, material_orders| %>
+          <% amount = 0 %>
+          <% material_orders.each do |i| %>
+            <% amount += i.amount %>
+          <% end %>
+          <% if signed_in? && current_user.can?("download_materials") %>
+            <% if material.attachments.any?  %>
+              <table>
+                <thead>
+                  <tr>
+                    <th><%= "#{material.subject.name} #{material.typee} (#{material.name})" %></th>
+                    <th><%= amount %> <%= t(:times, :scope => "globals" ) %></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% material.attachments.each do |attachment| %>
+                    <tr>
+                      <td colspan=2>
+                        <%= link_to attachment.basename, :controller=>'attachments',:action=>'download',:attachment_id=>attachment.id %> <br />
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            <% end %>
+          <% end %>
         <% end %>
-      <% end %>
       </fieldset>
     </ul>
+    <% if  false %>
       material:<%= material.name %><br/>
       orders:<%= material_orders %><br/>
     <% end %>
   <% end %>
 <% end %>
+
 
 <% if  false %>
   <table width="100%"><tr><td>Naam</td><td>File</td></tr><tr><td>Politicologie samenvatting 2011</td><td>Download PDF</td></tr></table>

@@ -72,7 +72,6 @@ class OrdersController < ApplicationController
   def create
     institute = Guild.find_by_initials(request.subdomain).disciplines.first.faculty.institute
     @order = Order.new()
-    @order.status = "Posted"
     @order.institute = institute
     @order.user = current_user
     @order.order_key = @order.get_random_string(7)
@@ -117,6 +116,7 @@ class OrdersController < ApplicationController
       x.guild = item.guild
       x.material = item.material
       x.amount = item.amount
+      x.status = "Posted"
       supplyqry = Supply.find(:all, :conditions => ["guild_id = ? and material_id = ?", item.guild.id, item.material.id])
       if supplyqry.any?
         supply = supplyqry.first
