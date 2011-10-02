@@ -85,7 +85,8 @@ class MaterialsController < ApplicationController
     deny_privileged_access and return unless current_user.can?('edit_materials')
     @material = Material.unchecked_find(params[:id])
     @material.subject = nil unless subject_given?(params[:material])
-    @material.options = get_options_from_material(params[:material])
+
+    set_options_attributes params[:material][:options_attributes]
     #    @material.subject_id = nil if !params[:material][:subject_id]
     #    @material.parent_id = nil if !params[:material][:parent_id]
     if @material.update_attributes(params[:material])
@@ -133,6 +134,16 @@ class MaterialsController < ApplicationController
 
   def subject_given? par
     return par[:subject_id]
+  end
+  
+  def set_options_attributes options_attributes
+    @material.options = []
+    options_attributes.each_value { |v|
+      unless v["id"].empty?
+        d = Option.find(v["id"])
+        @material.options << d if d.instance_of? Option and v["_destroy"] != "1"
+      end
+    }
   end
 
   def get_options_from_material par
