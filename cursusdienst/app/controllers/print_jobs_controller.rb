@@ -28,7 +28,7 @@ class PrintJobsController < ApplicationController
     @print_job = PrintJob.new
     set_material_orders_attributes params[:print_job][:material_orders_attributes]
     if @print_job.save!
-      set_material_orders_status @print_job
+      set_material_orders_status @print_job, "Ordered"
       flash[:succes] = t(:print_job_send, :scope => "flash" )
     else
       flash[:error] = t(:print_job_not_send, :scope => "flash" )
@@ -37,6 +37,27 @@ class PrintJobsController < ApplicationController
     @submit = t(:send_print_job, :scope => "buttons")
     get_sorted_orders "Payed"
     render 'new'
+  end
+  
+  def orders
+    @title = t(:process, :scope => "titles" )
+    @submit_printed = t(:printed_print_job, :scope => "buttons")
+    @submit_delivered = t(:delivered_print_job, :scope => "buttons")
+    get_sorted_orders "Ordered"
+  end
+  
+  def deliver
+    print_job = PrintJob.find(params[:print_job_id])
+    act = params[:commit]
+    if act == t(:delivered_print_job, :scope => "buttons")
+      set_material_orders_status print_job, "Delivered"
+    end
+    @title = t(:new_print_job, :scope => "titles" )
+    @submit_printed = t(:printed_print_job, :scope => "buttons")
+    @submit_delivered = t(:delivered_print_job, :scope => "buttons")
+    get_sorted_orders "Ordered"
+    
+    render 'orders'
   end
 
   def logs
@@ -56,9 +77,9 @@ class PrintJobsController < ApplicationController
     }
   end
   
-  def set_material_orders_status print_job
+  def set_material_orders_status print_job, status
     print_job.material_orders.each { |material_order|
-      material_order.status = "Ordered"
+      material_order.status = status
       material_order.save!
     }
   end

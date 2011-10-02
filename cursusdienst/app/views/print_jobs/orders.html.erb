@@ -1,0 +1,76 @@
+<h1><%= @title %></h1>
+<% @payed_materials.each do |guild, types| %>
+  <h2><%= guild.name %></h2>
+  <% types.each do |type, materials| %>
+
+    <%= form_tag deliver_print_jobs_path, :method => :put do %>
+  
+      <%= hidden_field_tag "print_job_id", materials.first[1][0].print_job_id %>
+  
+      <%= print_job = materials.first[1][0].print_job %>
+  
+      <table>
+        <tbody>
+          <tr>
+            <% materials.first.first.options.each do |option| %>
+              <td>
+                <strong><%= option.name %></strong>
+              </td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+      <ul>
+        <fieldset class="simplefieldset2">
+          <legend>
+            <%= t(:attachment, :scope => "message" ) %>
+          </legend>
+          <% materials.each do |material, material_orders| %>
+            <% amount = 0 %>
+            <% material_orders.each do |i| %>
+              <% print_job.material_orders << i %>
+              <% amount += i.amount %>
+            <% end %>
+            <% if signed_in? && current_user.can?("download_materials") %>
+              <table>
+                <thead>
+                  <tr>
+                    <th><%= "#{material.subject.name} #{material.typee} (#{material.name})" %></th>
+                    <th><%= amount %> <%= t(:times, :scope => "globals" ) %></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if material.attachments.any?  %>
+                    <% material.attachments.each do |attachment| %>
+                      <tr>
+                        <td colspan=2>
+                          <%= link_to attachment.basename, :controller=>'attachments',:action=>'download',:attachment_id=>attachment.id %> <br />
+                        </td>
+                      </tr>
+                    <% end %>
+                  <% end %>
+                </tbody>
+              </table>
+            <% end %>
+          <% end %>
+
+        </fieldset>
+      </ul>
+      <% if  false %>
+        material:<%= material.name %><br/>
+        orders:<%= material_orders %><br/>
+      <% end %>
+
+      <div class="actions">
+        <%= submit_tag @submit_delivered %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+
+<% if  false %>
+  <table width="100%"><tr><td>Naam</td><td>File</td></tr><tr><td>Politicologie samenvatting 2011</td><td>Download PDF</td></tr></table>
+  <p><button>Verstuur print job</button> OF <button>Markeer print job als gedrukt</button> OF <button>Markeer print job als ontvangen</button></p>
+  <hr>
+<% end %>

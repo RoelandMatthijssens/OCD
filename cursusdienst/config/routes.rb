@@ -73,6 +73,8 @@ Cursusdienst::Application.routes.draw do
   end
 
   resources :print_jobs do
+    get :orders, :on => :collection
+    put :deliver, :on => :collection
     get :logs, :on => :collection
   end
 

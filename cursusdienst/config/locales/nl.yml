@@ -491,6 +491,7 @@ nl:
     edit_discipline: "Richting bewerken"
     edit_institute: "Instelling bewerken"
 
+    process: "Verwerk / Ontvang"
     home: "Home"
     guide: "Handleiding"
     info: "Info"
@@ -545,6 +546,8 @@ nl:
     update_supply: "Pas aan"
     new_stock: "Voeg toe"
     sign_in: "Inloggen"
+    printed_print_job: "Afgedrukt"
+    delivered_print_job: "Geleverd"
 
   flash:
     print_job_send: "Print job succesvol verzonden"
