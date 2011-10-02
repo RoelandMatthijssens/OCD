@@ -23,9 +23,9 @@ class Material < ActiveRecord::Base
   validates :name, :presence => true
   validates :typee, :presence => true
   validates :subject_id, :presence => true
-  
+
   #validates_with ExclusivePresence
-  
+
   validates :printable, :inclusion => {:in => [true, false]}
   belongs_to :subject
   belongs_to :parent, :class_name => 'Material', :foreign_key => 'parent_id'
@@ -62,7 +62,7 @@ class Material < ActiveRecord::Base
   def institute_id
     subject && subject.disciplines && subject.disciplines.first.faculty.institute.id
   end
-  
+
   def get_subject(ring_check = [])
     ring_check << self
     if self.subject
@@ -88,6 +88,18 @@ class Material < ActiveRecord::Base
 
   def supply guild
     supply = guild.supplies.find(:all, :conditions => ["material_id=?", id]).first
+  end
+
+  def print_type
+    print_options = ["single sided - black and white", "Single sided - color", "Duplex - black and white", "Duplex - color",
+                     "Inbinding: Lijm + plastiek", "Inbinding: Lijm + zonder plastiek", "Inbinding: Ringen + plastiek", "Inbinding: Ringen + zonder plastiek"]
+    result = ""
+    (0..print_options.length-1).to_a.each do |i|
+      result += i.to_s if options.include?(Option.find_by_name(print_options[i]))
+    end
+    result = result.to_i
+    valid_options = [5, 6, 7, 8, 15, 16, 17, 18, 25, 26, 27, 28, 35, 36, 37, 38]
+    return (valid_options.include? result) ? result : 0
   end
 
 end

@@ -1,25 +1,49 @@
-<h1><%= @title %></h1>
+<% @payed_materials.each do |guild, types| %>
+  <h1><%= guild.name %></h1>
+  <% types.each do |type, materials| %>
+    <%= materials.first.first.id %>
+    <table>
+      <tbody>
+        <tr>
+          <% materials.first.first.options.each do |option| %>
+            <td>
+              <%= option.name %>
+            </td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+    <% materials.each do |material, material_orders| %>
+      <% if signed_in? && current_user.can?("download_materials") %>
+        <fieldset class="simplefieldset2">
+          <legend>
+            <%= t(:attachment, :scope => "message" ) %>
+          </legend>
 
-	<table>
-		<thead>
-			<tr>
-				<th><%= t(:item, :scope => "print_jobs" ) %></th>
-				<th><%= t(:amount, :scope => "print_jobs" ) %></th>
-			</tr>
-		</thead>
-		<tbody>
-			<% @payed_materials.each do |k, v| %>
-				<tr>
-					<td><%= k.name %></td>
-					<td><%= v %></td>
-				</tr>
-			<% end %>
-		</tbody>
-	</table>
+          <table class="simpletable1">
+            <col/>
+            <table class="simpletable1">
+              <% if material.attachments.any?  %>
+                <ul>
+                  <% material.attachments.each do |attachment| %>
+                    <li>
+                      <%= link_to attachment.basename, :controller=>'attachments',:action=>'download',:attachment_id=>attachment.id %> <br />
+                    </li>
+                  <% end %>
+                </ul>
+              <% end %>
+            </table>
+          </table>
+        </fieldset>
+      <% end %>
+      material:<%= material.name %><br/>
+      orders:<%= material_orders %><br/>
+    <% end %>
+  <% end %>
+<% end %>
 
-
-<%= form_for(@print_job) do |f| %>
-	<div class='field'>
-		<%= f.submit @submit %>
-	</div>
+<% if  false %>
+  <table width="100%"><tr><td>Naam</td><td>File</td></tr><tr><td>Politicologie samenvatting 2011</td><td>Download PDF</td></tr></table>
+  <p><button>Verstuur print job</button> OF <button>Markeer print job als gedrukt</button> OF <button>Markeer print job als ontvangen</button></p>
+  <hr>
 <% end %>

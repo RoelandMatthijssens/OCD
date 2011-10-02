@@ -33,7 +33,7 @@ class SubjectsController < ApplicationController
     else
       @discipline = Discipline.new
     end
-    @dis_fac_inst = [[][][]]
+    @dis_fac_inst = [[], [], []]
     @submit = t(:new_subject, :scope => "buttons" )
   end
 
