@@ -44,7 +44,7 @@ class SuppliesController < ApplicationController
 
   def edit
     deny_access and return unless signed_in?
-    deny_privileged_access and return unless current_user.can?('edit_institutes')
+    deny_privileged_access and return unless current_user.can?('edit_supplies')
     @supply = Supply.find(params[:id])
     @title = t(:add_to_supply, :scope => "title" )
     @material = @supply.material
@@ -58,7 +58,7 @@ class SuppliesController < ApplicationController
 
   def update
     deny_access and return unless signed_in?
-    deny_privileged_access and return unless current_user.can?('edit_institutes')
+    deny_privileged_access and return unless current_user.can?('edit_supplies')
     @supply = Supply.find(params[:id])
     if @supply.update_attributes(params[:supply])
       if params[:book_cost] && params[:book_cost][:book_cost]
