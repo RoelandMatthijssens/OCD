@@ -405,6 +405,7 @@ nl:
       summary: "Samenvatting"
       syllabus: "Syllabus"
       misc: "Varia"
+      examquestions: "Examen vragen"
 
   message:
     new_message: "Nieuw bericht"
@@ -655,6 +656,7 @@ nl:
     new_discipline: "Nieuwe richting"
     set_footer_banner: "Plaats banner"
     delete_user: "Verwijder gebruiker"
+    delete_material: "Verwijder item"
     profile: "Profiel"
     logout: "Uitloggen"
     login: "Inloggen"

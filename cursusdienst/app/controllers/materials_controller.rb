@@ -128,6 +128,16 @@ class MaterialsController < ApplicationController
   end
 
   def destroy
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('delete_materials')
+    @material = Material.find(params[:id])
+    @material.deleted = true
+    if @material.save!
+      flash[:succes] = t(:delete_user_success, :scope => "flash" )
+    else
+      flash[:error] = t(:delete_user_fail, :scope => "flash" )
+    end
+    redirect_to users_path
   end
 
   private
@@ -135,7 +145,7 @@ class MaterialsController < ApplicationController
   def subject_given? par
     return par[:subject_id]
   end
-  
+
   def set_options_attributes options_attributes
     @material.options = []
     options_attributes.each_value { |v|

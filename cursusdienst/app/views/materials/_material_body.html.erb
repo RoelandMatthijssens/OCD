@@ -16,7 +16,10 @@
       <span class="edit">
         - <%= link_to "Edit", edit_material_path(material) %>
       </span>
-    <% end%>
+    <% end %>
+    <% if current_user.can? "delete_materials" %>
+      <%= link_to image_tag("icons/twotone/" + icon_color + "/against.gif", :alt=>t("delete_material", :scope => 'links')), { :action => "destroy", :id => material.id }, :method => :delete %>
+    <% end %>
     <% if signed_in? && current_user.can?("create_materials") %>
       <span class="comment_text">
         - <%= link_to t(:add_one, :scope => "links" ), :controller => "materials", :action => "new", :parent_id => material.id, :material_id => material.id %>
