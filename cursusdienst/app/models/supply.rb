@@ -20,7 +20,7 @@ class Supply < ActiveRecord::Base
   validates :price, :presence => true
   validates :material, :presence => true
   validates_uniqueness_of :guild_id, :scope => :material_id
-  
+
   validates_with PriceExclusivePresence
 
 
@@ -28,15 +28,15 @@ class Supply < ActiveRecord::Base
     if material.printable
       options = material.options
       pages = material.page_count
-      total = 0
+      total = [options]
       options.each do |option|
         option_price = price_set.prices.find(:all, :conditions => ['option_id=?', option.id]).first
         price = option_price.amount
         type = option_price.typee
         if type == 'per_page'
-          total += price * pages
+          total << price * pages
         else
-          total += price
+          total << price
         end
       end
       return total
@@ -44,7 +44,7 @@ class Supply < ActiveRecord::Base
       if book_costs.empty?
         nil
       else
-        return book_costs.first
+        return book_costs.first.amount
       end
     end
   end
