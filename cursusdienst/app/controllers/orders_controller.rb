@@ -139,10 +139,12 @@ class OrdersController < ApplicationController
   def mark_as
     @order = Order.find(params[:id])
     status = params[:status_to]
-    @order.status = status
-    @order.save!
+    @order.material_orders.each do |material_order|
+      material_order.status = status
+      material_order.save!
+    end
     #OrderMailer.payment_ok(@order.user).deliver
-    redirect_to orders_path
+    redirect_to process_orders_orders_path
   end
 
   def mark_as_payed
@@ -198,6 +200,17 @@ class OrdersController < ApplicationController
         @orders[order.status] << order
       else
         @orders[order.status] = [order]
+      end
+    end
+  end
+
+  def process_orders
+    @title = t(:process_orders, :scope => "titles" )
+    @orders = []
+    orders = Order.find(:all)
+    orders.each do |order|
+      if order.status == "Delivered"
+        @orders << order
       end
     end
   end

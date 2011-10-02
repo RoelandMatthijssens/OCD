@@ -1,8 +1,10 @@
 <tr>
-  <% unless params[:action] == "my_orders" %>
+  <% unless params[:action] == "my_orders" || params[:action] == "process_orders" %>
     <td><%= order.user.name %> <%= order.user.last_name %> (<%= order.user.user_name %>)</td>
   <% end %>
-  <td><%= order.order_key %></td>
+  <% unless params[:action] == "process_orders" %>
+    <td><%= order.order_key %></td>
+  <% end %>
   <% unless params[:action] == "my_orders" %>
     <td><%= t(order.status, :scope => "order.status" ) %></td>
   <% end %>
@@ -19,7 +21,7 @@
         <% when "Ordered" %>
           <%=  'mark as delivered' %>
         <% when "Delivered" %>
-          <%=  'mark as ready' %>
+          <%=  link_to t(:mark_as_ready, :scope => "globals" ), :controller=>'orders', :action=>'mark_as', :id=>order.id, :status_to=>"Ready", :method => :put %>
         <% when "Ready" %>
           <%=  'mark as done' %>
         <% when "Done" %>
