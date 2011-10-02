@@ -21,70 +21,21 @@ class PrintJobsController < ApplicationController
   def new
     @title = t(:new_print_job, :scope => "titles" )
     @submit = t(:send_print_job, :scope => "buttons")
-    @payed_order_materials = MaterialOrder.find(:all, :conditions => ['status = ?', 'payed'])
-    @payed_materials = {}
-    @payed_order_materials.each do |order_material|
-      material = order_material.material
-      print_type = material.print_type
-      if @payed_materials[order_material.guild]
-        guild = @payed_materials[order_material.guild]
-        if guild[print_type]
-          type = guild[print_type]
-          if type[material]
-            type[material] << order_material
-          else
-            type[material] = [order_material]
-          end
-        else
-          guild[print_type] = {material => [order_material]}
-        end
-      else
-        #first occurence of the guild
-        @payed_materials[order_material.guild] = {print_type => {material => [order_material]}}
-      end
-      #{guild => {type  => {material  => [ordermaterials ]},
-      #           type2 => {material2 => [ordermaterials2]}, }}
-    end
+    get_sorted_orders "Payed"
   end
 
   def create
     @print_job = PrintJob.new
-    
     set_material_orders_attributes params[:print_job][:material_orders_attributes]
-    #save_res = @print_job.save!
     if @print_job.save!
       set_material_orders_status @print_job
       flash[:succes] = t(:print_job_send, :scope => "flash" )
     else
       flash[:error] = t(:print_job_not_send, :scope => "flash" )
-    end
-    
+    end    
     @title = t(:new_print_job, :scope => "titles" )
     @submit = t(:send_print_job, :scope => "buttons")
-    @payed_order_materials = MaterialOrder.find(:all, :conditions => ['status = ?', 'payed'])
-    @payed_materials = {}
-    @payed_order_materials.each do |order_material|
-      material = order_material.material
-      print_type = material.print_type
-      if @payed_materials[order_material.guild]
-        guild = @payed_materials[order_material.guild]
-        if guild[print_type]
-          type = guild[print_type]
-          if type[material]
-            type[material] << order_material
-          else
-            type[material] = [order_material]
-          end
-        else
-          guild[print_type] = {material => [order_material]}
-        end
-      else
-        #first occurence of the guild
-        @payed_materials[order_material.guild] = {print_type => {material => [order_material]}}
-      end
-      #{guild => {type  => {material  => [ordermaterials ]},
-      #           type2 => {material2 => [ordermaterials2]}, }}
-    end
+    get_sorted_orders "Payed"
     render 'new'
   end
 
@@ -110,6 +61,33 @@ class PrintJobsController < ApplicationController
       material_order.status = "Ordered"
       material_order.save!
     }
+  end
+  
+  def get_sorted_orders status
+    @payed_order_materials = MaterialOrder.find(:all, :conditions => ['status = ?', status])
+    @payed_materials = {}
+    @payed_order_materials.each do |order_material|
+      material = order_material.material
+      print_type = material.print_type
+      if @payed_materials[order_material.guild]
+        guild = @payed_materials[order_material.guild]
+        if guild[print_type]
+          type = guild[print_type]
+          if type[material]
+            type[material] << order_material
+          else
+            type[material] = [order_material]
+          end
+        else
+          guild[print_type] = {material => [order_material]}
+        end
+      else
+        #first occurence of the guild
+        @payed_materials[order_material.guild] = {print_type => {material => [order_material]}}
+      end
+      #{guild => {type  => {material  => [ordermaterials ]},
+      #           type2 => {material2 => [ordermaterials2]}, }}
+    end
   end
 
 end
