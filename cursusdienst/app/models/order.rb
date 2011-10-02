@@ -17,4 +17,14 @@ class Order < ActiveRecord::Base
       return s
     end
   end
+
+  def status
+    s = { 'Posted' => 1, 'Payed' => 2, 'Ordered' => 3, 'Delivered' => 4,'Ready' => 5, 'Done' => 6, 'Canceled' => 0 }
+    r = 'Done'
+    x = material_orders
+    x.each do |i|
+      r = i.status if s[i.status] < s[r]
+    end
+    return r
+  end
 end
