@@ -19,6 +19,7 @@ class PrintJobsController < ApplicationController
   end
 
   def new
+    @title = t(:new_print_job, :scope => "titles" )
     @print_job = PrintJob.new()
     @payed_order_materials = MaterialOrder.find(:all, :conditions => ['status = ?', 'payed'])
     @payed_materials = {}

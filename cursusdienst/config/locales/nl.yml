@@ -298,6 +298,7 @@ nl:
     items: "Items"
     price: "Prijs/st"
     total: "Totaal"
+    times: "Maal"
 
   shopping_cart:
     shopping_cart: "Winkelwagen"
@@ -474,6 +475,7 @@ nl:
     new_printer: "Een nieuwe drukker aanmaken"
     new_price: "Een nieuwe prijs aanmaken"
     new_stock: "Een nieuwe stock aanmaken"
+    new_print_job: "Nieuwe bestelling naar drukker sturen"
 
     edit_subject: "Cursus bewerken"
     edit_faculty: "Faculteit bewerken"
