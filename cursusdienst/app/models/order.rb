@@ -7,6 +7,20 @@ class Order < ActiveRecord::Base
         file = File.open("#{RailsRoot}/public/LABEL.txt", "r+")
         @@label = file.gets
         file.rewind
+      else
+        file = File.new("#{RailsRoot}/public/LABEL.txt", "r+")
+        @@label = "A-000"
+      end
+      file.close
+     return @@label
+    end
+    
+    def self.set_next_label label
+      file = nil
+      if File.exists?("#{RailsRoot}/public/LABEL.txt")
+        file = File.open("#{RailsRoot}/public/LABEL.txt", "r+")
+        @@label = file.gets
+        file.rewind
         file.print next_label(@@label)
       else
         file = File.new("#{RailsRoot}/public/LABEL.txt", "r+")

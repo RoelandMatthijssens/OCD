@@ -152,6 +152,7 @@ class OrdersController < ApplicationController
       OrderMailer.payment_ok(@order).deliver
     elsif params[:status_to] == 'Ready'
       @order.label = params[:label]
+      Order.set_next_label params[:label]
       @order.save
       OrderMailer.order_ready(@order).deliver
     end
@@ -218,7 +219,7 @@ class OrdersController < ApplicationController
 
   def process_orders
     @title = t(:process_orders, :scope => "titles" )
-    @label = Order.get_label
+    @label = Order.get_label # todo label is changed EVERY time
     @orders = []
     orders = Order.find(:all)
     orders.each do |order|
