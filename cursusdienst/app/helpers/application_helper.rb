@@ -9,7 +9,8 @@ module ApplicationHelper
   end
      
   def title
-    base_title = request.subdomain == '' || request.subdomain == 'wwww' ? "Cursusdienst.net" : Guild.find_by_initials(request.subdomain).name + " cursusdienst"
+    #base_title = (request.subdomain == 'www')
+    base_title = request.subdomain == 'www' || request.subdomain == '' ? "Cursusdienst.net" : Guild.find_by_initials(request.subdomain).name + " cursusdienst"
     if @title.nil?
       base_title
     else
