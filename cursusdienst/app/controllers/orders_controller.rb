@@ -42,20 +42,23 @@ class OrdersController < ApplicationController
       @guild = current_user.guilds.first
       @own_orders = []
       substrs.each { |substr|
-        @own_orders =  @own_orders | Order.find(:all, :conditions => ['institute_id = ? and user_id=? and status!= ? and order_key LIKE ?' , institute.id, current_user.id, 'Ready', "%#{substr}%"])
+        @own_orders =  @own_orders | Order.find(:all, :conditions => ['institute_id = ? and user_id=? and order_key LIKE ?' , institute.id, current_user.id, "%#{substr}%"])
       }
       @orders
       @res = []
       if current_user.can?('view_all_orders')
+        @orders = {}
+        orders = []
         substrs.each { |substr|
-          x = Order.joins(:user).find(:all, :conditions => ['institute_id = ? and status!= ? and (user_name LIKE ? or email LIKE ? or rolno LIKE ? or order_key LIKE ? or name LIKE ? or last_name LIKE ?)', institute.id, 'Ready', "%#{substr}%", "%#{substr}%", "%#{substr}%", "%#{substr}%", "%#{substr}%", "%#{substr}%"])
-          @res << x
-          @res.any? ? @res & x : x
+          orders = orders | Order.joins(:user).find(:all, :conditions => ['institute_id = ? and (user_name LIKE ? or email LIKE ? or rolno LIKE ? or order_key LIKE ? or name LIKE ? or last_name LIKE ?)', institute.id, "%#{substr}%", "%#{substr}%", "%#{substr}%", "%#{substr}%", "%#{substr}%", "%#{substr}%"])
         }
-
-        @res.each { |g|
-          @orders = @orders.nil? ? g : @orders & g
-        }
+        orders.each do |order|
+          if @orders[order.status]
+            @orders[order.status] << order
+          else
+            @orders[order.status] = [order]
+          end
+        end
       end
       render :action => 'index'
     end
