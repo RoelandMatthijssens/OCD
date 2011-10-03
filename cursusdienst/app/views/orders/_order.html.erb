@@ -12,36 +12,39 @@
   <% unless params[:action] == 'my_orders' %>
     <td>
       <% case order.status %>
-        <% when "Posted"%>
-         <%= 'MAKE DROPDOWN mark as payed' %><br/>
-         <%= 'cancel' %>
-        <% when "Payed" %>
-          <%= link_to t(:go_and_ordered, :scope => "globals" ), new_print_job_path %>
-          <%= 'cancel' %>
-        <% when "Ordered" %>
-          <%= link_to t(:deliver, :scope => "globals" ), orders_print_jobs_path %>
-        <% when "Delivered" %>
-          <%= @label %>
-          <%=  link_to t(:mark_as_ready, :scope => "globals" ), :controller=>'orders', :action=>'mark_as', :id=>order.id, :status_to=>"Ready", :method => :put %>
-        <% when "Ready" %>
-          <%=  link_to t(:mark_as_done, :scope => "globals" ), :controller=>'orders', :action=>'mark_as', :id=>order.id, :status_to=>"Done", :method => :put %>
-        <% when "Done" %>
-          <%=  'nothing' %>
-        <% when "Canceled" %>
-          <%=  'nothing' %>
-        <% else %>
-          <%= "nothing" %>
+      <% when "Posted"%>
+        <strong><%= t(:payment_method, :scope => "orders") %></strong> <br />
+        <%=  link_to t(:cash, :scope => "orders" ), :controller=>'orders', :action=>'mark_as', :id=>order.id, :status_to=>"Payed", :payment_type => "cash", :method => :put %> <br />
+        <%=  link_to t(:transer, :scope => "orders" ), :controller=>'orders', :action=>'mark_as', :id=>order.id, :status_to=>"Payed", :payment_type => "cash", :method => :put %>   <br /> 
+        <%= 'cancel' %>
+      <% when "Payed" %>
+        <%= link_to t(:go_and_ordered, :scope => "globals" ), new_print_job_path %>
+        <%= 'cancel' %>
+      <% when "Ordered" %>
+        <%= link_to t(:deliver, :scope => "globals" ), orders_print_jobs_path %>
+      <% when "Delivered" %>
+        <%= @label %><br />
+        <%=  link_to t(:mark_as_ready, :scope => "globals" ), :controller=>'orders', :action=>'mark_as', :id=>order.id, :status_to=>"Ready", :label => @label, :method => :put %>
+      <% when "Ready" %>
+        <%= order.label %><br />
+        <%=  link_to t(:mark_as_done, :scope => "globals" ), :controller=>'orders', :action=>'mark_as', :id=>order.id, :status_to=>"Done", :method => :put %> <br />
+      <% when "Done" %>
+        <%=  'nothing' %>
+      <% when "Canceled" %>
+        <%=  'nothing' %>
+      <% else %>
+        <%= "nothing" %>
       <% end %>
     </td>
   <% else %>
     <td>
       <% case order.status %>
-        <% when "Posted"%>
-         <%= 'cancel' %>
-        <% when "Payed" %>
-          <%= 'cancel' %>
-        <% else %>
-          <%= "nothing" %>
+      <% when "Posted"%>
+        <%= 'cancel' %>
+      <% when "Payed" %>
+        <%= 'cancel' %>
+      <% else %>
+        <%= "nothing" %>
       <% end %>
     </td>
   <% end %>

@@ -303,6 +303,7 @@ nl:
     cancel: "Annuleer"
     go_and_ordered: "Bestel bij drukker"
     deliver: "Accepteer Levering"
+    mark_as_done: "Markeer als afgehaald"
     
   shopping_cart:
     shopping_cart: "Winkelwagen"
@@ -687,6 +688,7 @@ nl:
   orders:
     cash: "contant"
     transer: "overschrijving"
+    payment_method: "Betalingswijze"
 
   info:
     cash: "Cash info"
@@ -697,6 +699,8 @@ nl:
   mailers:
     ordermailer:
       hello: "Beste"
-      bye_html: "Met Vriendelijke Groeten, <br /> Het Cursusdient.net Team"
+      bye_html: "Tot binnenkort! <br /> Het Cursusdient.net Team"
+      order_ready:
+        content: "Uw bestelling ligt klaar on afgehaald te worden in het cursusdienst lokaal."
       paymentok:
-       content: "Uw betaling is goed ontvangen"
+       content: "Uw betaling is goed ontvangen."

@@ -146,6 +146,15 @@ class OrdersController < ApplicationController
       material_order.status = status
       material_order.save!
     end
+    if params[:status_to] == 'Payed'
+      @order.payment_type = params[:payment_type]
+      @order.save
+      OrderMailer.payment_ok(@order).deliver
+    elsif params[:status_to] == 'Ready'
+      @order.label = params[:label]
+      @order.save
+      OrderMailer.order_ready(@order).deliver
+    end
     #OrderMailer.payment_ok(@order.user).deliver
     redirect_to process_orders_orders_path
   end
