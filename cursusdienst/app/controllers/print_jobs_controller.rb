@@ -19,12 +19,16 @@ class PrintJobsController < ApplicationController
   end
 
   def new
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('create_print_jobs')
     @title = t(:new_print_job, :scope => "titles" )
     @submit = t(:send_print_job, :scope => "buttons")
     get_sorted_orders "Payed"
   end
 
   def create
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('create_print_jobs')
     @print_job = PrintJob.new
     set_material_orders_attributes params[:print_job][:material_orders_attributes]
     if @print_job.save!
@@ -40,6 +44,8 @@ class PrintJobsController < ApplicationController
   end
   
   def orders
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('view_print_jobs')
     @title = t(:process, :scope => "titles" )
     @submit_printed = t(:printed_print_job, :scope => "buttons")
     @submit_delivered = t(:delivered_print_job, :scope => "buttons")
@@ -47,6 +53,8 @@ class PrintJobsController < ApplicationController
   end
   
   def deliver
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('edit_print_jobs')
     print_job = PrintJob.find(params[:print_job_id])
     act = params[:commit]
     if act == t(:delivered_print_job, :scope => "buttons")

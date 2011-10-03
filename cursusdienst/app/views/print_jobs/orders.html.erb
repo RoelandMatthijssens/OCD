@@ -60,10 +60,11 @@
         material:<%= material.name %><br/>
         orders:<%= material_orders %><br/>
       <% end %>
-
-      <div class="actions">
-        <%= submit_tag @submit_delivered %>
-      </div>
+      <% if current_user.can? "edit_print_jobs" %>
+        <div class="actions">
+          <%= submit_tag @submit_delivered %>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>
