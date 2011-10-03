@@ -35,14 +35,14 @@ class MessagesController < ApplicationController
 
   def edit
     deny_access and return unless signed_in?
-    deny_privileged_access and return unless current_user.can?('edit_message') || current_user.can?('edit_all_messages')
+    deny_privileged_access and return unless current_user.can?('edit_messages') || current_user.can?('edit_all_messages')
     @message = Message.find(params[:id])
     @submit = t(:update_message, :scope => "buttons" )
   end
 
   def update
     deny_access and return unless signed_in?
-    deny_privileged_access and return unless current_user.can?('edit_message') || current_user.can?('edit_all_messages')
+    deny_privileged_access and return unless current_user.can?('edit_messages') || current_user.can?('edit_all_messages')
     @message = Message.find(params[:id])
     if @message.update_attributes(params[:message])
       flash[:succes] = t(:update_message_success, :scope => "flash" )
