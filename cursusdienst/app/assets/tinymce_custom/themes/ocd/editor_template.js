@@ -1,0 +1,1 @@
+editor_template_src.js
