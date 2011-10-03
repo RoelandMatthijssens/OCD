@@ -5,15 +5,16 @@ class MaterialsController < ApplicationController
     deny_privileged_access and return unless current_user.can?('view_materials')
     @title = t(:all_materials, :scope => "titles")
     @materials = Material.paginate(:page => params[:page], :per_page => 10)
-    @select_boxes = []
+    inst = Guild.find_by_initials(request.subdomain).disciplines.first.faculty.institute_id
+    @select_boxes = [inst]
   end
 
   def update_filter
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('view_materials')
     @select_boxes = [params[:institute_id],params[:faculty_id],params[:discipline_id],params[:subject_id]]
-    @title = t(:all_subjects, :scope => "titles" )
-    @materials = Material.find(:all, :conditions => ["subject_id = ?", params[:subject_id]]).paginate(:page => params[:page], :per_page => 10)
+		@title = t(:all_subjects, :scope => "titles" )
+		@materials = Material.find(:all, :conditions => ["subject_id = ?", params[:subject_id]]).paginate(:page => params[:page], :per_page => 10)
     render :action => 'index'
   end
 
