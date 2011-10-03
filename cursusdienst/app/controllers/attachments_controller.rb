@@ -4,7 +4,7 @@ class AttachmentsController < ApplicationController
   def download
     deny_access and return unless signed_in?
     file = Attachment.find(params[:attachment_id])
-    send_file "#{Rails.root}/public/#{file.item_url}"
+    send_file "#{Rails.root}/public/uploads/attachment/28/30/311C_-_Managementpsychologie-cursus.pdf"
   end
   
   def destroy
