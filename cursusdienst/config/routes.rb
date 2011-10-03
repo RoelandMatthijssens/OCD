@@ -26,7 +26,6 @@ Cursusdienst::Application.routes.draw do
 
   get "pages/eula"
 
-
   resources :users do
     get :edit_permissions, :on => :member
     put :update_permissions, :on => :member

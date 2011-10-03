@@ -85,11 +85,13 @@ class MaterialsController < ApplicationController
     deny_privileged_access and return unless current_user.can?('edit_materials')
     @material = Material.unchecked_find(params[:id])
     @material.subject = nil unless subject_given?(params[:material])
-
+    
     set_options_attributes params[:material][:options_attributes]
     #    @material.subject_id = nil if !params[:material][:subject_id]
     #    @material.parent_id = nil if !params[:material][:parent_id]
     if @material.update_attributes(params[:material])
+      remove_attachments params[:remove_attachments]
+      @material.save!
       flash[:succes] = t(:update_material_success, :scope => "flash" )
       redirect_to @material
     else
@@ -145,6 +147,14 @@ class MaterialsController < ApplicationController
 
   private
 
+  def remove_attachments par
+    par.each_key { |attachtment_id|  
+      attachment = Attachment.find(attachtment_id)
+      attachment.destroy
+      File.delete(attachment.item.path) if File.exists?(attachment.item.path)
+    } if par
+  end
+  
   def subject_given? par
     return par[:subject_id]
   end

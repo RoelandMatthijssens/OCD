@@ -7,6 +7,13 @@ class AttachmentsController < ApplicationController
     send_file "public/#{file.item_url}"
   end
   
+  def destroy
+    @attachment = Attachment.find(params[:id])
+    @attachment.destroy
+    flash[:notice] = "Successfully destroyed attachment."
+    redirect_to @attachment.gallery
+  end
+  
   private
   
   def allowed
