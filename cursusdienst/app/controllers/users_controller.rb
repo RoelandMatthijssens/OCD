@@ -33,7 +33,6 @@ class UsersController < ApplicationController
       sign_in @user
       @guild.users << @user if @guild
       flash[:succes] = t(:new_user_success, :scope => "flash" )
-      flash[:error] = guild_id ? "True" : "False"
       if @user.guilds.empty?
         redirect_to @user
       else
