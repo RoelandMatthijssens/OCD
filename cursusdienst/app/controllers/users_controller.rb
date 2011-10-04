@@ -18,6 +18,9 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     @submit = t(:register, :scope => 'user.signup')
+    unless request.subdomain == 'www' || request.subdomain == ''
+      @guild = Guild.find_by_initials request.subdomain
+    end
   end
 
   def create
@@ -26,14 +29,14 @@ class UsersController < ApplicationController
       @user.email = "#{params[:user][:user_name]}@vub.ac.be"
     end
     guild_id = params[:guild]
-    unless guild_id.empty?
-      @guild = Guild.find(guild_id)
+    unless request.subdomain == 'www' || request.subdomain == ''
+      @guild = Guild.find_by_initials request.subdomain
     end
-    if ! guild_id.empty? && @user.save
+    if ! params[:guild].empty? && @user.save
       sign_in @user
+      @guild = Guild.find(guild_id)
       @guild.users << @user if @guild
       flash[:succes] = t(:new_user_success, :scope => "flash" )
-      flash[:error] = guild_id ? "True" : "False"
       if @user.guilds.empty?
         redirect_to @user
       else

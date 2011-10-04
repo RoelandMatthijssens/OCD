@@ -18,7 +18,7 @@
     <div class='field'>
       <%= f.label :email %> <br>
       <%= f.text_field :email %> <br>
-  </div>
+    </div>
   <% end %>
   <div class='field'>
     <%= f.label :password %> <br>
@@ -29,12 +29,15 @@
     <%= f.password_field :password_confirmation %> <br>
   </div>
   <div class="field">
-    <%= select_tag :guild, options_from_collection_for_select(Guild.find(:all),
-      :id, :name, params[:guild] ? params[:guild] : "") ,
-      { :prompt => t(:select_guild, :scope => 'user.signup')} %>
-
-    </div>
-    <div class='field'>
-      <%= f.submit @submit %>
-    </div>
-  <% end %>
+    <% if @guild %>
+      <%= hidden_field_tag :guild,  @guild.id %>
+    <% else %>
+      <%= select_tag :guild, options_from_collection_for_select(Guild.find(:all),
+        :id, :name, params[:guild] ? params[:guild] : "") ,
+        { :prompt => t(:select_guild, :scope => 'user.signup')} %>
+    <% end %>
+  </div>
+  <div class='field'>
+    <%= f.submit @submit %>
+  </div>
+<% end %>
