@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(:version => 20111004183233) do
 
   create_table "info_strings", :force => true do |t|
     t.string   "key"
-    t.string   "content"
+    t.text     "content"
     t.integer  "guild_id"
     t.datetime "created_at"
     t.datetime "updated_at"
