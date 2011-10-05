@@ -4,6 +4,8 @@ class Teaching < ActiveRecord::Base
   #validate :unique_name_per_institute
 #  validates_associated :subjects
 
+  default_scope :conditions => {:deleted=>false}
+
   def subjects(i)
     result = []
     i.faculties.each { |x| x.disciplines.each{ |x| x.subjects.each { |x| result << x }}}

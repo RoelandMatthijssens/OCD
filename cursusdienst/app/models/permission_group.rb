@@ -5,6 +5,8 @@ class PermissionGroup < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_uniqueness_of :level
   has_and_belongs_to_many :users
+
+  default_scope :conditions => {:deleted=>false}
 end
 
 # == Schema Information
@@ -17,4 +19,3 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #
-

@@ -23,6 +23,7 @@ class Supply < ActiveRecord::Base
 
   validates_with PriceExclusivePresence
 
+  default_scope :conditions => {:deleted=>false}
 
   def buy_price
     if material.printable

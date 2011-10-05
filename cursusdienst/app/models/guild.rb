@@ -3,10 +3,10 @@ class Guild < ActiveRecord::Base
   validates :name, :presence => true
   validates :initials, :presence => true
   validate :has_at_least_one_discipline
-  
+
   validates_uniqueness_of :name
   validates_uniqueness_of :initials
-  
+
   has_and_belongs_to_many :disciplines
   has_and_belongs_to_many :users
   has_many :supplies, :dependent => :destroy
@@ -15,15 +15,15 @@ class Guild < ActiveRecord::Base
   has_many :shopping_cart_items
   has_many :material_orders
   has_many :info_strings
-  default_scope :order => "guilds.name ASC"
-  
+  default_scope :order => "guilds.name ASC", :conditions => {:deleted=>false}
+
   accepts_nested_attributes_for :disciplines
-  
+
   def has_at_least_one_discipline
     errors.add(:disciplines, "can't be blank") if
       disciplines.empty?
   end
-  
+
   def subjects
     s = []
     disciplines.each { |d|
@@ -32,15 +32,15 @@ class Guild < ActiveRecord::Base
     s
   end
 
-	def info info_type
-		r = info_strings.find_all{|item| item.key == info_type }
-		if r.size > 0
-			r[0]
-		else
-			nil
-		end
-	end
-  
+  def info info_type
+    r = info_strings.find_all{|item| item.key == info_type }
+    if r.size > 0
+      r[0]
+    else
+      nil
+    end
+  end
+
 end
 
 # == Schema Information
@@ -54,4 +54,3 @@ end
 #  created_at    :datetime
 #  updated_at    :datetime
 #
-
