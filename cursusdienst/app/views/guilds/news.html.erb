@@ -14,4 +14,8 @@
      <% end %>
 </div>
 
- <%= render :partial => 'pages/home_side_menu', :locals => {:guild => @guild}  %>
+  <%= render :partial => 'pages/home_side_menu', :locals => {:guild => @guild}  %>
+
+<% unless true %>
+  <%= Institute.first.to_delete %>
+<% end %>

@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
     :on => :create
   #  validates :password_confirmation, :presence => true
 
-  #validates_with InstitutePasswordCheck
+  validates_with InstitutePasswordCheck
   #validates_with FailAllTheThings
   validates :name, :presence => true
 

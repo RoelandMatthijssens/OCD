@@ -61,6 +61,15 @@ class FacultiesController < ApplicationController
   end
 
   def destroy
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('delete_faculties')
+    @faculty = Faculty.find(params[:id])
+    @faculty.deleted = true
+    if @faculty.save!
+      flash[:succes] = t(:delete_faculty_success, :scope => "flash" )
+    else
+      flash[:error] = t(:delete_faculty_fail, :scope => "flash" )
+    end
+    redirect_to faculties_path
   end
-
 end
