@@ -4,4 +4,6 @@ class Option < ActiveRecord::Base
   has_many :prices
   validates :name, :presence => true
   validates :typee, :presence => true
+
+  default_scope :conditions => {:deleted=>false}
 end

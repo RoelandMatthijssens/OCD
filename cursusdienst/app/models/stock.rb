@@ -7,6 +7,8 @@ class Stock < ActiveRecord::Base
   validates :amount, :presence => true
   #validates :typee, :presence => true
   before_save :default_values
+  default_scope :conditions => {:deleted=>false}
+
   def default_values
     self.floating = 0 unless self.floating
   end

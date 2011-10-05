@@ -14,7 +14,7 @@ class Order < ActiveRecord::Base
       file.close
      return @@label
     end
-    
+
     def self.set_next_label label
       file = nil
       if File.exists?("#{RailsRoot}/public/LABEL.txt")
@@ -49,6 +49,8 @@ class Order < ActiveRecord::Base
 
   validates :institute, :presence => true
   validates :user, :presence => true
+
+  default_scope :conditions => {:deleted=>false}
 
   def get_random_string(length)
     s = (0...length).map{ ('0'..'10').to_a[rand(10)] }.join

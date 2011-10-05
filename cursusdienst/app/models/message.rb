@@ -3,5 +3,5 @@ class Message < ActiveRecord::Base
   belongs_to :guild
   validates :guild, :presence => true
   validates :content, :presence => true
-  default_scope :order => "messages.created_at DESC"
+  default_scope :order => "messages.created_at DESC", :conditions => {:deleted=>false}
 end
