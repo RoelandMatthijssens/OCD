@@ -11,12 +11,14 @@ class GuildsController < ApplicationController
     @title = t(:supplies, :scope => "guild") 
     @supplies = {}
     @guild.supplies.each do |supply|
-      unless supply && supply.deleted && supply.material
-        subject = supply.material.subject
-        if @supplies[subject]
-          @supplies[subject] << supply
-        else
-          @supplies[subject] = [supply]
+      unless supply && supply.deleted 
+        unless supply.material
+          subject = supply.material.subject
+          if @supplies[subject]
+            @supplies[subject] << supply
+          else
+            @supplies[subject] = [supply]
+          end
         end
       end
     end
