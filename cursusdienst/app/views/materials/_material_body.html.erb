@@ -148,9 +148,13 @@
               <tr>
                 <th>guild</th>
                 <th>printer</th>
-                <th>price set</th>
-                <th>sell price</th>
-                <th>total buy price</th>
+                <% if supply && supply.price_set && supply.price_set.printer%>
+                  <th>price set</th>
+                  <th>sell price</th>
+                  <th>total buy price</th>
+                <% else %>
+                  <th>Problem</th>
+                <% end %>
                 <th>edit</th>
                 <th>stock</th>
 
@@ -163,10 +167,14 @@
                   <% supply =  supply_lookup.first %>
                   <tr>
                     <td><%= link_to guild.name, root_url(:subdomain => guild.initials) %></td>
-                    <td><%= supply.material.printable ? (link_to supply.price_set.printer.name, supply.price_set.printer) : 'N/A' %></td>
-                    <td><%= supply.material.printable ? (link_to supply.price_set.name, supply.price_set) : 'N/A' %></td>
-                    <td><%= number_to_currency supply.price %></td>
-                    <td><%= number_to_currency supply.buy_price %></td>
+                    <% if supply && supply.price_set && supply.price_set.printer%>
+                      <td><%= supply.material.printable ? (link_to supply.price_set.printer.name, supply.price_set.printer) : 'N/A' %></td>
+                      <td><%= supply.material.printable ? (link_to supply.price_set.name, supply.price_set) : 'N/A' %></td>
+                      <td><%= number_to_currency supply.price %></td>
+                      <td><%= number_to_currency supply.buy_price %></td>
+                    <% else %>
+                      <td>Try adding it again</td>
+                    <% end %>
                     <td><%= link_to image_tag("icons/twotone/" + icon_color + "/edit.gif", :alt=>t("edit", :scope => 'links')), edit_supply_path(supply) %></td>
                     <td>
                       <% s = Stock.find(:all, :conditions => ["material_id = ? AND guild_id = ?", material.id, guild.id]) %>
