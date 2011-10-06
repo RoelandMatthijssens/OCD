@@ -54,6 +54,16 @@ class InstitutesController < ApplicationController
   end
 
   def destroy
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('delete_institutes')
+    @institute = Institute.find(params[:id])
+    @institute.deleted = true
+    if @institute.save!
+      flash[:succes] = t(:delete_institute_success, :scope => "flash" )
+    else
+      flash[:error] = t(:delete_institute_fail, :scope => "flash" )
+    end
+    redirect_to institutes_path
   end
 
 end

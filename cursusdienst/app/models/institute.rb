@@ -12,9 +12,15 @@ class Institute < ActiveRecord::Base
 
   default_scope :conditions => {:deleted=>false}
 
-#  def users
-#    self.faculties.collect{|f| f.users }.flatten
-#  end
+  def to_delete
+    result = []
+    reflections.each do |relation_name, relation|
+      self.send(relation_name).each do |x|
+        result << (x)
+      end
+    end
+    return result
+  end
 end
 
 # == Schema Information

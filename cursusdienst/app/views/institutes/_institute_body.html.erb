@@ -37,4 +37,8 @@
       <% end %>
     </ul>
   </div>
+
+  <% if current_user.can? "delete_institutes" %>
+    <%= link_to image_tag("icons/twotone/" + icon_color + "/against.gif", :alt=>t("delete_institute", :scope => 'links')), { :action => "destroy", :id => institute.id }, :method => :delete %>
+  <% end %>
 </fieldset>

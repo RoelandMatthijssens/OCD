@@ -2,5 +2,5 @@ class ActionLog < ActiveRecord::Base
 
   validates :user, :presence => true
   belongs_to :user
-  default_scope :order => "faculties.name ASC", :conditions => {:deleted=>false}
+  default_scope :conditions => {:deleted=>false}
 end

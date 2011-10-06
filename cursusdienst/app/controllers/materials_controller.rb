@@ -13,8 +13,8 @@ class MaterialsController < ApplicationController
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('view_materials')
     @select_boxes = [params[:institute_id],params[:faculty_id],params[:discipline_id],params[:subject_id]]
-		@title = t(:all_subjects, :scope => "titles" )
-		@materials = Material.find(:all, :conditions => ["subject_id = ?", params[:subject_id]]).paginate(:page => params[:page], :per_page => 10)
+    @title = t(:all_subjects, :scope => "titles" )
+    @materials = Material.find(:all, :conditions => ["subject_id = ?", params[:subject_id]]).paginate(:page => params[:page], :per_page => 10)
     render :action => 'index'
   end
 
@@ -31,7 +31,7 @@ class MaterialsController < ApplicationController
     if params[:subject_id]
       @material = Subject.find(params[:subject_id]).materials.new
     elsif params[:parent_id]
-      @material = Material.new :parent_id => Material.unchecked_find(params[:parent_id])
+      @material = Material.new :parent_id => Material.deleted.unchecked_find(params[:parent_id])
     else
       @material = Material.new
     end
@@ -86,7 +86,7 @@ class MaterialsController < ApplicationController
     deny_privileged_access and return unless current_user.can?('edit_materials')
     @material = Material.unchecked_find(params[:id])
     @material.subject = nil unless subject_given?(params[:material])
-    
+
     set_options_attributes params[:material][:options_attributes]
     #    @material.subject_id = nil if !params[:material][:subject_id]
     #    @material.parent_id = nil if !params[:material][:parent_id]
@@ -149,13 +149,13 @@ class MaterialsController < ApplicationController
   private
 
   def remove_attachments par
-    par.each_key { |attachtment_id|  
+    par.each_key { |attachtment_id|
       attachment = Attachment.find(attachtment_id)
       attachment.destroy
       File.delete(attachment.item.path) if File.exists?(attachment.item.path)
     } if par
   end
-  
+
   def subject_given? par
     return par[:subject_id]
   end
