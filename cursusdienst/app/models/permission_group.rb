@@ -6,7 +6,7 @@ class PermissionGroup < ActiveRecord::Base
   validates_uniqueness_of :level
   has_and_belongs_to_many :users
 
-  default_scope :conditions => {:deleted=>false}
+  #default_scope :conditions => {:deleted=>false}
 end
 
 # == Schema Information

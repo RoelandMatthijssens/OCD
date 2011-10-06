@@ -11,5 +11,5 @@ class Price < ActiveRecord::Base
   validates_numericality_of :amount
   validates_uniqueness_of :option_id, :scope => :price_set_id
 
-  default_scope :conditions => {:deleted=>false}
+  #default_scope :conditions => {:deleted=>false}
 end

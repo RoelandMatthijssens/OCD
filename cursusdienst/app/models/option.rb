@@ -5,5 +5,5 @@ class Option < ActiveRecord::Base
   validates :name, :presence => true
   validates :typee, :presence => true
 
-  default_scope :conditions => {:deleted=>false}
+  #default_scope :conditions => {:deleted=>false}
 end

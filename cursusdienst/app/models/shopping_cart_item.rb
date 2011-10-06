@@ -9,6 +9,6 @@ class ShoppingCartItem < ActiveRecord::Base
   validates :material, :presence => true
   validates :guild, :presence => true
 
-  default_scope :conditions => {:deleted=>false}
+  #default_scope :conditions => {:deleted=>false}
 
 end

@@ -14,5 +14,5 @@ class MaterialOrder < ActiveRecord::Base
   validates :price, :presence => true
   validates :status, :presence => true
 
-  default_scope :conditions => {:deleted=>false}
+  #default_scope :conditions => {:deleted=>false}
 end

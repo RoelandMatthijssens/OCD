@@ -71,7 +71,7 @@ class User < ActiveRecord::Base
   has_many :action_logs
   has_many :ratings
 
-  default_scope :order => "users.last_name, users.name ASC", :conditions => {:deleted=>false}
+  default_scope :order => "users.last_name, users.name ASC"#, :conditions => {:deleted=>false}
 
   #before_save :encrypt_password
   before_create :encrypt_password

@@ -6,5 +6,5 @@ class BookCost < ActiveRecord::Base
 
   belongs_to :supply
 
-  default_scope :order => "book_costs.created_at DESC", :conditions => {:deleted=>false}
+  default_scope :order => "book_costs.created_at DESC"#, :conditions => {:deleted=>false}
 end

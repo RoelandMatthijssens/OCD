@@ -5,7 +5,7 @@ class Faculty < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => {:scope => :institute_id}
   validates :initials, :presence => true, :uniqueness => {:scope => :institute_id}
   validates :institute, :presence => true
-  default_scope :order => "faculties.name ASC", :conditions => {:deleted=>false}
+  default_scope :order => "faculties.name ASC"#, :conditions => {:deleted=>false}
   has_many :disciplines, :dependent => :destroy
   belongs_to :institute
 

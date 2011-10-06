@@ -5,5 +5,5 @@ class PriceSet < ActiveRecord::Base
   has_many :supplies
   validates :printer, :name, :presence => true
 
-  default_scope :conditions => {:deleted=>false}
+  #default_scope :conditions => {:deleted=>false}
 end
