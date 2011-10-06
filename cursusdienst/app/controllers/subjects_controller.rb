@@ -40,8 +40,16 @@ class SubjectsController < ApplicationController
   def create
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('create_subjects')
+    disciplines_params = params[:subject][:disciplines_attributes]
+    disciplines = []
+    disciplines_params.each do |k, v|
+      x = Discipline.find(v[:id])
+      disciplines << x
+    end
+    params[:subject].delete :disciplines_attributes
     @subject = Subject.new(params[:subject])
-    @subject.disciplines= get_disciplines_from_subject(params)
+    #@subject.disciplines= get_disciplines_from_subject(params)
+    @subject.disciplines = disciplines
     if @subject.save
       flash[:success] = t(:new_subject_success, :scope => "flash" )
       redirect_to @subject

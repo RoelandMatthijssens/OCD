@@ -15,7 +15,7 @@ class Subject < ActiveRecord::Base
   validates_associated :teachings
   #validate :unique_name_per_institute
 
-  accepts_nested_attributes_for :disciplines
+  accepts_nested_attributes_for :disciplines, :allow_destroy => true
 
   def subjects(i)
     result = []
