@@ -34,6 +34,11 @@
       <% subject = material.get_subject %>
       <% disciplines = subject.disciplines %>
       <table class="simpletable1">
+        <% if material.deleted %>
+          <tr>
+            <td colspan=2>This material is deleted</td>
+          </tr>
+        <% end %>
         <tr>
           <td><%= t(:prof, :scope => "globals" ) %></td>
           <td><%= subject.prof %></td>
@@ -109,7 +114,7 @@
             <ul>
               <% material.options.each do |option| %>
                 <li>
-                  <%= option.name %> 
+                  <%= option.name %>
                 </li>
               <% end %>
             </ul>
@@ -152,16 +157,16 @@
                 <th>sell price</th>
                 <th>total buy price</th>
                 <th>edit</th>
+                <th>stock</th>
                 <% if current_user.can? "delete_all_supply" %>
-                  <th>stock</th>
+                  <th>remove</th>
                 <% end %>
-                <th>remove</th>
 
               </tr>
             </thead>
             <tbody>
               <% material.guilds.each do |guild| %>
-                <% supply_lookup = Supply.find(:all, :conditions => ['material_id = ? and guild_id = ? ', material.id, guild.id]) %>
+                <% supply_lookup = Supply.active.find(:all, :conditions => ['material_id = ? and guild_id = ? ', material.id, guild.id]) %>
                 <% if supply_lookup.length == 1 %>
                   <% supply =  supply_lookup.first %>
                   <tr>

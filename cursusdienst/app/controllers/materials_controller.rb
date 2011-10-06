@@ -14,14 +14,14 @@ class MaterialsController < ApplicationController
     deny_privileged_access and return unless current_user.can?('view_materials')
     @select_boxes = [params[:institute_id],params[:faculty_id],params[:discipline_id],params[:subject_id]]
     @title = t(:all_subjects, :scope => "titles" )
-    @materials = Material.find(:all, :conditions => ["subject_id = ?", params[:subject_id]]).paginate(:page => params[:page], :per_page => 10)
+    @materials = Material.active.find(:all, :conditions => ["subject_id = ?", params[:subject_id]]).paginate(:page => params[:page], :per_page => 10)
     render :action => 'index'
   end
 
   def show
     #deny_access and return unless signed_in?
     #deny_privileged_access and return unless current_user.can?('view_materials')
-    @material = Material.unchecked_find(params[:id])
+    @material = Material.find(params[:id])
     @rating = Rating.new
   end
 
@@ -74,7 +74,7 @@ class MaterialsController < ApplicationController
   def edit
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('edit_materials')
-    @material = Material.unchecked_find(params[:id])
+    @material = Material.find(params[:id])
     @parents = @material.subject ? @material.subject.materials : nil
     set_given_subject @material
     set_given_parent @material
@@ -133,17 +133,14 @@ class MaterialsController < ApplicationController
   def destroy
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('delete_materials')
-    @material = Material.find(:all, params[:id])
-    unless @material.empty?
-      @material = @material.first
-      @material.deleted = true
-      if @material.save!
-        flash[:succes] = t(:delete_user_success, :scope => "flash" )
-      else
-        flash[:error] = t(:delete_user_fail, :scope => "flash" )
-      end
+    @material = Material.find(params[:id])
+    @material.deleted = true
+    if @material.save!
+      flash[:succes] = t(:delete_material_success, :scope => "flash" )
+    else
+      flash[:error] = t(:delete_material_fail, :scope => "flash" )
     end
-    redirect_to control_panel_path
+    redirect_to @material
   end
 
   private

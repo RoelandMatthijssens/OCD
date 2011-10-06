@@ -304,7 +304,7 @@ nl:
     go_and_ordered: "Bestel bij drukker"
     deliver: "Accepteer Levering"
     mark_as_done: "Markeer als afgehaald"
-    
+
   shopping_cart:
     shopping_cart: "Winkelwagen"
     total: "Totaal"
@@ -623,6 +623,8 @@ nl:
     update_printer_success: "Drukker succesvol aangepast"
     delete_user_success: "Gebruiker succesvol verwijderd"
     delete_user_fail: "Gebruiker niet verwijderd. Er is iets misgegaan"
+    delete_material_success: "Item succesvol verwijderd"
+    delete_material_fail: "Item niet verwijderd. Er is iets misgegaan"
     update_stock_success: "Stock succesvol aangepast"
     out_of_stock: "%{material} is niet meer in stock, en kan niet verkocht worden. Winkelwagen werd niet gepost"
     not_enough_stock: "%{material} is slechts %{available} keer in stock. U bestelde er %{ordered}."
