@@ -15,7 +15,7 @@
     <% items.each do |order_material| %>
       <% total_price += order_material.price %>
       <tr>
-        <%= if order_material.material && order_material.material.subject %>
+        <% if order_material.material && order_material.material.subject %>
           <td><%= link_to "#{order_material.material.subject.name}: #{order_material.material.typee}, #{order_material.material.name}" , order_material %></td>
         <% else %>
           <td>Problem</td>
