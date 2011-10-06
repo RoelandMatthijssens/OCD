@@ -12,14 +12,12 @@ class GuildsController < ApplicationController
     @supplies = {}
     @guild.supplies.each do |supply|
       unless supply && supply.deleted 
-        unless supply.material
           subject = supply.material.subject
           if @supplies[subject]
             @supplies[subject] << supply
           else
             @supplies[subject] = [supply]
           end
-        end
       end
     end
     @display_year_type_box = false
