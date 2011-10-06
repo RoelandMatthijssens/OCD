@@ -148,13 +148,9 @@
               <tr>
                 <th>guild</th>
                 <th>printer</th>
-                <% if supply && supply.price_set && supply.price_set.printer%>
                   <th>price set</th>
                   <th>sell price</th>
                   <th>total buy price</th>
-                <% else %>
-                  <th>Problem</th>
-                <% end %>
                 <th>edit</th>
                 <th>stock</th>
 
@@ -173,7 +169,7 @@
                       <td><%= number_to_currency supply.price %></td>
                       <td><%= number_to_currency supply.buy_price %></td>
                     <% else %>
-                      <td>Try adding it again</td>
+                      <td col-span="3">Try adding it again</td>
                     <% end %>
                     <td><%= link_to image_tag("icons/twotone/" + icon_color + "/edit.gif", :alt=>t("edit", :scope => 'links')), edit_supply_path(supply) %></td>
                     <td>
