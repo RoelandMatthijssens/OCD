@@ -1,2 +1,2 @@
-<%= render @info_string %>
+<%= render :partial => "info_string", :locals => {:guild => @info_string.guild, :info_name => @info_string.key}%>
 
