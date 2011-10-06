@@ -32,7 +32,7 @@ class SessionsController < ApplicationController
   def destroy
     flash[:succes] =  t(:signed_out, :scope => "flash")
     sign_out
-    redirect_to root_url()
+    redirect_to root_url(:subdomain => 'www')
   end
   
   private

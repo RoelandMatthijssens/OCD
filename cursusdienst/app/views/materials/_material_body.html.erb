@@ -148,11 +148,14 @@
               <tr>
                 <th>guild</th>
                 <th>printer</th>
-                  <th>price set</th>
-                  <th>sell price</th>
-                  <th>total buy price</th>
+                <th>price set</th>
+                <th>sell price</th>
+                <th>total buy price</th>
                 <th>edit</th>
-                <th>stock</th>
+                <% if current_user.can? "delete_all_supply" %>
+                  <th>stock</th>
+                <% end %>
+                <th>remove</th>
 
               </tr>
             </thead>
@@ -181,6 +184,12 @@
                         <%= link_to image_tag("icons/twotone/" + icon_color + "/edit.gif", :alt=>t("edit", :scope => 'links')), { :controller => "stocks", :action => "new", :guild_id => guild.id, :material_id => material.id } %>
                       <% end %>
                     </td>
+                    <% if current_user.can? "delete_all_supply" %>
+                      <td>
+                        <%= link_to t(:remove_supply, :scope => "message", :guild => guild.initials ), {:controller => "supplies", :action => "destroy", :id =>  supply}, :method => :delete %>
+                        <%= link_to image_tag("icons/twotone/" + icon_color + "/x.gif", :alt=>"X"), {:controller => "supplies", :action => "destroy", :id =>  supply}, :method => :delete %>
+                      </td>
+                    <% end %>
                   </tr>
                 <% end %>
               <% end %>

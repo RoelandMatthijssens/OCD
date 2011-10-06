@@ -45,6 +45,7 @@ namespace :db do
       #admin permissions
       "use_control_panel", "sell_materials", "sell_all_materials", 'create_all_messages', 'view_all_stock', 'create_all_stock', 'view_all_orders',
       "print", "download_materials", "mark_order_as_payed", "can_view_side_supply", 'view_all_guilds' ,"set_order_status", "view_side_supply",
+      "delete_all_supply",
       #normal permissions
       "edit_users"              , "delete_users"              , "view_users"              ,
       "edit_permissions"        , "delete_permissions"        , "view_permissions"        , "create_permissions"        ,
