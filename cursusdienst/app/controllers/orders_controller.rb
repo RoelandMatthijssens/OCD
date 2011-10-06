@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
       @guild = current_user.guilds.first
       if current_user.can?('view_all_orders')
         @orders = {}
-        orders = Order.find(:all, :conditions => ['institute_id = ?', institute.id])
+        orders = Order.active.find(:all, :conditions => ['institute_id = ?', institute.id])
         orders.each do |order|
           if @orders[order.status]
             @orders[order.status] << order

@@ -4,7 +4,7 @@ class SuppliesController < ApplicationController
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('create_supplies')
     @supply = Supply.new()
-    previous_sold = Supply.unchecked_find(:all, :conditions => ['material_id = ? and guild_id = ? ', params[:material], params[:guild]])
+    previous_sold = Supply.find(:all, :conditions => ['material_id = ? and guild_id = ? ', params[:material], params[:guild]])
     if previous_sold && previous_sold.length == 1
       @supply = previous_sold.first
     end
@@ -12,7 +12,7 @@ class SuppliesController < ApplicationController
       @guilds = current_user.guilds
       @printers = Printer.all
       @price_sets = PriceSet.all
-    @title = t(:add_to_supply, :scope => "title" )    
+    @title = t(:add_to_supply, :scope => "title" )
     @submit = t(:add_to_supply, :scope => "buttons" )
   end
 
@@ -27,7 +27,7 @@ class SuppliesController < ApplicationController
       update_existing params
     else
       create_new params
-    end  
+    end
   end
 
 
@@ -51,7 +51,7 @@ class SuppliesController < ApplicationController
     @supply = Supply.unchecked_find(params[:id])
     update_existing params
   end
-  
+
   def destroy
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('delete_users')
@@ -64,9 +64,9 @@ class SuppliesController < ApplicationController
     end
     redirect_to materials_path
   end
-  
+
   private
-  
+
   def update_existing params
     @supply.deleted = false
     if @supply.update_attributes(params[:supply])
@@ -90,7 +90,7 @@ class SuppliesController < ApplicationController
       render 'edit'
     end
   end
-  
+
   def create_new params
     if @supply.save
       if params[:book_cost] && params[:book_cost][:book_cost]
@@ -115,5 +115,5 @@ class SuppliesController < ApplicationController
       render 'new'
     end
   end
-  
+
 end

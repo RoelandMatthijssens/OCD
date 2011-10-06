@@ -15,7 +15,9 @@ class Guild < ActiveRecord::Base
   has_many :shopping_cart_items
   has_many :material_orders
   has_many :info_strings
-  default_scope :order => "guilds.name ASC"#, :conditions => {:deleted=>false}
+
+  default_scope :order => "guilds.name ASC"
+  scope :active, :conditions => {:deleted=>false}
 
   accepts_nested_attributes_for :disciplines
 

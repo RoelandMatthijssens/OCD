@@ -8,5 +8,5 @@ class Rating < ActiveRecord::Base
   validates_presence_of :user
 
   validates :score, :inclusion => {:in => 1..5}
-  #default_scope :conditions => {:deleted=>false}
+  scope :active, :conditions => {:deleted=>false}
 end

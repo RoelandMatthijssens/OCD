@@ -4,7 +4,7 @@ class MaterialsController < ApplicationController
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('view_materials')
     @title = t(:all_materials, :scope => "titles")
-    @materials = Material.paginate(:page => params[:page], :per_page => 10)
+    @materials = Material.active.paginate(:page => params[:page], :per_page => 10)
     inst = Guild.find_by_initials(request.subdomain).disciplines.first.faculty.institute_id
     @select_boxes = [inst]
   end

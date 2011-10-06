@@ -3,15 +3,15 @@ class GuildsController < ApplicationController
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('view_all_guilds')
     @title = t(:all_guilds, :scope => "titles")
-    @guilds = Guild.paginate(:page => params[:page], :per_page => 10)
+    @guilds = Guild.active.paginate(:page => params[:page], :per_page => 10)
   end
 
   def show
     @guild = Guild.find_by_initials!(request.subdomain)
-    @title = t(:supplies, :scope => "guild") 
+    @title = t(:supplies, :scope => "guild")
     @supplies = {}
     @guild.supplies.each do |supply|
-      unless supply && supply.deleted 
+      unless supply && supply.deleted
           subject = supply.material.subject
           if @supplies[subject]
             @supplies[subject] << supply
@@ -34,7 +34,7 @@ class GuildsController < ApplicationController
   def update_filter
     #deny_access and return unless signed_in?
     @guild = Guild.find_by_initials!(request.subdomain)
-    @title = t(:supplies, :scope => "guild") 
+    @title = t(:supplies, :scope => "guild")
     #@subjects = get_materials params[:filter][:discipline_id], params[:filter][:year_type]
     @supplies = {}
     @guild.supplies.each do |supply|

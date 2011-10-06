@@ -4,7 +4,7 @@ class Teaching < ActiveRecord::Base
   #validate :unique_name_per_institute
 #  validates_associated :subjects
 
-  #default_scope :conditions => {:deleted=>false}
+  scope :active, :conditions => {:deleted=>false}
 
   def subjects(i)
     result = []

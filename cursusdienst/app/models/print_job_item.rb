@@ -6,5 +6,5 @@ class PrintJobItem < ActiveRecord::Base
   validates :material, :presence => true
   validates :amount, :presence => true
 
-  #default_scope :conditions => {:deleted=>false}
+  scope :active, :conditions => {:deleted=>false}
 end

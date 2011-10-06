@@ -4,11 +4,11 @@ class DisciplinesController < ApplicationController
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?("view_disciplines")
     @title = t(:all_disciplines2, :scope => "titles")
-    @disciplines = Discipline.paginate(:page => params[:page], :per_page => 10)
+    @disciplines = Discipline.active.paginate(:page => params[:page], :per_page => 10)
     inst = Guild.find_by_initials(request.subdomain).disciplines.first.faculty.institute_id
     @select_boxes = [inst]
   end
-  
+
   def update_filter
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('view_disciplines')

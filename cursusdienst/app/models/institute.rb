@@ -10,7 +10,7 @@ class Institute < ActiveRecord::Base
   has_many :faculties, :dependent => :destroy
   has_many :orders
 
-  #default_scope :conditions => {:deleted=>false}
+  scope :active, :conditions => {:deleted=>false}
 
   def to_delete
     result = []

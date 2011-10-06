@@ -3,7 +3,7 @@ class StocksController < ApplicationController
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('view_stock') || current_user.can?('view_all_stock')
     @title = t(:stock, :scope => "titles" )
-    @guilds = current_user.guilds
+    @guilds = current_user.guilds.active
   end
 
   def new

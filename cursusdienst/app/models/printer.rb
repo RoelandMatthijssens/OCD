@@ -3,5 +3,6 @@ class Printer < ActiveRecord::Base
   has_many :price_sets
 
   validates :name, :presence => true
-  #default_scope :conditions => {:deleted=>false}
+
+  scope :active, :conditions => {:deleted=>false}
 end
