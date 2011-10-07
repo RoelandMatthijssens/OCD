@@ -1,6 +1,6 @@
 <h1>
   <%= @title %>
-  <% if current_user.can? "create_material" %>
+  <% if current_user.can? "create_materials" %>
     <div class="to_right">
       <span class="comment_text">
         <%= link_to t(:new_material, :scope => "links" ), new_material_path %>
@@ -16,7 +16,7 @@
     <%= render :partial => "filters/select_box", :locals => {
       :filter_key_ajax => "institute",
       :id => "institute_id",
-      :dataset => Institute.all, 
+      :dataset => Institute.all,
       :selected_id => "#{@select_boxes[0]}",
       :parent_id => "institute_id",
       :child_id => "faculty_id"} %> <br />
@@ -26,16 +26,16 @@
   <%= render :partial => "filters/select_box", :locals => {
     :filter_key_ajax => "faculty",
     :id => "faculty_id",
-    :dataset => Faculty.find_all_by_institute_id(@select_boxes[0]), 
+    :dataset => Faculty.find_all_by_institute_id(@select_boxes[0]),
     :selected_id => "#{@select_boxes[1]}",
     :parent_id => "faculty_id",
     :child_id => "discipline_id"} %> <br />
 
-  <%= label_tag t(:discipline, :scope => "globals" ) %>   <br /> 
+  <%= label_tag t(:discipline, :scope => "globals" ) %>   <br />
   <%= render :partial => "filters/select_box", :locals => {
     :filter_key_ajax => "discipline",
     :id => "discipline_id",
-    :dataset => Discipline.find_all_by_faculty_id(@select_boxes[1]), 
+    :dataset => Discipline.find_all_by_faculty_id(@select_boxes[1]),
     :selected_id => "#{@select_boxes[2]}",
     :parent_id => "discipline_id",
     :child_id => "subject_id"} %> <br />
