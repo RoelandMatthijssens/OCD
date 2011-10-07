@@ -31,7 +31,7 @@ class MaterialsController < ApplicationController
     if params[:subject_id]
       @material = Subject.find(params[:subject_id]).materials.new
     elsif params[:parent_id]
-      @material = Material.new :parent_id => Material.deleted.unchecked_find(params[:parent_id])
+      @material = Material.new :parent_id => Material.find(params[:parent_id])
     else
       @material = Material.new
     end
@@ -84,7 +84,7 @@ class MaterialsController < ApplicationController
   def update
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('edit_materials')
-    @material = Material.unchecked_find(params[:id])
+    @material = Material.find(params[:id])
     @material.subject = nil unless subject_given?(params[:material])
 
     set_options_attributes params[:material][:options_attributes]

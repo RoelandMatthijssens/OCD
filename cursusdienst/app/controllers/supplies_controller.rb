@@ -20,7 +20,7 @@ class SuppliesController < ApplicationController
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('create_supplies')
     @supply = Supply.new(params[:supply])
-    previous_sold = Supply.unchecked_find(:all, :conditions => ['material_id = ? and guild_id = ? ', params[:supply][:material_id], params[:supply][:guild_id]])
+    previous_sold = Supply.find(:all, :conditions => ['material_id = ? and guild_id = ? ', params[:supply][:material_id], params[:supply][:guild_id]])
     if previous_sold.length == 1
       @supply = previous_sold.first
       @supply.deleted = false
@@ -48,7 +48,7 @@ class SuppliesController < ApplicationController
   def update
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('edit_supplies')
-    @supply = Supply.unchecked_find(params[:id])
+    @supply = Supply.find(params[:id])
     update_existing params
   end
 
