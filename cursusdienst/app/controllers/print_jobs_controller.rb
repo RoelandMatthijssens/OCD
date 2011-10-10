@@ -45,7 +45,7 @@ class PrintJobsController < ApplicationController
 
   def orders
     deny_access and return unless signed_in?
-    deny_privileged_access and return unless current_user.can?('view_print_jobs')
+    deny_privileged_access and return unless current_user.can?('view_print_job_orders')
     @title = t(:process, :scope => "titles" )
     @submit_printed = t(:printed_print_job, :scope => "buttons")
     @submit_delivered = t(:delivered_print_job, :scope => "buttons")
