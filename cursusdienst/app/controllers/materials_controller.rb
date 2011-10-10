@@ -7,6 +7,7 @@ class MaterialsController < ApplicationController
     @materials = Material.active.paginate(:page => params[:page], :per_page => 10)
     inst = Guild.find_by_initials(request.subdomain).disciplines.first.faculty.institute_id
     @select_boxes = [inst]
+    @guild = Guild.find_by_initials(request.subdomain)
   end
 
   def update_filter
