@@ -3,7 +3,7 @@ class PricesController < ApplicationController
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('view_prices')
     @title = t(:all_prices, :scope => "titles" )
-    @prices = Price.all()
+    @prices = Price.active.all()
   end
 
   def new

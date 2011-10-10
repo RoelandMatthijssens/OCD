@@ -3,6 +3,6 @@ class InfoString < ActiveRecord::Base
   validates :key, :presence => true
   validates :content, :presence => true
 
-  #default_scope :conditions => {:deleted=>false}
+  scope :active, :conditions => {:deleted=>false}
   belongs_to :guild
 end

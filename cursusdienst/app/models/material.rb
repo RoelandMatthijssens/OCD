@@ -39,8 +39,9 @@ class Material < ActiveRecord::Base
   has_many :material_orders
   has_many :ratings, :as => :rateable
   has_many :orders, :through => :material_orders
-  default_scope :order => "materials.name ASC"#, :conditions => {:deleted=>false}
-  scope :deleted, :order => "materials.name ASC"
+
+  default_scope :order => "materials.name ASC"
+  scope :active, :conditions => {:deleted=>false}
 
   accepts_nested_attributes_for :options
 

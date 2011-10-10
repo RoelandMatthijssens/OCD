@@ -14,8 +14,8 @@ class PrintJobsController < ApplicationController
         end
       end
     end
-    @printed_print_jobs = PrintJob.find(:all, :conditions => ['status = ?', 'printed'])
-    @ordered_print_jobs = PrintJob.find(:all, :conditions => ['status = ?', 'ordered'])
+    @printed_print_jobs = PrintJob.active.find(:all, :conditions => ['status = ?', 'printed'])
+    @ordered_print_jobs = PrintJob.active.find(:all, :conditions => ['status = ?', 'ordered'])
   end
 
   def new
@@ -36,13 +36,13 @@ class PrintJobsController < ApplicationController
       flash[:succes] = t(:print_job_send, :scope => "flash" )
     else
       flash[:error] = t(:print_job_not_send, :scope => "flash" )
-    end    
+    end
     @title = t(:new_print_job, :scope => "titles" )
     @submit = t(:send_print_job, :scope => "buttons")
     get_sorted_orders "Payed"
     render 'new'
   end
-  
+
   def orders
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('view_print_jobs')
@@ -51,7 +51,7 @@ class PrintJobsController < ApplicationController
     @submit_delivered = t(:delivered_print_job, :scope => "buttons")
     get_sorted_orders "Ordered"
   end
-  
+
   def deliver
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('edit_print_jobs')
@@ -64,7 +64,7 @@ class PrintJobsController < ApplicationController
     @submit_printed = t(:printed_print_job, :scope => "buttons")
     @submit_delivered = t(:delivered_print_job, :scope => "buttons")
     get_sorted_orders "Ordered"
-    
+
     render 'orders'
   end
 
@@ -72,9 +72,9 @@ class PrintJobsController < ApplicationController
     @title = 'Logs'
     @delivered_print_jobs = PrintJob.find(:all, :conditions => ['status = ?', 'delivered'])
   end
-  
+
   private
-  
+
   def set_material_orders_attributes material_orders_attributes
     @print_job.material_orders = []
     material_orders_attributes.each_value { |v|
@@ -84,14 +84,14 @@ class PrintJobsController < ApplicationController
       end
     }
   end
-  
+
   def set_material_orders_status print_job, status
     print_job.material_orders.each { |material_order|
       material_order.status = status
       material_order.save!
     }
   end
-  
+
   def get_sorted_orders status
     @payed_order_materials = MaterialOrder.find(:all, :conditions => ['status = ?', status])
     @payed_materials = {}

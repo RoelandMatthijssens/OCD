@@ -9,7 +9,8 @@ class Discipline < ActiveRecord::Base
   has_many :teachings
   has_many :subjects, :through => :teachings
 
-  #default_scope :order => "disciplines.name ASC", :conditions => {:deleted=>false}
+  default_scope :order => "disciplines.name ASC"
+  scope :active, :conditions => {:deleted=>false}
 
   def full_name
     return "#{faculty.initials}-#{name}"

@@ -5,7 +5,7 @@ class Attachment < ActiveRecord::Base
 
   before_save :update_item_attributes
 
- # default_scope :conditions => {:deleted=>false}
+  scope :active, :conditions => {:deleted=>false}
 
   def basename
     File.basename(item_url)

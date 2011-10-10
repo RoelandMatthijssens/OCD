@@ -3,7 +3,7 @@ class PrintersController < ApplicationController
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('view_printers')
     @title = t(:all_printers , :scope => "titles" )
-    @printers = Printer.all
+    @printers = Printer.active.all
   end
 
   def new

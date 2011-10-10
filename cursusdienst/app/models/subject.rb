@@ -8,11 +8,14 @@ class Subject < ActiveRecord::Base
   has_many :teachings
   has_many :disciplines, :through => :teachings
   has_many :materials
-  default_scope :order => "subjects.name ASC"#, :conditions => {:deleted=>false}
+
+  default_scope :order => "subjects.name ASC"
+  scope :active, :conditions => {:deleted=>false}
+
   validates_associated :teachings
   #validate :unique_name_per_institute
 
-  accepts_nested_attributes_for :disciplines
+  accepts_nested_attributes_for :disciplines, :allow_destroy => true
 
   def subjects(i)
     result = []
