@@ -44,7 +44,7 @@
                     <% material.attachments.each do |attachment| %>
                       <tr>
                         <td colspan=2>
-                          <%= link_to attachment.basename, :controller=>'attachments',:action=>'download',:attachment_id=>attachment.id %> <br />
+                          <%= link_to "#{attachment.id} #{attachment.basename}", :controller=>'attachments',:action=>'download',:attachment_id=>attachment.id %> <br />
                         </td>
                       </tr>
                     <% end %>
