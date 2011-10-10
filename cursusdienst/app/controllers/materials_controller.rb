@@ -23,6 +23,7 @@ class MaterialsController < ApplicationController
     #deny_privileged_access and return unless current_user.can?('view_materials')
     @material = Material.find(params[:id])
     @rating = Rating.new
+    @guild = Guild.find_by_initials(request.subdomain)
   end
 
   def new

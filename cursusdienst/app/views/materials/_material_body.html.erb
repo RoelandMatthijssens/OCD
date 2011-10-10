@@ -19,12 +19,23 @@
         </span>
       <% end %>
       <% if signed_in? && current_user.can?("delete_materials") %>
+        <span class="comment_text">
         <%= link_to image_tag("icons/twotone/" + icon_color + "/against.gif", :alt=>t("delete_material", :scope => 'links')), { :action => "destroy", :id => material.id }, :method => :delete %>
+        </span>
       <% end %>
       <% if signed_in? && current_user.can?("create_materials") %>
         <span class="comment_text">
           - <%= link_to t(:add_one, :scope => "links" ), :controller => "materials", :action => "new", :parent_id => material.id, :material_id => material.id %>
           <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_verion", :scope => 'links')), :controller => "materials", :action => "new", :parent_id => material.id, :material_id => material.id %>
+        </span>
+      <% end %>
+      <% if signed_in? %>
+        <span>
+          <%= link_to_function image_tag("icons/twotone/" + icon_color + "/cart.gif", :alt=>t("add_to_cart", :scope => 'links')), "add_to_cart( #{ material.id }, #{@guild.id} )" %>
+        </span>
+      <% else %>
+        <span>
+          <%= link_to_function image_tag("icons/twotone/" + icon_color + "/cart.gif", :alt=>t("add_to_cart", :scope => 'links'), :mouseover => "icons/twotone/" + icon_color + "/lock.gif", :title => t(:please_log_in, :scope => "globals" )), "add_to_cart( #{ supply.material.id }, #{@guild.id} )" %>
         </span>
       <% end %>
     </legend>

@@ -2,6 +2,8 @@ class OrdersController < ApplicationController
 
   def index
     deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('view_orders')
+    deny_access and return unless signed_in?
     @title = t(:all_orders, :scope => "titles" )
     if current_user.guilds.empty? || current_user.guilds.first.disciplines.empty?
       flash[:error] = t(:no_institute, :scope => "flash" )
@@ -24,6 +26,8 @@ class OrdersController < ApplicationController
   end
 
   def show
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('view_orders')
     @title = t(:order_content, :scope => "globals" )
     @order = Order.find(params[:id])
   end
@@ -66,6 +70,8 @@ class OrdersController < ApplicationController
 
   def new
     deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('create_orders')
+    deny_access and return unless signed_in?
     @order = Order.new()
     @submit = t(:proceed, :scope => "buttons" )
     @back = t(:back, :scope => "buttons")
@@ -73,6 +79,8 @@ class OrdersController < ApplicationController
   end
 
   def create
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('create_orders')
     institute = Guild.find_by_initials(request.subdomain).disciplines.first.faculty.institute
     @order = Order.new()
     @order.institute = institute
@@ -169,12 +177,16 @@ class OrdersController < ApplicationController
   end
 
   def logs
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('view_logs')
     institute = current_user.guilds.first.disciplines.first.faculty.institute
     @orders = Order.find(:all, :conditions => ['user_id=? and status=?', current_user.id, 'Ready'])
     @all_orders = Order.find(:all, :conditions => ['status=?' , 'Ready'])
   end
 
   def results
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('view_results')
     @title = t(:results, :scope => "titles" )
     @orders = Order.find(:all, :conditions => ['status = ?', 'Done'])
     @per_material = {}
@@ -197,6 +209,8 @@ class OrdersController < ApplicationController
   end
 
   def destroy
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('delete_orders')
     @order = Order.find(params[:id])
     @order.status = 'Cancled'
     @order.save!
@@ -220,12 +234,13 @@ class OrdersController < ApplicationController
   def process_orders
     @title = t(:process_orders, :scope => "titles" )
     @label = Order.get_label # todo label is changed EVERY time
-    @orders = []
     orders = Order.find(:all)
+    @orders = []
     orders.each do |order|
       if order.status == "Delivered"
         @orders << order
       end
     end
+    #render process_orders
   end
 end
