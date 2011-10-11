@@ -70,7 +70,6 @@ class OrdersController < ApplicationController
 
   def new
     deny_access and return unless signed_in?
-    deny_privileged_access and return unless current_user.can?('create_orders')
     deny_access and return unless signed_in?
     @order = Order.new()
     @submit = t(:proceed, :scope => "buttons" )
