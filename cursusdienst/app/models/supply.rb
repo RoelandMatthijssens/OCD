@@ -31,13 +31,15 @@ class Supply < ActiveRecord::Base
       pages = material.page_count
       build_total = [options]
       options.each do |option|
-        option_price = price_set.prices.find(:all, :conditions => ['option_id=?', option.id]).first
-        price = option_price.amount
-        type = option_price.typee
-        if type == 'per_page'
-          build_total << price * pages
-        else
-          build_total << price
+        if option.typee == 'printer'
+          option_price = price_set.prices.find(:all, :conditions => ['option_id=?', option.id]).first
+          price = option_price.amount
+          type = option_price.typee
+          if type == 'per_page'
+            build_total << price * pages
+          else
+            build_total << price
+          end
         end
       end
       total = 0

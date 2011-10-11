@@ -31,6 +31,19 @@ class PrintJobsController < ApplicationController
     deny_privileged_access and return unless current_user.can?('create_print_jobs')
     @print_job = PrintJob.new
     set_material_orders_attributes params[:print_job][:material_orders_attributes]
+    total_price = 0
+    material_orders_ids = params[:print_job][:material_orders_attributes]
+    material_orders_ids.each do |key, id|
+      id = id[:id]
+      material_order = MaterialOrder.find(id)
+      material = material_order.material
+      guild = material_order.guild
+      supply = Supply.find(:first, :conditions => ["material_id=? AND guild_id = ?", material.id, guild.id])
+      unless supply.nil?
+        total_price += supply.buy_price
+      end
+    @print_job.price = total_price
+    end
     if @print_job.save!
       set_material_orders_status @print_job, "Ordered"
       flash[:succes] = t(:print_job_send, :scope => "flash" )

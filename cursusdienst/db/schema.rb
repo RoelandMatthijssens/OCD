@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111005144010) do
+ActiveRecord::Schema.define(:version => 20111011152444) do
 
   create_table "action_logs", :force => true do |t|
     t.integer  "user_id"
@@ -214,6 +214,7 @@ ActiveRecord::Schema.define(:version => 20111005144010) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "deleted",    :default => false
+    t.float    "price"
   end
 
   create_table "printers", :force => true do |t|
