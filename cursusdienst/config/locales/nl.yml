@@ -265,6 +265,8 @@ nl:
   example: "t(:cool, :scope => 'models.guild')"
 
   globals:
+    invoice_id: "Factuur nr."
+    id: "id"
     back: "Terug"
     none_found: "Geen resultaten gevonden"
     select: "Selecteer"

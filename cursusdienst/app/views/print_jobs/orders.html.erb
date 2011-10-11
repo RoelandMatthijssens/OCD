@@ -17,6 +17,9 @@
                 <strong><%= option.name %></strong>
               </td>
             <% end %>
+            <td>
+              <strong><%= t :invoice_id, :scope => "globals" %> <%= materials.first[1][0].print_job_id %></strong>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -43,11 +46,15 @@
                   <% if material.attachments.any?  %>
                     <% material.attachments.each do |attachment| %>
                       <tr>
-                        <td colspan=2>
-                          <%= link_to "#{attachment.id} #{attachment.basename}", attachment.item_url %> <br />
+                        
+                        <td>
+                          <%= link_to attachment.basename, attachment.item_url %> <br />
                           <% if false %>
-                            <%= link_to "#{attachment.id} #{attachment.basename}", :controller=>'attachments',:action=>'download',:attachment_id=>attachment.id %> <br />
+                            <%= link_to attachment.basename, :controller=>'attachments',:action=>'download',:attachment_id=>attachment.id %> <br />
                           <% end %>
+                        </td>
+                        <td>
+                          <%= t :id, :scope => "globals" %>: <%= attachment.id %>
                         </td>
                       </tr>
                     <% end %>
