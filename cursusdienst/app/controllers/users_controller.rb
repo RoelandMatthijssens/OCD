@@ -109,7 +109,7 @@ class UsersController < ApplicationController
       end
     end
     @user = User.find(params[:id])
-    selected_ids = params[:permission_ids]
+    selected_ids = params[:permission_ids] || []
     unselected_ids = []
     @permissions = @user.permission_groups
     @permissions.each { |x| unselected_ids << x unless selected_ids.include?(x.id.to_s)}
