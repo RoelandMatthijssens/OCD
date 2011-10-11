@@ -79,7 +79,6 @@ class OrdersController < ApplicationController
 
   def create
     deny_access and return unless signed_in?
-    deny_privileged_access and return unless current_user.can?('create_orders')
     institute = Guild.find_by_initials(request.subdomain).disciplines.first.faculty.institute
     @order = Order.new()
     @order.institute = institute
