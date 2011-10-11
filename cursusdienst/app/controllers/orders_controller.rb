@@ -163,7 +163,7 @@ class OrdersController < ApplicationController
       OrderMailer.order_ready(@order).deliver
     end
     #OrderMailer.payment_ok(@order.user).deliver
-    redirect_to orders_path
+    redirect_to request.referer
   end
 
   def mark_as_payed
