@@ -16,13 +16,76 @@
 <h1>Jouw cursusdienst</h1>
 <h2>OSD: Overkoepelende StudentenDienst VUB</h2>
 <table class="clickthrough">
-  <tr><td><img src="http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-es.png"></td><td><h3><a href="http://esp.cursusdienst.net">ESP<br /><small>(KEPS-Promeco)</small></a></h3></td><td><h3><a href="http://solvay.cursusdienst.net">Solvaykring</a></h3></td></tr>
-  <tr><td><img src="http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-ir.png"></td><td><h3><a href="http://pk.cursusdienst.net">PK</a></h3></td><td></td></tr>
-  <tr><td><img src="http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-lk.png"></td><td><h3><a href="http://mesacosa.cursusdienst.net">Mesacosa</a></h3></td><td></td></tr>
-  <tr><td><img src="http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-lw.png"></td><td><h3><a href="http://lwk.cursusdienst.net">LWK</a></h3></td><td><h3><a href="http://pers.cursusdienst.net">PERSkring</a></h3></td></tr>
-  <tr><td><img src="http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-pe.png"></td><td><h3><a href="http://ppk.cursusdienst.net">PPK</a></h3></td><td></td></tr>
-  <tr><td><img src="http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-rc.png"></td><td><h3><a href="http://vrg.cursusdienst.net">VRG</a></h3></td><td></td></tr>
-  <tr><td><img src="http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-we.png"></td><td><h3><a href="http://ig.cursusdienst.net">Infogroep</a></h3></td><td><h3><a href="http://wk.cursusdienst.net">WK</a></h3></td></tr>
+  <tr>
+    <td>
+      <%= image_tag "http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-es.png" %>
+    </td>
+    <td>
+      <h3><%= link_to raw("ESP<br /><small>(KEPS-Promeco)</small>"), root_url(:subdomain => "esp") %></h3>
+    </td>
+    <td>
+      <h3><%= link_to "Solvaykring", root_url(:subdomain => "solvay") %></h3>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= image_tag "http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-ir.png" %>
+    </td>
+    <td>
+      <h3><%= link_to "PK", root_url(:subdomain => "pk") %></h3>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>
+      <%= image_tag "http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-lk.png" %>
+    </td>
+    <td>
+      <h3><%= link_to "Mesacosa", root_url(:subdomain => "mesacosa") %></h3>
+      </h3>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>
+      <%= image_tag "http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-lw.png" %>
+    </td>
+    <td>
+      <h3><%= link_to "LWK", root_url(:subdomain => "lwk") %></h3>
+    </td>
+    <td>
+      <h3><%= link_to "PERSkring", root_url(:subdomain => "pers") %></h3>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= image_tag "http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-pe.png" %>
+    </td>
+    <td>
+      <h3><%= link_to "PPK", root_url(:subdomain => "ppk") %></h3>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>
+      <%= image_tag "http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-rc.png" %>
+    </td>
+    <td>
+      <h3><%= link_to "VRG", root_url(:subdomain => "vrg") %></h3>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>
+      <%= image_tag "http://studentenraad.vub.ac.be/static/stem/faculteiten/icon-we.png" %>
+    </td>
+    <td>
+      <h3><%= link_to "Infogroep", root_url(:subdomain => "ig") %></h3>
+    </td>
+    <td>
+      <h3><%= link_to "WK", root_url(:subdomain => "wk") %></h3>
+    </td>
+  </tr>
 </table>
 <h1>Meer info</h1>
 <p>Dit platform werd ontwikkeld door Tyca en is nu in haar derde versie sinds de lancering in 2008. Meer info over het platform en Tyca vzw op <a href="http://tyca.be">http://tyca.be</a></p>
