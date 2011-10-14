@@ -15,7 +15,7 @@
       </br>
       <fieldset class="simplefieldset2">
         <legend><%= t(:filter, :scope => "guild.supply") %></legend>
-        <%= form_tag update_filter_guild_path(guild), :method => :put do %>
+        <%= form_tag update_filter_guild_path(guild), :method => :get do %>
           <div style="display:none;">
             <%= label_tag "institute" %>
             <%= render :partial => "filters/select_box", :locals => {
