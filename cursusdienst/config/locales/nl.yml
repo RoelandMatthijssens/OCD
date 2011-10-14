@@ -294,7 +294,7 @@ nl:
     select: "Selecteer"
     please_log_in: "Gelieve in te loggen"
     user_name: "Gebruikersnaam"
-    order_key: "Ref. nr."
+    order_key: "Order key"
     status: "Status"
     order_content: "Bestelling"
     items: "Items"
@@ -306,6 +306,7 @@ nl:
     go_and_ordered: "Bestel bij drukker"
     deliver: "Accepteer Levering"
     mark_as_done: "Markeer als afgehaald"
+    confirm: "Ben je wel zeker?"
 
   shopping_cart:
     shopping_cart: "Winkelwagen"
@@ -693,6 +694,7 @@ nl:
     cash: "contant"
     transer: "overschrijving"
     payment_method: "Betalingswijze"
+    cancel: "anuleer"
 
   info:
     cash: "Cash info"

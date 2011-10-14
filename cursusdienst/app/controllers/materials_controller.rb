@@ -16,6 +16,7 @@ class MaterialsController < ApplicationController
     @select_boxes = [params[:institute_id],params[:faculty_id],params[:discipline_id],params[:subject_id]]
     @title = t(:all_subjects, :scope => "titles" )
     @materials = Material.active.find(:all, :conditions => ["subject_id = ?", params[:subject_id]]).paginate(:page => params[:page], :per_page => 10)
+    @guild = Guild.find_by_initials(request.subdomain)
     render :action => 'index'
   end
 
