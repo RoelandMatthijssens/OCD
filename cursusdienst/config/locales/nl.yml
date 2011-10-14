@@ -413,6 +413,7 @@ nl:
       syllabus: "Syllabus"
       misc: "Varia"
       examquestions: "Examen vragen"
+      reader: "Reader"
 
   message:
     new_message: "Nieuw bericht"
