@@ -171,7 +171,7 @@ class OrdersController < ApplicationController
       @order.save
       OrderMailer.order_ready(@order).deliver
     end
-    redirect_to orders_path   
+    redirect_to orders_path
   end
 
   def mark_as_payed
@@ -184,7 +184,7 @@ class OrdersController < ApplicationController
 
   def logs
     deny_access and return unless signed_in?
-    deny_privileged_access and return unless current_user.can?('view_logs')
+    deny_privileged_access and return unless current_user.can?('view_action_logs')
     institute = current_user.guilds.first.disciplines.first.faculty.institute
     @orders = Order.find(:all, :conditions => ['user_id=? and status=?', current_user.id, 'Ready'])
     @all_orders = Order.find(:all, :conditions => ['status=?' , 'Ready'])

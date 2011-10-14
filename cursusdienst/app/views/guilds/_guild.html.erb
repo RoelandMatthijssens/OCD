@@ -44,7 +44,7 @@
                 <%= render :partial => "filters/select_box_html_options", :locals => {
                   :filter_key_ajax => "discipline",
                   :id => "filter[discipline_id]",
-                  :dataset => get_disciplines(guild.disciplines.first.faculty.id.to_s),
+                  :dataset => guild.disciplines,
                   :selected_id => @selected_discipline,
                   :html_options => {:onchange => '$(filter_year_type).val("");this.form.submit()'}} %> <br />
               </td>
