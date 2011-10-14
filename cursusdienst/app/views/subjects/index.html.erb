@@ -11,7 +11,7 @@
 </h1>
 
 
-<%= form_tag update_filter_subjects_path, :method => :put do %>
+<%= form_tag update_filter_subjects_path, :method => :get do %>
   <% if current_user.can? "view_institutes" %>
     <%= label_tag t(:institute, :scope => "globals" ) %><br />
     <%= render :partial => "filters/select_box", :locals => {

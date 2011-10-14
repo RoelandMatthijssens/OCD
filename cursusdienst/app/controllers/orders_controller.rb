@@ -171,8 +171,7 @@ class OrdersController < ApplicationController
       @order.save
       OrderMailer.order_ready(@order).deliver
     end
-    #OrderMailer.payment_ok(@order.user).deliver
-    redirect_to request.referer
+    redirect_to orders_path   
   end
 
   def mark_as_payed

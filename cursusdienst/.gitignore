@@ -3,6 +3,7 @@ db/*.sqlite3
 log/*.log
 tmp/
 pulbic/attachment
+*LABEL*
 .sass-cache/
 *.autosave
 *.lock

@@ -19,6 +19,7 @@ module MaterialsHelper
       t(:syllabus, :scope => "material.types"),
       t(:misc, :scope => "material.types"),
       t(:examquestions, :scope => "material.types"),
+      t(:reader, :scope => "material.types"),
     ]
   end
 

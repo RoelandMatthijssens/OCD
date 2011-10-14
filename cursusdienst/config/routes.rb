@@ -87,11 +87,11 @@ Cursusdienst::Application.routes.draw do
   resources :faculties
 
   resources :disciplines do
-    put :update_filter, :on => :collection
+    get :update_filter, :on => :collection
   end
 
   resources :subjects do
-    put :update_filter, :on => :collection
+    get :update_filter, :on => :collection
   end
 
   constraints(Subdomain) do
@@ -100,7 +100,7 @@ Cursusdienst::Application.routes.draw do
 
   resources :guilds do
     put :join, :on => :member
-    put :update_filter, :on => :member
+    get :update_filter, :on => :member
     get :news, :on => :member
   end
 
@@ -112,7 +112,7 @@ Cursusdienst::Application.routes.draw do
     put :sell, :on => :member
     get :add_to_cart, :on => :member
     get :add_to_supply, :on => :member
-    put :update_filter, :on => :collection
+    get :update_filter, :on => :collection
   end
 
   resources :messages
