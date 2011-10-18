@@ -78,7 +78,7 @@ class SuppliesController < ApplicationController
       end
       flash[:succes] = t(:update_supply_success, :scope => "flash")
       log("Edit supply #{@supply.id}")
-      redirect_to materials_path
+      redirect_to @supply.material
     else
       @title = t(:add_to_supply, :scope => "title" )
       @material = @supply.material
@@ -86,7 +86,7 @@ class SuppliesController < ApplicationController
       @printers = Printer.all
       @price_sets = PriceSet.all
       @submit = t(:add_to_supply, :scope => "buttons" )
-      lash[:succes] = t(:update_supply_fail, :scope => "flash")
+      flash[:succes] = t(:update_supply_fail, :scope => "flash")
       render 'edit'
     end
   end
