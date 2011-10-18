@@ -46,7 +46,7 @@
                   <% if material.attachments.any?  %>
                     <% material.attachments.each do |attachment| %>
                       <tr>
-                        
+
                         <td>
                           <%= link_to attachment.basename, attachment.item_url %> <br />
                           <% if false %>
@@ -70,6 +70,7 @@
         material:<%= material.name %><br/>
         orders:<%= material_orders %><br/>
       <% end %>
+      <%= t(:total, :scope => "globals" ) %>: <%= print_job.price.nil? ? 'N/A' : number_to_currency(print_job.price) %>
       <% if current_user.can? "edit_print_jobs" %>
         <div class="actions">
           <%= submit_tag @submit_delivered %>
@@ -80,5 +81,3 @@
 <% end %>
 
 <%= render :partial => "shared/side_order_processing" %>
-
-
