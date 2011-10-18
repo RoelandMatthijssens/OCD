@@ -136,7 +136,7 @@
   <% end %>
 
   <% if signed_in? && current_user.can?("view_supplies") %>
-    <% my_first_guild_selling_supply = Supply.find(:all, :conditions => ['material_id = ? and guild_id = ? ', material.id, current_user.guilds.first.id]) if signed_in? %>
+    <%= my_first_guild_selling_supply = Supply.active.find(:all, :conditions => ['material_id = ? and guild_id = ? ', material.id, current_user.guilds.first.id]) if signed_in? %>
     <fieldset class="simplefieldset2">
       <legend>
         <%= t(:guilds, :scope => "message" ) %>
