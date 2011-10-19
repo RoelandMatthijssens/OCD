@@ -10,6 +10,7 @@ class GuildsController < ApplicationController
     @guild = Guild.find_by_initials!(request.subdomain)
     @title = t(:supplies, :scope => "guild")
     @supplies = {}
+    sups =
     @guild.supplies.each do |supply|
       unless supply && supply.deleted
         material = supply.material
@@ -23,6 +24,7 @@ class GuildsController < ApplicationController
         end
       end
     end
+    @supplies = @supplies.sort {|x, y| x[0].name <=> y[0].name}
     @display_year_type_box = false
     @subjects = @guild.subjects
     @selected_discipline = ""

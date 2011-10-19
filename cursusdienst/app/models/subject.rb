@@ -10,7 +10,7 @@ class Subject < ActiveRecord::Base
   has_many :materials
 
   default_scope :order => "subjects.name ASC"
-  scope :active, :conditions => {:deleted=>false}
+  scope :active, :order => "subjects.name ASC", :conditions => {:deleted=>false}
 
   validates_associated :teachings
   #validate :unique_name_per_institute

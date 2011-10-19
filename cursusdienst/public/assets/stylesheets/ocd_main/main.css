@@ -1,0 +1,311 @@
+/*****************************
+ * Design > HeaderBackground *
+ *****************************/
+
+#headerbg{
+	left: 		0px;
+	top: 		0px;
+	position:	absolute;
+	width: 		100%;
+	min-width:	1000px;
+	height: 	85px;
+
+	/* >>> for in case we make it scalable <<<
+	min-width: 750px;
+	min-height: 68px;
+	*/
+	background-image:	url(images/header_slice.gif); 
+	background-repeat:	repeat;
+}
+
+/******************************
+ * Design > Containers > Main *
+ ******************************/
+/* maincontainer will center everything else */
+#maincontainer{
+	margin: 	0 auto; 
+	width: 		970px;
+}
+
+/**************************************
+ * Design > Containers > Second Layer *
+ **************************************/
+#headercontainer{
+	width: 		970px;
+	height: 	85px;
+	top:		0px;
+	position: 	absolute;
+	margin: 	0px;
+}
+
+#menucontainer{
+	width: 		970px;
+	height: 	87px;	
+	position: 	absolute;
+	top:		85px;
+	margin: 	0px;
+}
+#bodycontainer{
+	width: 		970px;
+	top:		172px;
+	position: 	absolute;
+	margin: 	0px;
+	background-image:	url(images/body_slice.gif); 
+	background-repeat:	repeat-y;
+	padding-bottom: 40px;
+	}
+	
+#footer{
+	bottom: 0px;
+	left:	0px;
+	width: 		970px;
+	height: 	22px;
+	position: 	absolute;
+	display: 	block;
+	background-image:	url(images/bottom_slice.gif); 
+	Z-index: 	10;
+}
+
+
+
+/***************************
+ * Design > Images > header*
+ ***************************/
+#headerlogo{
+	left: 		0px; 
+	width: 		292px;
+	height: 	85px;
+	position: 	absolute;
+}
+
+#headerbanner{
+	left: 			0px;
+	top: 			0px;
+	margin-left: 	292px;
+	margin-right: 	209px;
+	width: 			486px;
+	height: 		85px;
+	position: 		absolute;
+}
+
+#headerloginarea{
+	right: 		0px;
+	width: 		209px;
+	height: 	85px;
+	position: 	absolute;
+
+}
+
+ 
+/***************************
+ * Design > Images > menu  *
+ ***************************/
+
+#menubuttonarea{
+	left: 			22px;
+	right:			16px;
+	top: 			0px;
+	margin-left: 	0px;
+	padding-left: 	20px;
+	margin-right: 	0px;
+	width: 			920px;
+	width: 			920px;
+	height: 		37px;
+	position: 		absolute;
+	background-image:	url(images/menu_center.gif); 
+	background-repeat:	repeat-x;
+}
+
+#menubottom{
+	left: 			0px;
+	top: 			0px;
+	margin-top: 	37px;
+	margin-left: 	22px;
+	margin-right: 	16px;
+	width: 			932px;
+	height: 		50px;
+	position: 		absolute;
+	background-image:	url(images/menu_bottom.gif); 
+	background-repeat:	no-repeat;
+}
+
+#menuleft{
+	left: 		0px; 
+	width: 		22px;
+	height: 	87px;
+	position: 	absolute;
+	background-image:	url(images/menu_left.gif); 
+	background-repeat:	no-repeat;
+}
+
+#menuright{
+	right: 		0px;
+	width: 		16px;
+	height: 	87px;
+	position: 	absolute;
+
+	background-image:	url(images/menu_right.gif); 
+	background-repeat:	no-repeat;
+}
+
+/***************************
+ * Design > Images > body  *
+ ***************************/
+/* 	Note that "bodyleft" and "bodyright" are again
+ *  containers in case there is a menu
+ ******************************************/
+ 
+#bodyleft{
+	width: 			171px;
+	height: 		100%;
+	float:			left;
+	padding-left:	10px;
+	background-image:	url(images/body_left.gif); 
+	background-repeat:	repeat-y;
+}
+
+#bodyright{
+	width: 			175px;
+	height: 		100%;
+	float:			left;
+	padding-left:	10px;
+	background-image:	url(images/body_right.gif); 
+	background-repeat:	repeat-y;
+}
+
+#bodycenter{
+	padding-left:	10px;
+	padding-right:	10px;	
+	height:			auto;
+	max-width: 		584px;
+	width: 			598px;
+	float:			left;
+}
+
+/*****************************
+ * Design > Images > footer  *
+ *****************************/
+ /*Footer is a bit overly complicated but the only way I was 100% sure it would work from the first time*/
+#footer1{
+	width: 			100%;
+	height: 		6px;
+	positioning:	relative;
+	background-image:	url(images/footer_1.gif); 
+	background-repeat:	no-repeat;
+}
+/* this is the scaleable one that contains the footerbannerdiv */
+#footer2{
+	width: 			100%;
+	height: 		auto;
+	positioning:	relative;
+	background-image:	url(images/footer_2.gif); 
+	background-repeat:	repeat-y;
+}
+
+
+#footer3{
+	width: 			100%;
+	height: 		7px;
+	positioning:	relative;
+	background-image:	url(images/footer_3.gif); 
+	background-repeat:	no-repeat;
+}
+/* this div contains the banner and will scale automatically in height */
+/* to make sure it stays centered it needs an absolute width though... */
+/* which I think is not a problem since the request came with an absolute widht */
+#footerbannerdiv{
+	margin: 	0 auto; 
+	width: 		468px;
+}
+
+#footertext{
+	margin: 	0 auto; 
+	width: 		920px;
+	text-align:	right;
+}
+
+/***************************
+ * Design > Images > errors*
+ ***************************/
+ 
+.error_red{
+z-index:2;
+	width: 			970px;
+	height: 		auto;
+	position:		relative;
+	background-image:	url(images/error/red_error.gif); 
+	background-repeat:	repeat-y;
+}
+.error_green{
+	height: 		auto;
+	position:		relative;
+	background-image:	url(images/error/green_error.gif); 
+}
+.error_text{
+	padding-left: 	180px;
+	padding-right:	180px;
+	text-decoration: none;
+	color:#000;
+	font-weight: bold;
+	font-size: 11px;
+	font-family:"Verdana";
+	}
+
+	
+	
+.whitespace {
+    height: 2px;
+	line-height: 0px;
+}
+
+
+
+.topline {
+	padding: 		0px 0px 0px 0px;
+	margin: 		0px 0px 0px 0px;
+	margin-left:	-3px;
+	height: 		3px;
+	width: 			172px;
+	background: 	transparent url('images/sidemenu/top.gif') no-repeat;
+	font-size: 		0px;
+	position:		relative;
+}
+
+.grey{background-color:#DDDDDD;}
+
+.field_with_errors {
+    margin-top: 10px;
+    padding: 2px;
+    background-color: red;
+    display: table;
+}
+.field_with_errors label {
+    color: #fff;
+}
+
+#error_explanation {
+    width: 400px;
+    border: 2px solid red;
+    padding: 7px;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    background-color: #f0f0f0;
+}
+#error_explanation h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    background-color: #c00;
+    color: #fff;
+}
+#error_explanation p {
+    color: #333;
+    margin-bottom: 0;
+    padding: 5px;
+}
+#error_explanation ul li {
+    font-size: 12px;
+    list-style: square;
+}

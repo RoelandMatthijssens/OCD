@@ -1,0 +1,40 @@
+
+table.supply th {
+	font:  12px Arial;
+	text-align: left;
+	line-height: 6px;
+	padding: 6px 6px 6px 12px;
+        font-weight: bold;
+}
+
+table.supply th.col1width {
+	width: 60%;
+        font-weight: bold;
+}
+table.supply th.col2width {
+	width: 30px;
+        font-weight: bold;
+}
+table.supply th.col3width {
+	width: 10px;
+        font-weight: bold;
+}
+table.supply th.col4width {
+	width: 10px;
+        font-weight: bold;
+}
+
+table.supply td {
+	line-height: 10px;
+	padding: 6px 6px 6px 6px;
+	border-bottom: 1px dotted #BBB;
+	border-top: 1px dotted #BBB;
+}
+table.supply td.alt{
+	border-top: 1px dotted #BBB;
+	border-bottom: 1px dotted #BBB;
+        background: rgb(237,237,237);
+
+}
+
+

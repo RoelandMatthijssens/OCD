@@ -1,0 +1,16 @@
+ul.faculties, ul.disciplines{ 
+	font-family:Arial, serif; 
+	font-size:12px;
+	padding:0;
+	padding-left: 20px; 
+	margin:0;
+	list-style:none;
+}
+
+ul.faculties li, ul.disciplines li {
+	padding-left: 20px;
+	margin-top:0px;
+	background-image: url(../images/arrow.gif);
+	background-repeat: no-repeat;
+	background-position: 0 .5em;
+}

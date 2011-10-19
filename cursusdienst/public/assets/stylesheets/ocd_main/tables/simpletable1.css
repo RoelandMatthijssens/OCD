@@ -1,0 +1,27 @@
+table.simpletable1{
+	border-top: 1px;
+	border: 0;
+	padding: 0;
+	margin: 0;
+	margin-left: 5px;
+	overflow: hidden;
+	font-size: 13px;
+}
+table.simpletable1 tr{
+	height: 4px;
+}
+table.simpletable1 col{
+	height: 8px;
+	width: 90px;
+}
+table.simpletable1 td{
+        border: 0;
+	background: none;
+	line-height: 12px;
+        text-align: left;
+}
+table.simpletable1 td:first-child {
+	font-weight: bold;
+
+}
+

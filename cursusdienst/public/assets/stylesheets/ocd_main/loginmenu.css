@@ -1,0 +1,68 @@
+
+.lockicon{
+	background: 			transparent url('images/loginmenu/lock.gif') center right no-repeat;
+}
+.lockicon:hover{
+	background: 			transparent url('images/loginmenu/lock_hover.png') center right no-repeat;
+}
+.usericon{
+	background: 			transparent url('images/loginmenu/user.gif') center right no-repeat;
+}
+.usericon:hover{
+	background: 			transparent url('images/loginmenu/user_hover.gif') center right no-repeat;
+}
+
+.shopicon{
+	background: 			transparent url('images/loginmenu/cart.gif') center right no-repeat;
+}
+.shopicon:hover{
+	background: 			transparent url('images/loginmenu/cart_hover.gif') center right no-repeat;
+}
+
+
+#loginmenu {
+	width:					176px;
+	padding: 				0;
+	margin:					0;
+	position:				relative;
+}
+
+#loginmenu ul {
+	list-style-type:		none;
+	padding: 				0px 0px 0px 0px;
+	margin: 				0px 0px 0px 0px;
+	width:					1px;
+	font: 					normal 10px verdana, sans-serif;
+	font-weight: 			bold;
+    text-decoration: 		none;
+
+}
+
+#loginmenu li  a{	
+	margin-left: 			3px;
+	padding-top: 			7px;
+	padding-bottom: 		5px;
+	display:				block; 
+	width:					209px; 
+	max-width:				129px;
+	height:					auto; 
+	padding-left: 			40px;
+	padding-right: 			30px;	
+	text-align:				right; 
+	font: 					normal 12px verdana, sans-serif;
+    text-decoration: 		none;
+	color:					#BBB;
+}
+
+#loginmenu li a:hover, #loginmenu li a:focus{
+
+	color:					#C3DB6E; 
+	
+	
+}
+
+#loginmenu ul a{
+	
+}
+
+
