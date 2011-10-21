@@ -155,7 +155,7 @@ class OrdersController < ApplicationController
           redirect_to request.referer
           return nil
         end
-       end
+      end
     end
     @order.material_orders.each do |material_order|
       material_order.status = status
@@ -164,12 +164,38 @@ class OrdersController < ApplicationController
     if params[:status_to] == 'Payed'
       @order.payment_type = params[:payment_type]
       @order.save
+      @order.material_orders.each do |material_order|
+        material = material_order.material
+        unless material.printable
+          material_order.status = 'Delivered'
+          material_order.save
+        end
+      end
       OrderMailer.payment_ok(@order).deliver
     elsif params[:status_to] == 'Ready'
       @order.label = params[:label]
       Order.set_next_label params[:label]
+      @order.material_orders.each do |material_order|
+        material = material_order.material
+        unless material.printable
+          stock = Stock.find(:first, :conditions => ['material_id = ? and guild_id = ?', material.id, material_order.guild.id])
+          if stock & stock.floating > 0
+            stock.get_one_from_floating
+          end
+        end
+      end
       @order.save
       OrderMailer.order_ready(@order).deliver
+    elsif params[:status_to] == 'Canceled'
+      @order.material_orders.each do |material_order|
+        material = material_order.material
+        unless material.printable
+          stock = Stock.find(:first, :conditions => ['material_id = ? and guild_id = ?', material.id, material_order.guild.id])
+          if stock & stock.floating > 0
+            stock.floating_to_stock
+          end
+        end
+      end
     end
     redirect_to orders_path
   end
