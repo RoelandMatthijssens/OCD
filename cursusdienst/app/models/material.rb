@@ -104,6 +104,10 @@ class Material < ActiveRecord::Base
     return (valid_options.include? result) ? result : 0
   end
 
+  def full_name
+    return ("#{subject.name} #{typee} #{name}")
+  end
+
 end
 
 # == Schema Information

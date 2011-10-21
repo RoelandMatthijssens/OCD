@@ -307,6 +307,15 @@ nl:
     deliver: "Accepteer Levering"
     mark_as_done: "Markeer als afgehaald"
     confirm: "Ben je wel zeker?"
+    guild_results: "Kring Resultaten"
+    general_results: "Algemene Resultaten"
+    name: "Naam"
+    type: "Type"
+    amount: "Aantal"
+    cost: "Kost per uitgave"
+    profit: "Marge"
+    total_profit: "Winst voor overhead"
+    sell_price: "Verkoopprijs"
 
   shopping_cart:
     shopping_cart: "Winkelwagen"

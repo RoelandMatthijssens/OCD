@@ -13,6 +13,9 @@
       <% if current_user.can? "view_print_jobs" %>
         <%= link_to content_tag(:span, t(:print_jobs, :scope => "links" )), new_print_job_path, :class=>@button_style %>
       <% end %>
+      <% if current_user.can? "view_results" %>
+        <%= link_to content_tag(:span, t(:results, :scope => "globals" )), results_path, :class=>@button_style %>
+      <% end %>
     <% end %>
   <% end %>
   <!-- <a class="button style1" href="#" onclick="this.blur();"><span>HOME </span></a>
