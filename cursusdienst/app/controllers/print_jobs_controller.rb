@@ -110,25 +110,27 @@ class PrintJobsController < ApplicationController
     @payed_materials = {}
     @payed_order_materials.each do |order_material|
       material = order_material.material
-      print_type = material.print_type
-      if @payed_materials[order_material.guild]
-        guild = @payed_materials[order_material.guild]
-        if guild[print_type]
-          type = guild[print_type]
-          if type[material]
-            type[material] << order_material
+      if material.printable
+        print_type = material.print_type
+        if @payed_materials[order_material.guild]
+          guild = @payed_materials[order_material.guild]
+          if guild[print_type]
+            type = guild[print_type]
+            if type[material]
+              type[material] << order_material
+            else
+              type[material] = [order_material]
+            end
           else
-            type[material] = [order_material]
+            guild[print_type] = {material => [order_material]}
           end
         else
-          guild[print_type] = {material => [order_material]}
+          #first occurence of the guild
+          @payed_materials[order_material.guild] = {print_type => {material => [order_material]}}
         end
-      else
-        #first occurence of the guild
-        @payed_materials[order_material.guild] = {print_type => {material => [order_material]}}
-      end
       #{guild => {type  => {material  => [ordermaterials ]},
       #           type2 => {material2 => [ordermaterials2]}, }}
+      end
     end
   end
 

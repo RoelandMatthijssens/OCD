@@ -2,7 +2,7 @@
 db/*.sqlite3
 log/*.log
 tmp/
-pulbic/attachment
+public/
 *LABEL*
 .sass-cache/
 *.autosave
