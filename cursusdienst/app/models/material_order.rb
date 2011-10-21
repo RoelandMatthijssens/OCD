@@ -15,4 +15,5 @@ class MaterialOrder < ActiveRecord::Base
   validates :status, :presence => true
 
   scope :active, :conditions => {:deleted=>false}
+  
 end

@@ -3,7 +3,7 @@ class PrintJobsController < ApplicationController
   def index
     deny_access unless signed_in?
     @print_job = PrintJob.new()
-    @payed_orders = Order.find(:all, :conditions => ['status = ?', 'payed'])
+    @payed_orders = Order.find(:all, :conditions => ['status = ?', 'Payed'])
     @payed_materials = {}
     @payed_orders.each do |order|
       order.material_orders.each do |item|
@@ -14,8 +14,8 @@ class PrintJobsController < ApplicationController
         end
       end
     end
-    @printed_print_jobs = PrintJob.active.find(:all, :conditions => ['status = ?', 'printed'])
-    @ordered_print_jobs = PrintJob.active.find(:all, :conditions => ['status = ?', 'ordered'])
+    @printed_print_jobs = PrintJob.active.find(:all, :conditions => ['status = ?', 'Printed'])
+    @ordered_print_jobs = PrintJob.active.find(:all, :conditions => ['status = ?', 'Ordered'])
   end
 
   def new
@@ -83,7 +83,7 @@ class PrintJobsController < ApplicationController
 
   def logs
     @title = 'Logs'
-    @delivered_print_jobs = PrintJob.find(:all, :conditions => ['status = ?', 'delivered'])
+    @delivered_print_jobs = PrintJob.find(:all, :conditions => ['status = ?', 'Delivered'])
   end
 
   private

@@ -19,7 +19,6 @@
         <%=  link_to t(:cancel, :scope => "orders" ), {:controller=>'orders', :action=>'mark_as', :id=>order.id, :status_to=>"Canceled", :method => :put}, :confirm => t(:confirm, :scope => 'globals') %>
       <% when "Payed" %>
         <%= link_to t(:go_and_ordered, :scope => "globals" ), new_print_job_path %>
-        <%=  link_to t(:transer, :scope => "orders" ), {:controller=>'orders', :action=>'mark_as', :id=>order.id, :status_to=>"Canceled", :method => :put}, :confirm => t(:confirm, :scope => 'globals') %>
       <% when "Ordered" %>
         <%= link_to t(:deliver, :scope => "globals" ), orders_print_jobs_path %>
       <% when "Delivered" %>
