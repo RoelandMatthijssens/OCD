@@ -2,50 +2,40 @@
   <%= @title %>
 </h1>
 
-<% @results.each do |guild, material_orders| %>
-  <h2><%= guild.name %></h2>
-  <% materials = {} %>
-  <% material_orders.each do |material_order| %>
-    <% if materials[material_order.material] %>
-      <% materials[material_order.material] << materials_order %>
-    <% else %>
-      <% materials[material_order.material] = [material_order] %>
-    <% end %>
-  <% end %>
-  <table>
-    <thead>
+<table>
+  <thead>
+    <tr>
+      <th><%= t(:name, :scope => "globals" ) %></th>
+      <th><%= t(:type, :scope => "globals" ) %></th>
+      <th><%= t(:amount, :scope => "globals" ) %></th>
+      <th><%= t(:cost, :scope => "globals" ) %></th>
+      <th><%= t(:sell_price, :scope => "globals" ) %></th>
+      <th><%= t(:profit, :scope => "globals" ) %></th>
+      <th><%= t(:total_profit, :scope => "globals" ) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% total = 0 %>
+    <% @grouped_orders.each do |material, amount| %>
       <tr>
-        <th>material</th>
-        <th>total cost</th>
-        <th>total gain</th>
-        <th>total amount</th>
-        <th>total profit</th>
+        <td><%= link_to(material.full_name, material) %></td>
+        <td><%= t(material.typee.to_sym, :scope => "material.tyoes" ) %></td>
+        <td><%= amount %></td>
+        <% supply = Supply.find(:first, :conditions => ["material_id = ? and guild_id = ?", material.id, @guild.id]) %>
+        <td><%= supply.buy_price.round(4) %></td>
+        <td><%= supply.price.round(4) %></td>
+        <% profit = (supply.price - supply.buy_price) %>
+        <td><%= profit.round(4) %></td>
+        <td><%= (profit * amount).round(4) %></td>
+        <% total += (profit * amount) %>
       </tr>
-    </thead>
-    <tbody>
-      <% materials.each do |material, material_orders| %>
-        <% sell_price = material.supply(guild).price %>
-        <% buy_price = material.supply(guild).buy_price %>
-        <% total_buy_price = 0 %>
-        <% total_sell_price = 0 %>
-        <% total_amount = 0 %>
-        <% material_orders.each do |material_order| %>
-          <% total_buy_price += buy_price * material_order.amount %>
-          <% total_sell_price += sell_price * material_order.amount %>
-          <% total_amount += material_order.amount %>
-        <% end %>
-        <tr>
-          <td><%= link_to material.name, material %></td>
-          <td><%= total_buy_price %></td>
-          <td><%= total_sell_price %></td>
-          <td><%= total_amount %></td>
-          <td><%= total_sell_price - total_buy_price %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
+    <% end %>
+    <tr>
+      <td colspan = 6><strong><%= t(:total, :scope => "globals" ) %></strong></td>
+      <td><strong><%= total.round(5) %></strong></td>
+    </tr>
+  </tbody>
+</table>
 
 
-
-<MaterialOrder id: 1, order_id: 1, material_id: 1, created_at: "2011-09-22 15:15:42", updated_at: "2011-09-22 15:15:42", guild_id: 1, amount: 1>
+<%= render :partial => 'side_menu' %>
