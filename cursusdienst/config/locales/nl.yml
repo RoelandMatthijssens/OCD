@@ -312,10 +312,15 @@ nl:
     name: "Naam"
     type: "Type"
     amount: "Aantal"
-    cost: "Kost per uitgave"
-    profit: "Marge"
-    total_profit: "Winst voor overhead"
+    cost: "Kost"
+    costpp: "Kost per stuk"
+    pricepp: "Prijs per stuk"
+    profit: "Winst"
+    marge: "Marge"
+    total_profit: "Totale winst"
+    total_cost: "Totale kost"
     sell_price: "Verkoopprijs"
+    share_in_global_profit: "Aandeel in winst"
 
   shopping_cart:
     shopping_cart: "Winkelwagen"

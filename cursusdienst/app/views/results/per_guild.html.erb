@@ -8,8 +8,8 @@
       <th><%= t(:name, :scope => "globals" ) %></th>
       <th><%= t(:type, :scope => "globals" ) %></th>
       <th><%= t(:amount, :scope => "globals" ) %></th>
-      <th><%= t(:cost, :scope => "globals" ) %></th>
-      <th><%= t(:sell_price, :scope => "globals" ) %></th>
+      <th><%= t(:costpp, :scope => "globals" ) %></th>
+      <th><%= t(:pricepp, :scope => "globals" ) %></th>
       <th><%= t(:profit, :scope => "globals" ) %></th>
       <th><%= t(:total_profit, :scope => "globals" ) %></th>
     </tr>
@@ -22,17 +22,17 @@
         <td><%= t(material.typee.to_sym, :scope => "material.tyoes" ) %></td>
         <td><%= amount %></td>
         <% supply = Supply.find(:first, :conditions => ["material_id = ? and guild_id = ?", material.id, @guild.id]) %>
-        <td><%= supply.buy_price.round(4) %></td>
-        <td><%= supply.price.round(4) %></td>
+        <td><%= number_to_currency supply.buy_price %></td>
+        <td><%= number_to_currency supply.price %></td>
         <% profit = (supply.price - supply.buy_price) %>
-        <td><%= profit.round(4) %></td>
-        <td><%= (profit * amount).round(4) %></td>
+        <td><%= number_to_currency profit %></td>
+        <td><%= number_to_currency (profit * amount) %></td>
         <% total += (profit * amount) %>
       </tr>
     <% end %>
     <tr>
       <td colspan = 6><strong><%= t(:total, :scope => "globals" ) %></strong></td>
-      <td><strong><%= total.round(5) %></strong></td>
+      <td><strong><%= number_to_currency total %></strong></td>
     </tr>
   </tbody>
 </table>

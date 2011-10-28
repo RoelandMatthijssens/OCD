@@ -1,5 +1,6 @@
 class ResultsController < ApplicationController
   def index
+    @guilds = Guild.all
     @title = t(:general_results, :scope => "globals" )
   end
 
@@ -8,12 +9,7 @@ class ResultsController < ApplicationController
     @guild = Guild.find_by_initials(request.subdomain)
     material_orders = @guild.material_orders
     filter_status = ['Posted', 'Canceled']
-    payed_orders = []
-    material_orders.each do |material_order|
-      unless filter_status.include? material_order.status
-        payed_orders << material_order
-      end
-    end
+    payed_orders = @guild.payed_orders
     @grouped_orders = {}
     payed_orders.each do |payed_order|
       if @grouped_orders[payed_order.material]
