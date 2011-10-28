@@ -146,6 +146,7 @@ class OrdersController < ApplicationController
   def mark_as
     @order = Order.find(params[:id])
     status = params[:status_to]
+    redirect_path = orders_path
     if params[:status_to] == 'Canceled'
       @order.material_orders.each do |material_order|
         allowed = ['Posted', 'Payed']
@@ -181,6 +182,7 @@ class OrdersController < ApplicationController
             stock.get_one_from_floating
           end
         end
+        redirect_path = process_orders_orders_path
       end
       @order.save
       OrderMailer.order_ready(@order).deliver
@@ -195,7 +197,7 @@ class OrdersController < ApplicationController
         end
       end
     end
-    redirect_to orders_path
+    redirect_to redirect_path
   end
 
   def mark_as_payed
