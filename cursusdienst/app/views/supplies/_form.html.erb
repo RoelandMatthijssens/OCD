@@ -24,7 +24,7 @@
         :child_id => nil} %> <br />
     <% else %>
       <%= label_tag t(:buy_price, :scope => "globals" ) %><br/>
-      <%= text_field "book_cost", "book_cost" %><br/>
+      <%= text_field "book_cost", "book_cost", {:value => @supply.buy_price } %><br/>
     <% end %>
 
     <%= f.label :guild %> <br />

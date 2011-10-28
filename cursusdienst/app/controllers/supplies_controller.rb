@@ -9,9 +9,9 @@ class SuppliesController < ApplicationController
       @supply = previous_sold.first
     end
     @material = Material.find(params[:material])
-      @guilds = current_user.guilds
-      @printers = Printer.all
-      @price_sets = PriceSet.all
+    @guilds = current_user.guilds
+    @printers = Printer.all
+    @price_sets = PriceSet.all
     @title = t(:add_to_supply, :scope => "title" )
     @submit = t(:add_to_supply, :scope => "buttons" )
   end
@@ -38,10 +38,12 @@ class SuppliesController < ApplicationController
     @title = t(:add_to_supply, :scope => "title" )
     @material = @supply.material
     @guilds = current_user.guilds
-    @printers = Printer.all
-    @price_sets = PriceSet.all
-    @price_set = @supply.price_set
-    @printer = @price_set.printer
+    if @material.printable
+      @printers = Printer.all
+      @price_sets = PriceSet.all
+      @price_set = @supply.price_set
+      @printer = @price_set.printer
+    end
     @submit = t(:update_supply, :scope => "buttons")
   end
 
