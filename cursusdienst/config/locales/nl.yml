@@ -705,6 +705,7 @@ nl:
     back_to_root: "Wijzig cursusdienst"
     current_CD: "Huidige cursusdienst"
     delete_institute: "Verwijder Instelling"
+    results: "Resultaten"
 
   orders:
     cash: "contant"

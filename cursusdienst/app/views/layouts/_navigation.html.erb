@@ -14,7 +14,7 @@
         <%= link_to content_tag(:span, t(:print_jobs, :scope => "links" )), new_print_job_path, :class=>@button_style %>
       <% end %>
       <% if current_user.can? "view_results" %>
-        <%= link_to content_tag(:span, t(:results, :scope => "globals" )), per_guild_results_path, :class=>@button_style %>
+        <%= link_to content_tag(:span, t(:results, :scope => "links" )), per_guild_results_path, :class=>@button_style %>
       <% end %>
     <% end %>
   <% end %>
