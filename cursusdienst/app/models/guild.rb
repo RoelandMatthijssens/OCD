@@ -87,7 +87,7 @@ class Guild < ActiveRecord::Base
       total_profit += (supply.price - supply.buy_price) * amount
       total_items += amount
     end
-    return [total_cost, total_revenue, total_profit, total_items, grand_total(start_date, end_date)]
+    return [total_cost, total_revenue, total_profit, total_items]
   end
 
   def total_expenses start_date=0, end_date=Time.now()

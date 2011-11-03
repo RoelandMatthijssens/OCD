@@ -1,0 +1,50 @@
+<h1>
+  <%= @title %>
+</h1>
+<table>
+  <thead>
+    <tr>
+      <th><%= t(:guild, :scope => "globals" ) %></th>
+      <th><%= t(:total_cost, :scope => "globals" ) %></th>
+      <th><%= t(:total_profit, :scope => "globals" ) %></th>
+      <th><%= t(:marge, :scope => "globals" ) %></th>
+      <th><%= t(:share_in_global_profit, :scope => "globals" ) %></th>
+      <th><%= t(:items, :scope => "globals" ) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% total_profit = 0 %>
+    <% total_cost = 0 %>
+    <% total_items = 0 %>
+    <% total_revenue = 0 %>
+    <% @guilds.each do |guild| %>
+      <tr>
+        <% totals = guild.all_totals %>
+        <% cost = totals[0] %>
+        <% revenue = totals[1] %>
+        <% profit = totals[2] %>
+        <% items = totals[3] %>
+        <td><%= guild.initials %></td>
+        <td><%= number_to_currency cost %></td>
+        <td><%= number_to_currency revenue %></td>
+        <td><%= number_to_currency profit %></td>
+        <td><%= ((profit/@grand_total)*100).round(3) %>%</td>
+        <td><%= items %></td>
+        <% total_cost += cost %>
+        <% total_revenue += revenue %>
+        <% total_profit += profit %>
+        <% total_items += items %>
+      </tr>
+    <% end %>
+    <tr>
+      <td><strong><%= t(:total, :scope => "globals" ) %></strong></td>
+      <td><strong><%= number_to_currency total_cost %></strong></td>
+      <td><strong><%= number_to_currency total_revenue %></strong></td>
+      <td><strong><%= number_to_currency total_profit %></strong></td>
+      <td><strong>100%</strong></td>
+      <td><strong><%= total_items %></strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<%= render :partial => 'side_menu' %>

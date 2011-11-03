@@ -1,10 +1,13 @@
 class ResultsController < ApplicationController
   def index
-    @guilds = Guild.all
-    @title = t(:general_results, :scope => "globals" )
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('view_results')
+    per_guild
   end
 
   def per_guild
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('view_results')
     @title = t(:guild_results, :scope => "globals" )
     @guild = Guild.find_by_initials(request.subdomain)
     material_orders = @guild.material_orders
@@ -20,5 +23,13 @@ class ResultsController < ApplicationController
     end
     @grouped_orders = @grouped_orders.sort {|x, y| x[0].full_name <=> y[0].full_name}
     render 'per_guild'
+  end
+
+  def global
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('view_all_results')
+    @guilds = Guild.all
+    @grand_total = @guilds.first.grand_total
+    @title = t(:general_results, :scope => "globals" )
   end
 end
