@@ -56,6 +56,16 @@
           <td><%= subject.prof %></td>
         </tr>
         <tr>
+          <td><%= t(:owner, :scope => "globals" ) %></td>
+          <td>
+            <% if material.owner %>
+              <%= link_to material.owner.name, material.owner %>
+            <% else %>
+              <font color="red">This material has no owner yet, fill in the ownership please
+            <% end %>
+          </td>
+        </tr>
+        <tr>
           <% if subject %>
             <td><%= t(:subject, :scope => "globals" ) %></td>
             <td><%= link_to(subject.name, subject) %></td>

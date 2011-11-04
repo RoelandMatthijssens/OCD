@@ -69,7 +69,7 @@ namespace :db do
       "edit_print_jobs"         , "delete_print_jobs"         , "view_print_jobs"         , "create_print_jobs"         ,
       "edit_ratings"            , "delete_ratings"            , "view_ratings"            , "create_ratings"            ,
       "edit_supplies"           , "delete_supplies"           , "view_supplies"           , "create_supplies"           ,
-                                                              , "view_results"                                           ,
+                                                                "view_results"                                          ,
       ]
       #"edit_"            , "delete_"           , "view_"           , "create_"           ,
     permissionNames.each do |name|

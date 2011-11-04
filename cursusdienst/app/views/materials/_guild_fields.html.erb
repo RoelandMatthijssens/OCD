@@ -1,0 +1,6 @@
+<div class="fields">
+  <% if :id %>
+    <%= f.hidden_field :id, :value => 0 %>
+    <%= f.collection_select :id, Guild.find(:all), :id, :name, { :prompt => true } %>
+  <% end %>
+</div>

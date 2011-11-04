@@ -19,7 +19,7 @@
     <% @grouped_orders.each do |material, amount| %>
       <tr>
         <td><%= link_to(material.full_name, material) %></td>
-        <td><%= t(material.typee.to_sym, :scope => "material.tyoes" ) %></td>
+        <td><%= t(material.typee.to_sym, :scope => "material.types" ) %></td>
         <td><%= amount %></td>
         <% supply = Supply.find(:first, :conditions => ["material_id = ? and guild_id = ?", material.id, @guild.id]) %>
         <td><%= number_to_currency supply.buy_price %></td>
