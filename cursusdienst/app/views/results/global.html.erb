@@ -1,6 +1,13 @@
 <h1>
   <%= @title %>
 </h1>
+<%= form_tag global_results_path, :method => :get do%>
+  <%= label_tag "start_date" %><br/>
+  <%= text_field_tag "start_date" %><br/>
+  <%= label_tag "end_date" %><br/>
+  <%= text_field_tag "end_date" %><br/>
+  <%= submit_tag('filter') %>
+<% end %>
 <table>
   <thead>
     <tr>
@@ -13,10 +20,34 @@
     </tr>
   </thead>
   <tbody>
-    <% @payed_orders.each do |p| %>
-      <tr><td><%= p.status %></td></tr>
-    <% end %>
+
   </tbody>
 </table>
 
 <%= render :partial => 'side_menu' %>
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>t(:guild, :scope => "globals" )</th>
+      <th>t(:items, :scope => "globals" )</th>
+      <th>totalsellpricebyself</th>
+      <th>t(:total_cost, :scope => "globals" )</th>
+      <th>amountsoldbyothers</th>
+      <th>totalsellpricebyothers</th>
+      <th>totalbuypricebyothers</th>
+      <th>t(:total_profit, :scope => "globals" )</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @res.each do |x| %>
+      <tr>
+        <% x.each do |y| %>
+          <td><%= y %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
