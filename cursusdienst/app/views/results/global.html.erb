@@ -8,46 +8,38 @@
   <%= text_field_tag "end_date" %><br/>
   <%= submit_tag('filter') %>
 <% end %>
+
 <table>
   <thead>
     <tr>
       <th><%= t(:guild, :scope => "globals" ) %></th>
-      <th><%= t(:total_cost, :scope => "globals" ) %></th>
-      <th><%= t(:total_profit, :scope => "globals" ) %></th>
-      <th><%= t(:marge, :scope => "globals" ) %></th>
-      <th><%= t(:share_in_global_profit, :scope => "globals" ) %></th>
       <th><%= t(:items, :scope => "globals" ) %></th>
+      <th><%= t(:total_sell_price_self, :scope => "globals" ) %></th>
+      <th><%= t(:total_buy_price_self, :scope => "globals" ) %></th>
+      <th><%= t(:sold_by_others, :scope => "globals" ) %></th>
+      <th><%= t(:total_sell_price_others, :scope => "globals" ) %></th>
+      <th><%= t(:total_buy_price_others, :scope => "globals" ) %></th>
+      <th><%= t(:total_revenue, :scope => "globals" ) %></th>
+      <th><%= t(:total_profit, :scope => "globals") %></th>
+      <th><%= t(:share_in_global_profit, :scope => "globals" ) %></th>
     </tr>
   </thead>
   <tbody>
-
-  </tbody>
-</table>
-
-<%= render :partial => 'side_menu' %>
-
-
-
-<table>
-  <thead>
-    <tr>
-      <th>t(:guild, :scope => "globals" )</th>
-      <th>t(:items, :scope => "globals" )</th>
-      <th>totalsellpricebyself</th>
-      <th>t(:total_cost, :scope => "globals" )</th>
-      <th>amountsoldbyothers</th>
-      <th>totalsellpricebyothers</th>
-      <th>totalbuypricebyothers</th>
-      <th>t(:total_profit, :scope => "globals" )</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @res.each do |x| %>
+    <% @totals.each do |total| %>
       <tr>
-        <% x.each do |y| %>
-          <td><%= y %></td>
-        <% end %>
+        <td><%= link_to(total[0].initials, total[0]) %></td>
+        <td><%= total[1] %></td>
+        <td><%= number_to_currency total[2] %></td>
+        <td><%= number_to_currency total[3] %></td>
+        <td><%= total[4] %></td>
+        <td><%= number_to_currency total[5] %></td>
+        <td><%= number_to_currency total[6] %></td>
+        <td><%= number_to_currency total[7] %></td>
+        <td><%= number_to_currency total[8] %></td>
+        <td><%= @global_profit==0 ? 0 : ((total[8]*100)/@global_profit).round(2) %>%</td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<%= render :partial => 'side_menu' %>

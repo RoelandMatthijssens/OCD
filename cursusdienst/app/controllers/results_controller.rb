@@ -8,7 +8,7 @@ class ResultsController < ApplicationController
   def per_guild
     @start_date ||= params[:start_date] ? Date.civil(params[:start_date].split('/')[2].to_i, params[:start_date].split('/')[0].to_i, params[:start_date].split('/')[0].to_i ) : 1.month.ago
     @end_date ||= params[:end_date] ? Date.civil(params[:end_date].split('/')[2].to_i, params[:end_date].split('/')[0].to_i, params[:end_date].split('/')[1].to_i ) : Time.now
-    #{ material => [amountsoldbyself, totalsellpricebyself, totalbuypricebyself, amountsoldbyothers, totalsellpricebyothers, totalbuypricebyothers] } #what each entry of the hash 'grouped_orders' looks like
+    #{ material => [amountsoldbyself, totalsellpricebyself, totalbuypricebyself, amountsoldbyothers, totalsellpricebyothers, totalbuypricebyothers, revenue, profit] } #what each entry of the hash 'grouped_orders' looks like
 
     deny_access and return unless signed_in?
     deny_privileged_access and return unless current_user.can?('view_results')
@@ -45,6 +45,34 @@ class ResultsController < ApplicationController
         end
       end
     end
+    @grouped_orders.each do |material, amounts|
+      if material.owner
+        #guild that is owner will receive 100% of own revenue, and 40% of the profit of others
+        #this means the others will receive 60% of the profit of what they sell + the amount of costs to buy, when they are not the owner
+        if material.owner == @guild
+          revenue = amounts[1] + (40*(amounts[4]-amounts[5]))/100
+        else
+          revenue = amounts[2] + (60*(amounts[1]-amounts[2]))/100
+        end
+      else
+        #guild that is calculating will receive all revenue that they have sold themselves, and none of that of other guilds
+        revenue = amounts[1]
+      end
+      if material.owner
+      #guild that is owner will receive 100% of own sold profit, and 40% of the profit of others
+      #this means the others will receive 60% of the profit of what they sell, when they are not the owner
+        if material.owner == @guild
+          profit = (amounts[1]-amounts[2]) + (40*(amounts[4]-amounts[5]))/100
+        else
+          profit = (60*(amounts[1]-amounts[2]))/100
+        end
+      else
+        #guild that is calculating will receive all profit that they have sold themselve, and none of that of other guilds
+        profit = amounts[1]-amounts[2]
+      end
+      amounts << revenue
+      amounts << profit
+    end
     @grouped_orders = @grouped_orders.sort {|x, y| x[0].full_name <=> y[0].full_name}
 
     #@start_date = Date.civil(params[:range][:"start_date(1i)"].to_i,params[:range][:"start_date(2i)"].to_i,params[:range][:"start_date(3i)"].to_i)
@@ -57,7 +85,8 @@ class ResultsController < ApplicationController
     @guilds = Guild.active.all
     @start_date ||= params[:start_date] ? Date.civil(params[:start_date].split('/')[2].to_i, params[:start_date].split('/')[0].to_i, params[:start_date].split('/')[0].to_i ) : 1.month.ago
     @end_date ||= params[:end_date] ? Date.civil(params[:end_date].split('/')[2].to_i, params[:end_date].split('/')[0].to_i, params[:end_date].split('/')[1].to_i ) : Time.now
-    @res = []
+    @totals = []
+    @global_profit=0
     @guilds.each do |guild|
       @guild = guild
       amountsoldbyself=0
@@ -66,6 +95,8 @@ class ResultsController < ApplicationController
       amountsoldbyothers=0
       totalsellpricebyothers=0
       totalbuypricebyothers=0
+      totalrevenue=0
+      totalprofit=0
       per_guild.each do |material, payed_order|
         amountsoldbyself+=payed_order[0]
         totalsellpricebyself+=payed_order[1]
@@ -73,8 +104,11 @@ class ResultsController < ApplicationController
         amountsoldbyothers+=payed_order[3]
         totalsellpricebyothers+=payed_order[4]
         totalbuypricebyothers+=payed_order[5]
+        totalrevenue+=payed_order[6]
+        totalprofit+=payed_order[7]
       end
-      @res << [guild.initials, amountsoldbyself, totalsellpricebyself, totalbuypricebyself, amountsoldbyothers, totalsellpricebyothers, totalbuypricebyothers]
+      @totals << [guild, amountsoldbyself, totalsellpricebyself, totalbuypricebyself, amountsoldbyothers, totalsellpricebyothers, totalbuypricebyothers, totalrevenue, totalprofit]
+      @global_profit+=totalprofit
     end
   end
 end

@@ -37,6 +37,7 @@ Cursusdienst::Application.routes.draw do
 
   resources :material_orders, :only => [:show, :mark_as] do
     put :mark_as, :on => :member
+    get :fill_buy_price, :on => :collection
   end
 
   resources :action_logs, :only => [:index]

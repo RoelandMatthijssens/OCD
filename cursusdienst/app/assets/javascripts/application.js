@@ -112,7 +112,9 @@ function add_to_cart(material_id, guild_id) {
 }
 
 $(function() {
+  $(this).dialog("widget").css("z-index", 20);
   $("#start_date").datepicker({ altFormat: "dd-mm-yy" });
+
 });
 $(function() {
   $("#end_date").datepicker({ altFormat: "dd-mm-yy" });

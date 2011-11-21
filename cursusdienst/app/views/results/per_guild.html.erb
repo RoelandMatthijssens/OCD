@@ -34,38 +34,8 @@
         <td><%= amounts[3] %></td>
         <td><%= number_to_currency amounts[4] %></td>
         <td><%= number_to_currency amounts[5] %></td>
-        <% if material.owner %>
-<!--
-          guild that is owner will receive 100% of own revenue, and 40% of the profit of others
-          this means the others will receive 60% of the profit of what they sell + the amount of costs to buy, when they are not the owner
--->
-          <% if material.owner == @guild %>
-            <% revenue = amounts[1] + (40*(amounts[4]-amounts[5]))/100 %>
-          <% else %>
-            <% revenue = amounts[2] + (60*(amounts[1]-amounts[2]))/100 %>
-          <% end %>
-        <% else %>
-<!--
-          guild that is calculating will receive all revenue that they have sold themselves, and none of that of other guilds
--->
-          <% revenue = amounts[1] %>
-        <% end %>
-        <% if material.owner %>
-<!--
-          guild that is owner will receive 100% of own sold profit, and 40% of the profit of others
-          this means the others will receive 60% of the profit of what they sell, when they are not the owner
--->
-          <% if material.owner == @guild %>
-            <% profit = (amounts[1]-amounts[2]) + (40*(amounts[4]-amounts[5]))/100 %>
-          <% else %>
-            <% profit = (60*(amounts[1]-amounts[2]))/100 %>
-          <% end %>
-        <% else %>
-<!--
-          guild that is calculating will receive all profit that they have sold themselve, and none of that of other guilds
--->
-          <% profit = amounts[1]-amounts[2] %>
-        <% end %>
+        <% revenue = amounts [6] %>
+        <% profit = amounts [7] %>
         <td><%= number_to_currency revenue %></td>
         <td><%= number_to_currency profit %></td>
         <% total += profit %>
