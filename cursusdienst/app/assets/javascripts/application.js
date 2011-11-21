@@ -5,6 +5,7 @@
 // the compiled file.
 //
 //= require jquery
+//= require jquery-ui
 //= require jquery_ujs
 //= require_tree .
 //= require tinymce-jquery
@@ -71,7 +72,7 @@ function filter_select_on_change(parent_id, child_id, data_key) {
             data: data_key+"=" + id_value_string,
             timeout: 2000,
             error: function(XMLHttpRequest, errorTextStatus, error){
-								$('#ajax_errors').append("Failed to submit : "+ errorTextStatus+" ;"+error)
+                $('#ajax_errors').append("Failed to submit : "+ errorTextStatus+" ;"+error)
             },
             success: function(data){
                 // Clear all options from sub category select
@@ -91,21 +92,28 @@ function filter_select_on_change(parent_id, child_id, data_key) {
 }
 
 function add_to_cart(material_id, guild_id) {
-	$.ajax({
-		dataType: "json",
-		cache: false,
-		url: '/materials/'+material_id+'/add_to_cart?',
+  $.ajax({
+    dataType: "json",
+    cache: false,
+    url: '/materials/'+material_id+'/add_to_cart?',
     data: "guild_id=" + guild_id,
-		timeout: 2000,
-		error: function(XMLHttpRequest, errorTextStatus, error){
-			// flash error message
-			$('#ajax_errors').append("Failed to submit : "+ errorTextStatus+" ;"+error)
-		},
-		success: function(data){
-			// flash success message
-			$.each(data, function(i, j){
-				$('#ajax_messages').append(j).append("<br/>")
-			});
-		}
-	});
+    timeout: 2000,
+    error: function(XMLHttpRequest, errorTextStatus, error){
+      // flash error message
+      $('#ajax_errors').append("Failed to submit : "+ errorTextStatus+" ;"+error)
+    },
+    success: function(data){
+      // flash success message
+      $.each(data, function(i, j){
+        $('#ajax_messages').append(j).append("<br/>")
+      });
+    }
+  });
 }
+
+$(function() {
+  $("#start_date").datepicker({ altFormat: "dd-mm-yy" });
+});
+$(function() {
+  $("#end_date").datepicker({ altFormat: "dd-mm-yy" });
+});

@@ -147,7 +147,7 @@
   <% end %>
 
   <% if signed_in? && current_user.can?("view_supplies") %>
-    <% my_first_guild_selling_supply = Supply.active.find(:all, :conditions => ['material_id = ? and guild_id = ? ', material.id, current_user.guilds.first.id]) if signed_in? %>
+    <% guild_selling_supply = Supply.active.find(:all, :conditions => ['material_id = ? and guild_id = ? ', material.id, @guild.id]) if signed_in? %>
     <fieldset class="simplefieldset2">
       <legend>
         <%= t(:guilds, :scope => "message" ) %>
@@ -155,12 +155,14 @@
           <% if signed_in? && current_user.can?("sell_materials") %>
             <% if signed_in? && current_user.guilds.size == 0 %>
               - <%= t :join_to_add, :scope => "material"%>
-            <% elsif signed_in? && my_first_guild_selling_supply.any? %>
-              - <%= link_to t(:remove_supply, :scope => "message", :guild => current_user.guilds.first.initials ), {:controller => "supplies", :action => "destroy", :id =>  my_first_guild_selling_supply}, :method => :delete %>
-              <%= link_to image_tag("icons/twotone/" + icon_color + "/x.gif", :alt=>"X"), {:controller => "supplies", :action => "destroy", :id =>  my_first_guild_selling_supply}, :method => :delete %>
+            <% elsif signed_in? && guild_selling_supply.any? %>
+              - <%= link_to t(:remove_supply, :scope => "message", :guild => @guild.initials ), {:controller => "supplies", :action => "destroy", :id =>  guild_selling_supply}, :method => :delete %>
+              <%= link_to image_tag("icons/twotone/" + icon_color + "/x.gif", :alt=>"X"), {:controller => "supplies", :action => "destroy", :id =>  guild_selling_supply}, :method => :delete %>
             <% else %>
-              - <%= link_to t(:add_supply, :scope => "message" ), :controller => "supplies", :action => "new", :material => material, :guild => current_user.guilds.first %>
-              <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), :controller => "supplies", :action => "new", :material => material %>
+              <% if current_user.guilds.include?(@guild) || current_user.can?("sell_all_materials")%>
+                - <%= link_to t(:add_supply, :scope => "message" ), :controller => "supplies", :action => "new", :material => material, :guild => @guild %>
+                <%= link_to image_tag("icons/twotone/" + icon_color + "/plus.gif", :alt=>t("new_message", :scope => 'links')), :controller => "supplies", :action => "new", :material => material %>
+              <% end %>
             <% end %>
           <% end %>
         </span>

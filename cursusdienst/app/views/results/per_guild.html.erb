@@ -2,36 +2,77 @@
   <%= @title %>
 </h1>
 
+<%= form_tag per_guild_results_path, :method => :get do%>
+  <%= label_tag "start_date" %><br/>
+  <%= text_field_tag "start_date" %><br/>
+  <%= label_tag "end_date" %><br/>
+  <%= text_field_tag "end_date" %><br/>
+  <%= submit_tag('filter') %>
+<% end %>
 <table>
   <thead>
     <tr>
       <th><%= t(:name, :scope => "globals" ) %></th>
-      <th><%= t(:type, :scope => "globals" ) %></th>
-      <th><%= t(:amount, :scope => "globals" ) %></th>
-      <th><%= t(:costpp, :scope => "globals" ) %></th>
-      <th><%= t(:pricepp, :scope => "globals" ) %></th>
-      <th><%= t(:profit, :scope => "globals" ) %></th>
+      <th><%= t(:sold_by_self, :scope => "globals" ) %></th>
+      <th><%= t(:total_sell_price_self, :scope => "globals" ) %></th>
+      <th><%= t(:total_buy_price_self, :scope => "globals" ) %></th>
+      <th><%= t(:sold_by_others, :scope => "globals" ) %></th>
+      <th><%= t(:total_sell_price_others, :scope => "globals" ) %></th>
+      <th><%= t(:total_buy_price_others, :scope => "globals" ) %></th>
+      <th><%= t(:total_revenue, :scope => "globals" ) %></th>
       <th><%= t(:total_profit, :scope => "globals" ) %></th>
     </tr>
   </thead>
   <tbody>
     <% total = 0 %>
-    <% @grouped_orders.each do |material, amount| %>
+    <% @grouped_orders.each do |material, amounts| %>
       <tr>
         <td><%= link_to(material.full_name, material) %></td>
-        <td><%= t(material.typee.to_sym, :scope => "material.types" ) %></td>
-        <td><%= amount %></td>
-        <% supply = Supply.find(:first, :conditions => ["material_id = ? and guild_id = ?", material.id, @guild.id]) %>
-        <td><%= number_to_currency supply.buy_price %></td>
-        <td><%= number_to_currency supply.price %></td>
-        <% profit = (supply.price - supply.buy_price) %>
+        <td><%= amounts[0] %></td>
+        <td><%= number_to_currency amounts[1] %></td>
+        <td><%= number_to_currency amounts[2] %></td>
+        <td><%= amounts[3] %></td>
+        <td><%= number_to_currency amounts[4] %></td>
+        <td><%= number_to_currency amounts[5] %></td>
+        <% if material.owner %>
+<!--
+          guild that is owner will receive 100% of own revenue, and 40% of the profit of others
+          this means the others will receive 60% of the profit of what they sell + the amount of costs to buy, when they are not the owner
+-->
+          <% if material.owner == @guild %>
+            <% revenue = amounts[1] + (40*(amounts[4]-amounts[5]))/100 %>
+          <% else %>
+            <% revenue = amounts[2] + (60*(amounts[1]-amounts[2]))/100 %>
+          <% end %>
+        <% else %>
+<!--
+          guild that is calculating will receive all revenue that they have sold themselves, and none of that of other guilds
+-->
+          <% revenue = amounts[1] %>
+        <% end %>
+        <% if material.owner %>
+<!--
+          guild that is owner will receive 100% of own sold profit, and 40% of the profit of others
+          this means the others will receive 60% of the profit of what they sell, when they are not the owner
+-->
+          <% if material.owner == @guild %>
+            <% profit = (amounts[1]-amounts[2]) + (40*(amounts[4]-amounts[5]))/100 %>
+          <% else %>
+            <% profit = (60*(amounts[1]-amounts[2]))/100 %>
+          <% end %>
+        <% else %>
+<!--
+          guild that is calculating will receive all profit that they have sold themselve, and none of that of other guilds
+-->
+          <% profit = amounts[1]-amounts[2] %>
+        <% end %>
+        <td><%= number_to_currency revenue %></td>
         <td><%= number_to_currency profit %></td>
-        <td><%= number_to_currency (profit * amount) %></td>
-        <% total += (profit * amount) %>
+        <% total += profit %>
       </tr>
     <% end %>
     <tr>
-      <td colspan = 6><strong><%= t(:total, :scope => "globals" ) %></strong></td>
+      <td colspan = 8><strong><%= t(:total, :scope => "globals" ) %></strong></td>
       <td><strong><%= number_to_currency total %></strong></td>
     </tr>
   </tbody>

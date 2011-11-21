@@ -44,13 +44,7 @@ class Guild < ActiveRecord::Base
   end
 
   def payed_orders start_date=0, end_date=Time.now()
-    filter_status = ['Posted', 'Canceled']
-    payed_orders = []
-    MaterialOrder.joins(:material).find(:all, :conditions => ["material_orders.created_at > ? AND material_orders.created_at < ? AND (material_orders.guild_id = ? OR materials.owner_id = ?)", start_date, end_date, id, id]).each do |material_order|
-      unless filter_status.include? material_order.status
-        payed_orders << material_order
-      end
-    end
+    payed_orders = MaterialOrder.joins(:material).find(:all, :conditions => ["NOT (status='Posted' OR status='Canceled') AND material_orders.created_at > ? AND material_orders.created_at < ? AND (material_orders.guild_id = ? OR materials.owner_id = ?)", start_date, end_date, id, id])
     return payed_orders
   end
 

@@ -9,7 +9,7 @@ class SuppliesController < ApplicationController
       @supply = previous_sold.first
     end
     @material = Material.find(params[:material])
-    @guilds = current_user.guilds
+    @guild = Guild.find_by_initials(request.subdomain)
     @printers = Printer.all
     @price_sets = PriceSet.all
     @title = t(:add_to_supply, :scope => "title" )
