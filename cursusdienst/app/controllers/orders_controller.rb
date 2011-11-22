@@ -104,7 +104,7 @@ class OrdersController < ApplicationController
       stock = Stock.find(:all, :conditions => ['guild_id=? AND material_id=?', item.guild.id, item.material.id])
       if stock.any? && stock.first.amount >= item.amount
         stock = stock.first
-        stock.stock_to_floating
+        stock.stock_to_floating item.amount
       end
     end
     #all stock amounts are edited to be floating for the amount ordered by the user
@@ -179,7 +179,7 @@ class OrdersController < ApplicationController
         unless material.printable
           stock = Stock.find(:first, :conditions => ['material_id = ? and guild_id = ?', material.id, material_order.guild.id])
           if stock && stock.floating > 0
-            stock.get_one_from_floating
+            stock.get_from_floating material_order.amount
           end
         end
         redirect_path = process_orders_orders_path

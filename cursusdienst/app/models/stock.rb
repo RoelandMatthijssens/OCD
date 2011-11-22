@@ -14,20 +14,25 @@ class Stock < ActiveRecord::Base
     self.floating = 0 unless self.floating
   end
   
-  def stock_to_floating
-    self.amount -= 1
-    self.floating += 1
+  def stock_to_floating(amount = 1)
+    self.amount -= amount
+    self.floating += amount
     self.save
   end
   
-  def floating_to_stock
-    self.amount += 1
-    self.floating -= 1
+  def floating_to_stock(amount = 1)
+    self.amount += amount
+    self.floating -= amount
     self.save
   end
 
-  def get_one_from_floating
-    self.floating -= 1
+  def get_one_from_floating(amount = 1)
+    self.floating -= amount
+    self.save
+  end
+  
+  def get_from_floating(amount = 1)
+    self.floating -= amount
     self.save
   end
 end
