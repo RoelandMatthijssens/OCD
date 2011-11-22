@@ -1,0 +1,83 @@
+<h1><%= @title %></h1>
+<% @payed_materials.each do |guild, types| %>
+  <h2><%= guild.initials %></h2>
+  <% types.each do |type, materials| %>
+
+    <%= form_tag deliver_print_jobs_path, :method => :put do %>
+
+      <%= hidden_field_tag "print_job_id", materials.first[1][0].print_job_id %>
+
+      <% print_job = materials.first[1][0].print_job %>
+
+      <table>
+        <tbody>
+          <tr>
+            <% materials.first.first.options.each do |option| %>
+              <td>
+                <strong><%= option.name %></strong>
+              </td>
+            <% end %>
+            <td>
+              <strong><%= t :invoice_id, :scope => "globals" %> <%= materials.first[1][0].print_job_id %></strong>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <ul>
+        <fieldset class="simplefieldset2">
+          <legend>
+            <%= t(:attachment, :scope => "message" ) %>
+          </legend>
+          <% materials.each do |material, material_orders| %>
+            <% amount = 0 %>
+            <% material_orders.each do |i| %>
+              <% print_job.material_orders << i %>
+              <% amount += i.amount %>
+            <% end %>
+            <% if signed_in? && current_user.can?("download_materials") %>
+              <table>
+                <thead>
+                  <tr>
+                    <th><%= "#{material.subject.name} #{material.typee} (#{material.name})" %></th>
+                    <th><%= amount %> <%= t(:times, :scope => "globals" ) %></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if material.attachments.any?  %>
+                    <% material.attachments.each do |attachment| %>
+                      <tr>
+
+                        <td>
+                          <%= link_to attachment.basename, attachment.item_url %> <br />
+                          <% if false %>
+                            <%= link_to attachment.basename, :controller=>'attachments',:action=>'download',:attachment_id=>attachment.id %> <br />
+                          <% end %>
+                        </td>
+                        <td>
+                          <%= t :id, :scope => "globals" %>: <%= attachment.id %>
+                        </td>
+                      </tr>
+                    <% end %>
+                  <% end %>
+                </tbody>
+              </table>
+            <% end %>
+          <% end %>
+
+        </fieldset>
+      </ul>
+      <% if  false %>
+        material:<%= material.name %><br/>
+        orders:<%= material_orders %><br/>
+      <% end %>
+      <%= t(:total, :scope => "globals" ) %>: <%= print_job.price.nil? ? 'N/A' : number_to_currency(print_job.price) %>
+      <% if current_user.can? "edit_print_jobs" %>
+        <div class="actions">
+          <%= submit_tag @submit_delivered %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= render :partial => "shared/side_order_processing" %>

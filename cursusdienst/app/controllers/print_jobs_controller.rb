@@ -1,21 +1,12 @@
 class PrintJobsController < ApplicationController
 
   def index
-    deny_access unless signed_in?
-    @print_job = PrintJob.new()
-    @payed_orders = Order.find(:all, :conditions => ['status = ?', 'Payed'])
-    @payed_materials = {}
-    @payed_orders.each do |order|
-      order.material_orders.each do |item|
-        if @payed_materials[item.material]
-          @payed_materials[item.material] += item.amount
-        else
-          @payed_materials[item.material] = item.amount
-        end
-      end
-    end
-    @printed_print_jobs = PrintJob.active.find(:all, :conditions => ['status = ?', 'Printed'])
-    @ordered_print_jobs = PrintJob.active.find(:all, :conditions => ['status = ?', 'Ordered'])
+    deny_access and return unless signed_in?
+    deny_privileged_access and return unless current_user.can?('view_print_job_orders')
+    @title = t(:process, :scope => "titles" )
+    @submit_printed = t(:printed_print_job, :scope => "buttons")
+    @submit_delivered = t(:delivered_print_job, :scope => "buttons")
+    get_sorted_orders "Delivered"
   end
 
   def new
