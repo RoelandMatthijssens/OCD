@@ -72,9 +72,7 @@
       <% end %>
       <%= t(:total, :scope => "globals" ) %>: <%= print_job.price.nil? ? 'N/A' : number_to_currency(print_job.price) %>
       <% if current_user.can? "edit_print_jobs" %>
-        <div class="actions">
-          <%= submit_tag @submit_delivered %>
-        </div>
+
       <% end %>
     <% end %>
   <% end %>
