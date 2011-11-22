@@ -27,8 +27,7 @@
       <%= text_field "book_cost", "book_cost", {:value => @supply.buy_price } %><br/>
     <% end %>
 
-    <%= f.label :guild %> <br />
-    <%= f.select(:guild_id, @guilds.collect {|p| [ p.name, p.id ] }, {:prompt => 'Select guild'}) %><br />
+    <%= f.hidden_field :guild_id, :value => @guild.id %>
     <%= label_tag t(:sale_price, :scope => "globals" ) %> <br/>
     <%= f.text_field :price %>
 

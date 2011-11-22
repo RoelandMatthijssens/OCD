@@ -124,10 +124,10 @@ class OrdersController < ApplicationController
       x.material = item.material
       x.amount = item.amount
       x.status = "Posted"
-      supplyqry = Supply.find(:all, :conditions => ["guild_id = ? and material_id = ?", item.guild.id, item.material.id])
-      if supplyqry.any?
-        supply = supplyqry.first
+      supply = Supply.find(:first, :conditions => ["guild_id = ? and material_id = ?", item.guild.id, item.material.id])
+      if supply
         x.price = supply.price * item.amount
+        x.buy_price = supply.buy_price
       end
       unless x.save!
         #something weird went wrong, so delete the order, and delete the last material_order.

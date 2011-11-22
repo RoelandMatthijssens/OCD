@@ -54,6 +54,7 @@ class GuildsController < ApplicationController
         end
       end
     end
+    @supplies = @supplies.sort {|x, y| x[0].name <=> y[0].name}
     @selected_discipline = params[:filter][:discipline_id]
     @selected_year_type = params[:filter][:year_type]
     @display_year_type_box = true

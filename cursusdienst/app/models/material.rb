@@ -15,7 +15,7 @@ class ExclusivePresence < ActiveModel::Validator
 end
 
 class Material < ActiveRecord::Base
-  attr_accessible :name, :subject_id, :guilds, :material_options, :parent, :parent_id, :path_name, :attachments_attributes, :typee, :info, :printable, :page_count
+  attr_accessible :name, :subject_id, :guilds, :material_options, :parent, :parent_id, :path_name, :attachments_attributes, :typee, :info, :printable, :page_count, :owner_id, :owner
 
   has_many :attachments
   accepts_nested_attributes_for :attachments
@@ -29,6 +29,7 @@ class Material < ActiveRecord::Base
   validates :printable, :inclusion => {:in => [true, false]}
   belongs_to :subject
   belongs_to :parent, :class_name => 'Material', :foreign_key => 'parent_id'
+  belongs_to :owner, :class_name => 'Guild', :foreign_key => 'owner_id'
   has_many :supplies
   has_many :guilds, :through => :supplies
   has_many :sales

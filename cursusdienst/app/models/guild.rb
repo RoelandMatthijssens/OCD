@@ -43,6 +43,57 @@ class Guild < ActiveRecord::Base
     end
   end
 
+  def payed_orders start_date=0, end_date=Time.now()
+    payed_orders = MaterialOrder.joins(:material).find(:all, :conditions => ["NOT (status='Posted' OR status='Canceled') AND material_orders.created_at > ? AND material_orders.created_at < ? AND (material_orders.guild_id = ? OR materials.owner_id = ?)", start_date, end_date, id, id])
+    return payed_orders
+  end
+
+  def grand_total start_date=0, end_date=Time.now()
+    filter_status = ['Posted', 'Canceled']
+    grand_total = 0
+    all_payed_orders = []
+    MaterialOrder.find(:all, :conditions => ["created_at > ? AND created_at < ?", start_date, end_date]).each do |material_order|
+      unless filter_status.include? material_order.status
+        all_payed_orders << material_order
+      end
+    end
+    all_payed_orders.each do |order|
+      material = order.material
+      amount = order.amount
+      supply = Supply.find(:first, :conditions => ["material_id = ? and guild_id = ?", material.id, order.guild_id])
+      grand_total += (supply.price - supply.buy_price) * amount
+    end
+    return grand_total
+  end
+
+  def all_totals start_date=0, end_date=Time.now()
+    total_cost = 0
+    total_revenue = 0
+    total_profit = 0
+    total_items = 0
+    orders = payed_orders(start_date, end_date)
+    orders.each do |order|
+      material = order.material
+      amount = order.amount
+      supply = Supply.find(:first, :conditions => ["material_id = ? and guild_id = ?", material.id, id])
+      total_cost += supply.buy_price * amount
+      total_revenue += supply.price * amount
+      total_profit += (supply.price - supply.buy_price) * amount
+      total_items += amount
+    end
+    return [total_cost, total_revenue, total_profit, total_items]
+  end
+
+  def total_expenses start_date=0, end_date=Time.now()
+    return all_totals[0]
+  end
+  def total_profit start_date=0, end_date=Time.now()
+    return all_totals[1]
+  end
+  def total_items start_date=0, end_date=Time.now()
+    return all_totals[2]
+  end
+
 end
 
 # == Schema Information

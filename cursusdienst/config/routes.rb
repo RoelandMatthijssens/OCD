@@ -37,6 +37,7 @@ Cursusdienst::Application.routes.draw do
 
   resources :material_orders, :only => [:show, :mark_as] do
     put :mark_as, :on => :member
+    get :fill_buy_price, :on => :collection
   end
 
   resources :action_logs, :only => [:index]
@@ -53,10 +54,7 @@ Cursusdienst::Application.routes.draw do
 
   resources :results do
     get :per_guild, :on => :collection
-    get :per_isntitute, :on => :collection
-    get :per_discipline, :on => :collection
-    get :per_year, :on => :collection
-    get :per_subject, :on => :collection
+    get :global, :on => :collection
   end
 
   resources :info_strings
