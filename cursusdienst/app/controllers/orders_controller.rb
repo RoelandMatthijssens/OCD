@@ -12,15 +12,7 @@ class OrdersController < ApplicationController
       institute = current_user.guilds.first.disciplines.first.faculty.institute
       @guild = current_user.guilds.first
       if current_user.can?('view_all_orders')
-        @orders = {}
-        orders = Order.active.find(:all, :conditions => ['institute_id = ?', institute.id])
-        orders.each do |order|
-          if @orders[order.status]
-            @orders[order.status] << order
-          else
-            @orders[order.status] = [order]
-          end
-        end
+        @orders = Order.active.find(:all, :conditions => ['institute_id = ?', institute.id]).paginate(:page => params[:page], :per_page => 10)
       end
     end
   end
@@ -48,21 +40,10 @@ class OrdersController < ApplicationController
       substrs.each { |substr|
         @own_orders =  @own_orders | Order.find(:all, :conditions => ['institute_id = ? and user_id=? and order_key LIKE ?' , institute.id, current_user.id, "%#{substr}%"])
       }
-      @orders
-      @res = []
       if current_user.can?('view_all_orders')
-        @orders = {}
-        orders = []
         substrs.each { |substr|
-          orders = orders | Order.joins(:user).find(:all, :conditions => ['institute_id = ? and (user_name LIKE ? or email LIKE ? or rolno LIKE ? or order_key LIKE ? or name LIKE ? or last_name LIKE ?)', institute.id, "%#{substr}%", "%#{substr}%", "%#{substr}%", "%#{substr}%", "%#{substr}%", "%#{substr}%"])
+          @orders = Order.joins(:user).find(:all, :conditions => ['institute_id = ? and (user_name LIKE ? or email LIKE ? or rolno LIKE ? or order_key LIKE ? or name LIKE ? or last_name LIKE ?)', institute.id, "%#{substr}%", "%#{substr}%", "%#{substr}%", "%#{substr}%", "%#{substr}%", "%#{substr}%"]).paginate(:page => params[:page], :per_page => 10)
         }
-        orders.each do |order|
-          if @orders[order.status]
-            @orders[order.status] << order
-          else
-            @orders[order.status] = [order]
-          end
-        end
       end
       render :action => 'index'
     end

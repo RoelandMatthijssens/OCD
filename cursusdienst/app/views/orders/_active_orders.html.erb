@@ -13,10 +13,9 @@
       </tr>
     </thead>
     <tbody>
-      <% @orders.each do |status, order_list| %>
-        <% order_list.each do |order| %>
-          <%= render order %>
-        <% end %>
+<%= will_paginate %>
+      <% @orders.each do |order| %>
+        <%= render order %>
       <% end %>
     </tbody>
   </table>
