@@ -34,6 +34,7 @@ class GuildsController < ApplicationController
   def news
     @guild = Guild.find_by_initials!(request.subdomain)
     @title = t(:news, :scope => "side_menu")
+    @messages = @guild.messages
   end
 
   def update_filter
