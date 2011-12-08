@@ -25,20 +25,38 @@
     </tr>
   </thead>
   <tbody>
+    <% totals = ["Tyca", 0, 0, 0, 0, 0, 0, 0, 0, 0] %>
     <% @totals.each do |total| %>
       <tr>
         <td><%= link_to(total[0].initials, total[0]) %></td>
         <td><%= total[1] %></td>
+        <% totals[1] += total[1] %>
         <td><%= number_to_currency total[2] %></td>
+        <% totals[2] += total[2] %>
         <td><%= number_to_currency total[3] %></td>
+        <% totals[3] += total[3] %>
         <td><%= total[4] %></td>
+        <% totals[4] += total[4] %>
         <td><%= number_to_currency total[5] %></td>
+        <% totals[5] += total[5] %>
         <td><%= number_to_currency total[6] %></td>
+        <% totals[6] += total[6] %>
         <td><%= number_to_currency total[7] %></td>
+        <% totals[7] += total[7] %>
         <td><%= number_to_currency total[8] %></td>
-        <td><%= @global_profit==0 ? 0 : ((total[8]*100)/@global_profit).round(2) %>%</td>
+        <% totals[8] += total[8] %>
+        <% x = @global_profit==0 ? 0 : ((total[8]*100)/@global_profit) %>
+        <td><%= x.round(2) %>%</td>
+        <% totals[9] += x %>
       </tr>
     <% end %>
+    <tr><strong>
+      <td><strong><%= totals[0] %></strong></td>
+      <td><strong><%= totals[1]-totals[4] %></strong></td>
+      <td colspan=6><strong>€0.20 per item</strong></td>
+      <td><strong><%= number_to_currency (totals[1]-totals[4])*0.2 %></strong></td>
+      <td></td>
+    </strong></tr>
   </tbody>
 </table>
 
